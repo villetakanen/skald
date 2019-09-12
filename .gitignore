@@ -22,3 +22,8 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Firebase config files
+firebase.json
+.firebase*
+firebase-debug.log

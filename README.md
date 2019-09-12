@@ -12,6 +12,28 @@ N.B: this projec contains only the PWA part. The security rules and firestore co
 npm install
 ```
 
+## Deploy
+
+### Setup Firebase hosting
+
+```bash
+firebase init
+```
+
+Do note: we add a custom site definition to the generated files:
+
+```json
+"site": "mekanismi",
+```
+
+### deploy to firebase
+
+```bash
+firebase deploy
+```
+
+## Other
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
