@@ -14,7 +14,13 @@ export default {
   ],
   computed: {
     rended () {
-      return '<h1>A header</h1><p>with some text<p>'
+      var rendedContent = this.content
+
+      const MarkdownIt = require('markdown-it')
+      const md = new MarkdownIt()
+      rendedContent = md.render(rendedContent)
+
+      return rendedContent
     }
   }
 }

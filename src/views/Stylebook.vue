@@ -8,10 +8,10 @@
     <div class="style-book-chapter">
       <v-layout wrap>
         <v-flex xs12 md3>
-          <WikiText theme="Quick" content="# The Quick"/>
+          <WikiText theme="Skald" content="# Skald"/>
         </v-flex>
         <v-flex xs12 md3>
-          <WikiText theme="Quick" content="# The Quick"/>
+          <WikiText theme="Hood" content="# Hood"/>
         </v-flex>
         <v-flex xs12 md3>
           <WikiText theme="Quick" content="# The Quick"/>
