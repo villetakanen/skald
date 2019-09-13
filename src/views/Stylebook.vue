@@ -7,14 +7,17 @@
 
     <div class="style-book-chapter">
       <v-layout wrap>
-        <v-flex xs12 md3>
-          <WikiText theme="Skald" content="# Skald"/>
+        <v-flex xs12 md4>
+          <p>Theme: Skald</p>
+          <WikiText theme="Skald" :content="defaultContent"/>
         </v-flex>
-        <v-flex xs12 md3>
-          <WikiText theme="Hood" content="# Hood"/>
+        <v-flex xs12 md4>
+          <p>Theme: Hood</p>
+          <WikiText theme="Hood" :content="defaultContent"/>
         </v-flex>
-        <v-flex xs12 md3>
-          <WikiText theme="Quick" content="# The Quick"/>
+        <v-flex xs12 md4>
+          <p>Theme: Quick</p>
+          <WikiText theme="Quick" :content="defaultContent"/>
         </v-flex>
       </v-layout>
     </div>
@@ -40,7 +43,10 @@ import WikiText from '../components/WikiText'
 export default {
   components: {
     WikiText
-  }
+  },
+  data: () => ({
+    defaultContent: `# A Wikipage \n\nWith some text.`
+  })
 }
 </script>
 <style scoped>

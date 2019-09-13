@@ -94,3 +94,10 @@ export default {
   }
 }
 </script>
+
+<style lang="sass">
+@import './styles/skald.scss'
+@import './styles/hood.scss'
+@import './styles/quick.scss'
+
+</style>
