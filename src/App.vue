@@ -29,7 +29,7 @@
         v-model="newContent"
         bottom
         left
-        timeout="1000000">
+        :timeout="timeout">
           Update available!
         <v-spacer />
         <v-btn
@@ -57,7 +57,8 @@ export default {
     registration: null,
     refreshing: false,
     newContent: false,
-    drawer: null
+    drawer: null,
+    timeout: 10000000
     //
   }),
   computed: {

@@ -6,6 +6,20 @@
     </div>
 
     <div class="style-book-chapter">
+      <v-layout wrap>
+        <v-flex xs12 md3>
+          <WikiText theme="Quick" content="# The Quick"/>
+        </v-flex>
+        <v-flex xs12 md3>
+          <WikiText theme="Quick" content="# The Quick"/>
+        </v-flex>
+        <v-flex xs12 md3>
+          <WikiText theme="Quick" content="# The Quick"/>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    <div class="style-book-chapter">
       <v-btn>v-btn</v-btn>
     </div>
     <div class="style-book-chapter">
@@ -20,6 +34,15 @@
 
   </div>
 </template>
+<script>
+import WikiText from '../components/WikiText'
+
+export default {
+  components: {
+    WikiText
+  }
+}
+</script>
 <style scoped>
 div.style-book-chapter{
   margin: 8px;
