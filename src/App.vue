@@ -1,7 +1,20 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-icon>mdi-menu</v-icon>
+
+    <v-navigation-drawer
+      v-model="drawer"
+      app
+      :clipped="$vuetify.breakpoint.lgAndUp"
+      >
+      <NavigationDrawer/>
+    </v-navigation-drawer>
+
+    <v-app-bar
+      app
+      :clipped-left="$vuetify.breakpoint.lgAndUp">
+
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
       <v-toolbar-title class="headline text-uppercase">
         Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
       </v-toolbar-title>
@@ -33,13 +46,18 @@
 </template>
 
 <script>
+import NavigationDrawer from './components/NavigationDrawer'
 
 export default {
   name: 'App',
+  components: {
+    NavigationDrawer
+  },
   data: () => ({
     registration: null,
     refreshing: false,
-    newContent: false
+    newContent: false,
+    drawer: null
     //
   }),
   computed: {
