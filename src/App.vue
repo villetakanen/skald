@@ -3,7 +3,7 @@
     <v-app-bar app>
       <v-icon>mdi-menu</v-icon>
       <v-toolbar-title class="headline text-uppercase">
-        Skald
+        Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
       </v-toolbar-title>
     </v-app-bar>
 
@@ -42,6 +42,11 @@ export default {
     newContent: false
     //
   }),
+  computed: {
+    version () {
+      return this.$store.getters['version']()
+    }
+  },
   created () {
     // Listen for swUpdated event and display refresh snackbar as required.
     document.addEventListener('swUpdated', this.showRefreshUI, { once: true })
