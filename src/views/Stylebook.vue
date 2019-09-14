@@ -44,9 +44,16 @@ export default {
   components: {
     WikiText
   },
-  data: () => ({
+  /* data: () => ({
     defaultContent: `# A Wikipage \n\nWith some text.`
-  })
+  }) */
+  computed: {
+    defaultContent () {
+      const page = this.$store.getters['metaBinder/page']('example-wikipage')
+      if (page === null) return ''
+      return page.content
+    }
+  }
 }
 </script>
 <style scoped>

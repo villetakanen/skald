@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import metaBinder from './metaBinder.js'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,9 @@ const getters = {
 }
 
 export default new Vuex.Store({
+  modules: {
+    metaBinder
+  },
   state,
   getters,
   mutations: {
