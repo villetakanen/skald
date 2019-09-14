@@ -1,9 +1,15 @@
 <template>
-  <p>A Pagelog Entry:  {{action}},
+  <div class="pagelog-entry">
+    <div class="pagelog-type">
+    <v-icon>mdi-file-document-box-plus-outline</v-icon>
+    </div>
+    <div class="pagelog-details">
+      A Pagelog Entry:  {{action}},
     {{creator}},
     {{pageid}},
     {{siteid}},
-    {{date}}</p>
+    {{date}}</div>
+  </div>
 </template>
 <script>
 export default {
@@ -16,3 +22,12 @@ export default {
   ]
 }
 </script>
+<style scoped>
+div.pagelog-entry{
+  display: flex;
+  flex-direction: row;
+}
+div.pagelog-type{
+  width: 50px;
+}
+</style>
