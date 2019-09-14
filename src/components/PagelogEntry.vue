@@ -6,8 +6,7 @@
     <div class="pagelog-details">
       A Pagelog Entry:  {{action}},
     {{creator}},
-    {{pageid}},
-    {{siteid}},
+    {{siteid}}/{{pageid}}
     {{date}}</div>
   </div>
 </template>
