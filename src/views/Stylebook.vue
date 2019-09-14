@@ -5,6 +5,23 @@
       <p>This is a stylebook, with all elements we use shown, for UX design and verification</p>
     </div>
 
+    <v-container fluid>
+      <v-layout wrap>
+        <v-flex xs12 md6>
+          <v-card>
+            <v-card-text>
+              <PagelogEntry
+                action="update"
+                creator="Creator Nick"
+                pageid="pageid"
+                siteid="siteid"
+                :date="defaultDate"/>
+            </v-card-text>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
+
     <div class="style-book-chapter">
       <v-layout wrap>
         <v-flex xs12 md4>
@@ -39,14 +56,16 @@
 </template>
 <script>
 import WikiText from '../components/WikiText'
+import PagelogEntry from '../components/PagelogEntry'
 
 export default {
   components: {
-    WikiText
+    WikiText,
+    PagelogEntry
   },
-  /* data: () => ({
-    defaultContent: `# A Wikipage \n\nWith some text.`
-  }) */
+  data: () => ({
+    defaultDate: new Date()
+  }),
   computed: {
     defaultContent () {
       const page = this.$store.getters['metaBinder/page']('example-wikipage')
