@@ -24,9 +24,9 @@ const mutations = {
         }
         return true
       })
-      filtered = filtered.reverse()
+      // filtered = filtered.reverse()
       filtered.push(data)
-      filtered = filtered.reverse()
+      // filtered = filtered.reverse()
       Vue.set(context, 'all', filtered)
     }
   }
@@ -37,7 +37,7 @@ const actions = {
 
     const db = firebase.firestore()
 
-    db.collection('pagelog').orderBy('timestamp', 'asc').limit(10).get().then((querySnapshot) => {
+    db.collection('pagelog').orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         context.commit('patchLog', { data: doc.data() })
       })

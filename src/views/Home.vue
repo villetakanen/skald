@@ -1,13 +1,15 @@
 <template>
-  <HelloWorld />
+  <div>
+    <LatestChanges />
+  </div>
 </template>
 
 <script>
-import HelloWorld from '../components/HelloWorld'
+import LatestChanges from '../components/LatestChanges'
 
 export default {
   components: {
-    HelloWorld
+    LatestChanges
   }
 }
 </script>
