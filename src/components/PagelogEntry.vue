@@ -1,13 +1,13 @@
 <template>
   <div class="pagelog-entry">
     <div class="pagelog-type">
-    <v-icon>mdi-file-document-box-plus-outline</v-icon>
+        <v-icon v-if="action === 'create'">mdi-file-document-box-plus-outline</v-icon>
+        <v-icon v-if="action === 'update'">mdi-file-document-edit-outline</v-icon>
     </div>
     <div class="pagelog-details">
-      A Pagelog Entry:  {{action}},
-    {{creator}},
-    {{siteid}}/{{pageid}}
-    {{date}}</div>
+    <p>{{creator}},
+    {{siteid}}/{{pageid}}</p>
+    <p>{{date}}</p></div>
   </div>
 </template>
 <script>
@@ -28,5 +28,13 @@ div.pagelog-entry{
 }
 div.pagelog-type{
   width: 50px;
+  padding: 8px;
+}
+div.pagelog-entry p{
+  margin: 0;
+  padding: 0;
+}
+div.pagelog-entry p:last-of-type{
+  padding-bottom: 8px;
 }
 </style>

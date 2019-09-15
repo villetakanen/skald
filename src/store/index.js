@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import metaBinder from './metaBinder.js'
+import pageLog from './pageLog'
 
 Vue.use(Vuex)
 
@@ -18,7 +19,8 @@ const getters = {
 
 export default new Vuex.Store({
   modules: {
-    metaBinder
+    metaBinder,
+    pageLog
   },
   state,
   getters,

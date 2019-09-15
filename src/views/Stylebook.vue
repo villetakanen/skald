@@ -12,12 +12,33 @@
             <v-card-text>
               <PagelogEntry
                 action="update"
+                creator="Updater Nick"
+                pageid="pageid"
+                siteid="siteid"
+                :date="defaultDate"/>
+              <PagelogEntry
+                action="create"
                 creator="Creator Nick"
                 pageid="pageid"
                 siteid="siteid"
                 :date="defaultDate"/>
             </v-card-text>
           </v-card>
+        </v-flex>
+        <v-flex xs12 md6>
+          <v-card>
+    <v-card-title>Latest changes</v-card-title>
+    <v-card-text>
+    <template v-for="(page, index) in latestChanges">
+      <PagelogEntry v-bind:key="index"
+                :action="page.action"
+                :creator="page.creator"
+                :pageid="page.pageid"
+                :siteid="page.siteid"
+                :date="toDate(page.timestamp.seconds)"/>
+    </template>
+    </v-card-text>
+  </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -71,6 +92,18 @@ export default {
       const page = this.$store.getters['metaBinder/page']('example-wikipage')
       if (page === null) return ''
       return page.content
+    },
+    latestChanges () {
+      return this.$store.getters['pageLog/latest']()
+    }
+  },
+  methods: {
+    toDate (seconds) {
+      if (seconds === null || typeof seconds === 'undefined') return '...'
+      var lastChangeDate = new Date(1970, 0, 1) // Epoch
+      lastChangeDate.setSeconds(seconds)
+      const s = lastChangeDate.toISOString().split('T')
+      return s[0] + ' ' + s[1].substring(0, 8)
     }
   }
 }
