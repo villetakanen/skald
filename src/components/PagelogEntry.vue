@@ -6,7 +6,7 @@
     </div>
     <div class="pagelog-details">
     <p>{{creator}},
-    {{siteid}}/{{pageid}}</p>
+    <router-link :to="`/v/${siteid}/${pageid}`">{{siteid}}/{{pageid}}</router-link></p>
     <p>{{date}}</p></div>
   </div>
 </template>

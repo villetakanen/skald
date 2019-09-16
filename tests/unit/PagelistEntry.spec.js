@@ -1,6 +1,7 @@
 // Libraries
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import VueRouter from 'vue-router'
 
 // Utilities
 import {
@@ -12,6 +13,7 @@ import PagelogEntry from '@/components/PagelogEntry'
 
 Vue.use(Vuetify)
 const localVue = createLocalVue()
+const router = new VueRouter()
 
 describe('PagelogEntry.vue', () => {
   let vuetify
@@ -25,7 +27,9 @@ describe('PagelogEntry.vue', () => {
     const wrapper = mount(PagelogEntry, {
       localVue,
       vuetify,
-      propsData: { creator }
+      router,
+      propsData: { creator },
+      stubs: ['router-link']
     })
     expect(wrapper.text()).toContain(creator)
   })
@@ -36,7 +40,9 @@ describe('PagelogEntry.vue', () => {
     const wrapper = mount(PagelogEntry, {
       localVue,
       vuetify,
-      propsData: { pageid, siteid }
+      router,
+      propsData: { pageid, siteid },
+      stubs: ['router-link']
     })
     expect(wrapper.text()).toContain(siteid + '/' + pageid)
   })
