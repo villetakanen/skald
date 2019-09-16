@@ -27,7 +27,7 @@ export default new Router({
     },
     {
       path: '/v/:siteid',
-      name: 'viewPage',
+      name: 'viewSite',
       // lazy-loaded when the route is visited.
       component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
     },
@@ -35,6 +35,7 @@ export default new Router({
       path: '/v/:siteid/:pageid',
       name: 'viewPage',
       // lazy-loaded when the route is visited.
+      props: true,
       component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
     }
   ]

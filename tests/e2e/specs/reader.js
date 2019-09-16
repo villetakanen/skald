@@ -10,4 +10,9 @@ describe('Reader for skald.skald', () => {
     cy.get('div.changelog').children().should('have.length', 11)
     cy.get('div.changelog').children().contains('a')
   })
+
+  it('Sees the slogan on meta-welcome-page', () => {
+    cy.visit('/#/v/skald/skald')
+    cy.contains('A wiki for RPG material')
+  })
 })
