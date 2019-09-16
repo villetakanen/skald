@@ -41,8 +41,6 @@ const actions = {
       querySnapshot.forEach((doc) => {
         context.commit('patchLog', { data: doc.data() })
       })
-    }).catch(function (error) {
-      console.log(error)
     })
   }
 }

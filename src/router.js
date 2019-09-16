@@ -23,7 +23,19 @@ export default new Router({
       path: '/stylebook',
       name: 'stylebook',
       // lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Stylebook.vue')
+      component: () => import(/* webpackChunkName: "stylebook" */ './views/Stylebook.vue')
+    },
+    {
+      path: '/v/:siteid',
+      name: 'viewPage',
+      // lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
+    },
+    {
+      path: '/v/:siteid/:pageid',
+      name: 'viewPage',
+      // lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
     }
   ]
 })

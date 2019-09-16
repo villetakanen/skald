@@ -16,6 +16,8 @@ export default {
     rended () {
       var rendedContent = this.content
 
+      if (rendedContent === null) rendedContent = 'Missing content'
+
       const MarkdownIt = require('markdown-it')
       const md = new MarkdownIt()
       rendedContent = md.render(rendedContent)
