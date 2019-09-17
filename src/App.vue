@@ -91,6 +91,17 @@ export default {
       if (!this.registration || !this.registration.waiting) { return }
       this.registration.waiting.postMessage('skipWaiting')
     }
+  },
+  mounted () {
+    this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      switch (mutation.type) {
+        case 'binder/setTheme':
+          if (this.$store.getters['binder/theme']() === 'Quick') this.$vuetify.theme.dark = true
+          else (this.$vuetify.theme.dark = false)
+          break
+      }
+    })
   }
 }
 </script>

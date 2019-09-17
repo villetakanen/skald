@@ -5,7 +5,8 @@ import 'firebase/firestore'
 const state = {
   content: null,
   pageid: null,
-  siteid: null
+  siteid: null,
+  theme: null
   // unsubscribe: null
 }
 const getters = {
@@ -15,6 +16,12 @@ const getters = {
   content: (context) => () => {
     if (context.content === null) return '-'
     return context.content
+  },
+  /**
+   * Returns theme for current site
+   */
+  theme: (context) => () => {
+    return context.theme
   }
 }
 const mutations = {
@@ -23,6 +30,9 @@ const mutations = {
   },
   setContent (context, content) {
     Vue.set(context, 'content', content)
+  },
+  setTheme (context, theme) {
+    Vue.set(context, 'theme', theme)
   }
 }
 const actions = {
@@ -41,6 +51,7 @@ const actions = {
     siteRef.get().then((doc) => {
       if (doc.exists) {
         context.commit('setSiteid', siteid)
+        context.commit('setTheme', doc.data().theme)
         const pageRef = siteRef.collection('pages').doc(pageid)
         pageRef.get().then((doc) => {
           if (doc.exists) {

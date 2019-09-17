@@ -5,5 +5,15 @@ div.Quick{
     text-transform: uppercase;
     color: #424242;
   }
+  div.page-container{
+    background-color: black;
+    color: white;
+    background-image: url('./assets/quick-poster.jpg');
+    background-size: 100% auto;
+    padding-top: 200px;
+  }
+}
+div#app.theme--dark.v-application{
+  background-color: black;
 }
   

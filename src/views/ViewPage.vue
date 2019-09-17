@@ -1,8 +1,28 @@
 <template>
-  <div class="reader">
-    <h1>View Page</h1>
-    <WikiText :content="content"/>
-    <LatestChanges />
+  <div :class="theme">
+    <div class="page-container">
+      <v-container
+    fluid
+    grid-list-md>
+        <v-layout wrap>
+          <v-flex xs12>
+          <v-card>
+            <v-card-title>View Page</v-card-title>
+            <v-card-text>
+              <WikiText :content="content"/>
+            </v-card-text>
+          </v-card>
+          </v-flex>
+          <v-flex xs12>
+          <v-card>
+            <v-card-text>
+              <LatestChanges />
+            </v-card-text>
+          </v-card>
+          </v-flex>
+        </v-layout>
+      </v-container>
+    </div>
   </div>
 </template>
 
@@ -31,6 +51,10 @@ export default {
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
       return this.$store.getters['binder/content']()
+    },
+    theme () {
+      if (this.$store.getters['binder/theme']() === null) return 'Skald reader'
+      return this.$store.getters['binder/theme']() + ' reader'
     }
   },
   methods: {
