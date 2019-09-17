@@ -1,1 +1,61 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 87.5 100"><defs><style>.cls-1{fill:#1697f6;}.cls-2{fill:#7bc6ff;}.cls-3{fill:#1867c0;}.cls-4{fill:#aeddff;}</style></defs><title>Artboard 46</title><polyline class="cls-1" points="43.75 0 23.31 0 43.75 48.32"/><polygon class="cls-2" points="43.75 62.5 43.75 100 0 14.58 22.92 14.58 43.75 62.5"/><polyline class="cls-3" points="43.75 0 64.19 0 43.75 48.32"/><polygon class="cls-4" points="64.58 14.58 87.5 14.58 43.75 100 43.75 62.5 64.58 14.58"/></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#006DB3;}
+	.st1{fill:#FFFFFF;}
+	.st2{display:none;opacity:0.32;fill:#FFFFFF;}
+	.st3{opacity:0.2;fill:url(#SVGID_1_);}
+	.st4{opacity:0.2;fill:url(#SVGID_2_);}
+	.st5{opacity:0.2;fill:url(#SVGID_3_);}
+	.st6{opacity:0.2;fill:url(#SVGID_4_);}
+</style>
+<g id="Layer_1">
+	<g>
+		<circle class="st0" cx="256" cy="256" r="256"/>
+	</g>
+	<path class="st1" d="M27,426"/>
+</g>
+<g id="Layer_2">
+	<g>
+		<polyline class="st1" points="253,463 82,231.8 137,67 173,159 253,145.1 		"/>
+		<polyline class="st1" points="252.9,463.2 423.9,232.1 368.9,67.2 332.9,159.3 252.9,145.4 		"/>
+	</g>
+	<g>
+		<polygon class="st0" points="102,230.8 225,407.8 244,392.8 244,280.8 194,221.8 		"/>
+		<polygon class="st0" points="404,230.8 281,407.8 262,392.8 262,280.8 312,221.8 		"/>
+	</g>
+	<circle class="st1" cx="187.5" cy="284.5" r="14.5"/>
+	<circle class="st1" cx="323.5" cy="284.5" r="14.5"/>
+	<g>
+		<polygon class="st1" points="176.1,85.3 206.2,74.6 252.6,205.1 299,74.6 329.2,85.3 252.6,300.6 		"/>
+		<path class="st0" d="M302.4,81.6l19.8,7l-69.5,195.5L183.1,88.6l19.8-7l49.7,139.9L302.4,81.6 M209.6,67.5l-10.4,3.7l-19.8,7
+			l-10.4,3.7l3.7,10.4l69.5,195.5l10.4,29.1l10.4-29.1l69.5-195.5l3.7-10.4l-10.4-3.7l-19.8-7l-10.4-3.7L292,77.9l-39.4,110.7
+			L213.3,77.9L209.6,67.5L209.6,67.5z"/>
+	</g>
+</g>
+<g id="Layer_3">
+	<polygon class="st2" points="137.5,66.5 376.6,296 511.5,425.5 253,463 89,230 	"/>
+	<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="105.4746" y1="219.4557" x2="450.1575" y2="390.9745">
+		<stop  offset="7.975601e-02" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<polygon class="st3" points="139,67 469,402 255,463 84,232 	"/>
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="195.4663" y1="171.8197" x2="489.863" y2="318.3155">
+		<stop  offset="7.975601e-02" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<polygon class="st4" points="204,82 469,402 253,283 226,149 	"/>
+	<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="294.8524" y1="195.4164" x2="504.9463" y2="299.962">
+		<stop  offset="7.975601e-02" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<polygon class="st5" points="322,89 469,402 469,402 253,283 	"/>
+	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="290.5844" y1="254.6143" x2="481.5692" y2="349.6509">
+		<stop  offset="7.975601e-02" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#FFFFFF;stop-opacity:0"/>
+	</linearGradient>
+	<polygon class="st6" points="367.9,67 469,402 255,463 253,283 	"/>
+</g>
+</svg>
