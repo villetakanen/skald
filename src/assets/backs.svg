@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.6, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1920 1080" style="enable-background:new 0 0 1920 1080;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCA28;}
+	.st1{opacity:0.3;}
+	.st2{fill:url(#SVGID_1_);}
+	.st3{opacity:0.29;}
+	.st4{fill:url(#SVGID_2_);}
+	.st5{fill:url(#SVGID_3_);}
+	.st6{fill:url(#SVGID_4_);}
+	.st7{fill:url(#SVGID_5_);}
+	.st8{fill:url(#SVGID_6_);}
+</style>
+<g>
+	<rect class="st0" width="1920" height="1080"/>
+</g>
+<g class="st1">
+	<radialGradient id="SVGID_1_" cx="960" cy="540" r="778.8453" gradientUnits="userSpaceOnUse">
+		<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
+		<stop  offset="2.049065e-02" style="stop-color:#FFFBF4;stop-opacity:2.049065e-02"/>
+		<stop  offset="0.1353" style="stop-color:#FFE9BC;stop-opacity:0.1353"/>
+		<stop  offset="0.2536" style="stop-color:#FFD88A;stop-opacity:0.2536"/>
+		<stop  offset="0.3728" style="stop-color:#FFCA5F;stop-opacity:0.3728"/>
+		<stop  offset="0.493" style="stop-color:#FFBE3D;stop-opacity:0.493"/>
+		<stop  offset="0.6147" style="stop-color:#FFB522;stop-opacity:0.6147"/>
+		<stop  offset="0.7382" style="stop-color:#FFAF0F;stop-opacity:0.7382"/>
+		<stop  offset="0.865" style="stop-color:#FFAB04;stop-opacity:0.865"/>
+		<stop  offset="1" style="stop-color:#FFAA00"/>
+	</radialGradient>
+	<rect class="st2" width="1920" height="1080"/>
+</g>
+<g class="st3">
+	<linearGradient id="SVGID_2_" gradientUnits="userSpaceOnUse" x1="0" y1="540" x2="1121" y2="540">
+		<stop  offset="0" style="stop-color:#CCE0F4;stop-opacity:0"/>
+		<stop  offset="0.2823" style="stop-color:#D5E6F6;stop-opacity:0.2823"/>
+		<stop  offset="0.7501" style="stop-color:#EFF5FB;stop-opacity:0.7501"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon class="st4" points="445,1080 0,1080 0,0 1121,0 	"/>
+</g>
+<g class="st3">
+	
+		<linearGradient id="SVGID_3_" gradientUnits="userSpaceOnUse" x1="83.6103" y1="540" x2="1204.6104" y2="540" gradientTransform="matrix(-1 0 0 1 2003.6104 0)">
+		<stop  offset="0" style="stop-color:#CCE0F4;stop-opacity:0"/>
+		<stop  offset="0.2823" style="stop-color:#D5E6F6;stop-opacity:0.2823"/>
+		<stop  offset="0.7501" style="stop-color:#EFF5FB;stop-opacity:0.7501"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon class="st5" points="1475,1080 1920,1080 1920,0 799,0 	"/>
+</g>
+<g class="st3">
+	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="-120" y1="540" x2="1001" y2="540">
+		<stop  offset="0" style="stop-color:#CCE0F4;stop-opacity:0"/>
+		<stop  offset="0.2823" style="stop-color:#D5E6F6;stop-opacity:0.2823"/>
+		<stop  offset="0.7501" style="stop-color:#EFF5FB;stop-opacity:0.7501"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon class="st6" points="325,1080 -120,1080 -120,0 1001,0 	"/>
+</g>
+<g class="st3">
+	<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="-248" y1="540" x2="873" y2="540">
+		<stop  offset="0" style="stop-color:#CCE0F4;stop-opacity:0"/>
+		<stop  offset="0.2823" style="stop-color:#D5E6F6;stop-opacity:0.2823"/>
+		<stop  offset="0.7501" style="stop-color:#EFF5FB;stop-opacity:0.7501"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon class="st7" points="197,1080 -248,1080 -248,0 873,0 	"/>
+</g>
+<g class="st3">
+	
+		<linearGradient id="SVGID_6_" gradientUnits="userSpaceOnUse" x1="-176" y1="319.5258" x2="945" y2="319.5258" gradientTransform="matrix(1 0 0 -1 0 859.5259)">
+		<stop  offset="0" style="stop-color:#CCE0F4;stop-opacity:0"/>
+		<stop  offset="0.2823" style="stop-color:#D5E6F6;stop-opacity:0.2823"/>
+		<stop  offset="0.7501" style="stop-color:#EFF5FB;stop-opacity:0.7501"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<polygon class="st8" points="269,0 -176,0 -176,1080 945,1080 	"/>
+</g>
+</svg>

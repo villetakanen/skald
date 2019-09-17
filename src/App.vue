@@ -1,6 +1,8 @@
 <template>
   <v-app>
-
+    <div id="cover" :class="theme">
+      <div id="cover-image"></div>
+    </div>
     <v-navigation-drawer
       v-model="drawer"
       app
@@ -13,7 +15,9 @@
       app
       :clipped-left="$vuetify.breakpoint.lgAndUp">
 
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-btn icon @click.stop="drawer = !drawer">
+        <img style="height:42px" alt="S" src="./assets/logo.png"/>
+      </v-btn>
 
       <v-toolbar-title class="headline text-uppercase">
         Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
@@ -58,7 +62,8 @@ export default {
     refreshing: false,
     newContent: false,
     drawer: null,
-    timeout: 10000000
+    timeout: 10000000,
+    theme: 'Skald'
     //
   }),
   computed: {
@@ -97,8 +102,13 @@ export default {
       // console.log(mutation.type)
       switch (mutation.type) {
         case 'binder/setTheme':
-          if (this.$store.getters['binder/theme']() === 'Quick') this.$vuetify.theme.dark = true
-          else (this.$vuetify.theme.dark = false)
+          if (this.$store.getters['binder/theme']() === 'Quick') {
+            this.$vuetify.theme.dark = true
+            this.theme = 'Quick'
+          } else {
+            this.$vuetify.theme.dark = false
+            this.theme = 'Skald'
+          }
           break
       }
     })
