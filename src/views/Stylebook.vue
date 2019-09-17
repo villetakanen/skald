@@ -7,6 +7,11 @@
 
     <v-container fluid>
       <v-layout wrap>
+        <v-flex xs12>
+          <Loading/>
+        </v-flex>
+      </v-layout>
+      <v-layout wrap>
         <v-flex xs12 md6>
           <v-card>
             <v-card-text>
@@ -78,11 +83,13 @@
 <script>
 import WikiText from '../components/WikiText'
 import PagelogEntry from '../components/PagelogEntry'
+import Loading from '../components/Loading'
 
 export default {
   components: {
     WikiText,
-    PagelogEntry
+    PagelogEntry,
+    Loading
   },
   data: () => ({
     defaultDate: new Date()
