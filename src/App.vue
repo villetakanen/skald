@@ -6,14 +6,13 @@
     <v-navigation-drawer
       v-model="drawer"
       app
-      :clipped="$vuetify.breakpoint.lgAndUp"
       >
       <NavigationDrawer/>
     </v-navigation-drawer>
 
     <v-app-bar
       app
-      :clipped-left="$vuetify.breakpoint.lgAndUp">
+      >
 
       <v-btn icon @click.stop="drawer = !drawer">
         <img style="height:42px" alt="S" src="./assets/logo.png"/>
@@ -72,6 +71,7 @@ export default {
     }
   },
   created () {
+    this.$vuetify.theme.dark = true
     // Listen for swUpdated event and display refresh snackbar as required.
     document.addEventListener('swUpdated', this.showRefreshUI, { once: true })
     // Refresh all open app tabs when a new service worker is installed.
@@ -98,7 +98,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.subscribe((mutation, state) => {
+    /* this.$store.subscribe((mutation, state) => {
       // console.log(mutation.type)
       switch (mutation.type) {
         case 'binder/setTheme':
@@ -111,7 +111,7 @@ export default {
           }
           break
       }
-    })
+    }) */
   }
 }
 </script>
