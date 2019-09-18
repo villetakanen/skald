@@ -8,9 +8,13 @@
     fluid
     grid-list-md>
       <v-layout wrap>
+        <v-flex xs12>
         <v-card>
-          <LatestChanges />
+          <v-card-text>
+            <LatestChanges />
+          </v-card-text>
         </v-card>
+        </v-flex>
       </v-layout>
     </v-container>
   </div>
