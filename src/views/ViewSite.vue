@@ -57,6 +57,7 @@ export default {
   },
   methods: {
     updateSite (siteid) {
+      // console.log('siteid', siteid, this.siteid)
       if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'
       this.$store.dispatch('binder/openPage', { siteid: siteid, pageid: siteid })
     }

@@ -4,9 +4,15 @@
         <img alt="V" src="../assets/fox.svg" style="max-width: 128px"/>
       </div>
       <SiteList />
-    <v-card>
-      <LatestChanges />
-    </v-card>
+    <v-container
+    fluid
+    grid-list-md>
+      <v-layout wrap>
+        <v-card>
+          <LatestChanges />
+        </v-card>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
