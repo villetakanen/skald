@@ -16,8 +16,10 @@ export default new Vuetify({
         warning: '#FFC107'
       },
       dark: {
-        primary: '#455a64',
-        secondary: '#e91e63'
+        primary: '#039be5',
+        secondary: '#fbc02d'
+        // primary: '#455a64',
+        // secondary: '#e91e63'
       }
     }
   },

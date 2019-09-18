@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import metaBinder from './metaBinder.js'
 import pageLog from './pageLog'
 import binder from './binder'
+import sites from './sites'
 
 Vue.use(Vuex)
 
@@ -22,7 +23,8 @@ export default new Vuex.Store({
   modules: {
     binder,
     metaBinder,
-    pageLog
+    pageLog,
+    sites
   },
   state,
   getters,

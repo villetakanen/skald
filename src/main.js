@@ -25,6 +25,7 @@ new Vue({
     // Fetch all base site pages to Vuex store
     store.dispatch('metaBinder/init')
     store.dispatch('pageLog/init')
+    store.dispatch('sites/init')
   },
   render: h => h(App)
 }).$mount('#app')
