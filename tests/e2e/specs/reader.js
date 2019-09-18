@@ -1,9 +1,7 @@
 describe('Reader for skald.skald', () => {
-  it('Opens reader with url', () => {
+  it('Opens a site front page', () => {
     cy.visit('/#/v/skald')
 
-    // There is a header
-    cy.get('div.reader')
     // There and some content, in a wikipage
     cy.get('.wikipage')
 
@@ -11,8 +9,13 @@ describe('Reader for skald.skald', () => {
     cy.get('div.changelog').children().contains('a')
   })
 
-  it('Sees the slogan on meta-welcome-page', () => {
+  it('Sees the slogan on meta-welcome-page for skald', () => {
     cy.visit('/#/v/skald/skald')
     cy.contains('A wiki for RPG material')
+  })
+
+  it('Can read a wikipage in reader component', () => {
+    cy.visit('/#/v/skald/about')
+    cy.get('div.reader')
   })
 })
