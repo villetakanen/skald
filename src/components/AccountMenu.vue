@@ -24,7 +24,7 @@
         </v-list-item>
       </v-list>
       <v-list v-if="isAuthz">
-        <v-subheader>Welcome</v-subheader>
+        <v-subheader>Welcome {{nick}}</v-subheader>
         <v-list-item>
           <v-list-item-title>My account</v-list-item-title>
         </v-list-item>
@@ -51,6 +51,9 @@ export default {
   computed: {
     isAuthz () {
       return this.$store.getters['isAuthz']()
+    },
+    nick () {
+      return this.$store.getters['author/nick']()
     }
   },
   methods: {
