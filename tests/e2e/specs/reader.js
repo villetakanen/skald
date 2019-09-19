@@ -2,6 +2,9 @@ describe('Reader for skald.skald', () => {
   it('Opens a site front page', () => {
     cy.visit('/#/v/skald')
 
+    // The welcome page is opened
+    cy.contains('A wiki for RPG material')
+
     // There and some content, in a wikipage
     cy.get('.wikipage')
 

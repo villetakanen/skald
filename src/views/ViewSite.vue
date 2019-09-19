@@ -7,7 +7,7 @@
         <v-layout wrap>
           <v-flex xs12 md4>
             <v-card>
-              <v-card-title>A Site!</v-card-title>
+              <v-card-title>{{title}}</v-card-title>
               <v-card-text>
                 <WikiText :content="content"/>
               </v-card-text>
@@ -46,6 +46,10 @@ export default {
     }
   },
   computed: {
+    title () {
+      if (this.$store.getters['binder/title']() === null) return ' '
+      return this.$store.getters['binder/title']()
+    },
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
       return this.$store.getters['binder/content']()

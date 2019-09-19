@@ -5,7 +5,14 @@
     fluid
     grid-list-md>
         <v-layout wrap>
-          <v-flex xs12>
+
+          <v-flex xs12 v-if="loading">
+            <Loading/>
+          </v-flex>
+
+          <v-flex
+            xs12
+            v-if="!loading">
           <v-card>
             <v-card-title>View Page</v-card-title>
             <v-card-text>
@@ -29,11 +36,13 @@
 <script>
 import LatestChanges from '../components/LatestChanges'
 import WikiText from '../components/WikiText'
+import Loading from '../components/Loading'
 
 export default {
   components: {
     LatestChanges,
-    WikiText
+    WikiText,
+    Loading
   },
   props: [
     'pageid',
@@ -55,6 +64,9 @@ export default {
     theme () {
       if (this.$store.getters['binder/theme']() === null) return 'Skald reader'
       return this.$store.getters['binder/theme']() + ' reader'
+    },
+    loading () {
+      return this.$store.getters['binder/loading']()
     }
   },
   methods: {

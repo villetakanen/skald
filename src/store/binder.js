@@ -3,13 +3,21 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 
 const state = {
+  title: null,
   content: null,
   pageid: null,
   siteid: null,
-  theme: null
+  theme: null,
+  loading: false
   // unsubscribe: null
 }
 const getters = {
+  /**
+   * Returns content for this page
+   */
+  title: (context) => () => {
+    return context.title
+  },
   /**
    * Returns content for this page
    */
@@ -22,17 +30,27 @@ const getters = {
    */
   theme: (context) => () => {
     return context.theme
+  },
+  /**
+   * Returns true if binder is refreshing page content from firebase
+   */
+  loading: (context) => () => {
+    return context.loading
   }
 }
 const mutations = {
   setSiteid (context, siteid) {
     Vue.set(context, 'siteid', siteid)
   },
-  setContent (context, content) {
-    Vue.set(context, 'content', content)
+  setData (context, data) {
+    Vue.set(context, 'title', data.title)
+    Vue.set(context, 'content', data.content)
   },
   setTheme (context, theme) {
     Vue.set(context, 'theme', theme)
+  },
+  setLoading (context, bool) {
+    Vue.set(context, 'loading', bool)
   }
 }
 const actions = {
@@ -41,6 +59,7 @@ const actions = {
    * @param {vuex context} context Vuex context
    */
   openPage (context, { siteid, pageid }) {
+    context.commit('setLoading', true)
     // get the firestore
     const db = firebase.firestore()
 
@@ -55,7 +74,8 @@ const actions = {
         const pageRef = siteRef.collection('pages').doc(pageid)
         pageRef.get().then((doc) => {
           if (doc.exists) {
-            context.commit('setContent', doc.data().content)
+            context.commit('setData', doc.data())
+            context.commit('setLoading', false)
           } else {
             // @todo: 404 - page does not exist
             console.log('TODO: 404 - page does not exist')
