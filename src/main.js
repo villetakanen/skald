@@ -8,7 +8,7 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 
 // Here it gets interesting: bring in the Firebase and our middleware
-// import firebase from 'firebase/app'
+import firebase from 'firebase/app'
 import skaldfire from './plugins/skaldfire'
 
 Vue.config.productionTip = false
@@ -26,6 +26,15 @@ new Vue({
     store.dispatch('metaBinder/init')
     store.dispatch('pageLog/init')
     store.dispatch('sites/init')
+
+    // get signed in profile, and update Vuex state accordingly
+    firebase.auth().onAuthStateChanged(function (user) {
+      if (user) {
+        store.dispatch('author/login', user)
+      } else {
+        store.dispatch('author/logout', user)
+      }
+    })
   },
   render: h => h(App)
 }).$mount('#app')
