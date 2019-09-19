@@ -38,6 +38,13 @@ export default new Router({
       // lazy-loaded when the route is visited.
       props: true,
       component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
+    },
+    {
+      path: '/e/:siteid/:pageid',
+      name: 'editPage',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "viewpage" */ './views/Editor.vue')
     }
   ]
 })

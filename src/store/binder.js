@@ -43,7 +43,7 @@ const mutations = {
     Vue.set(context, 'siteid', siteid)
   },
   setData (context, data) {
-    Vue.set(context, 'title', data.title)
+    Vue.set(context, 'title', data.name)
     Vue.set(context, 'content', data.content)
   },
   setTheme (context, theme) {

@@ -14,7 +14,24 @@
             xs12
             v-if="!loading">
           <v-card>
-            <v-card-title>View Page</v-card-title>
+            <v-toolbar
+              dense
+              flat
+              style="border-bottom: 1px solid #232323">
+              <v-toolbar-title>{{title}}</v-toolbar-title>
+              <v-btn
+                v-if="isAuthz"
+                color="secondary"
+                small
+                absolute
+                bottom
+                right
+                fab
+                v-bind:to="editlink"
+                elevation="0">
+                <v-icon>mdi-pencil</v-icon>
+              </v-btn>
+            </v-toolbar>
             <v-card-text>
               <WikiText :content="content"/>
             </v-card-text>
@@ -57,6 +74,13 @@ export default {
     }
   },
   computed: {
+    isAuthz () {
+      return this.$store.getters['isAuthz']()
+    },
+    title () {
+      if (this.$store.getters['binder/title']() === null) return ' '
+      return this.$store.getters['binder/title']()
+    },
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
       return this.$store.getters['binder/content']()
@@ -67,6 +91,9 @@ export default {
     },
     loading () {
       return this.$store.getters['binder/loading']()
+    },
+    editlink () {
+      return `/e/${this.siteid}/${this.pageid}`
     }
   },
   methods: {
