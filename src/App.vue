@@ -19,7 +19,7 @@
       </v-btn>
 
       <v-toolbar-title class="headline text-uppercase">
-        Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span>{{version}}
+        Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
       </v-toolbar-title>
 
      <v-spacer></v-spacer>
