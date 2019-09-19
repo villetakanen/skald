@@ -4,6 +4,7 @@ import metaBinder from './metaBinder.js'
 import pageLog from './pageLog'
 import binder from './binder'
 import sites from './sites'
+import author from './author'
 
 Vue.use(Vuex)
 
@@ -16,6 +17,17 @@ const getters = {
    */
   version: (context) => () => {
     return context.version
+  },
+  /**
+   * If the author module has a set UID, we should have an actual logged in user.
+   *
+   * Note: the value returned is intented to be used for visibility of the UX
+   * elements, not for actual authentication requests
+   */
+  isAuthz: (context) => () => {
+    return context.author.uid !== null
+    // console.log(context.author)
+    // return false
   }
 }
 
@@ -24,7 +36,8 @@ export default new Vuex.Store({
     binder,
     metaBinder,
     pageLog,
-    sites
+    sites,
+    author
   },
   state,
   getters,
