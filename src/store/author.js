@@ -7,9 +7,9 @@ const state = {
   nick: null
 }
 const getters = {
-  /**
-   * Returns the version number
-   */
+  uid: (context) => () => {
+    return context.uid
+  },
   nick: (context) => () => {
     return context.nick
   }

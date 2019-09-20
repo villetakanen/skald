@@ -42,6 +42,22 @@ const actions = {
         context.commit('patchLog', { data: doc.data() })
       })
     })
+  },
+  stamp (context, { action, pageid, siteid, creator }) {
+    console.log('pagelog/stamp', action, pageid, siteid, creator)
+
+    // console.log('updating firestore for', siteid, pageid
+    var log = {
+      action: action,
+      pageid: pageid,
+      siteid: siteid,
+      creator: creator,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+    }
+
+    const db = firebase.firestore()
+    var logRef = db.collection('pagelog').doc(siteid + '.' + pageid)
+    logRef.set(log)
   }
 }
 export default {

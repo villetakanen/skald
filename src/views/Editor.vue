@@ -17,6 +17,10 @@
       <v-toolbar
         dense>
         <v-toolbar-title>Editing {{title}}</v-toolbar-title>
+
+        <v-spacer></v-spacer>
+
+        <v-btn color="primary" @click="savePage">save</v-btn>
       </v-toolbar>
       <v-card-text>
         <v-form  @submit.prevent="savePage">
@@ -78,6 +82,18 @@ export default {
       if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'
       if (pageid === null || typeof pageid === 'undefined') pageid = siteid
       this.$store.dispatch('binder/openPage', { siteid: siteid, pageid: pageid })
+    },
+    savePage () {
+      this.$store.dispatch('binder/savePage',
+        {
+          siteid: this.siteid,
+          pageid: this.pageid,
+          name: this.title,
+          content: this.content,
+          author: this.$store.getters['author/uid'](),
+          nick: this.$store.getters['author/nick']()
+        })
+      this.$router.push('/v/' + this.siteid + '/' + this.pageid)
     }
   }
 }

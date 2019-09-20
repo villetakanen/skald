@@ -7,7 +7,7 @@
         :creator="page.creator"
         :pageid="page.pageid"
         :siteid="page.siteid"
-        :date="toDate(page.timestamp.seconds)"/>
+        :date="toDate(page.timestamp)"/>
     </template>
   </div>
 </template>
@@ -24,7 +24,9 @@ export default {
     }
   },
   methods: {
-    toDate (seconds) {
+    toDate (timestamp) {
+      if (timestamp === null || typeof timestamp === 'undefined') return '...'
+      const seconds = timestamp.seconds
       if (seconds === null || typeof seconds === 'undefined') return '...'
       var lastChangeDate = new Date(1970, 0, 1) // Epoch
       lastChangeDate.setSeconds(seconds)
