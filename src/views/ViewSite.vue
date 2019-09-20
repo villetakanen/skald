@@ -9,7 +9,7 @@
             <v-card>
               <v-card-title>{{title}}</v-card-title>
               <v-card-text>
-                <WikiText :content="content"/>
+                <WikiText :content="content" :siteid="siteid"/>
               </v-card-text>
             </v-card>
           </v-flex>

@@ -15,4 +15,12 @@ describe('WikiText.vue', () => {
     })
     expect(wrapper.vm.rended.split('\n').join('')).toEqual('<h1>A header</h1><p>with some text</p>')
   })
+  it('Renders [wiki: link]\'s', () => {
+    const content = 'Renders [wiki: link]'
+    const siteid = 'testsite'
+    const wrapper = mount(WikiText, {
+      propsData: { siteid, content }
+    })
+    expect(wrapper.vm.rended.split('\n').join('')).toEqual('<p>Renders <a href="/#/v/testsite/link">link</a></p>')
+  })
 })

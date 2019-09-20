@@ -1,18 +1,17 @@
 <template>
   <div :class="theme">
     <div class="page-container">
-      <v-container
-    fluid
-    grid-list-md>
-        <v-layout wrap>
-
-          <v-flex xs12 v-if="loading">
+      <v-container v-if="loading">
+        <v-row>
+          <v-col align='center'>
             <Loading/>
-          </v-flex>
-
-          <v-flex
-            xs12
-            v-if="!loading">
+          </v-col>
+        </v-row>
+      </v-container>
+      <v-container v-if="!loading">
+        <v-row>
+        <v-col
+            cols="12">
           <v-card>
             <v-toolbar
               dense
@@ -33,18 +32,18 @@
               </v-btn>
             </v-toolbar>
             <v-card-text>
-              <WikiText :content="content"/>
+              <WikiText :content="content" :siteid="siteid"/>
             </v-card-text>
           </v-card>
-          </v-flex>
-          <v-flex xs12>
+          </v-col>
+          <v-col xs12>
           <v-card>
             <v-card-text>
               <LatestChanges />
             </v-card-text>
           </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+        </v-row>
       </v-container>
     </div>
   </div>

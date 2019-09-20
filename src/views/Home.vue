@@ -3,7 +3,7 @@
       <div style="text-align:center;padding:16px">
         <img alt="V" src="../assets/fox.svg" style="max-width: 128px"/>
       </div>
-      <SiteList />
+      <SiteList count="4"/>
     <v-container
     fluid
     grid-list-md>

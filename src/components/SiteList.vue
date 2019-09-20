@@ -24,9 +24,16 @@
 </template>
 <script>
 export default {
+  props: [
+    'count'
+  ],
   computed: {
     sites () {
-      return this.$store.getters['sites/list']()
+      const list = this.$store.getters['sites/list']()
+      const count = parseInt(this.count)
+      console.log(count, this.count)
+      if (count > 0) return list.splice(0, count)
+      return list
     }
   }
 }
