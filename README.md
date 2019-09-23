@@ -55,7 +55,20 @@ npm run lint
 ```
 
 ### Run your end-to-end tests
+
+You need to add a cypress.env.json file to project root with username and password to test the features that require login.
+
+### Example of the cypress.env.json file
+
+```json
+{
+  "TEST_USER_EMAIL": "an.email@address.com",
+  "TEST_USER_PASSWORD": "theP4ssw0rd"
+}
+
 ```
+
+```bash
 npm run test:e2e
 ```
 
