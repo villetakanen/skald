@@ -33,7 +33,8 @@
             <v-btn
               rounded
               large
-              @click="logout">
+              @click="logout"
+              id="logout-button">
               Logout
             </v-btn>
           </v-list-item-title>

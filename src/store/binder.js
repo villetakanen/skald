@@ -63,7 +63,7 @@ const actions = {
     // get the firestore
     const db = firebase.firestore()
 
-    console.log('openPage', siteid, pageid)
+    // console.log('openPage', siteid, pageid)
 
     // get site reference
     const siteRef = db.collection('sites').doc(siteid)
@@ -78,19 +78,19 @@ const actions = {
             context.commit('setLoading', false)
           } else {
             // @todo: 404 - page does not exist
-            console.log('TODO: 404 - page does not exist')
+            // console.log('TODO: 404 - page does not exist')
             // context.commit('httpStatusCode', '404', { root: true })
           }
         })
       } else {
         // @todo: 404 - site does not exist
-        console.log('TODO: 404 - site does not exist')
+        // console.log('TODO: 404 - site does not exist')
       }
     })
   },
   savePage (context, { pageid, name, content, siteid,
     author, nick }) {
-    console.log('updating firestore for', siteid, pageid, name, content, author, nick)
+    // console.log('updating firestore for', siteid, pageid, name, content, author, nick)
 
     var u = {
       creator: author,

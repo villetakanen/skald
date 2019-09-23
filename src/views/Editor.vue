@@ -28,6 +28,7 @@
             v-model="title"
             filled></v-text-field>
           <v-textarea
+            class="editor"
             rows="10"
             outlined
             style="font-family: 'Source Code Pro', monospace;"
