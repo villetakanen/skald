@@ -62,7 +62,7 @@ export default {
     }
   },
   created () {
-    if (!this.$store.getters['isAuthz']()){
+    if (!this.$store.getters['isAuthz']()) {
       this.$router.push('/v/' + this.siteid + '/' + this.pageid)
       return
     }
