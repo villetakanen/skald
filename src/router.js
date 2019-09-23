@@ -52,6 +52,13 @@ export default new Router({
       // lazy-loaded when the route is visited.
       props: true,
       component: () => import(/* webpackChunkName: "testlogin" */ './views/EmailLogin.vue')
+    },
+    {
+      path: '/c/site/:siteid',
+      name: 'sitesettings',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "site" */ './views/SiteSettings.vue')
     }
   ]
 })

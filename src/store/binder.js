@@ -36,6 +36,12 @@ const getters = {
    */
   loading: (context) => () => {
     return context.loading
+  },
+  /**
+   * Returns true if binder is refreshing page content from firebase
+   */
+  siteID: (context) => () => {
+    return context.siteid
   }
 }
 const mutations = {

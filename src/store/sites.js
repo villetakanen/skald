@@ -3,7 +3,9 @@ import 'firebase/firestore'
 import Vue from 'vue'
 
 const state = {
-  list: {}
+  list: {},
+  owners: {},
+  loading: false
 }
 const getters = {
   /**
@@ -11,6 +13,9 @@ const getters = {
    */
   list: (context) => () => {
     return context.list
+  },
+  owners: (context) => () => {
+    return context.owners
   }
 }
 const mutations = {
@@ -29,6 +34,12 @@ const mutations = {
     // console.log(state.list)
     Vue.set(state.list, key, data)
     // console.log(state.list[key])
+  },
+  flushOwners (context) {
+    Vue.set(context, 'owners', {})
+  },
+  patchOwners (state, { key, data }) {
+    Vue.set(state.owners, key, data)
   }
 }
 const actions = {
@@ -43,6 +54,23 @@ const actions = {
         // console.log('getSites() is adding to sites :', doc.id, doc.data())
         context.commit('patchSite', { key: doc.id, data: doc.data() })
       })
+    })
+  },
+  /**
+   * Opens a site for editing, viewing - with all child attributes
+   * @param {*} siteid firebase id for the site
+   */
+  openSite (context, siteid) {
+    const db = firebase.firestore()
+
+    // context.commit('loading', true)
+    context.commit('flushOwners')
+
+    db.collection('sites').doc(siteid).collection('owners').get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        context.commit('patchOwners', { key: doc.id, data: doc.data() })
+      })
+      // context.commit('loading', false)
     })
   }
 }

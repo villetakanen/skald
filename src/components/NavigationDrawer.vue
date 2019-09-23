@@ -1,5 +1,18 @@
 <template>
   <v-list>
+    <template v-if="siteID !== null">
+      <v-subheader>Site</v-subheader>
+      <v-list-item :to="'/v/'+siteID">
+        <v-list-item-action><v-icon>mdi-dice-d20</v-icon></v-list-item-action>
+
+        <v-list-item-title >Site Home</v-list-item-title>
+      </v-list-item>
+      <v-list-item :to="'/c/site/'+siteID">
+        <v-list-item-action><v-icon>mdi-dice-d4</v-icon></v-list-item-action>
+
+        <v-list-item-title >Settings</v-list-item-title>
+      </v-list-item>
+    </template>
     <v-subheader>Meta</v-subheader>
     <v-list-item :to="'/'">
       <v-list-item-action><v-icon>mdi-home</v-icon></v-list-item-action>
@@ -33,6 +46,9 @@ export default {
   computed: {
     version () {
       return this.$store.getters['version']()
+    },
+    siteID () {
+      return this.$store.getters['binder/siteID']()
     }
   }
 }
