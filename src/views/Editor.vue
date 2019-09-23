@@ -62,6 +62,10 @@ export default {
     }
   },
   created () {
+    if (!this.$store.getters['isAuthz']()){
+      this.$router.push('/v/' + this.siteid + '/' + this.pageid)
+      return
+    }
     this.updatePage(this.siteid, this.pageid)
     this.$store.subscribe((mutation, state) => {
       // console.log(mutation.type)
