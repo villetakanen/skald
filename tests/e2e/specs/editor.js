@@ -19,7 +19,7 @@ describe('Editor as logged in user', () => {
     cy.get('#pw').type(Cypress.env('TEST_USER_PASSWORD'))
     cy.get('#login-button').click()
 
-    cy.wait(300)
+    cy.wait(1000)
 
     // open editor
     cy.visit('/#/e/skald/sandbox')
