@@ -30,7 +30,7 @@ export default new Router({
       name: 'viewSite',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewSite.vue')
+      component: () => import(/* webpackChunkName: "viewsite" */ './views/ViewSite.vue')
     },
     {
       path: '/v/:siteid/:pageid',
@@ -44,7 +44,14 @@ export default new Router({
       name: 'editPage',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "viewpage" */ './views/Editor.vue')
+      component: () => import(/* webpackChunkName: "editor" */ './views/Editor.vue')
+    },
+    {
+      path: '/testlogin',
+      name: 'testlogin',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "testlogin" */ './views/EmailLogin.vue')
     }
   ]
 })
