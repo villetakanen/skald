@@ -29,7 +29,7 @@
             filled></v-text-field>
           <v-textarea
             class="editor"
-            rows="10"
+            :rows="rows"
             outlined
             style="font-family: 'Source Code Pro', monospace;"
             v-model="content"></v-textarea>
@@ -59,6 +59,11 @@ export default {
   computed: {
     loading () {
       return this.$store.getters['binder/loading']()
+    },
+    rows () {
+      if (window.innerWidth < 960) return 10
+      console.log(window.innerWidth)
+      return 20
     }
   },
   created () {
