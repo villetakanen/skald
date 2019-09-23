@@ -100,6 +100,9 @@ export default {
       if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'
       if (pageid === null || typeof pageid === 'undefined') pageid = siteid
       this.$store.dispatch('binder/openPage', { siteid: siteid, pageid: pageid })
+
+      // set site styles
+      this.$store.dispatch('sites/openSite', siteid)
     }
   }
 }

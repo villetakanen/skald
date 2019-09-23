@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar>
-     <v-toolbar-title>Owners</v-toolbar-title>
+      <v-toolbar-title>Owners</v-toolbar-title>
     </v-toolbar>
     <v-card-text>
       <v-chip

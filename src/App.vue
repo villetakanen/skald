@@ -1,7 +1,14 @@
 <template>
   <v-app>
-    <div id="cover" :class="theme">
-      <div id="cover-image"></div>
+    <div
+      id="cover"
+      :class="theme"
+      :style="sitePoster">
+      <div
+        v-if="sitePoster !== null"
+        id="cover-image"
+        >
+      </div>
     </div>
     <v-navigation-drawer
       v-model="drawer"
@@ -74,6 +81,12 @@ export default {
   computed: {
     version () {
       return this.$store.getters['version']()
+    },
+    sitePoster () {
+      const url = this.$store.getters['sites/posterURL']()
+      console.log('sitePoster', url)
+      if (url === null) return ''
+      return `background-image:url('${url}');`
     }
   },
   created () {

@@ -28,6 +28,9 @@ export default {
   components: {
     LatestChanges,
     SiteList
+  },
+  created () {
+    this.$store.dispatch('sites/openSite', 'skald')
   }
 }
 </script>
