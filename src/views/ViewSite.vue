@@ -4,23 +4,29 @@
       <v-container
         fluid
         grid-list-md>
-        <v-layout wrap>
-          <v-flex xs12 md4>
+        <v-row>
+          <v-col>
+            <h1 id="sitetitle">{{title}}</h1>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col
+            cols="8">
             <v-card>
-              <v-card-title>{{title}}</v-card-title>
               <v-card-text>
                 <WikiText :content="content" :siteid="siteid"/>
               </v-card-text>
             </v-card>
-          </v-flex>
-          <v-flex xs12 md4>
-          <v-card>
-            <v-card-text>
-              <LatestChanges />
-            </v-card-text>
-          </v-card>
-          </v-flex>
-        </v-layout>
+          </v-col>
+          <v-col
+            cols="4">
+            <v-card>
+              <v-card-text>
+                <LatestChanges />
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
       </v-container>
     </div>
   </div>

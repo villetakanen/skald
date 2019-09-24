@@ -8,7 +8,7 @@ const state = {
   owners: {},
   description: {},
   loading: false,
-  currentSiteID: null,
+  activeSiteID: null,
   posterURL: null
 }
 const getters = {
@@ -56,6 +56,9 @@ const mutations = {
   },
   setDescription (context, desc) {
     Vue.set(context, 'description', desc)
+  },
+  setActiveSite (context, id) {
+    Vue.set(context, 'activeSiteID', id)
   },
   setPosterURL (context, url) {
     Vue.set(context, 'posterURL', url)
@@ -107,6 +110,7 @@ const actions = {
 
     db.collection('sites').doc(siteid).get().then((doc) => {
       if (doc.exists) {
+        context.commit('setActiveSite', doc.key)
         context.commit('setDescription', doc.data().description)
 
         if (doc.data().posterURL) {
@@ -132,6 +136,10 @@ const actions = {
       })
       // context.commit('loading', false)
     })
+  },
+  setDescription (context, description) {
+    console.log('updating desctription of', context.state.activeSiteID, ' to', description)
+    context.commit('setDescription', description)
   }
 }
 export default {
