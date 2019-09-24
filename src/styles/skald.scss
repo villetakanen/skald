@@ -4,7 +4,12 @@ h1 {
 }
 h1#sitetitle {
   color: white;
-  padding-bottom:32px;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+p#sitedescription {
+  color: white;
+  margin-bottom: 16px;
 }
 div.wikipage{
   h1, h2, h3, h4 {

@@ -5,13 +5,17 @@
         fluid
         grid-list-md>
         <v-row>
-          <v-col>
+          <v-col id="sitehead">
             <h1 id="sitetitle">{{title}}</h1>
+            <p id="sitedescription">{{description}}</p>
           </v-col>
         </v-row>
         <v-row>
           <v-col
-            cols="8">
+            cols="12"
+            md="8"
+            sm="12"
+            xs="12">
             <v-card>
               <v-card-text>
                 <WikiText :content="content" :siteid="siteid"/>
@@ -19,7 +23,10 @@
             </v-card>
           </v-col>
           <v-col
-            cols="4">
+            cols="12"
+            md="4"
+            sm="12"
+            xs="12">
             <v-card>
               <v-card-text>
                 <LatestChanges />
@@ -55,6 +62,10 @@ export default {
     title () {
       if (this.$store.getters['binder/title']() === null) return ' '
       return this.$store.getters['binder/title']()
+    },
+    description () {
+      if (this.$store.getters['sites/description']() === null) return ' '
+      return this.$store.getters['sites/description']()
     },
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
