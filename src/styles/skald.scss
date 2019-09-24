@@ -11,8 +11,14 @@ div.wikipage{
     font-weight: 400;
     margin-bottom: 16px;
     margin-top: 8px;
+    color: white;
   }
+
   font-family: Roboto, serif;
+
+  ul, ol {
+    margin-bottom: 16px;
+  }
 }
 /* div.site-frontpage {
   /* * /
