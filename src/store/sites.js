@@ -29,6 +29,9 @@ const getters = {
   },
   sitePosterURL: (context) => (siteid) => {
     return context.list[siteid].fullPosterURL
+  },
+  activeSiteID: (contex) => () => {
+    return contex.activeSiteID
   }
 }
 const mutations = {
@@ -110,7 +113,7 @@ const actions = {
 
     db.collection('sites').doc(siteid).get().then((doc) => {
       if (doc.exists) {
-        context.commit('setActiveSite', doc.key)
+        context.commit('setActiveSite', doc.id)
         context.commit('setDescription', doc.data().description)
 
         if (doc.data().posterURL) {
@@ -138,7 +141,12 @@ const actions = {
     })
   },
   setDescription (context, description) {
-    console.log('updating desctription of', context.state.activeSiteID, ' to', description)
+    const siteid = context.getters['activeSiteID']()
+    console.log('updating desctription of', siteid, 'to', description)
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({ 'description': description })
+
     context.commit('setDescription', description)
   }
 }
