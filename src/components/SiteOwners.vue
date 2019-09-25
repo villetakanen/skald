@@ -8,6 +8,8 @@
         v-for="(owner, index) in owners"
         v-bind:key="index"
         :outlined="index === currentUser"
+        :close="!(index === currentUser)"
+        @click:close="removeOwner(owner.uid)"
         >
           {{owner.nick}}</v-chip>
     </v-card-text>
@@ -15,15 +17,11 @@
 </template>
 
 <script>
-// v-chip
-// :close="!(index === currentUser)"
-// @click:close="removeOwner(owner.uid)"
 
 export default {
   computed: {
     owners () {
-      // return null
-      return this.$store.getters['sites/owners']()
+      return this.$store.getters['site/owners']()
     },
     currentUser () {
       return this.$store.getters['author/uid']()

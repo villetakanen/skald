@@ -84,6 +84,7 @@ export default {
 
       // set site styles
       this.$store.dispatch('sites/openSite', siteid)
+      this.$store.dispatch('site/open', siteid)
     }
   }
 }

@@ -5,7 +5,6 @@ import Vue from 'vue'
 
 const state = {
   list: {},
-  owners: {},
   description: {},
   loading: false,
   activeSiteID: null,
@@ -17,9 +16,6 @@ const getters = {
    */
   list: (context) => () => {
     return context.list
-  },
-  owners: (context) => () => {
-    return context.owners
   },
   description: (contex) => () => {
     return contex.description
@@ -46,16 +42,7 @@ const mutations = {
       typeof data.link === 'undefined') {
       data.link = key + '.' + key
     }
-    // console.log('patching site', key, data)
-    // console.log(state.list)
     Vue.set(state.list, key, data)
-    // console.log(state.list[key])
-  },
-  flushOwners (context) {
-    Vue.set(context, 'owners', {})
-  },
-  patchOwners (state, { key, data }) {
-    Vue.set(state.owners, key, data)
   },
   setDescription (context, desc) {
     Vue.set(context, 'description', desc)
@@ -67,7 +54,6 @@ const mutations = {
     Vue.set(context, 'posterURL', url)
   },
   setSitePosterURL (context, { siteid, posterURL }) {
-    console.log(posterURL)
     Vue.set(context.list[siteid], 'fullPosterURL', posterURL)
   }
 }
@@ -80,11 +66,9 @@ const actions = {
     const db = firebase.firestore()
     db.collection('sites').orderBy('lastUpdate', 'desc').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        // console.log('getSites() is adding to sites :', doc.id, doc.data())
         context.commit('patchSite', { key: doc.id, data: doc.data() })
 
         if (doc.data().posterURL) {
-          console.log('setting ', doc.data().posterURL)
           // Get a reference to the storage service, which is used to
           // create references in your storage bucket
           const storage = firebase.storage()
@@ -109,7 +93,7 @@ const actions = {
     const db = firebase.firestore()
 
     // context.commit('loading', true)
-    context.commit('flushOwners')
+    // context.commit('flushOwners')
 
     db.collection('sites').doc(siteid).get().then((doc) => {
       if (doc.exists) {
@@ -125,7 +109,7 @@ const actions = {
             context.commit('setPosterURL', url)
           }).catch((err) => {
             this.message = siteid + '/' + doc.data().posterUR + ' not found.'
-            console.log(err.message)
+            console.log(err.message, this.message)
           })
         } else {
           context.commit('setPosterURL', null)
@@ -133,16 +117,15 @@ const actions = {
       }
     })
 
-    db.collection('sites').doc(siteid).collection('owners').get().then((querySnapshot) => {
+    /* db.collection('sites').doc(siteid).collection('owners').get().then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
         context.commit('patchOwners', { key: doc.id, data: doc.data() })
       })
       // context.commit('loading', false)
-    })
+    }) */
   },
   setDescription (context, description) {
     const siteid = context.getters['activeSiteID']()
-    console.log('updating desctription of', siteid, 'to', description)
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({ 'description': description })

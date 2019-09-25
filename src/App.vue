@@ -84,7 +84,7 @@ export default {
     },
     sitePoster () {
       const url = this.$store.getters['sites/posterURL']()
-      console.log('sitePoster', url)
+      // console.log('sitePoster', url)
       if (url === null) return ''
       return `background-image:url('${url}');`
     }

@@ -29,10 +29,8 @@ const mutations = {
     Vue.set(context, 'owners', owners)
   },
   patchOwner (context, { id, data }) {
-    // Owners is reactive, so we need Vue to set it
-    var owners = context.owners
-    owners[id] = data
-    Vue.set(context, 'owners', owners)
+    // console.log('site/patchOwner', id, data)
+    Vue.set(context.owners, id, data)
   }
 }
 
@@ -52,6 +50,8 @@ const actions = {
       return
     }
 
+    console.log('site/open', siteid)
+
     // unsubscribe from previous site
     context.state.unsubscibe()
     context.state.unsubscibeOwners()
@@ -65,13 +65,13 @@ const actions = {
     const ownersRef = siteRef.collection('owners')
 
     // Subscribe to site data changes
-    context.state.unsubscribe = siteRef.onSnapshot((change) => {
-      context.commit('site', { siteid: siteid, data: change.data() })
+    context.state.unsubscribe = siteRef.onSnapshot((doc) => {
+      context.commit('site', { siteid: siteid, data: doc.data() })
     })
 
     // Subscribe to owner data changes
-    context.state.unsubscribeOwners = ownersRef.onSnapshot((change) => {
-      change.docChanges().forEach((owner) => {
+    context.state.unsubscribeOwners = ownersRef.onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((owner) => {
         context.commit('patchOwner', { id: owner.id, data: owner.data() })
       })
     })

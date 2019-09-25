@@ -30,7 +30,16 @@ export default {
     'siteid'
   ],
   created () {
-    this.$store.dispatch('sites/openSite', this.siteid)
+    this.updateSite(this.siteid)
+  },
+  methods: {
+    updateSite (siteid) {
+      if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'
+
+      // set site styles
+      this.$store.dispatch('sites/openSite', siteid)
+      this.$store.dispatch('site/open', siteid)
+    }
   }
 }
 </script>
