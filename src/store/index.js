@@ -6,6 +6,7 @@ import binder from './binder'
 import sites from './sites'
 import author from './author'
 import site from './site'
+import users from './users'
 
 Vue.use(Vuex)
 
@@ -39,7 +40,8 @@ export default new Vuex.Store({
     pageLog,
     sites,
     author,
-    site
+    site,
+    users
   },
   state,
   getters,

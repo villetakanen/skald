@@ -3,7 +3,7 @@
     <h1>Site settings</h1>
     <v-row>
       <v-col>
-        <SiteOwners/>
+        <SiteOwners :siteid="siteid"/>
       </v-col>
       <v-col>
         <SiteDescription/>

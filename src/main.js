@@ -26,6 +26,7 @@ new Vue({
     store.dispatch('metaBinder/init')
     store.dispatch('pageLog/init')
     store.dispatch('sites/init')
+    store.dispatch('users/init')
 
     // get signed in profile, and update Vuex state accordingly
     firebase.auth().onAuthStateChanged(function (user) {
