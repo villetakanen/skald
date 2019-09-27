@@ -10,7 +10,7 @@
         v-bind:key="index"
         :outlined="index === currentUser"
         :close="!(index === currentUser)"
-        @click:close="removeOwner(owner.uid)"
+        @click:close="removeOwner(index)"
         >
           {{owner.nick}}</v-chip>
 
@@ -33,6 +33,7 @@ export default {
   }),
   computed: {
     owners () {
+      console.log(this.$store.getters['site/owners']())
       return this.$store.getters['site/owners']()
     },
     nonOwners () {
@@ -60,6 +61,10 @@ export default {
         if (user.nick === this.newOwner) return true
       })[0].uid
       this.$store.dispatch('users/addOwner', { siteid: this.siteid, uid: newUid })
+    },
+    removeOwner (uid) {
+      console.log('removeOwner', uid)
+      this.$store.dispatch('users/removeOwner', { siteid: this.siteid, uid: uid })
     }
   }
 }

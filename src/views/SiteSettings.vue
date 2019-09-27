@@ -32,6 +32,11 @@ export default {
   created () {
     this.updateSite(this.siteid)
   },
+  watch: {
+    '$route' (to, from) {
+      this.updateSite(this.siteid)
+    }
+  },
   methods: {
     updateSite (siteid) {
       if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'

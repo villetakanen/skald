@@ -50,6 +50,22 @@ const actions = {
 
     db.collection('profiles').doc(uid).update({ owns: userSites })
     db.collection('sites').doc(siteid).collection('owners').doc(uid).set({ nick: user.nick })
+  },
+  removeOwner (context, { siteid, uid }) {
+    const db = firebase.firestore()
+
+    var user = context.getters['get'](uid)
+    var userSites = user.owns
+    if (typeof userSites === 'undefined') userSites = []
+    userSites = userSites.filter((site) => {
+      if (site === siteid) return false
+      return true
+    })
+
+    console.log('removeOwner', uid, siteid, userSites)
+
+    db.collection('profiles').doc(uid).update({ owns: userSites })
+    db.collection('sites').doc(siteid).collection('owners').doc(uid).delete()
   }
 }
 

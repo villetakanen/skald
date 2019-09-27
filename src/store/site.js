@@ -31,6 +31,9 @@ const mutations = {
   patchOwner (context, { id, data }) {
     // console.log('site/patchOwner', id, data)
     Vue.set(context.owners, id, data)
+  },
+  dropOwner (context, { id }) {
+    Vue.delete(context.owners, id)
   }
 }
 
@@ -71,8 +74,13 @@ const actions = {
 
     // Subscribe to owner data changes
     context.state.unsubscribeOwners = ownersRef.onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((owner) => {
-        context.commit('patchOwner', { id: owner.id, data: owner.data() })
+      // snapshot.docChanges().forEach(function(change)
+      querySnapshot.docChanges().forEach((change) => {
+        if (change.type === 'removed') {
+          context.commit('dropOwner', { id: change.doc.id })
+        } else {
+          context.commit('patchOwner', { id: change.doc.id, data: change.doc.data() })
+        }
       })
     })
   },
