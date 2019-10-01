@@ -23,4 +23,12 @@ describe('WikiText.vue', () => {
     })
     expect(wrapper.vm.rended.split('\n').join('')).toEqual('<p>Renders <a href="/#/v/testsite/link">link</a></p>')
   })
+  it('Renders [wiki: link/link]\'s', () => {
+    const content = 'Renders [wiki: link/link]'
+    const siteid = 'testsite'
+    const wrapper = mount(WikiText, {
+      propsData: { siteid, content }
+    })
+    expect(wrapper.vm.rended.split('\n').join('')).toEqual('<p>Renders <a href="/#/v/link/link">link/link</a></p>')
+  })
 })

@@ -16,6 +16,9 @@ const getters = {
   },
   owners: (context) => () => {
     return context.owners
+  },
+  description: (context) => () => {
+    return context.data.description
   }
 }
 

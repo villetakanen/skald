@@ -4,6 +4,7 @@
       <v-toolbar-title>Description</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
+        id="saveDescriptionButton"
         v-if="isAuthz"
         @click="save">Save</v-btn>
     </v-toolbar>
@@ -25,15 +26,15 @@
 
 <script>
 export default {
-  data: () => ({
+  /* data: () => ({
     description: ''
-  }),
-  mounted () {
-    this.description = this.$store.getters['sites/description']()
-  },
+  }), */
   computed: {
     isAuthz () {
       return this.$store.getters['isAuthz']()
+    },
+    description () {
+      return this.$store.getters['site/description']()
     }
   },
   methods: {

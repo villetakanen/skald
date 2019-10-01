@@ -9,15 +9,19 @@
         v-for="(owner, index) in owners"
         v-bind:key="index"
         :outlined="index === currentUser"
-        :close="!(index === currentUser)"
+        :close="!(index === currentUser) && isAuthz"
         @click:close="removeOwner(index)"
         >
           {{owner.nick}}</v-chip>
 
       <v-autocomplete
+        v-if="isAuthz"
         v-model="newOwner"
         :items="nonOwners"></v-autocomplete>
-      <v-btn color="primary" @click="addOwner">Add to Owners</v-btn>
+      <v-btn
+        v-if="isAuthz"
+        color="primary"
+        @click="addOwner">Add to Owners</v-btn>
     </v-card-text>
   </v-card>
 </template>
@@ -52,6 +56,9 @@ export default {
     },
     currentUser () {
       return this.$store.getters['author/uid']()
+    },
+    isAuthz () {
+      return this.$store.getters['isAuthz']()
     }
   },
   methods: {
