@@ -26,15 +26,23 @@
 
 <script>
 export default {
-  /* data: () => ({
-    description: ''
-  }), */
+  data: () => ({
+    rawDescription: null
+  }),
   computed: {
     isAuthz () {
       return this.$store.getters['isAuthz']()
     },
-    description () {
-      return this.$store.getters['site/description']()
+    description: {
+      get () {
+        if (this.rawDescription == null){
+          return this.$store.getters['site/description']()
+        }
+        return this.rawDescription
+      },
+      set (value) {
+        this.rawDescription = value
+      }
     }
   },
   methods: {
