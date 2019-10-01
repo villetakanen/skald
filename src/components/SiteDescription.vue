@@ -35,7 +35,7 @@ export default {
     },
     description: {
       get () {
-        if (this.rawDescription == null){
+        if (this.rawDescription == null) {
           return this.$store.getters['site/description']()
         }
         return this.rawDescription

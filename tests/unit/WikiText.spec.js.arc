@@ -1,4 +1,8 @@
 // Utilities
+
+
+//Will not run as wikitext uses runtime compiler 
+
 import {
   mount
 } from '@vue/test-utils'

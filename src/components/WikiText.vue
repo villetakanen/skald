@@ -1,12 +1,17 @@
 <template>
   <div class="wikipage">
     <div :class="this.theme">
-      <div v-html="rended"></div>
+      <!--div v-html="rended"></div-->
+      <component v-bind:is="rended"></component>
     </div>
   </div>
 </template>
 
 <script>
+import ViewAttachment from './ViewAttachment.vue'
+import Vue from 'vue'
+Vue.component('ViewAttachment', ViewAttachment)
+
 export default {
   props: [
     'content',
@@ -25,7 +30,12 @@ export default {
       const md = new MarkdownIt()
       rendedContent = md.render(rendedContent)
 
-      return rendedContent
+      // These we need to run on html
+      rendedContent = attachLinks(rendedContent, this.siteid)
+
+      return {
+        template: '<div>' + rendedContent + '</div>'
+      }
     }
   }
 }
@@ -51,5 +61,18 @@ function toURI (link) {
     s = s.split('--').join('-')
   }
   return s.toLowerCase()
+}
+function attachLinks (page, siteid) {
+  const re = new RegExp('([\\[(]attach:)(.+?)([\\])])', 'g')
+  return page.replace(re, function (match, p1, p2, p3, offset, string) {
+    p2 = p2.trim()
+    if (p2.includes(':')) {
+      const parts = p2.split(':')
+      if (parts[1].trim() === 'wide') return `<ViewAttachment wide="margin:0 -16px" path="${siteid}/${parts[0]}"/>`
+      if (parts[1].trim() === 'sm') return `<ViewAttachment wide="height:128px" path="${siteid}/${parts[0]}"/>`
+      if (parts[1].trim() === 'xs') return `<ViewAttachment wide="height:56px;width:56px" path="${siteid}/${parts[0]}"/>`
+    }
+    return `<ViewAttachment wide="text-align:center" path="${siteid}/${p2}"/>`
+  })
 }
 </script>

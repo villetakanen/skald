@@ -1,6 +1,7 @@
 var manifestJSON = require('./public/manifest.json')
 
 module.exports = {
+  runtimeCompiler: true,
   pwa: {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {
