@@ -6,13 +6,18 @@ const state = {
   siteid: null,
   owners: {},
   data: {},
+  sidebarContent: null,
   unsubscibe: () => {},
-  unsubscibeOwners: () => {}
+  unsubscibeOwners: () => {},
+  unsubscibeSidebar: () => {}
 }
 
 const getters = {
   id: (context) => () => {
     return context.siteid
+  },
+  sidebarContent: (context) => () => {
+    return context.sidebarContent
   },
   owners: (context) => () => {
     return context.owners
@@ -26,6 +31,9 @@ const mutations = {
   site (context, { siteid, data }) {
     Vue.set(context, 'siteid', siteid)
     Vue.set(context, 'data', data)
+  },
+  sidebar (context, { data }) {
+    Vue.set(context, 'sidebarContent', data.content)
   },
   owners (context, owners) {
     if (!exists(owners)) owners = {}
@@ -61,6 +69,7 @@ const actions = {
     // unsubscribe from previous site
     context.state.unsubscibe()
     context.state.unsubscibeOwners()
+    context.state.unsubscibeSidebar()
 
     // reset all patched data
     context.commit('owners', null)
@@ -85,6 +94,11 @@ const actions = {
           context.commit('patchOwner', { id: change.doc.id, data: change.doc.data() })
         }
       })
+    })
+
+    // Subscribe to site sidebar changes
+    context.state.unsubscribeSidebar = siteRef.collection('pages').doc('sidebar').onSnapshot((doc) => {
+      context.commit('sidebar', { data: doc.data() })
     })
   },
   /* getOwners (context) {

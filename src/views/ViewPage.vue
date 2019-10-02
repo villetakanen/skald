@@ -11,7 +11,7 @@
       <v-container v-if="!loading">
         <v-row>
         <v-col
-            cols="12">
+            cols="8">
           <v-card>
             <v-toolbar
               dense
@@ -35,6 +35,14 @@
               <WikiText :content="content" :siteid="siteid"/>
             </v-card-text>
           </v-card>
+          </v-col>
+          <v-col cols="4">
+            <v-card>
+              <v-card-title>Sidebar</v-card-title>
+              <v-card-text>
+              <WikiText :content="sidebarContent" :siteid="siteid"/>
+            </v-card-text>
+            </v-card>
           </v-col>
           <v-col xs12>
           <v-card>
@@ -83,6 +91,10 @@ export default {
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
       return this.$store.getters['binder/content']()
+    },
+    sidebarContent () {
+      if (this.$store.getters['site/sidebarContent']() === null) return ' '
+      return this.$store.getters['site/sidebarContent']()
     },
     theme () {
       if (this.$store.getters['binder/theme']() === null) return 'Skald reader'
