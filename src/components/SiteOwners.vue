@@ -70,7 +70,6 @@ export default {
       this.$store.dispatch('users/addOwner', { siteid: this.siteid, uid: newUid })
     },
     removeOwner (uid) {
-      console.log('removeOwner', uid)
       this.$store.dispatch('users/removeOwner', { siteid: this.siteid, uid: uid })
     }
   }

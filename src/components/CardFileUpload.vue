@@ -25,10 +25,6 @@ export default {
   }),
   methods: {
     upload () {
-      // this.file = this.$refs.file
-      // console.log(this.file)
-      // console.log(this.file2)
-
       var preview = document.querySelector('#demoimg')
       var reader = new FileReader()
 
@@ -42,8 +38,7 @@ export default {
 
       // Create a root reference
       const storageRef = firebase.storage().ref()
-      // Create site reference
-      // console.log('f', this.path)
+
       const fileRef = storageRef.child(this.path)
       fileRef.put(this.file2).then((snapshot) => {
         this.$store.dispatch('sites/openSite', this.siteid)

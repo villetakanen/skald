@@ -66,21 +66,24 @@ const actions = {
     const db = firebase.firestore()
     db.collection('sites').orderBy('lastUpdate', 'desc').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
-        context.commit('patchSite', { key: doc.id, data: doc.data() })
+        // If the site is nonlisted, we do not read any data to Sites store!
+        if (doc.data().nonlisted !== true) {
+          context.commit('patchSite', { key: doc.id, data: doc.data() })
 
-        if (doc.data().posterURL) {
-          // Get a reference to the storage service, which is used to
-          // create references in your storage bucket
-          const storage = firebase.storage()
-          var pathRef = storage.ref(doc.id + '/' + doc.data().posterURL)
-          pathRef.getDownloadURL().then((url) => {
-            context.commit('setSitePosterURL', { siteid: doc.id, posterURL: url })
-          }).catch((err) => {
-            this.message = doc.id + '/' + doc.data().posterUR + ' not found.'
-            console.log(err.message)
-          })
-        } else {
-          context.commit('setSitePosterURL', { siteid: doc.id, posterURL: null })
+          if (doc.data().posterURL) {
+            // Get a reference to the storage service, which is used to
+            // create references in your storage bucket
+            const storage = firebase.storage()
+            var pathRef = storage.ref(doc.id + '/' + doc.data().posterURL)
+            pathRef.getDownloadURL().then((url) => {
+              context.commit('setSitePosterURL', { siteid: doc.id, posterURL: url })
+            }).catch((err) => {
+              this.message = doc.id + '/' + doc.data().posterUR + ' not found.'
+              console.log(err.message)
+            })
+          } else {
+            context.commit('setSitePosterURL', { siteid: doc.id, posterURL: null })
+          }
         }
       })
     })

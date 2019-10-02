@@ -11,7 +11,8 @@ import users from './users'
 Vue.use(Vuex)
 
 const state = {
-  version: unescape(process.env.VERSION || '%7Bversion%3A0%7D')
+  version: unescape(process.env.VERSION || '%7Bversion%3A0%7D'),
+  error: null
 }
 const getters = {
   /**
@@ -30,6 +31,17 @@ const getters = {
     return context.author.uid !== null
     // console.log(context.author)
     // return false
+  },
+  /**
+   * Global error state
+   */
+  error: (context) => () => {
+    return context.error
+  }
+}
+const mutations = {
+  error (context, error) {
+    Vue.set(context, 'error', error)
   }
 }
 
@@ -45,9 +57,7 @@ export default new Vuex.Store({
   },
   state,
   getters,
-  mutations: {
-
-  },
+  mutations,
   actions: {
 
   }

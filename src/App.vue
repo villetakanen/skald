@@ -56,18 +56,21 @@
           @click.native="newContent=!newContent"
         ><v-icon>mdi-close</v-icon></v-btn></v-snackbar>
     </v-content>
+    <ErrorDialog/>
   </v-app>
 </template>
 
 <script>
 import NavigationDrawer from './components/NavigationDrawer'
 import AccountMenu from './components/AccountMenu'
+import ErrorDialog from './components/ErrorDialog'
 
 export default {
   name: 'App',
   components: {
     NavigationDrawer,
-    AccountMenu
+    AccountMenu,
+    ErrorDialog
   },
   data: () => ({
     registration: null,
@@ -84,7 +87,6 @@ export default {
     },
     sitePoster () {
       const url = this.$store.getters['sites/posterURL']()
-      // console.log('sitePoster', url)
       if (url === null) return ''
       return `background-image:url('${url}');`
     }
@@ -115,22 +117,6 @@ export default {
       if (!this.registration || !this.registration.waiting) { return }
       this.registration.waiting.postMessage('skipWaiting')
     }
-  },
-  mounted () {
-    /* this.$store.subscribe((mutation, state) => {
-      // console.log(mutation.type)
-      switch (mutation.type) {
-        case 'binder/setTheme':
-          if (this.$store.getters['binder/theme']() === 'Quick') {
-            this.$vuetify.theme.dark = true
-            this.theme = 'Quick'
-          } else {
-            this.$vuetify.theme.dark = false
-            this.theme = 'Skald'
-          }
-          break
-      }
-    }) */
   }
 }
 </script>
