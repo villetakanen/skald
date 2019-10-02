@@ -70,7 +70,6 @@ export default {
       // Create a root reference
       const storageRef = firebase.storage().ref()
       // Create site reference
-      // console.log('f', this.path)
       const fileRef = storageRef.child(this.siteid + '/poster.jpg')
       fileRef.put(this.file2).then((snapshot) => {
         this.$emit('uploaded', true)

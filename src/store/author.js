@@ -24,7 +24,6 @@ const mutations = {
 }
 const actions = {
   login (context, user) {
-    // console.log('author/login', user)
     context.commit('setUid', user.uid)
 
     const db = firebase.firestore()
@@ -35,7 +34,6 @@ const actions = {
     })
   },
   logout (context, user) {
-    // console.log('author/logout', user)
     if (context.state.uid !== null) {
       context.commit('setUid', null)
       context.commit('setNick', null)

@@ -40,8 +40,7 @@ export default {
     sites () {
       const list = this.$store.getters['sites/list']()
       const count = parseInt(this.count)
-      // console.log(count, this.count, list)
-      // if (count > 0) return list.splice(0, count)
+
       var i = 0
       var rlist = {}
       for (var key in list) {
@@ -49,7 +48,7 @@ export default {
         if (i > count) break
         rlist[key] = list[key]
       }
-      // console.log(rlist)
+
       return rlist
     }
   },
