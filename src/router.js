@@ -40,6 +40,13 @@ export default new Router({
       component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
     },
     {
+      path: '/l/sites',
+      name: 'listSites',
+      // lazy-loaded when the route is visited.
+      props: false,
+      component: () => import(/* webpackChunkName: "viewpage" */ './views/ListSites.vue')
+    },
+    {
       path: '/e/:siteid/:pageid',
       name: 'editPage',
       // lazy-loaded when the route is visited.
