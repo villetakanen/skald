@@ -44,7 +44,6 @@ export default {
         {
           siteid: this.newSiteid,
           name: this.newSiteid,
-          content: '# ' + this.newSiteName,
           owner: this.$store.state.creator.uid,
           ownerNick: this.$store.state.creator.nick
         })

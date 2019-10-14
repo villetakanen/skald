@@ -119,13 +119,6 @@ const actions = {
         }
       }
     })
-
-    /* db.collection('sites').doc(siteid).collection('owners').get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        context.commit('patchOwners', { key: doc.id, data: doc.data() })
-      })
-      // context.commit('loading', false)
-    }) */
   },
   setDescription (context, description) {
     const siteid = context.getters['activeSiteID']()
@@ -134,8 +127,31 @@ const actions = {
     db.collection('sites').doc(siteid).update({ 'description': description })
 
     context.commit('setDescription', description)
+  },
+  createSite (context, { siteid, name, description, ownerid, ownernick }) {
+    if (!exists(siteid)) {
+      context.commit('error', 'Can not create site without a site id', { root: true })
+      return
+    }
+
+    description = exists(description) ? description : 'A new site'
+
+    const site = {
+      name: name,
+      description: description
+    }
+
+    const owner = {
+      nick: ownernick
+    }
+
+    console.log(site, owner)
   }
 }
+function exists (thing) {
+  return thing !== null && typeof thing !== 'undefined'
+}
+
 export default {
   actions,
   getters,
