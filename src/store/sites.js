@@ -138,7 +138,9 @@ const actions = {
 
     const site = {
       name: name,
-      description: description
+      description: description,
+      locked: true,
+      hidden: false
     }
 
     const owner = {
@@ -146,6 +148,14 @@ const actions = {
     }
 
     console.log(site, owner)
+
+    context.dispatch('binder/updatePage', {
+      pageid: siteid,
+      name: name,
+      content: description,
+      siteid: siteid,
+      creator: ownerid,
+      creatorNick: ownernick }, { root: true })
   }
 }
 function exists (thing) {

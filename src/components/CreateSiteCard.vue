@@ -47,7 +47,7 @@ export default {
           owner: this.$store.state.creator.uid,
           ownerNick: this.$store.state.creator.nick
         })
-      this.$store.dispatch('binder/createPage',
+      /* this.$store.dispatch('binder/createPage',
         {
           pageid: this.newSiteid,
           name: this.newSiteName,
@@ -55,7 +55,7 @@ export default {
           siteid: this.newSiteid,
           creator: this.$store.state.creator.uid,
           creatorNick: this.$store.state.creator.nick
-        })
+        })*/
       this.name = null
       this.$emit('closeDialog', true)
     }
