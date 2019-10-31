@@ -55,7 +55,7 @@ export default {
           siteid: this.newSiteid,
           creator: this.$store.state.creator.uid,
           creatorNick: this.$store.state.creator.nick
-        })*/
+        }) */
       this.name = null
       this.$emit('closeDialog', true)
     }

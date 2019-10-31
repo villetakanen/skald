@@ -12,7 +12,7 @@
         <v-row>
         <v-col
             cols="8">
-          <v-card>
+          <div id="reader-text"><v-card>
             <v-toolbar
               dense
               flat
@@ -35,6 +35,7 @@
               <WikiText :content="content" :siteid="siteid"/>
             </v-card-text>
           </v-card>
+          </div>
           </v-col>
           <v-col cols="4">
             <v-card>

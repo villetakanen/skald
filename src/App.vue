@@ -125,5 +125,6 @@ export default {
 @import './styles/skald.scss'
 @import './styles/hood.scss'
 @import './styles/quick.scss'
+@import './styles/dd.scss'
 
 </style>
