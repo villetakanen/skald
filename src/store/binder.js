@@ -82,18 +82,47 @@ const actions = {
             context.commit('setLoading', false)
           } else {
             // @todo: 404 - page does not exist
-            context.commit('error', '404 - page does not exist', { root: true })
+            context.commit('pageNotFound', pageid, { root: true })
             // context.commit('httpStatusCode', '404', { root: true })
           }
         })
       } else {
         // @todo: 404 - site does not exist
-
+        context.commit('error', '404 - site does not exist', { root: true })
       }
     })
   },
-  savePage (context, { pageid, name, content, siteid,
-    author, nick }) {
+  /**
+   * Create a new page in Firebase Store
+   *
+   * @param {*} context vuex state
+   * @param {*} param1 JSON for page data, see below
+   */
+  createPage (context, { pageid, name, content, siteid, author, nick }) {
+    console.log('firestore create for', siteid, pageid, name, content, author, nick)
+
+    let np = {
+      creator: author,
+      creatorNick: nick,
+      name: name,
+      content: content,
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+    }
+
+    const db = firebase.firestore()
+    const siteRef = db.collection('sites').doc(siteid)
+    const pageRef = siteRef.collection('pages').doc(pageid)
+    pageRef.set(np).then((e) => {
+      context.dispatch('pageLog/stamp', {
+        creator: np.creatorNick,
+        action: 'create',
+        pageid: pageid,
+        siteid: siteid }, { root: true })
+      // Binder state management: force open created page as the current page
+      context.dispatch('openPage', { siteid: siteid, pageid: pageid })
+    })
+  },
+  savePage (context, { pageid, name, content, siteid, author, nick }) {
     // console.log('updating firestore for', siteid, pageid, name, content, author, nick)
 
     var u = {

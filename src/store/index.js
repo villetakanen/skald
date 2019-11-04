@@ -12,6 +12,7 @@ Vue.use(Vuex)
 
 const state = {
   version: unescape(process.env.VERSION || '%7Bversion%3A0%7D'),
+  pageNotFound: null,
   error: null
 }
 const getters = {
@@ -33,6 +34,12 @@ const getters = {
     // return false
   },
   /**
+   * 404 - we'll want to offer a way to create the page!
+   */
+  pageNotFound: (context) => () => {
+    return context.pageNotFound
+  },
+  /**
    * Global error state
    */
   error: (context) => () => {
@@ -42,6 +49,13 @@ const getters = {
 const mutations = {
   error (context, error) {
     Vue.set(context, 'error', error)
+  },
+  pageNotFound (context, name) {
+    Vue.set(context, 'pageNotFound', name)
+  },
+  clearErrors (context) {
+    Vue.set(context, 'pageNotFound', null)
+    Vue.set(context, 'error', null)
   }
 }
 

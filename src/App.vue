@@ -57,6 +57,7 @@
         ><v-icon>mdi-close</v-icon></v-btn></v-snackbar>
     </v-content>
     <ErrorDialog/>
+    <PageNotFoundDialog/>
   </v-app>
 </template>
 
@@ -64,13 +65,15 @@
 import NavigationDrawer from './components/NavigationDrawer'
 import AccountMenu from './components/AccountMenu'
 import ErrorDialog from './components/ErrorDialog'
+import PageNotFoundDialog from './components/PageNotFoundDialog'
 
 export default {
   name: 'App',
   components: {
     NavigationDrawer,
     AccountMenu,
-    ErrorDialog
+    ErrorDialog,
+    PageNotFoundDialog
   },
   data: () => ({
     registration: null,
