@@ -25,6 +25,26 @@ div.wikipage{
     margin-bottom: 16px;
   }
 }
+div.sidebar{
+  h1,h2,h3,h4{
+    margin:0;
+    padding: 0;
+    margin-bottom: 4px;
+  }
+  a{
+    text-decoration: none;
+  }
+  ul{
+    margin: 0;
+    padding: 0;
+    padding-left: 1em;
+  }
+  li{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+}
 /* div.site-frontpage {
   /* * /
 } */

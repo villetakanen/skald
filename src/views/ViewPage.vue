@@ -10,8 +10,10 @@
       </v-container>
       <v-container v-if="!loading">
         <v-row>
+
         <v-col
-            cols="8">
+            cols="12"
+            md="8">
           <div id="reader-text"><v-card>
             <v-toolbar
               dense
@@ -37,12 +39,22 @@
           </v-card>
           </div>
           </v-col>
-          <v-col cols="4">
+
+          <v-col
+            cols="12"
+            md="4">
             <v-card>
-              <v-card-title>Sidebar</v-card-title>
               <v-card-text>
-              <WikiText :content="sidebarContent" :siteid="siteid"/>
+                <div class="sidebar">
+                  <WikiText :content="sidebarContent" :siteid="siteid"/>
+                </div>
             </v-card-text>
+              <v-card-actions v-if="isAuthz">
+                <v-btn
+                  text
+                  color="primary"
+                  :to="`/e/${siteid}/sidebar`">Edit sidebar</v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
           <v-col xs12>
