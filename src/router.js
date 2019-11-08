@@ -44,7 +44,14 @@ export default new Router({
       name: 'listSites',
       // lazy-loaded when the route is visited.
       props: false,
-      component: () => import(/* webpackChunkName: "viewpage" */ './views/ListSites.vue')
+      component: () => import(/* webpackChunkName: "listSites" */ './views/ListSites.vue')
+    },
+    {
+      path: '/l/pages/:siteid',
+      name: 'listPages',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "listPages" */ './views/ListPages.vue')
     },
     {
       path: '/e/:siteid/:pageid',

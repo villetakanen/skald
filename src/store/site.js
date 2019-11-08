@@ -9,7 +9,9 @@ const state = {
   sidebarContent: null,
   unsubscibe: () => {},
   unsubscibeOwners: () => {},
-  unsubscibeSidebar: () => {}
+  unsubscibeSidebar: () => {},
+  pages: {},
+  unsubscibePages: () => {}
 }
 
 const getters = {
@@ -24,6 +26,10 @@ const getters = {
   },
   description: (context) => () => {
     return context.data.description
+  },
+  pageIndex: (context) => () => {
+    console.log(context.pages)
+    return context.pages
   }
 }
 
@@ -45,6 +51,13 @@ const mutations = {
   },
   dropOwner (context, { id }) {
     Vue.delete(context.owners, id)
+  },
+  resetPageCache (context) {
+    Vue.set(context, 'pages', {})
+  },
+  patchPage (context, { id, data }) {
+    if (!data.path) data['path'] = context.siteid + '/' + id
+    Vue.set(context.pages, id, data)
   }
 }
 
@@ -70,9 +83,11 @@ const actions = {
     context.state.unsubscibe()
     context.state.unsubscibeOwners()
     context.state.unsubscibeSidebar()
+    context.state.unsubscibePages()
 
     // reset all patched data
     context.commit('owners', null)
+    context.commit('resetPageCache')
 
     const db = firebase.firestore()
 
@@ -93,6 +108,15 @@ const actions = {
         } else {
           context.commit('patchOwner', { id: change.doc.id, data: change.doc.data() })
         }
+      })
+    })
+
+    // Subscribe to site pages
+    context.state.unsubscribePages = siteRef.collection('pages').onSnapshot((snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        context.commit('patchPage', {
+          id: change.doc.id,
+          data: change.doc.data() })
       })
     })
 

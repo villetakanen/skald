@@ -7,6 +7,11 @@
 
         <v-list-item-title >Site Home</v-list-item-title>
       </v-list-item>
+      <v-list-item :to="'/l/pages/'+siteID">
+        <v-list-item-action><v-icon>mdi-dice-d6</v-icon></v-list-item-action>
+
+        <v-list-item-title >Page list</v-list-item-title>
+      </v-list-item>
       <v-list-item :to="'/c/site/'+siteID">
         <v-list-item-action><v-icon>mdi-dice-d4</v-icon></v-list-item-action>
 
