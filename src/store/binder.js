@@ -146,6 +146,17 @@ const actions = {
       // Binder state management: force open created page as the current page
       context.dispatch('openPage', { siteid: siteid, pageid: pageid })
     })
+  },
+  deletePage (context, { pageid, siteid }) {
+    const db = firebase.firestore()
+    var siteRef = db.collection('sites').doc(siteid)
+    var pageRef = siteRef.collection('pages').doc(pageid)
+
+    pageRef.delete().then(() => {
+      console.log(`Document ${pageid} successfully deleted!`)
+    }).catch((error) => {
+      console.error('Error removing document: ', error)
+    })
   }
 }
 export default {

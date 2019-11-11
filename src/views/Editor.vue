@@ -20,9 +20,16 @@
 
         <v-spacer></v-spacer>
 
+        <v-btn icon @click="menuVisible=!menuVisible"><v-icon>mdi-menu</v-icon></v-btn>
+
         <v-btn color="primary" @click="savePage">save</v-btn>
       </v-toolbar>
       <v-card-text>
+        <div v-if="menuVisible" class="pagetools">
+          <v-btn
+            outlined
+            @click="deletePageDialog=!deletePageDialog">Delete page</v-btn>
+        </div>
         <v-form  @submit.prevent="savePage">
           <v-text-field
             v-model="title"
@@ -38,6 +45,23 @@
     </v-card>
       </v-flex>
     </v-layout>
+    <v-dialog
+      v-model="deletePageDialog"
+      max-width="800px">
+      <v-card>
+        <v-card-title>Delete the page?</v-card-title>
+        <v-card-text>There is no undo. The page will be gone for good.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn
+            text
+            @click="deletePage">Delete</v-btn>
+          <v-btn
+            color="primary"
+            @click="deletePageDialog=!deletePageDialog">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -54,7 +78,9 @@ export default {
   ],
   data: () => ({
     title: null,
-    content: null
+    content: null,
+    menuVisible: false,
+    deletePageDialog: false
   }),
   computed: {
     loading () {
@@ -104,7 +130,35 @@ export default {
           nick: this.$store.getters['author/nick']()
         })
       this.$router.push('/v/' + this.siteid + '/' + this.pageid)
+    },
+    deletePage () {
+      this.$store.dispatch('binder/deletePage',
+        {
+          pageid: this.pageid,
+          siteid: this.siteid
+        }
+      )
+      this.$store.dispatch('pageLog/stamp',
+        {
+          action: 'delete',
+          pageid: this.pageid,
+          siteid: this.siteid,
+          creator: this.$store.getters['author/nick']()
+        }
+      )
+      this.$router.push('/')
     }
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.pagetools{
+  padding: 16px;
+  background-color:RGBA(0,0,0, 0.2);
+  min-height: 32px;
+  margin: -16px;
+  margin-bottom: 16px;
+  text-align: right;
+}
+</style>
