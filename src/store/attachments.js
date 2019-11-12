@@ -26,7 +26,7 @@ const mutations = {
     Vue.set(context, 'loading', loading)
   },
   patchFile (context, data) {
-    console.log(data)
+    // console.log(data)
     let filesArray = context.files
     filesArray.push(data)
     Vue.set(context, 'files', filesArray)
@@ -46,7 +46,7 @@ const actions = {
       })
       res.items.forEach((itemRef) => {
         // All the items under listRef.
-        console.log(itemRef)
+        // console.log(itemRef)
         context.commit('patchFile', {
           name: itemRef.name,
           path: itemRef.fullPath
