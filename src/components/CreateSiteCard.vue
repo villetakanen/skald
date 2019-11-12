@@ -43,9 +43,9 @@ export default {
       this.$store.dispatch('sites/createSite',
         {
           siteid: this.newSiteid,
-          name: this.newSiteid,
-          owner: this.$store.state.creator.uid,
-          ownerNick: this.$store.state.creator.nick
+          name: this.newSiteName,
+          author: this.$store.getters['author/uid'](),
+          nick: this.$store.getters['author/nick']()
         })
       /* this.$store.dispatch('binder/createPage',
         {
@@ -65,16 +65,9 @@ export default {
       get () {
         return this.newSiteName
       },
-      set (e) {
-        this.newSiteName = e
-
-        if (this.name === null) return null
-        var re = new RegExp('[\\W]', 'g')
-        var s = e.replace(re, '-')
-        while (s.includes('--')) {
-          s = s.split('--').join('-')
-        }
-        this.newSiteid = s
+      set (stringName) {
+        this.newSiteid = this.$skaldURI(stringName)
+        this.newSiteName = stringName
       }
     }
   },
