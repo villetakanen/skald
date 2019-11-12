@@ -128,7 +128,7 @@ const actions = {
 
     context.commit('setDescription', description)
   },
-  createSite (context, { siteid, name, description, ownerid, ownernick }) {
+  createSite (context, { siteid, name, description, author, nick }) {
     if (!exists(siteid)) {
       context.commit('error', 'Can not create site without a site id', { root: true })
       return
@@ -137,25 +137,35 @@ const actions = {
     description = exists(description) ? description : 'A new site'
 
     const site = {
-      name: name,
       description: description,
+      hidden: false,
+      lastUpdate: firebase.firestore.FieldValue.serverTimestamp(),
       locked: true,
-      hidden: false
-    }
-
-    const owner = {
-      nick: ownernick
-    }
-
-    console.log(site, owner)
-
-    context.dispatch('binder/updatePage', {
-      pageid: siteid,
       name: name,
-      content: description,
-      siteid: siteid,
-      creator: ownerid,
-      creatorNick: ownernick }, { root: true })
+      theme: 'Skald'
+    }
+
+    const db = firebase.firestore()
+    const siteRef = db.collection('sites').doc(siteid)
+
+    siteRef.get().then((doc) => {
+      if (doc.exists) {
+        context.dispatch('error', 'site exists', { root: true })
+      } else {
+        siteRef.set(site).then(() => {
+          siteRef.collection('owners').doc(author).set({ nick: nick })
+          siteRef.collection('members').doc(author).set({ nick: nick })
+          context.dispatch('binder/createPage', {
+            pageid: siteid,
+            name: name,
+            content: description,
+            siteid: siteid,
+            author: author,
+            nick: nick },
+          { root: true })
+        })
+      }
+    })
   }
 }
 function exists (thing) {
