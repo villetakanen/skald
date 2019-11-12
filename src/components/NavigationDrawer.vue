@@ -16,6 +16,11 @@
         <v-list-item-action><v-icon>mdi-dice-d8</v-icon></v-list-item-action>
         <v-list-item-title ><CreatePageButton/></v-list-item-title>
       </v-list-item>
+      <v-list-item :to="'/l/attachments/'+siteID">
+        <v-list-item-action><v-icon>mdi-dice-d12</v-icon></v-list-item-action>
+
+        <v-list-item-title >Attachments</v-list-item-title>
+      </v-list-item>
       <v-list-item :to="'/c/site/'+siteID">
         <v-list-item-action><v-icon>mdi-dice-d4</v-icon></v-list-item-action>
 
