@@ -7,6 +7,7 @@ import sites from './sites'
 import author from './author'
 import site from './site'
 import users from './users'
+import attachments from './attachments'
 
 Vue.use(Vuex)
 
@@ -67,7 +68,8 @@ export default new Vuex.Store({
     sites,
     author,
     site,
-    users
+    users,
+    attachments
   },
   state,
   getters,
