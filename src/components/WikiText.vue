@@ -25,6 +25,7 @@ export default {
       if (rendedContent === null) rendedContent = 'Missing content'
 
       rendedContent = wikiLinks(rendedContent, this.siteid)
+      rendedContent = siteLinks(rendedContent)
 
       const MarkdownIt = require('markdown-it')
       const md = new MarkdownIt()
@@ -54,6 +55,14 @@ function wikiLinks (page, siteid) {
     }
   })
 }
+function siteLinks (page) {
+  const re = new RegExp('([\\[(]site:)(.+?)([\\])])', 'g')
+  return page.replace(re, function (match, p1, p2, p3, offset, string) {
+    p2 = p2.trim()
+    return `[${p2}](/#/v/${toURI(p2)})`
+  })
+}
+
 function toURI (link) {
   var re = new RegExp('[\\W]', 'g')
   var s = link.replace(re, '-')
