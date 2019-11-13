@@ -6,6 +6,7 @@ const state = {
   loading: true,
   files: []
 }
+
 const getters = {
   /**
    * Returns true if binder is refreshing page content from firebase
@@ -17,6 +18,7 @@ const getters = {
     return context.files
   }
 }
+
 const mutations = {
   reset (context) {
     Vue.set(context, 'loading', true)
@@ -32,7 +34,14 @@ const mutations = {
     Vue.set(context, 'files', filesArray)
   }
 }
+
 const actions = {
+  /**
+   * Gets all attachment names and paths for a site.
+   *
+   * @param {*} context vuex context
+   * @param {*} json with { siteid } for the site.
+   */
   fetch (context, { siteid }) {
     context.commit('reset')
 
@@ -53,6 +62,25 @@ const actions = {
         })
       })
       context.commit('loading', false)
+    }).catch((error) => {
+      // Uh-oh, an error occurred!
+      console.log(error)
+    })
+  },
+  /**
+   * delete a file
+   *
+   * @param {*} context Vuex state
+   * @param {*} json { siteid, filename }
+   */
+  delete (context, { siteid, filename }) {
+    // console.log('delete unimplemented', siteid, filename)
+
+    const storage = firebase.storage()
+    const fileRef = storage.ref(siteid + '/' + filename)
+
+    fileRef.delete().then(() => {
+      context.dispatch('fetch', { siteid: siteid })
     }).catch((error) => {
       // Uh-oh, an error occurred!
       console.log(error)
