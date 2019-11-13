@@ -1,6 +1,8 @@
 <template>
   <div :style="wide">
-    <img alt="-" style="max-width:100%; max-height:100%" v-if="!loading" :src="url"/>
+    <img
+      class = "attachment"
+      alt="-" style="max-width:100%; max-height:100%" v-if="!loading" :src="url"/>
     <p v-if="loading && !view"><em>{{message}}</em>
       &nbsp;<v-btn v-if="!view" @click="dialog=!dialog" color="primary" text>upload it</v-btn>
     </p>
