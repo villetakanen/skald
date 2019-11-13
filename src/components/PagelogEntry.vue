@@ -3,6 +3,7 @@
     <div class="pagelog-type">
         <v-icon v-if="action === 'create'">mdi-file-document-box-plus-outline</v-icon>
         <v-icon v-if="action === 'update'">mdi-file-document-edit-outline</v-icon>
+        <v-icon v-if="action === 'delete'">mdi-file-document-box-remove-outline</v-icon>
     </div>
     <div class="pagelog-details">
     <p>{{creator}},
