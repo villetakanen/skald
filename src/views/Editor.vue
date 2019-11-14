@@ -22,7 +22,9 @@
 
         <v-btn icon @click="menuVisible=!menuVisible"><v-icon>mdi-menu</v-icon></v-btn>
 
-        <v-btn color="primary" @click="savePage">save</v-btn>
+        <v-btn color="primary" 
+          @click="savePage"
+          id="save-editor-button">save</v-btn>
       </v-toolbar>
       <v-card-text>
         <div v-if="menuVisible" class="pagetools">

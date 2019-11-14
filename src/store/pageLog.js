@@ -15,6 +15,8 @@ const getters = {
 }
 const mutations = {
   patchLog (context, { data }) {
+    // Ingore e2e testing site from the results
+    if (data.siteid === 'e2e-testing') return
     // Add to all if not found
     if (context.all.length === 0) context.all.push(data)
     else {
