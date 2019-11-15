@@ -22,7 +22,7 @@
       >
 
       <v-btn icon @click.stop="drawer = !drawer">
-        <img style="height:42px" alt="S" src="./assets/logo.png"/>
+        <img style="height:42px" alt="S" src="./assets/logo.png" id="sitelogo"/>
       </v-btn>
 
       <v-toolbar-title class="headline text-uppercase">
