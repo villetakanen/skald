@@ -36,4 +36,9 @@ describe('Editor as logged in user', () => {
     cy.wait(300)
     cy.get('.editor').should('not.exist')
   })
+  it('Adds a page to wiki', () => {
+  })
+  it('Deletes a page from wiki', () => {
+
+  })
 })
