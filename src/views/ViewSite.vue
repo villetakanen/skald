@@ -22,9 +22,32 @@
               </v-card-text>
             </v-card>
           </v-col>
+
           <v-col
             cols="12"
             md="4"
+            sm="12"
+            xs="12">
+            <v-card>
+              <v-card-text>
+                <div class="sidebar">
+                  <WikiText :content="sidebarContent" :siteid="siteid"/>
+                </div>
+            </v-card-text>
+              <v-card-actions v-if="isAuthz">
+                <v-btn
+                  text
+                  color="primary"
+                  :to="`/e/${siteid}/sidebar`">Edit sidebar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+
+        </v-row>
+        <v-row>
+          <v-col
+            cols="12"
+            md="12"
             sm="12"
             xs="12">
             <v-card>
@@ -38,6 +61,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import LatestChanges from '../components/LatestChanges'
 import WikiText from '../components/WikiText'
@@ -62,6 +86,10 @@ export default {
     title () {
       if (this.$store.getters['binder/title']() === null) return ' '
       return this.$store.getters['binder/title']()
+    },
+    sidebarContent () {
+      if (this.$store.getters['site/sidebarContent']() === null) return ' '
+      return this.$store.getters['site/sidebarContent']()
     },
     description () {
       if (this.$store.getters['sites/description']() === null) return ' '
