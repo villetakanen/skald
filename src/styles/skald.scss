@@ -24,6 +24,24 @@ div.wikipage{
   ul, ol {
     margin-bottom: 16px;
   }
+  table.statblock {
+    td, th {
+      border: solid 1px #666;
+      width: 44px;
+      text-align: center;
+      margin: 0;
+      padding: 4px;
+      font-size: 18px;
+      line-height: 22px;
+    }
+    th {
+      background-color: RGBA(255,255,255,0.1);
+    }
+    td {
+      background-color: RGBA(0,0,0,0.5);
+    }
+    margin-bottom: 16px;
+  }
 }
 div.sidebar{
   h1,h2,h3,h4{

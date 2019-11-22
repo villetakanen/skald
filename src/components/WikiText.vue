@@ -27,8 +27,10 @@ export default {
       rendedContent = wikiLinks(rendedContent, this.siteid)
       rendedContent = siteLinks(rendedContent)
 
+      // These we want to run on html
+      rendedContent = statBlocks(rendedContent)
       const MarkdownIt = require('markdown-it')
-      const md = new MarkdownIt()
+      const md = new MarkdownIt({ html: true })
       rendedContent = md.render(rendedContent)
 
       // These we need to run on html
@@ -39,6 +41,31 @@ export default {
       }
     }
   }
+}
+/**
+ * Takes in the page, and rends the statblocks as HTML table
+ */
+function statBlocks (page) {
+  console.log(page)
+  // const re = new RegExp('<p>stats:([a-zA-Z]|\\s|\\+|\\-|\\d)+<\\/p>', 'g')
+  const re = new RegExp('stats:([a-zA-Z]|\\s|\\+|\\-|\\d)+\\n{2}', 'gm')
+  return page.replace(re, function (match, offset, string) {
+    console.log('splitting:', match)
+    const stats = match.split('\n')
+    let block = '<table class="statblock">'
+    for (let i in stats) {
+      let line = stats[i].trim()
+      if (!line.includes('stats:') && line.length > 0) {
+        // console.log(line)
+        const values = line.split(' ')
+        block += `<tr><th>${values[0]}</th>`
+        if (values.length > 1) block += `<td>${values[1]}</td>`
+        if (values.length > 2) block += `<td>${values[2]}</td>`
+        block += '</tr>'
+      }
+    }
+    return block + '</table>'
+  })
 }
 function wikiLinks (page, siteid) {
   const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'g')
