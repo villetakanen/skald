@@ -4,22 +4,31 @@
       <v-container
         fluid
         grid-list-md>
+
+        <!-- the title and summary of the group, on top of the poster image -->
         <v-row>
           <v-col id="sitehead">
             <h1 id="sitetitle">{{title}}</h1>
             <p id="sitedescription">{{description}}</p>
           </v-col>
         </v-row>
+
         <v-row>
           <v-col
             cols="12"
-            md="8"
+            md="4"
             sm="12"
             xs="12">
             <v-card>
               <v-card-text>
                 <WikiText :content="content" :siteid="siteid"/>
               </v-card-text>
+              <v-card-actions v-if="isAuthz">
+                <v-btn
+                  text
+                  color="primary"
+                  :to="`/e/${siteid}/${siteid}`">Edit</v-btn>
+              </v-card-actions>
             </v-card>
           </v-col>
 
@@ -43,11 +52,9 @@
             </v-card>
           </v-col>
 
-        </v-row>
-        <v-row>
           <v-col
             cols="12"
-            md="12"
+            md="4"
             sm="12"
             xs="12">
             <v-card>
@@ -83,6 +90,9 @@ export default {
     }
   },
   computed: {
+    isAuthz () {
+      return this.$store.getters['isAuthz']()
+    },
     title () {
       if (this.$store.getters['binder/title']() === null) return ' '
       return this.$store.getters['binder/title']()
