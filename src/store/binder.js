@@ -136,15 +136,28 @@ const actions = {
     const db = firebase.firestore()
     var siteRef = db.collection('sites').doc(siteid)
     var pageRef = siteRef.collection('pages').doc(pageid)
-    siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
-    pageRef.update(u).then((e) => {
-      context.dispatch('pageLog/stamp', {
-        creator: u.creatorNick,
-        action: 'update',
-        pageid: pageid,
-        siteid: siteid }, { root: true })
-      // Binder state management: force open created page as the current page
-      context.dispatch('openPage', { siteid: siteid, pageid: pageid })
+
+    let history = []
+
+    pageRef.get().then((doc) => {
+      if (doc.exists) {
+        if (doc.data().history) history = doc.data().history
+        history.push(doc.data().content)
+        console.log(history)
+
+        u['history'] = history
+
+        siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
+        pageRef.update(u).then((e) => {
+          context.dispatch('pageLog/stamp', {
+            creator: u.creatorNick,
+            action: 'update',
+            pageid: pageid,
+            siteid: siteid }, { root: true })
+          // Binder state management: force open created page as the current page
+          context.dispatch('openPage', { siteid: siteid, pageid: pageid })
+        })
+      }
     })
   },
   deletePage (context, { pageid, siteid }) {
