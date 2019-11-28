@@ -10,6 +10,7 @@
 <script>
 import ViewAttachment from './ViewAttachment.vue'
 import Vue from 'vue'
+import Skaldmd from '../lib/skaldmd'
 Vue.component('ViewAttachment', ViewAttachment)
 
 export default {
@@ -20,6 +21,11 @@ export default {
   ],
   computed: {
     rended () {
+      // TMP
+      // let skaldmd = new Skaldmd(this.content)
+      // console.log(skaldmd.toHtml())
+      // /TMP
+
       var rendedContent = this.content
 
       if (rendedContent === null) rendedContent = 'Missing content'
@@ -29,9 +35,13 @@ export default {
 
       // These we want to run on html
       rendedContent = statBlocks(rendedContent)
-      const MarkdownIt = require('markdown-it')
-      const md = new MarkdownIt({ html: true })
-      rendedContent = md.render(rendedContent)
+
+      // const MarkdownIt = require('markdown-it')
+      // const md = new MarkdownIt({ html: true })
+      // rendedContent = md.render(rendedContent)
+      const skaldmd = new Skaldmd()
+      rendedContent = skaldmd.toHtml(this.content)
+      // rendedContent = skaldmd.toHtml()
 
       // These we need to run on html
       rendedContent = attachLinks(rendedContent, this.siteid)
@@ -46,7 +56,7 @@ export default {
  * Takes in the page, and rends the statblocks as HTML table
  */
 function statBlocks (page) {
-  console.log(page)
+  // console.log(page)
   // const re = new RegExp('<p>stats:([a-zA-Z]|\\s|\\+|\\-|\\d)+<\\/p>', 'g')
   const re = new RegExp('stats:([a-zA-Z]|\\s|\\+|\\-|\\d)+\\n{2}', 'gm')
   return page.replace(re, function (match, offset, string) {
