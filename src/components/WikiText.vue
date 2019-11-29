@@ -39,7 +39,7 @@ export default {
       // const MarkdownIt = require('markdown-it')
       // const md = new MarkdownIt({ html: true })
       // rendedContent = md.render(rendedContent)
-      const skaldmd = new Skaldmd()
+      const skaldmd = new Skaldmd(this.siteid)
       rendedContent = skaldmd.toHtml(this.content)
       // rendedContent = skaldmd.toHtml()
 
