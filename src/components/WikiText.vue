@@ -122,3 +122,9 @@ function attachLinks (page, siteid) {
   })
 }
 </script>
+
+<style lang="scss">
+table.border td{
+  border: solid 1px white;
+}
+</style>

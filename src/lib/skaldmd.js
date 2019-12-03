@@ -5,43 +5,51 @@ const PARAGRAPH = 0
 const TABLE = 1
 const UL = 2
 
-let parsing = NONE
-let rendedHtml = ''
-let brNeeded = false
-let siteLinkStub = 'skald'
-
 export default class Skaldmd {
   constructor (siteid) {
-    siteLinkStub = siteid
+    this.siteLinkStub = siteid
+    this.parsing = NONE
+    this.rendedHtml = ''
+  }
+  /**
+   * Sets current stream parsing mode to mode
+   * @param {*} mode NONE, PARAGRAPH, TABLE, UL
+   */
+  setMode (mode) {
+    this.resetMode()
+    this.parsing = mode
   }
   toHtml (rawContent) {
     if (!rawContent) return ''
 
-    rendedHtml = ''
+    this.rendedHtml = ''
 
     let linesArray = rawContent.split(NEWLINE)
 
     linesArray.forEach((line) => {
-      console.log('line', line.substring(0, 3))
+      console.log('line', line.substring(0, 3), line.trim().length)
+
+      // if the line is emtpy, we always just reset the parsing mode
+      if (line.trim().length === 0) this.resetMode()
       // #... A header
-      if (line[0] === '#') this.parseH(line)
+      else if (line[0] === '#') this.parseH(line)
       // -... A bullet point
       else if (line[0] === '-') this.parseUL(line)
-      else if (parsing === PARAGRAPH) this.parseP(line)
-      else if (parsing === TABLE) this.parseTR(line)
-      else {
-        if (line[0] === '|') this.parseTR(line)
-        else this.parseP(line)
-      }
+      // a table starts
+      else if (line[0] === '|') this.parseTable(line)
+      // In a mode, continuing
+      // else if (parsing === PARAGRAPH) this.parseP(line)
+      // else if (parsing === TABLE) this.parseTR(line)
+      else this.parseP(line)
     })
     this.resetMode()
-    return rendedHtml
+    return this.rendedHtml
   }
   resetMode () {
-    if (parsing > -1) {
-      if (parsing === PARAGRAPH) rendedHtml += '</p>\n'
-      if (parsing === UL) rendedHtml += '</ul>\n'
-      parsing = NONE
+    if (this.parsing > -1) {
+      if (this.parsing === PARAGRAPH) this.rendedHtml += '</p>\n'
+      if (this.parsing === UL) this.rendedHtml += '</ul>\n'
+      this.parsing = NONE
     }
   }
   parseText (line) {
@@ -51,14 +59,14 @@ export default class Skaldmd {
       return '<i>' + p2 + '</i>'
     })
     line = this.rendWikiLinks(line)
-    rendedHtml += line
+    this.rendedHtml += line
   }
   /**
    * Sets mode to UL (no nesting of ul, and table, or ul), and rends the line item
    * @param {string} line the ul
    */
   parseUL (line) {
-    console.log('parseUL', line)
+    /* / console.log('parseUL', line)
     if (parsing !== UL) {
       this.resetMode()
       parsing = UL
@@ -66,64 +74,49 @@ export default class Skaldmd {
     }
     rendedHtml += '<li>'
     this.parseText(line.substring(1))
-    rendedHtml += '</li>'
+    rendedHtml += '</li>' */
   }
   parseH (line) {
+    this.resetMode()
     let level = 1
     if (line.indexOf('##') === 0) level = 2
     if (line.indexOf('###') === 0) level = 3
     if (line.indexOf('####') === 0) level = 4
-    rendedHtml += '<h' + level + '>'
+    this.rendedHtml += '<h' + level + '>'
     this.parseText(line.substring(level).trim())
-    rendedHtml += '</h' + level + '>'
+    this.rendedHtml += '</h' + level + '>\n'
   }
   /**
    * A <p> is found on the stream
    * @param {*} line the linedata
    */
   parseP (line) {
-    // console.log('parseP', parsing, '"' + line + '"', line.trim().length)
-    // We are starting to parse a P
-    if (parsing !== PARAGRAPH) {
-      this.resetMode()
-      parsing = PARAGRAPH
-      rendedHtml += '<p>'
-      this.parseText(line)
-      brNeeded = false
-      return
+    if (this.parsing !== PARAGRAPH) {
+      console.log('parseP starts paragraph')
+      this.setMode(PARAGRAPH)
+      this.rendedHtml += '<p>'
+    } else {
+      this.rendedHtml += '<br/>\n'
     }
-
-    // We hit the end of the P
-    if (line.trim().length === 0 && parsing === PARAGRAPH) {
-      parsing = NONE
-      rendedHtml += '</p>'
-      brNeeded = false
-      return
-    }
-
-    // We are parsing a part of the String, with BR's
-    if (brNeeded) rendedHtml += '<br>\n'
-    // And the text itself needs to be digested
     this.parseText(line)
-    brNeeded = true
   }
-  parseTR (line) {
-    // console.log('parseTR', parsing)
-    // We are starting to parse a Table, add the table tag: and RETURN
-    if (parsing !== TABLE) {
-      this.resetMode()
-      parsing = TABLE
-      rendedHtml += '<table>'
-      return
-    }
-    // We hit the end of the Table, add end tag and RETURN
-    if (line.trim().length === 0) {
-      parsing = NONE
-      rendedHtml += '</table>'
+  parseTable (line) {
+    // We are starting to parse a Table, add the table tag
+    if (this.parsing !== TABLE) {
+      this.setMode(TABLE)
+      // No style set
+      this.rendedHtml += '<table>\n'
+      // let cssClass = ''
+      // if (line.includes('border=1')) cssClass += ' border'
+      // rendedHtml += '<table class=' + cssClass + '>'
       return
     }
 
-    // Parsing a single TR
+    this.rendedHtml += '<tr>'
+    this.parseTableRow(line)
+    this.rendedHtml += '</tr>\n'
+
+    /* Parsing a single row
     let tr = '<tr>'
     const cells = line.split('|')
     cells.forEach((cell) => {
@@ -142,10 +135,28 @@ export default class Skaldmd {
         tr += '<' + cellType + ' class="' + styleClass + '">' + this.parseText(cell) + '</' + cellType + ' >'
       }
     })
-    rendedHtml += tr + '</tr>'
+    rendedHtml += tr + '</tr>' */
   }
+  /**
+   * Should only be called from parseTable
+   * @param {*} line line, inside table mode
+   */
+  parseTableRow (line) {
+    // remobe pipe at the end, if any!
+    if (line[line.length - 1] === '|') line = line.substring(0, line.length - 1)
+    // remove pipe at the beginning
+    const lineArray = line.substring(1).split('|')
+    lineArray.forEach((cell) => {
+      let cssClass = ' class="alignLeft"'
+      if (line[0] === ' ') cssClass = ' class="alignRight"'
+      this.rendedHtml += `<td${cssClass}>`
+      this.parseText(cell.trim())
+      this.rendedHtml += '</td>'
+    })
+  }
+
   rendWikiLinks (line) {
-    console.log('rendWikiLinks', siteLinkStub, line)
+    /* console.log('rendWikiLinks', siteLinkStub, line)
     const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gm')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
@@ -154,6 +165,7 @@ export default class Skaldmd {
       url = url.includes('/') ? `#/v/${url}` : `#/v/${siteLinkStub}/${url}`
       return `<a href="${url}">${link}</a>`// '<a hred' + p2 + '-'
     })
+    return line */
     return line
   }
 
