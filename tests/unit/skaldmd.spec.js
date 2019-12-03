@@ -45,8 +45,8 @@ describe('Render', () => {
   it('renders a p, and a two by two array', () => {
     const result = renderer.toHtml('line\n|\n|cell | another|\n|| fourth |')
     expect(result).toBe('<p>line</p>\n<table>\n' +
-      '<tr><td class="alignLeft">cell</td><td class="alingRight">another</td></tr>\n' +
-      '<tr><td></td><td class="alingCenter"></td></tr>\n' +
+      '<tr><td class="alignLeft">cell</td><td class="alignRight">another</td></tr>\n' +
+      '<tr><td class="alignLeft"></td><td class="alignCenter">fourth</td></tr>\n' +
       '</table>\n')
   })
 })

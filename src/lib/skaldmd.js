@@ -49,6 +49,7 @@ export default class Skaldmd {
     if (this.parsing > -1) {
       if (this.parsing === PARAGRAPH) this.rendedHtml += '</p>\n'
       if (this.parsing === UL) this.rendedHtml += '</ul>\n'
+      if (this.parsing === TABLE) this.rendedHtml += '</table>\n'
       this.parsing = NONE
     }
   }
@@ -148,7 +149,10 @@ export default class Skaldmd {
     const lineArray = line.substring(1).split('|')
     lineArray.forEach((cell) => {
       let cssClass = ' class="alignLeft"'
-      if (line[0] === ' ') cssClass = ' class="alignRight"'
+      if (cell[0] === ' ') {
+        if (cell[cell.length - 1] === ' ') cssClass = ' class="alignCenter"'
+        else cssClass = ' class="alignRight"'
+      }
       this.rendedHtml += `<td${cssClass}>`
       this.parseText(cell.trim())
       this.rendedHtml += '</td>'
