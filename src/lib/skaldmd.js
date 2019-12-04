@@ -34,6 +34,7 @@ export default class Skaldmd {
       // #... A header
       else if (line[0] === '#') this.parseH(line)
       // -... A bullet point
+      else if (line.indexOf('----') === 0) this.parseHR(line)
       else if (line[0] === '-') this.parseUL(line)
       // a table starts
       else if (line[0] === '|') this.parseTable(line)
@@ -61,6 +62,10 @@ export default class Skaldmd {
     })
     line = this.rendWikiLinks(line)
     this.rendedHtml += line
+  }
+  parseHR (line) {
+    this.resetMode()
+    this.rendedHtml += '<hr/>\n'
   }
   /**
    * Sets mode to UL (no nesting of ul, and table, or ul), and rends the line item
