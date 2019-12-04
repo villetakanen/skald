@@ -49,4 +49,14 @@ describe('Render', () => {
       '<tr><td></td><td class="alignCenter">fourth</td></tr>\n' +
       '</table>\n')
   })
+
+  it('renders a [wiki:page] link to skald/page, when there is no wiki set', () => {
+    const result = renderer.toHtml('[wiki:page]')
+    expect(result).toBe('<p><a href="/#/v/skald/page">page</a></p>\n')
+  })
+
+  it('renders a [wiki:test/page] link to test/page, when there is no wiki set', () => {
+    const result = renderer.toHtml('it links to [wiki:test/page]')
+    expect(result).toBe('<p>it links to <a href="/#/v/test/page">test/page</a></p>\n')
+  })
 })

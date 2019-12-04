@@ -7,7 +7,7 @@ const UL = 2
 
 export default class Skaldmd {
   constructor (siteid) {
-    this.siteLinkStub = siteid
+    siteid ? this.siteLinkStub = siteid : this.siteLinkStub = 'skald'
     this.parsing = NONE
     this.rendedHtml = ''
   }
@@ -27,7 +27,7 @@ export default class Skaldmd {
     let linesArray = rawContent.split(NEWLINE)
 
     linesArray.forEach((line) => {
-      console.log('line', line.substring(0, 3), line.trim().length)
+      // console.log('line', line.substring(0, 3), line.trim().length)
 
       // if the line is emtpy, we always just reset the parsing mode
       if (line.trim().length === 0) this.resetMode()
@@ -93,7 +93,7 @@ export default class Skaldmd {
    */
   parseP (line) {
     if (this.parsing !== PARAGRAPH) {
-      console.log('parseP starts paragraph')
+      // console.log('parseP starts paragraph')
       this.setMode(PARAGRAPH)
       this.rendedHtml += '<p>'
     } else {
@@ -160,20 +160,20 @@ export default class Skaldmd {
   }
 
   rendWikiLinks (line) {
-    /* console.log('rendWikiLinks', siteLinkStub, line)
+    /* console.log('rendWikiLinks', siteLinkStub, line) */
     const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gm')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
       const link = p2.includes(' ') ? p2.substring(p2.indexOf(' ')) : p2
       let url = p2.split(' ')[0]
-      url = url.includes('/') ? `#/v/${url}` : `#/v/${siteLinkStub}/${url}`
+      url = url.includes('/') ? `/#/v/${url}` : `/#/v/${this.siteLinkStub}/${url}`
       return `<a href="${url}">${link}</a>`// '<a hred' + p2 + '-'
     })
-    return line */
     return line
   }
 
-  /* console.log(inArrayBool)
+  /* console.log
+  (inArrayBool)
       // h1...h4
       if (line.substring(0, 2) === '# ') rendedHtml += '<h1>' + this.rendLine(line.substring(2)) + '</h1>\n'
       else if (line.substring(0, 3) === '## ') rendedHtml += '<h2>' + this.rendLine(line.substring(3)) + '</h2>\n'
