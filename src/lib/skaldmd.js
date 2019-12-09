@@ -56,9 +56,13 @@ export default class Skaldmd {
   }
   parseText (line) {
     // Italics
-    const re = new RegExp('(^_| _)(\\w+[\\w ]*)(_ |_$)', 'gm')
+    let re = new RegExp('(^_| _)(\\w+[\\w ]*)(_ |_$)', 'gm')
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {
-      return '<i>' + p2 + '</i>'
+      return '<i> ' + p2 + ' </i>'
+    })
+    re = new RegExp('(\\*)([^\\*]*)(\\*)', 'gm')
+    line = line.replace(re, function (match, p1, p2, p3, offset, string) {
+      return '<b>' + p2 + '</b>'
     })
     line = this.rendWikiLinks(line)
     this.rendedHtml += line
@@ -72,6 +76,13 @@ export default class Skaldmd {
    * @param {string} line the ul
    */
   parseUL (line) {
+    if (this.parsing !== UL) {
+      this.setMode(UL)
+      this.rendedHtml += '<ul>\n'
+    }
+    this.rendedHtml += '<li>'
+    this.parseText(line.substring(2))
+    this.rendedHtml += '</li>\n'
     /* / console.log('parseUL', line)
     if (parsing !== UL) {
       this.resetMode()
@@ -121,27 +132,6 @@ export default class Skaldmd {
     this.rendedHtml += '<tr>'
     this.parseTableRow(line)
     this.rendedHtml += '</tr>\n'
-
-    /* Parsing a single row
-    let tr = '<tr>'
-    const cells = line.split('|')
-    cells.forEach((cell) => {
-      if (cell.length > 0) {
-        let styleClass = ''
-        let cellType = 'td'
-        if (cell[0] === '!') {
-          cell = cell.substring(1)
-          cellType = 'th'
-        }
-        if (cell[cell.length - 1] === ' ') {
-          if (cell[0] === ' ') styleClass = 'align-center'
-          else styleClass = 'align-left'
-        } else if (cell[0] === ' ') styleClass = 'align-right'
-        else styleClass = 'align-left'
-        tr += '<' + cellType + ' class="' + styleClass + '">' + this.parseText(cell) + '</' + cellType + ' >'
-      }
-    })
-    rendedHtml += tr + '</tr>' */
   }
   /**
    * Should only be called from parseTable
@@ -169,12 +159,27 @@ export default class Skaldmd {
     const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gm')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
-      const link = p2.includes(' ') ? p2.substring(p2.indexOf(' ')) : p2
-      let url = p2.split(' ')[0]
-      url = url.includes('/') ? `/#/v/${url}` : `/#/v/${this.siteLinkStub}/${url}`
-      return `<a href="${url}">${link}</a>`// '<a hred' + p2 + '-'
+      const link = p2.includes(':') ? p2.substring(p2.indexOf(':')) : p2
+      let url = p2.split(':')[0]
+      let siteid = this.siteLinkStub
+      if (url.includes('/')) {
+        siteid = this.skaldURI(url.split('/')[0].trim())
+        url = url.split('/')[1]
+      }
+      url = this.skaldURI(url.trim())
+      return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a hred' + p2 + '-'
     })
     return line
+  }
+
+  skaldURI (s) {
+    if (s === null) return null
+    var re = new RegExp('[\\W]', 'g')
+    var r = s.replace(re, '-')
+    while (r.includes('--')) {
+      r = r.split('--').join('-')
+    }
+    return r.toLowerCase()
   }
 
   /* console.log
