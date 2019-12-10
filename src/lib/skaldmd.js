@@ -122,10 +122,10 @@ export default class Skaldmd {
     if (this.parsing !== TABLE) {
       this.setMode(TABLE)
       // No style set
-      this.rendedHtml += '<table>\n'
-      // let cssClass = ''
-      // if (line.includes('border=1')) cssClass += ' border'
-      // rendedHtml += '<table class=' + cssClass + '>'
+      let tag = '<table>\n'
+      // Border style set
+      if (line.includes('border=1')) tag += '<table class="border-1">\n'
+      this.rendedHtml += tag
       return
     }
 
