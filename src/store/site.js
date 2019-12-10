@@ -124,6 +124,8 @@ const actions = {
     context.state.unsubscribeSidebar = siteRef.collection('pages').doc('sidebar').onSnapshot((doc) => {
       context.commit('sidebar', { data: doc.data() })
     })
+
+    context.dispatch('attachments/fetch', { siteid: siteid }, { root: true })
   },
   /* getOwners (context) {
     if (!exists(context.getters['id']())) throw new Error('A site is not opened, can not get owners')

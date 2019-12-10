@@ -4,7 +4,8 @@ import 'firebase/storage'
 
 const state = {
   loading: true,
-  files: []
+  files: [],
+  siteID: null
 }
 
 const getters = {
@@ -16,6 +17,9 @@ const getters = {
   },
   files: (context) => () => {
     return context.files
+  },
+  siteID: (context) => () => {
+    return context.currentSiteID
   }
 }
 
@@ -27,11 +31,17 @@ const mutations = {
   loading (context, loading) {
     Vue.set(context, 'loading', loading)
   },
-  patchFile (context, data) {
+  siteID (context, siteid) {
+    Vue.set(context, 'siteID', siteid)
+  },
+  patchFile (context, { name, path, siteid }) {
     // console.log(data)
     let filesArray = context.files
-    filesArray.push(data)
+    filesArray.push({ name, path })
     Vue.set(context, 'files', filesArray)
+    const storageKey = siteid + '/' + name
+    // console.log('adding to local storage:', storageKey, path)
+    localStorage.setItem(storageKey, path)
   }
 }
 
@@ -43,6 +53,11 @@ const actions = {
    * @param {*} json with { siteid } for the site.
    */
   fetch (context, { siteid }) {
+    console.log('fetch', siteid)
+    // We are fetching with siteid, and that site is already fetched -> return
+    if (siteid === context.getters['siteID']()) return
+    context.commit('siteID', siteid)
+
     context.commit('reset')
 
     const storage = firebase.storage()
@@ -54,11 +69,12 @@ const actions = {
         // You may call listAll() recursively on them.
       })
       res.items.forEach((itemRef) => {
-        // All the items under listRef.
-        // console.log(itemRef)
-        context.commit('patchFile', {
-          name: itemRef.name,
-          path: itemRef.fullPath
+        itemRef.getDownloadURL().then((url) => {
+          context.commit('patchFile', {
+            name: itemRef.name,
+            path: url,
+            siteid: siteid
+          })
         })
       })
       context.commit('loading', false)

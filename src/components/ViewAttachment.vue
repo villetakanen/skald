@@ -37,18 +37,27 @@ export default {
     dialog: false
   }),
   created () {
-    // Get a reference to the storage service, which is used to create references in your storage bucket
-    const storage = firebase.storage()
+    console.log('Loading attachment:', this.path)
+    let cachedURL = localStorage.getItem(this.path)
+    console.log('Got:', cachedURL)
 
-    var pathRef = storage.ref(this.path)
+    if (!cachedURL) {
+      // Get a reference to the storage service, which is used to create references in your storage bucket
+      const storage = firebase.storage()
 
-    pathRef.getDownloadURL().then((url) => {
-      this.url = url
+      var pathRef = storage.ref(this.path)
+
+      pathRef.getDownloadURL().then((url) => {
+        this.url = url
+        this.loading = false
+      }).catch((err) => {
+        this.message = this.path + ' not found.'
+        console.log(err.message)
+      })
+    } else {
       this.loading = false
-    }).catch((err) => {
-      this.message = this.path + ' not found.'
-      console.log(err.message)
-    })
+      this.url = cachedURL
+    }
   },
   methods: {
     refresh () {
