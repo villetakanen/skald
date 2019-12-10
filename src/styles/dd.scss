@@ -1,5 +1,19 @@
 div.DD{
-  #reader-text{
+  div.v-card.v-sheet.theme--dark{
+   h1, h2 {
+    font-family: modesto-condensed, Smythe, serif;
+    font-weight: 400;
+    font-style: normal;
+    color: 	lightblue;
+    a {
+      text-decoration: none;
+    }
+   }
+   h1 {
+     border-bottom: solid 1px #666;
+     padding-bottom: 2px;
+   }
+  /* #reader-text{
     div.v-card.v-sheet.theme--dark{
       background-image: url('./assets/paper_texture_01.png');
       background-repeat: repeat;
@@ -36,5 +50,6 @@ div.DD{
         background-color: RGB(0,0,0, 0.7)
       }
     }
+  }*/
   }
 }
