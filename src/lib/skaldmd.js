@@ -56,7 +56,7 @@ export default class Skaldmd {
   }
   parseText (line) {
     // Italics
-    let re = new RegExp('(^_| _)(\\w+[\\w ]*)(_ |_$)', 'gm')
+    let re = new RegExp('( _|^_)([-a-zA-Z \\x2c\\x2e]*)(_ |_$)', 'gm')
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {
       return '<i> ' + p2 + ' </i>'
     })

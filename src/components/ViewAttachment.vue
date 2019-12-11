@@ -12,13 +12,13 @@
       >
       <CardFileUpload
         :path="path"
-        v-on:uploaded="refresh"/>
+        />
     </v-dialog>
   </div>
 </template>
 <script>
-import firebase from 'firebase/app'
-import 'firebase/storage'
+// import firebase from 'firebase/app'
+// import 'firebase/storage'
 import CardFileUpload from './CardFileUpload'
 
 export default {
@@ -31,13 +31,21 @@ export default {
     CardFileUpload
   },
   data: () => ({
-    loading: true,
-    url: '',
+    // loading: true,
+    // url: '',
     message: 'Loading...',
     dialog: false
   }),
-  created () {
-    console.log('Loading attachment:', this.path)
+  computed: {
+    loading () {
+      return this.$fireStoreURL(this.path) === null
+    },
+    url () {
+      return this.$fireStoreURL(this.path)
+    }
+  }
+  /* created () {
+    /* console.log('Loading attachment:', this.path)
     let cachedURL = localStorage.getItem(this.path)
     console.log('Got:', cachedURL)
 
@@ -57,7 +65,7 @@ export default {
     } else {
       this.loading = false
       this.url = cachedURL
-    }
+    } * /
   },
   methods: {
     refresh () {
@@ -74,6 +82,6 @@ export default {
       })
       this.dialog = false
     }
-  }
+  } */
 }
 </script>

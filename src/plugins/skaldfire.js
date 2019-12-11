@@ -6,7 +6,7 @@
  * Skald
  */
 import firebase from 'firebase/app'
-// import firestore from 'firebase/firestore'
+import 'firebase/firestore'
 
 /**
  * Replaces a String with a skald uri compatible slug
@@ -20,6 +20,26 @@ const skaldURI = function (s) {
     r = r.split('--').join('-')
   }
   return r.toLowerCase()
+}
+
+/**
+ * Caches FireStore urls
+ */
+const fileStoreURL = function (path) {
+  let url = localStorage.getItem(path)
+  if (!url) {
+    const storage = firebase.storage()
+
+    var pathRef = storage.ref(this.path)
+
+    pathRef.getDownloadURL().then((newUrl) => {
+      url = newUrl
+      localStorage.setItem(path)
+    }).catch(() => {
+      return null
+    })
+  }
+  return url
 }
 
 // This exports the plugin object.
@@ -40,5 +60,6 @@ export default {
     firebase.initializeApp(config)
 
     Vue.prototype.$skaldURI = skaldURI
+    Vue.prototype.$fireStoreURL = fileStoreURL
   }
 }

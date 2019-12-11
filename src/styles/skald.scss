@@ -90,3 +90,16 @@ div#app.theme--dark.v-application{
 b{
   color: white;
 }
+div.v-card.v-sheet.theme--dark table,
+div.v-card.v-sheet.theme--dark .wikipage ul{
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+}
+div.v-card.v-sheet.theme--dark .sidebar .wikipage ul{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+div.v-card.v-sheet.theme--dark .wikipage p+ul,
+div.v-card.v-sheet.theme--dark .wikipage p+table{
+  margin-top: -16px;
+}

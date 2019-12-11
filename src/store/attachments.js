@@ -39,9 +39,9 @@ const mutations = {
     let filesArray = context.files
     filesArray.push({ name, path })
     Vue.set(context, 'files', filesArray)
-    const storageKey = siteid + '/' + name
+    // const storageKey = siteid + '/' + name
     // console.log('adding to local storage:', storageKey, path)
-    localStorage.setItem(storageKey, path)
+    // localStorage.setItem(storageKey, path)
   }
 }
 
