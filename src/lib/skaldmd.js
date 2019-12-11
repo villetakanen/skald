@@ -35,12 +35,14 @@ export default class Skaldmd {
       else if (line[0] === '#') this.parseH(line)
       // -... A bullet point
       else if (line.indexOf('----') === 0) this.parseHR(line)
-      else if (line[0] === '-') this.parseUL(line)
+      // * bullet creates an UL
+      // - as does dash
+      else if ((line[0] === '-' || line[0] === '*') &&
+        line.length > 1 &&
+        line[1] === ' ') this.parseUL(line)
       // a table starts
       else if (line[0] === '|') this.parseTable(line)
       // In a mode, continuing
-      // else if (parsing === PARAGRAPH) this.parseP(line)
-      // else if (parsing === TABLE) this.parseTR(line)
       else this.parseP(line)
     })
     this.resetMode()
