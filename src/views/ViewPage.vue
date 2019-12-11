@@ -9,31 +9,28 @@
         </v-row>
       </v-container>
       <v-container v-if="!loading">
+        <h1 class="sitelink">{{siteid}}</h1>
+        <h1 class="pagetitle">{{title}}</h1>
+
         <v-row>
 
         <v-col
             cols="12"
             md="8">
           <div id="reader-text"><v-card>
-            <v-toolbar
-              dense
-              flat
-              style="border-bottom: 1px solid #232323">
-              <v-toolbar-title>{{title}}</v-toolbar-title>
+            <v-card-text>
               <v-btn
                 v-if="isAuthz"
                 color="secondary"
                 small
                 absolute
-                bottom
+                top
                 right
                 fab
                 v-bind:to="editlink"
-                elevation="0">
+                elevation="2">
                 <v-icon>mdi-pencil</v-icon>
               </v-btn>
-            </v-toolbar>
-            <v-card-text>
               <WikiText :content="content" :siteid="siteid"/>
             </v-card-text>
           </v-card>
@@ -133,3 +130,18 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+h1.sitelink,
+h1.pagetitle {
+  text-shadow: 0px 0px 8px rgba(0,0,0,1);
+  font-weight: 500;
+}
+h1.sitelink{
+  font-size: 14px;
+  line-height: 16px;
+}
+h1.pagetitle{
+  font-size:28px;
+}
+</style>
