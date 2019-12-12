@@ -4,6 +4,7 @@ const NONE = -1
 const PARAGRAPH = 0
 const TABLE = 1
 const UL = 2
+const STATSBLOCK = 3
 
 export default class Skaldmd {
   constructor (siteid) {
@@ -42,6 +43,8 @@ export default class Skaldmd {
         line[1] === ' ') this.parseUL(line)
       // a table starts
       else if (line[0] === '|') this.parseTable(line)
+      else if (line.indexOf('[stats') === 0 ||
+        this.parsing === STATSBLOCK) this.parseStatBlock(line)
       // In a mode, continuing
       else this.parseP(line)
     })
@@ -52,7 +55,8 @@ export default class Skaldmd {
     if (this.parsing > -1) {
       if (this.parsing === PARAGRAPH) this.rendedHtml += '</p>\n'
       if (this.parsing === UL) this.rendedHtml += '</ul>\n'
-      if (this.parsing === TABLE) this.rendedHtml += '</table>\n'
+      if (this.parsing === TABLE ||
+        this.parsing === STATSBLOCK) this.rendedHtml += '</table>\n'
       this.parsing = NONE
     }
   }
@@ -68,6 +72,46 @@ export default class Skaldmd {
     })
     line = this.rendWikiLinks(line)
     this.rendedHtml += line
+  }
+  parseStatBlock (line) {
+    console.log('parseStatBlock', line, this.parsing)
+    // We are starting to parse a Table, add the table tag
+    if (this.parsing !== STATSBLOCK) {
+      this.setMode(STATSBLOCK)
+      if (line.includes('box')) this.rendedHtml += '<table class="statblock box">\n'
+      else this.rendedHtml += '<table class="statblock">\n'
+      return
+    }
+    if (line.indexOf('[/stats]') === 0) {
+      this.resetMode()
+      return
+    }
+    this.rendedHtml += '<tr>'
+    const statArray = line.split(' ')
+    // TH
+    this.rendedHtml += '<th>'
+    this.parseText(statArray[0])
+    this.rendedHtml += '</th>'
+    // Stat field 1
+    if (statArray.length > 1) {
+      this.rendedHtml += '<td>'
+      this.parseText(statArray[1])
+      this.rendedHtml += '</td>'
+    }
+    // Stat field 2
+    if (statArray.length > 2) {
+      this.rendedHtml += '<td>'
+      this.parseText(statArray[2])
+      this.rendedHtml += '</td>'
+    }
+    // Stat field 3
+    if (statArray.length > 3) {
+      this.rendedHtml += '<td>'
+      this.parseText(statArray[3])
+      this.rendedHtml += '</td>'
+    }
+
+    this.rendedHtml += '</tr>'
   }
   parseHR (line) {
     this.resetMode()
@@ -85,15 +129,6 @@ export default class Skaldmd {
     this.rendedHtml += '<li>'
     this.parseText(line.substring(2))
     this.rendedHtml += '</li>\n'
-    /* / console.log('parseUL', line)
-    if (parsing !== UL) {
-      this.resetMode()
-      parsing = UL
-      rendedHtml += '<ul>'
-    }
-    rendedHtml += '<li>'
-    this.parseText(line.substring(1))
-    rendedHtml += '</li>' */
   }
   parseH (line) {
     this.resetMode()

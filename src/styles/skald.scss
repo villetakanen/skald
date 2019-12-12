@@ -17,6 +17,7 @@ div.wikipage{
     margin-bottom: 16px;
     margin-top: 8px;
     color: white;
+    clear:both;
   }
 
   font-family: Roboto, serif;
@@ -41,6 +42,13 @@ div.wikipage{
       background-color: RGBA(0,0,0,0.5);
     }
     margin-bottom: 16px;
+  }
+  table.statblock.box {
+    float:left;
+    // background-color: RGBA(0,0,0,0.5);
+  }
+  table.statblock.box+table.statblock.box{
+    margin-left:16px;
   }
 }
 div.sidebar{

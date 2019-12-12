@@ -1,10 +1,12 @@
 <template>
   <div :style="wide">
+    <!-- This is the image itself, if it exists -->
     <img
       class = "attachment"
-      alt="-" style="max-width:100%; max-height:100%" v-if="!loading" :src="url"/>
-    <p v-if="loading && !view"><em>{{message}}</em>
-      &nbsp;<v-btn v-if="!view" @click="dialog=!dialog" color="primary" text>upload it</v-btn>
+      alt="-" style="max-width:100%; max-height:100%" v-if="exists" :src="url"/>
+    <!-- upload -->
+    <p v-if="!exists && !view">
+      &nbsp;<v-btn v-if="!view" @click="dialog=!dialog" color="primary" text>upload {{path}}</v-btn>
     </p>
     <v-dialog
       v-model="dialog"
@@ -31,17 +33,14 @@ export default {
     CardFileUpload
   },
   data: () => ({
-    // loading: true,
-    // url: '',
-    message: 'Loading...',
     dialog: false
   }),
   computed: {
-    loading () {
-      return this.$fireStoreURL(this.path) === null
-    },
     url () {
       return this.$fireStoreURL(this.path)
+    },
+    exists () {
+      return this.$store.getters['attachments/exists'](this.path)
     }
   }
   /* created () {
