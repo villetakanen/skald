@@ -144,4 +144,10 @@ h1.sitelink{
 h1.pagetitle{
   font-size:28px;
 }
+div.infodocpart{
+  border: 1px solid #666;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: rgba(0,0,0,0.2)
+}
 </style>

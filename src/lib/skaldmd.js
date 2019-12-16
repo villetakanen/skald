@@ -5,12 +5,14 @@ const PARAGRAPH = 0
 const TABLE = 1
 const UL = 2
 const STATSBLOCK = 3
+const DP_INFO = 1001
 
 export default class Skaldmd {
   constructor (siteid) {
     siteid ? this.siteLinkStub = siteid : this.siteLinkStub = 'skald'
     this.parsing = NONE
     this.rendedHtml = ''
+    this.docpart = NONE
   }
   /**
    * Sets current stream parsing mode to mode
@@ -32,6 +34,10 @@ export default class Skaldmd {
 
       // if the line is emtpy, we always just reset the parsing mode
       if (line.trim().length === 0) this.resetMode()
+      // start a docpart?
+      else if (line.indexOf('[info]') === 0) this.startPart(DP_INFO)
+      // start a docpart?
+      else if (line.indexOf('[/info]') === 0) this.endPart()
       // #... A header
       else if (line[0] === '#') this.parseH(line)
       // -... A bullet point
@@ -60,6 +66,18 @@ export default class Skaldmd {
       this.parsing = NONE
     }
   }
+  endPart () {
+    if (this.docpart === DP_INFO) {
+      this.rendedHtml += '</div>'
+    }
+    this.docpart = NONE
+  }
+  startPart (type) {
+    if (type === DP_INFO) {
+      this.docpart = DP_INFO
+      this.rendedHtml += '<div class="infodocpart">'
+    }
+  }
   parseText (line) {
     // Italics
     let re = new RegExp('( _|^_)([-a-zA-Z \\x2c\\x2e]*)(_ |_$)', 'gm')
@@ -70,9 +88,21 @@ export default class Skaldmd {
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {
       return '<b>' + p2 + '</b>'
     })
+    line = this.rendDice(line)
     line = this.rendWikiLinks(line)
     this.rendedHtml += line
   }
+
+  rendDice (line) {
+    let re = new RegExp('\\[([0-9]*)d([0-9]*)\\]', 'gm')
+    line = line.replace(re, function (match, p1, p2, offset, string) {
+      let die = p2
+      if (p2 === '12') die = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-dice-d12 theme--dark"></i>'
+      return '<span class="ndn">' + p1 + 'd </span>' + die
+    })
+    return line
+  }
+
   parseStatBlock (line) {
     console.log('parseStatBlock', line, this.parsing)
     // We are starting to parse a Table, add the table tag
