@@ -55,6 +55,7 @@ export default class Skaldmd {
       else this.parseP(line)
     })
     this.resetMode()
+    this.endPart()
     return this.rendedHtml
   }
   resetMode () {
