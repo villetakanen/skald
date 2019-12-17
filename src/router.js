@@ -40,6 +40,13 @@ export default new Router({
       component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
     },
     {
+      path: '/u/:nickname',
+      name: 'profile',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "viewpage" */ './views/Profile.vue')
+    },
+    {
       path: '/l/sites',
       name: 'listSites',
       // lazy-loaded when the route is visited.

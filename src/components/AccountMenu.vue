@@ -26,7 +26,9 @@
       <v-list v-if="isAuthz">
         <v-subheader>Welcome {{nick}}</v-subheader>
         <v-list-item>
-          <v-list-item-title>My account</v-list-item-title>
+          <v-list-item-title>
+            <router-link :to="`/u/${nick}`">My account</router-link>
+          </v-list-item-title>
         </v-list-item>
         <v-list-item>
           <v-list-item-title>
