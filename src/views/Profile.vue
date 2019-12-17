@@ -5,7 +5,12 @@
         <h1>{{nickname}}</h1>
         <v-card>
           <v-card-text>
-            This is your profile page, with no particular content ATM.
+            These are the Pages you have been working on!
+          </v-card-text>
+        </v-card>
+        <v-card>
+          <v-card-text>
+            These are the Sites you have been working on!
           </v-card-text>
         </v-card>
       </v-col>
