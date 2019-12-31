@@ -114,7 +114,8 @@ const actions = {
     const pageRef = siteRef.collection('pages').doc(pageid)
     pageRef.set(np).then((e) => {
       context.dispatch('pageLog/stamp', {
-        creator: np.creatorNick,
+        authorNick: np.creatorNick,
+        authorID: np.creator,
         action: 'create',
         pageid: pageid,
         siteid: siteid }, { root: true })
@@ -150,7 +151,8 @@ const actions = {
         siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
         pageRef.update(u).then((e) => {
           context.dispatch('pageLog/stamp', {
-            creator: u.creatorNick,
+            authorNick: u.creatorNick,
+            authorID: author,
             action: 'update',
             pageid: pageid,
             siteid: siteid }, { root: true })

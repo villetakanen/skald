@@ -5,7 +5,10 @@
         <h1>{{nickname}}</h1>
         <v-card>
           <v-card-text>
-            These are the Pages you have been working on!
+            <h1>Pages I have been working on</h1>
+            <template v-for="(logentry, index) in pageLog">
+              <p :key='index'>{{logentry.id}}</p>
+            </template>
           </v-card-text>
         </v-card>
         <v-card>
@@ -36,6 +39,11 @@ export default {
   props: [
     'nickname'
   ],
+  computed: {
+    pageLog () {
+      return this.$store.getters['author/pageLog']()
+    }
+  },
   methods: {
     isAuthorsProfile () {
       return this.$store.getters['author/nick']() === this.nickname

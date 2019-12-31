@@ -145,7 +145,8 @@ export default {
           action: 'delete',
           pageid: this.pageid,
           siteid: this.siteid,
-          creator: this.$store.getters['author/nick']()
+          authorNick: this.$store.getters['author/nick'](),
+          authorID: this.$store.getters['author/uid']()
         }
       )
       this.$router.push('/')

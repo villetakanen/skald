@@ -45,21 +45,27 @@ const actions = {
       })
     })
   },
-  stamp (context, { action, pageid, siteid, creator }) {
-    // console.log('pagelog/stamp', action, pageid, siteid, creator)
+  stamp (context, { action, pageid, siteid, authorNick, authorID }) {
+    console.log('pagelog/stamp', action, pageid, siteid, authorID)
 
     // console.log('updating firestore for', siteid, pageid
     var log = {
       action: action,
       pageid: pageid,
       siteid: siteid,
-      creator: creator,
+      creator: authorNick,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
     }
 
+    // Stamp to global pagelog
     const db = firebase.firestore()
-    var logRef = db.collection('pagelog').doc(siteid + '.' + pageid)
+    const logRef = db.collection('pagelog').doc(siteid + '.' + pageid)
     logRef.set(log)
+
+    // Stamp to author pagelog
+    const authorRef = db.collection('profiles').doc(authorID)
+    const authorPageLogRef = authorRef.collection('pagelog').doc(siteid + '.' + pageid)
+    authorPageLogRef.set(log)
   }
 }
 export default {
