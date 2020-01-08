@@ -79,7 +79,7 @@ export default {
     registration: null,
     refreshing: false,
     newContent: false,
-    drawer: null,
+    drawer: false,
     timeout: 10000000,
     theme: 'Skald'
     //
