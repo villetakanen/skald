@@ -7,7 +7,7 @@
     </v-card-text>
     <v-card-actions>
       <v-btn color="primary" outlined @click="upload">Upload</v-btn>
-      <v-btn color="primary" text>cancel</v-btn>
+      <v-btn color="primary" @click="cancel" text>cancel</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -24,7 +24,11 @@ export default {
     file2: null
   }),
   methods: {
+    cancel () {
+      this.$emit('cancel', true)
+    },
     upload () {
+      console.log('upload:', this.path)
       var preview = document.querySelector('#demoimg')
       var reader = new FileReader()
 
@@ -41,7 +45,6 @@ export default {
 
       const fileRef = storageRef.child(this.path)
       fileRef.put(this.file2).then((snapshot) => {
-        this.$store.dispatch('sites/openSite', this.siteid)
         this.$emit('uploaded', true)
       })
     }

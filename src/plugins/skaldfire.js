@@ -23,23 +23,26 @@ const skaldURI = function (s) {
 }
 
 /**
- * Caches FireStore urls
+ * Firestore URL fetching with cache
  */
-const fileStoreURL = function (path) {
-  let url = localStorage.getItem(path)
-  if (!url) {
+const fireStoreURL = function (path) {
+  return new Promise(function (resolve, reject) {
+    let url = localStorage.getItem(path)
+    if (url !== null) {
+      resolve(url)
+    }
     const storage = firebase.storage()
-
-    var pathRef = storage.ref(this.path)
-
+    const pathRef = storage.ref(path)
     pathRef.getDownloadURL().then((newUrl) => {
-      url = newUrl
-      localStorage.setItem(path)
-    }).catch(() => {
-      return null
+      localStorage.setItem(path, newUrl)
+      if (!url) {
+        resolve(newUrl)
+      }
+    }).catch((error) => {
+      localStorage.removeItem(path)
+      reject(error)
     })
-  }
-  return url
+  })
 }
 
 // This exports the plugin object.
@@ -60,6 +63,6 @@ export default {
     firebase.initializeApp(config)
 
     Vue.prototype.$skaldURI = skaldURI
-    Vue.prototype.$fireStoreURL = fileStoreURL
+    Vue.prototype.$fireStoreURL = fireStoreURL
   }
 }

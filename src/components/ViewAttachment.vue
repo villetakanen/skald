@@ -14,13 +14,13 @@
       >
       <CardFileUpload
         :path="path"
+        v-on:uploaded="refresh"
+        v-on:cancel="cancel"
         />
     </v-dialog>
   </div>
 </template>
 <script>
-// import firebase from 'firebase/app'
-// import 'firebase/storage'
 import CardFileUpload from './CardFileUpload'
 
 export default {
@@ -33,54 +33,28 @@ export default {
     CardFileUpload
   },
   data: () => ({
-    dialog: false
+    dialog: false,
+    url: null,
+    exists: false
   }),
-  computed: {
-    url () {
-      return this.$fireStoreURL(this.path)
-    },
-    exists () {
-      return this.$store.getters['attachments/exists'](this.path)
-    }
-  }
-  /* created () {
-    /* console.log('Loading attachment:', this.path)
-    let cachedURL = localStorage.getItem(this.path)
-    console.log('Got:', cachedURL)
-
-    if (!cachedURL) {
-      // Get a reference to the storage service, which is used to create references in your storage bucket
-      const storage = firebase.storage()
-
-      var pathRef = storage.ref(this.path)
-
-      pathRef.getDownloadURL().then((url) => {
-        this.url = url
-        this.loading = false
-      }).catch((err) => {
-        this.message = this.path + ' not found.'
-        console.log(err.message)
-      })
-    } else {
-      this.loading = false
-      this.url = cachedURL
-    } * /
+  mounted () {
+    this.refresh()
   },
   methods: {
-    refresh () {
-      const storage = firebase.storage()
-
-      var pathRef = storage.ref(this.path)
-
-      pathRef.getDownloadURL().then((url) => {
-        this.url = url
-        this.loading = false
-      }).catch((err) => {
-        this.message = this.path + ' not found.'
-        console.log(err.message)
-      })
+    cancel () {
       this.dialog = false
+    },
+    refresh () {
+      this.dialog = false
+      this.$fireStoreURL(this.path).then((refurl) => {
+        this.url = refurl
+        this.exists = true
+      }).catch((error) => {
+        console.log(error.code)
+        this.url = null
+        this.exists = false
+      })
     }
-  } */
+  }
 }
 </script>

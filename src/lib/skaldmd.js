@@ -192,7 +192,7 @@ export default class Skaldmd {
       // No style set
       let tag = '<table>\n'
       // Border style set
-      if (line.includes('border=1')) tag += '<table class="border-1">\n'
+      if (line.includes('border=1')) tag = '<table class="border-1">\n'
       this.rendedHtml += tag
       return
     }

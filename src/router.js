@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import ViewPage from './views/ViewPage.vue'
 
 Vue.use(Router)
 
@@ -30,14 +31,14 @@ export default new Router({
       name: 'viewSite',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "viewsite" */ './views/ViewSite.vue')
+      component: ViewPage
     },
     {
       path: '/v/:siteid/:pageid',
       name: 'viewPage',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "viewpage" */ './views/ViewPage.vue')
+      component: ViewPage
     },
     {
       path: '/u/:nickname',
