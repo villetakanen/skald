@@ -211,14 +211,20 @@ export default class Skaldmd {
     // remove pipe at the beginning
     const lineArray = line.substring(1).split('|')
     lineArray.forEach((cell) => {
-      let cssClass = ''
-      if (cell[0] === ' ') {
-        if (cell[cell.length - 1] === ' ') cssClass = ' class="alignCenter"'
-        else cssClass = ' class="alignRight"'
+      if (line.indexOf('!') === 1) {
+        this.rendedHtml += `<th>`
+        this.parseText(cell.substring(1, cell.length).trim())
+        this.rendedHtml += '</th>'
+      } else {
+        let cssClass = ''
+        if (cell[0] === ' ') {
+          if (cell[cell.length - 1] === ' ') cssClass = ' class="alignCenter"'
+          else cssClass = ' class="alignRight"'
+        }
+        this.rendedHtml += `<td${cssClass}>`
+        this.parseText(cell.trim())
+        this.rendedHtml += '</td>'
       }
-      this.rendedHtml += `<td${cssClass}>`
-      this.parseText(cell.trim())
-      this.rendedHtml += '</td>'
     })
   }
 
