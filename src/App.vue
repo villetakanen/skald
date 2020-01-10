@@ -56,6 +56,16 @@
           @click.native="newContent=!newContent"
         ><v-icon>mdi-close</v-icon></v-btn></v-snackbar>
     </v-content>
+    <v-btn
+      v-scroll="onScroll"
+      v-show="scrollFab"
+      fab
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="toTop"
+      ><v-icon>mdi-arrow-up-thick</v-icon></v-btn>
     <ErrorDialog/>
     <PageNotFoundDialog/>
   </v-app>
@@ -81,7 +91,8 @@ export default {
     newContent: false,
     drawer: false,
     timeout: 10000000,
-    theme: 'Skald'
+    theme: 'Skald',
+    scrollFab: false
     //
   }),
   computed: {
@@ -106,6 +117,14 @@ export default {
     })
   },
   methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.scrollFab = top > 20
+    },
+    toTop () {
+      window.scroll(0, 0)
+    },
     showRefreshUI (e) {
       // Display a snackbar inviting the user to refresh/reload the app due
       // to an app update being available.
