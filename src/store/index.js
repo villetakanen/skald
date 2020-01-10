@@ -14,7 +14,8 @@ Vue.use(Vuex)
 const state = {
   version: unescape(process.env.VERSION || '%7Bversion%3A0%7D'),
   pageNotFound: null,
-  error: null
+  error: null,
+  snack: null
 }
 const getters = {
   /**
@@ -45,6 +46,13 @@ const getters = {
    */
   error: (context) => () => {
     return context.error
+  },
+
+  /**
+   * Global error state
+   */
+  snack: (context) => () => {
+    return context.snack
   }
 }
 const mutations = {
@@ -57,6 +65,9 @@ const mutations = {
   clearErrors (context) {
     Vue.set(context, 'pageNotFound', null)
     Vue.set(context, 'error', null)
+  },
+  snack (context, message) {
+    Vue.set(context, 'snack', message)
   }
 }
 

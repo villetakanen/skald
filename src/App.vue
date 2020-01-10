@@ -68,6 +68,18 @@
       ><v-icon>mdi-arrow-up-thick</v-icon></v-btn>
     <ErrorDialog/>
     <PageNotFoundDialog/>
+    <v-snackbar
+      v-model="snackbar"
+    >
+      {{ snackMessage }}
+      <v-btn
+        color="primary"
+        text
+        @click="snackbar = false"
+      >
+        Close
+      </v-btn>
+    </v-snackbar>
   </v-app>
 </template>
 
@@ -92,7 +104,8 @@ export default {
     drawer: false,
     timeout: 10000000,
     theme: 'Skald',
-    scrollFab: false
+    scrollFab: false,
+    snackbar: false
     //
   }),
   computed: {
@@ -103,6 +116,9 @@ export default {
       const url = this.$store.getters['sites/posterURL']()
       if (url === null) return ''
       return `background-image:url('${url}');`
+    },
+    snackMessage () {
+      return this.$store.getters['snack']()
     }
   },
   created () {

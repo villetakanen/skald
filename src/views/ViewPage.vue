@@ -17,22 +17,48 @@
         <v-col
             cols="12"
             md="8">
-          <div id="reader-text"><v-card>
-            <v-card-text>
-              <v-btn
-                v-if="isAuthz"
-                color="secondary"
-                small
-                absolute
+          <div id="reader-text">
+            <v-card>
+              <v-container>
+                <WikiText :content="content" :siteid="siteid"/>
+              </v-container>
+            <v-speed-dial
+                v-model="fab"
                 top
                 right
-                fab
-                v-bind:to="editlink"
-                elevation="2">
-                <v-icon>mdi-pencil</v-icon>
-              </v-btn>
-              <WikiText :content="content" :siteid="siteid"/>
-            </v-card-text>
+                direction="bottom"
+                absolute
+                style="margin-top:-32px">
+                <template v-slot:activator>
+                  <v-btn
+                    v-model="fab"
+                    color="secondary"
+                    small
+                    top
+                    right
+                    fab
+                    elevation="2">
+                    <v-icon v-if="fab">mdi-close</v-icon>
+                    <v-icon v-else>mdi-menu-down</v-icon>
+                  </v-btn>
+                </template>
+                 <v-btn
+                  :disabled="!isAuthz"
+                  fab
+                  small
+                  v-bind:to="editlink"
+                  >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>
+                <v-btn
+                  fab
+                  dark
+                  small
+                  @click="copyUrl"
+                >
+                  <v-icon>mdi-link</v-icon>
+                </v-btn>
+              </v-speed-dial>
           </v-card>
           </div>
           </v-col>
@@ -82,6 +108,9 @@ export default {
     'pageid',
     'siteid'
   ],
+  data: () => ({
+    fab: false
+  }),
   created () {
     this.updatePage(this.siteid, this.pageid)
   },
@@ -132,6 +161,15 @@ export default {
       console.log('scrolling to top')
       // this.$vuetify.goTo(0)
       window.scroll(0, 0)
+    },
+    copyUrl () {
+      const dummy = document.createElement('input')
+      document.body.appendChild(dummy)
+      dummy.value = window.location.href
+      dummy.select()
+      document.execCommand('copy')
+      document.body.removeChild(dummy)
+      this.$store.commit('snack', 'Url copied to clipboard')
     }
   }
 }
