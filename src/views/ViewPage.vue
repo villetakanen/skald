@@ -126,6 +126,12 @@ export default {
       // set site styles
       this.$store.dispatch('sites/openSite', siteid)
       this.$store.dispatch('site/open', siteid)
+
+      // in case we are updating the same page, without route change:
+      // we need to manually scroll to top
+      console.log('scrolling to top')
+      // this.$vuetify.goTo(0)
+      window.scroll(0, 0)
     }
   }
 }

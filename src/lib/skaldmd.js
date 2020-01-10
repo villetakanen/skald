@@ -7,6 +7,9 @@ const UL = 2
 const STATSBLOCK = 3
 const DP_INFO = 1001
 
+/**
+ * Stream parser for Skald Markdown subsyntax and wikitags
+ */
 export default class Skaldmd {
   constructor (siteid) {
     siteid ? this.siteLinkStub = siteid : this.siteLinkStub = 'skald'
@@ -211,6 +214,7 @@ export default class Skaldmd {
     // remove pipe at the beginning
     const lineArray = line.substring(1).split('|')
     lineArray.forEach((cell) => {
+      // Table header cell starts with a !, remove it and parse as TD
       if (line.indexOf('!') === 1) {
         this.rendedHtml += `<th>`
         this.parseText(cell.substring(1, cell.length).trim())
