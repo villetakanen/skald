@@ -143,6 +143,8 @@ export default {
       return this.$store.getters['binder/loading']()
     },
     editlink () {
+      // If we are showing the root of site, no pageid is set.
+      if (!this.pageid) return `/e/${this.siteid}/${this.siteid}`
       return `/e/${this.siteid}/${this.pageid}`
     }
   },
@@ -158,8 +160,6 @@ export default {
 
       // in case we are updating the same page, without route change:
       // we need to manually scroll to top
-      console.log('scrolling to top')
-      // this.$vuetify.goTo(0)
       window.scroll(0, 0)
     },
     copyUrl () {

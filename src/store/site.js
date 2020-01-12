@@ -28,7 +28,7 @@ const getters = {
     return context.data.description
   },
   pageIndex: (context) => () => {
-    console.log(context.pages)
+    // console.log(context.pages)
     return context.pages
   }
 }
@@ -77,7 +77,7 @@ const actions = {
       return
     }
 
-    console.log('site/open', siteid)
+    // console.log('site/open', siteid)
 
     // unsubscribe from previous site
     context.state.unsubscibe()
@@ -145,11 +145,11 @@ const actions = {
   }, */
   addOwner (context, { nick }) {
     if (!exists(context.getters['id']())) return
-    console.log('adding owner ', nick)
+    console.log('adding owner not implemented!', nick)
   },
   removeOwner (context, { nick }) {
     if (!exists(context.getters['id']())) return
-    console.log('adding owner ', nick)
+    console.log('removing owner not implemented!', nick)
   }
 }
 

@@ -90,7 +90,6 @@ export default {
     },
     rows () {
       if (window.innerWidth < 960) return 10
-      console.log(window.innerWidth)
       return 20
     }
   },
@@ -99,9 +98,11 @@ export default {
       this.$router.push('/v/' + this.siteid + '/' + this.pageid)
       return
     }
+    // If we reach this view without a page-id, we assume we want to
+    // edit the root page of the site
+    if (!this.pageid) this.pageid = this.siteid
     this.updatePage(this.siteid, this.pageid)
     this.$store.subscribe((mutation, state) => {
-      // console.log(mutation.type)
       switch (mutation.type) {
         case 'binder/setData':
           this.title = this.$store.getters['binder/title']()

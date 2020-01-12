@@ -53,7 +53,7 @@ const actions = {
    * @param {*} json with { siteid } for the site.
    */
   fetch (context, { siteid }) {
-    console.log('fetch', siteid)
+    // console.log('fetch', siteid)
     // We are fetching with siteid, and that site is already fetched -> return
     if (siteid === context.getters['siteID']()) return
     context.commit('siteID', siteid)
