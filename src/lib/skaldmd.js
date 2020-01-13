@@ -238,14 +238,14 @@ export default class Skaldmd {
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
       const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
-      let url = p2.split(':')[0]
+      let url = p2.split('|')[0]
       let siteid = this.siteLinkStub
       if (url.includes('/')) {
         siteid = this.skaldURI(url.split('/')[0].trim())
         url = url.split('/')[1]
       }
       url = this.skaldURI(url.trim())
-      return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a hred' + p2 + '-'
+      return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a href' + p2 + '-'
     })
     return line
   }

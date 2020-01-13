@@ -62,7 +62,7 @@ describe('Render', () => {
 
   it('renders a [wiki:test/page Named] link to test/page-named with text Named', () => {
     const result = renderer.toHtml('it links to [wiki:test/page | Named]')
-    expect(result).toBe('<p>it links to <a href="/#/v/test/page-named">Named</a></p>\n')
+    expect(result).toBe('<p>it links to <a href="/#/v/test/page">Named</a></p>\n')
   })
 
   it('renders a HR', () => {
