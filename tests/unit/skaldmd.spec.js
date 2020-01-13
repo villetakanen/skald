@@ -55,14 +55,14 @@ describe('Render', () => {
     expect(result).toBe('<p><a href="/#/v/skald/page">page</a></p>\n')
   })
 
-  it('renders a [wiki:test/page] link to test/page, when there is no wiki set', () => {
+  it('renders a [wiki:test/page] link to test/page', () => {
     const result = renderer.toHtml('it links to [wiki:test/page ]')
     expect(result).toBe('<p>it links to <a href="/#/v/test/page">test/page</a></p>\n')
   })
 
-  it('renders a [wiki:test/page Named] link to test/page-named, when there is no wiki set', () => {
-    const result = renderer.toHtml('it links to [wiki:test/page Named]')
-    expect(result).toBe('<p>it links to <a href="/#/v/test/page-named">test/page Named</a></p>\n')
+  it('renders a [wiki:test/page Named] link to test/page-named with text Named', () => {
+    const result = renderer.toHtml('it links to [wiki:test/page | Named]')
+    expect(result).toBe('<p>it links to <a href="/#/v/test/page-named">Named</a></p>\n')
   })
 
   it('renders a HR', () => {

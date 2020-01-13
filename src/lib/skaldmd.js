@@ -237,7 +237,7 @@ export default class Skaldmd {
     const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gm')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
-      const link = p2.includes(':') ? p2.substring(p2.indexOf(':')) : p2
+      const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
       let url = p2.split(':')[0]
       let siteid = this.siteLinkStub
       if (url.includes('/')) {

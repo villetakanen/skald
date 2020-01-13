@@ -123,6 +123,9 @@ div.v-card.v-sheet.theme--dark .wikipage {
     color: white;
     clear:both;
     line-height: 1em;
+    a {
+      text-decoration: none;
+    }
   }
 
   p, li, td, th {
@@ -155,6 +158,10 @@ div.v-card.v-sheet.theme--dark .wikipage {
     font-weight: 500;
     color: white;
   }
+
+  td.alignCenter{
+    text-align: center;
+  }
 }
 /**
  * Wikipage overrides for sidebar
@@ -164,5 +171,8 @@ div.v-card.v-sheet.theme--dark .sidebar .wikipage{
     margin:0;
     padding: 0;
     margin-bottom: 4px;
+  }
+  ul+h1{
+    margin-top: 8px;
   }
 }
