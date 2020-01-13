@@ -26,21 +26,8 @@ export default {
       // console.log(skaldmd.toHtml())
       // /TMP
 
-      var rendedContent = this.content
-
-      if (rendedContent === null) rendedContent = 'Missing content'
-
-      rendedContent = wikiLinks(rendedContent, this.siteid)
-      rendedContent = siteLinks(rendedContent)
-
-      // These we want to run on html
-      rendedContent = statBlocks(rendedContent)
-
-      // const MarkdownIt = require('markdown-it')
-      // const md = new MarkdownIt({ html: true })
-      // rendedContent = md.render(rendedContent)
       const skaldmd = new Skaldmd(this.siteid)
-      rendedContent = skaldmd.toHtml(this.content)
+      let rendedContent = skaldmd.toHtml(this.content)
       // rendedContent = skaldmd.toHtml()
 
       // These we need to run on html
@@ -54,7 +41,7 @@ export default {
 }
 /**
  * Takes in the page, and rends the statblocks as HTML table
- */
+ * /
 function statBlocks (page) {
   // console.log(page)
   // const re = new RegExp('<p>stats:([a-zA-Z]|\\s|\\+|\\-|\\d)+<\\/p>', 'g')
@@ -92,22 +79,22 @@ function wikiLinks (page, siteid) {
     }
   })
 }
-function siteLinks (page) {
+/* function siteLinks (page) {
   const re = new RegExp('([\\[(]site:)(.+?)([\\])])', 'g')
   return page.replace(re, function (match, p1, p2, p3, offset, string) {
     p2 = p2.trim()
     return `[${p2}](/#/v/${toURI(p2)})`
   })
-}
+} */
 
-function toURI (link) {
-  var re = new RegExp('[\\W]', 'g')
+/* function toURI (link) {
+  var re = new RegExp('[\\W]', 'gmu')
   var s = link.replace(re, '-')
   while (s.includes('--')) {
     s = s.split('--').join('-')
   }
   return s.toLowerCase()
-}
+} */
 function attachLinks (page, siteid) {
   const re = new RegExp('([\\[(]attach:)(.+?)([\\])])', 'g')
   return page.replace(re, function (match, p1, p2, p3, offset, string) {

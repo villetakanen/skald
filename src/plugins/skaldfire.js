@@ -14,7 +14,7 @@ import 'firebase/firestore'
  */
 const skaldURI = function (s) {
   if (s === null) return null
-  var re = new RegExp('[\\W]', 'g')
+  var re = new RegExp('[\\W]', 'gmu')
   var r = s.replace(re, '-')
   while (r.includes('--')) {
     r = r.split('--').join('-')
