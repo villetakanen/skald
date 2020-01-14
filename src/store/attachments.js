@@ -78,10 +78,10 @@ const actions = {
         })
       })
       context.commit('loading', false)
-    }).catch((error) => {
+    })/* .catch((error) => {
       // Uh-oh, an error occurred!
       console.log(error)
-    })
+    }) */
   },
   /**
    * delete a file
@@ -97,10 +97,10 @@ const actions = {
 
     fileRef.delete().then(() => {
       context.dispatch('fetch', { siteid: siteid })
-    }).catch((error) => {
+    })/* .catch((error) => {
       // Uh-oh, an error occurred!
       console.log(error)
-    })
+    }) */
   }
 }
 export default {

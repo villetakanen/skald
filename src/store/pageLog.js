@@ -46,7 +46,7 @@ const actions = {
     })
   },
   stamp (context, { action, pageid, siteid, authorNick, authorID }) {
-    console.log('pagelog/stamp', action, pageid, siteid, authorID)
+    // console.log('pagelog/stamp', action, pageid, siteid, authorID)
 
     // console.log('updating firestore for', siteid, pageid
     var log = {

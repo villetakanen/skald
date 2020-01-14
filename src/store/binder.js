@@ -169,9 +169,9 @@ const actions = {
 
     pageRef.delete().then(() => {
       // console.log(`Document ${pageid} successfully deleted!`)
-    }).catch((error) => {
-      console.error('Error removing document: ', error)
-    })
+    })// .catch((error) => {
+    // console.error('Error removing document: ', error)
+    // })
   }
 }
 export default {

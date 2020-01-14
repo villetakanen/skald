@@ -133,7 +133,7 @@ export default class Skaldmd {
   }
 
   parseStatBlock (line) {
-    console.log('parseStatBlock', line, this.parsing)
+    // console.log('parseStatBlock', line, this.parsing)
     // We are starting to parse a Table, add the table tag
     if (this.parsing !== STATSBLOCK) {
       this.setMode(STATSBLOCK)

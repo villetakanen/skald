@@ -78,8 +78,8 @@ const actions = {
             pathRef.getDownloadURL().then((url) => {
               context.commit('setSitePosterURL', { siteid: doc.id, posterURL: url })
             }).catch((err) => {
-              this.message = doc.id + '/' + doc.data().posterUR + ' not found.'
-              console.log(err.message)
+              this.message = doc.id + '/' + doc.data().posterUR + ' not found.' + err
+              // console.log(err.message)
             })
           } else {
             context.commit('setSitePosterURL', { siteid: doc.id, posterURL: null })
@@ -111,8 +111,8 @@ const actions = {
           pathRef.getDownloadURL().then((url) => {
             context.commit('setPosterURL', url)
           }).catch((err) => {
-            this.message = siteid + '/' + doc.data().posterUR + ' not found.'
-            console.log(err.message, this.message)
+            this.message = siteid + '/' + doc.data().posterUR + ' not found.' + err
+            // console.log(err.message, this.message)
           })
         } else {
           context.commit('setPosterURL', null)

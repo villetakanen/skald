@@ -14,7 +14,7 @@ const getters = {
       if (user.uid === uid) return true
     })
     if (userArray.length === 1) return userArray[0]
-    console.log('not found', uid, context.all)
+    // console.log('not found', uid, context.all)
     return null
   }
 }
@@ -62,7 +62,7 @@ const actions = {
       return true
     })
 
-    console.log('removeOwner', uid, siteid, userSites)
+    // console.log('removeOwner', uid, siteid, userSites)
 
     db.collection('profiles').doc(uid).update({ owns: userSites })
     db.collection('sites').doc(siteid).collection('owners').doc(uid).delete()

@@ -144,12 +144,12 @@ const actions = {
     })
   }, */
   addOwner (context, { nick }) {
-    if (!exists(context.getters['id']())) return
-    console.log('adding owner not implemented!', nick)
+    // if (!exists(context.getters['id']())) return
+    // console.log('adding owner not implemented!', nick)
   },
   removeOwner (context, { nick }) {
-    if (!exists(context.getters['id']())) return
-    console.log('removing owner not implemented!', nick)
+    // if (!exists(context.getters['id']())) return
+    // console.log('removing owner not implemented!', nick)
   }
 }
 
