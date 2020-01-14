@@ -93,8 +93,26 @@ export default class Skaldmd {
       return '<b>' + p2 + '</b>'
     })
     line = this.rendDice(line)
+    line = this.rendColors(line)
     line = this.rendWikiLinks(line)
     this.rendedHtml += line
+  }
+
+  rendColors (line) {
+    /* console.log('rendWikiLinks', siteLinkStub, line) */
+    const re = new RegExp('\\[color:(.+?)\\[\\/color\\]', 'gmu')
+    line = line.replace(re, (match, p1, offset, string) => {
+      const colorcode = p1.substring(0, p1.indexOf(']')).trim()
+      // console.log('colorcode:', colorcode, p1)
+      if (colorcode === 'green') {
+        return '<span style="color:green">' + p1.substring(p1.indexOf(']') + 1, p1.length) + '</span>'
+      } else if (colorcode.indexOf('#') === 0 && colorcode.length === 7) {
+        return '<span style="color:' + colorcode + '">' + p1.substring(p1.indexOf(']') + 1, p1.length) + '</span>'
+      } else {
+        return p1
+      }
+    })
+    return line
   }
 
   rendDice (line) {

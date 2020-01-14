@@ -99,7 +99,7 @@ const actions = {
    * @param {*} param1 JSON for page data, see below
    */
   createPage (context, { pageid, name, content, siteid, author, nick }) {
-    console.log('firestore create for', siteid, pageid, name, content, author, nick)
+    // console.log('firestore create for', siteid, pageid, name, content, author, nick)
 
     let np = {
       creator: author,
@@ -144,7 +144,7 @@ const actions = {
       if (doc.exists) {
         if (doc.data().history) history = doc.data().history
         history.push(doc.data().content)
-        console.log(history)
+        // console.log(history)
 
         u['history'] = history
 
@@ -168,7 +168,7 @@ const actions = {
     var pageRef = siteRef.collection('pages').doc(pageid)
 
     pageRef.delete().then(() => {
-      console.log(`Document ${pageid} successfully deleted!`)
+      // console.log(`Document ${pageid} successfully deleted!`)
     }).catch((error) => {
       console.error('Error removing document: ', error)
     })
