@@ -1,28 +1,28 @@
 <template>
   <v-list>
     <template v-if="siteID !== null">
-      <v-subheader>Site</v-subheader>
-      <v-list-item :to="'/v/'+siteID">
-        <v-list-item-action><v-icon>mdi-dice-d20</v-icon></v-list-item-action>
 
-        <v-list-item-title >Site Home</v-list-item-title>
+      <v-list-item :to="'/v/'+siteID">
+        <v-list-item-action><v-icon>mdi-home</v-icon></v-list-item-action>
+        <v-list-item-title >{{siteID}}</v-list-item-title>
       </v-list-item>
+
       <v-list-item :to="'/l/pages/'+siteID">
-        <v-list-item-action><v-icon>mdi-dice-d6</v-icon></v-list-item-action>
+        <v-list-item-action><v-icon>mdi-view-agenda</v-icon></v-list-item-action>
 
         <v-list-item-title >Pages</v-list-item-title>
       </v-list-item>
       <v-list-item>
-        <v-list-item-action><v-icon>mdi-dice-d8</v-icon></v-list-item-action>
-        <v-list-item-title ><CreatePageButton/></v-list-item-title>
+        <v-list-item-action><CreatePageButton/></v-list-item-action>
+        <v-list-item-title>Add Page</v-list-item-title>
       </v-list-item>
       <v-list-item :to="'/l/attachments/'+siteID">
-        <v-list-item-action><v-icon>mdi-dice-d12</v-icon></v-list-item-action>
+        <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>
 
         <v-list-item-title >Attachments</v-list-item-title>
       </v-list-item>
       <v-list-item :to="'/c/site/'+siteID">
-        <v-list-item-action><v-icon>mdi-dice-d4</v-icon></v-list-item-action>
+        <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
 
         <v-list-item-title >Settings</v-list-item-title>
       </v-list-item>
@@ -74,7 +74,7 @@ export default {
       return this.$store.getters['version']()
     },
     siteID () {
-      return this.$store.getters['binder/siteID']()
+      return this.$store.getters['site/id']()
     }
   }
 }

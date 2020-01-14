@@ -13,18 +13,17 @@
     <v-navigation-drawer
       v-model="drawer"
       app
+      clipped
       >
       <NavigationDrawer/>
     </v-navigation-drawer>
 
     <v-app-bar
       app
+      clipped-left
       >
-
-      <v-btn icon @click.stop="drawer = !drawer">
-        <img style="height:42px" alt="S" src="./assets/logo.png" id="sitelogo"/>
-      </v-btn>
-
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <img style="height:48px;margin-right:8px;margin-left:8px" alt="S" src="./assets/fox.svg" id="sitelogo"/>
       <v-toolbar-title class="headline text-uppercase">
         Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
       </v-toolbar-title>

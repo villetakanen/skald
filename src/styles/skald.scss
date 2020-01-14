@@ -108,6 +108,20 @@ span.ndn{
   font-size: 16px;
   line-height: 16px;
 }
+/**
+ *
+ */
+ #app .theme--dark.v-sheet {
+  background-color: #333;
+ }
+/**
+ * Navigation bar
+ */
+ #app .theme--dark.v-navigation-drawer,
+ #app .theme--dark.v-navigation-drawer .v-sheet {
+   background-color: #222;
+ }
+
 /** 
  * This style is applied by WikiText.vue component to all HTML rendered
  * by the component

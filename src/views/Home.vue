@@ -29,8 +29,9 @@ export default {
     LatestChanges,
     SiteList
   },
-  created () {
+  mounted () {
     this.$store.dispatch('sites/openSite', 'skald')
+    this.$store.dispatch('site/open', 'skald')
   }
 }
 </script>
