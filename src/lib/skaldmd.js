@@ -16,6 +16,7 @@ export default class Skaldmd {
     this.parsing = NONE
     this.rendedHtml = ''
     this.docpart = NONE
+    this.ulLevel = 0
   }
   /**
    * Sets current stream parsing mode to mode
@@ -49,7 +50,7 @@ export default class Skaldmd {
       // - as does dash
       else if ((line[0] === '-' || line[0] === '*') &&
         line.length > 1 &&
-        line[1] === ' ') this.parseUL(line)
+        (line[1] === ' ' || line[1] === '-')) this.parseUL(line)
       // a table starts
       else if (line[0] === '|') this.parseTable(line)
       else if (line.indexOf('[stats') === 0 ||
@@ -64,7 +65,13 @@ export default class Skaldmd {
   resetMode () {
     if (this.parsing > -1) {
       if (this.parsing === PARAGRAPH) this.rendedHtml += '</p>\n'
-      if (this.parsing === UL) this.rendedHtml += '</ul>\n'
+      if (this.parsing === UL) {
+        if (this.ulLevel === 1) {
+          this.rendedHtml += '</ul>\n'
+          this.ulLevel = 0
+        }
+        this.rendedHtml += '</ul>\n'
+      }
       if (this.parsing === TABLE ||
         this.parsing === STATSBLOCK) this.rendedHtml += '</table>\n'
       this.parsing = NONE
@@ -178,8 +185,21 @@ export default class Skaldmd {
       this.setMode(UL)
       this.rendedHtml += '<ul>\n'
     }
-    this.rendedHtml += '<li>'
-    this.parseText(line.substring(2))
+    if (line[1] === '-') {
+      if (this.ulLevel !== 1) {
+        this.ulLevel = 1
+        this.rendedHtml += '<ul>\n'
+      }
+      this.rendedHtml += '<li>'
+      this.parseText(line.substring(3))
+    } else {
+      if (this.ulLevel === 1) {
+        this.ulLevel = 0
+        this.rendedHtml += '</ul>\n'
+      }
+      this.rendedHtml += '<li>'
+      this.parseText(line.substring(2))
+    }
     this.rendedHtml += '</li>\n'
   }
   parseH (line) {

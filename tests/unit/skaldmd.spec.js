@@ -80,4 +80,30 @@ describe('Render', () => {
       '<li>another li</li>\n' +
       '</ul>\n')
   })
+
+  it('renders a nested li with 2 levels', () => {
+    const result = renderer.toHtml('- a li, with\n' +
+      '- another li\n' +
+      '-- subli\n' +
+      '-- subli\n' +
+      '- another li\n')
+    expect(result).toBe('<ul>\n' +
+      '<li>a li, with</li>\n' +
+      '<li>another li</li>\n' +
+      '<ul>\n' +
+      '<li>subli</li>\n' +
+      '<li>subli</li>\n' +
+      '</ul>\n' +
+      '<li>another li</li>\n' +
+      '</ul>\n')
+  })
+
+  it('renders a nested li', () => {
+    const result = renderer.toHtml('-- a li\n')
+    expect(result).toBe('<ul>\n' +
+      '<ul>\n' +
+      '<li>a li</li>\n' +
+      '</ul>\n' +
+      '</ul>\n')
+  })
 })
