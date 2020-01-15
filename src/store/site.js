@@ -158,8 +158,6 @@ const actions = {
   setInfo (context, { name, description }) {
     const siteid = context.state.siteid
 
-    console.log(name, description)
-
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
       'name': name,
