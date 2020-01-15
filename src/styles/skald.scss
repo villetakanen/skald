@@ -129,7 +129,7 @@ span.ndn{
  * @todo Everything for wikipage should be refactored here
  */
 div.v-card.v-sheet.theme--dark .wikipage {
-
+  
   h1, h2, h3, h4 {
     font-weight: 400;
     margin-bottom: 16px;
@@ -149,6 +149,17 @@ div.v-card.v-sheet.theme--dark .wikipage {
   table {
     display: block;
     overflow-x: auto;
+  }
+  
+  table.statblock{
+    border-collapse: collapse;
+    td, th {
+      border-width: 0px;
+    }
+    td+td{
+      border-left-width: 1px;
+    }
+    margin-right: 16px;
   }
 
   // Eliminate extra spacing between non-space-needing elements

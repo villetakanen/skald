@@ -46,6 +46,7 @@
                   :disabled="!isAuthz"
                   fab
                   small
+                  color="primary"
                   v-bind:to="editlink"
                   >
                   <v-icon>mdi-pencil</v-icon>
@@ -54,6 +55,7 @@
                   fab
                   dark
                   small
+                  color="primary"
                   @click="copyUrl"
                 >
                   <v-icon>mdi-link</v-icon>
