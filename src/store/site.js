@@ -30,6 +30,10 @@ const getters = {
   pageIndex: (context) => () => {
     // console.log(context.pages)
     return context.pages
+  },
+  name: (context) => () => {
+    if (!context.data.name) return context.siteid
+    return context.data.name
   }
 }
 
@@ -150,6 +154,16 @@ const actions = {
   removeOwner (context, { nick }) {
     // if (!exists(context.getters['id']())) return
     // console.log('removing owner not implemented!', nick)
+  },
+  setInfo (context, { name, description }) {
+    const siteid = context.state.siteid
+
+    console.log(name, description)
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({
+      'name': name,
+      'description': description })
   }
 }
 

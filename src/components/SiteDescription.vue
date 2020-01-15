@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-toolbar>
-      <v-toolbar-title>Description</v-toolbar-title>
+      <v-toolbar-title>Site Info</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
         id="saveDescriptionButton"
@@ -15,10 +15,19 @@
       <v-form
         v-if="isAuthz"
         submit.prevent="saveDescription">
+
         <v-text-field
-            v-model="description"
+            v-model="siteName"
+            label = "name"
             filled
             ></v-text-field>
+
+        <v-text-field
+            v-model="description"
+            label = "description"
+            filled
+            ></v-text-field>
+
       </v-form>
     </v-card-text>
   </v-card>
@@ -27,7 +36,8 @@
 <script>
 export default {
   data: () => ({
-    rawDescription: null
+    rawDescription: null,
+    rawSiteName: null
   }),
   computed: {
     isAuthz () {
@@ -43,14 +53,25 @@ export default {
       set (value) {
         this.rawDescription = value
       }
+    },
+    siteName: {
+      get () {
+        if (this.rawSiteName == null) {
+          return this.$store.getters['site/name']()
+        }
+        return this.rawSiteName
+      },
+      set (value) {
+        this.rawSiteName = value
+      }
+
     }
   },
   methods: {
     save () {
-      this.$store.dispatch('sites/setDescription',
-        this.description).then(() => {
-        this.description = this.$store.getters['sites/description']()
-      })
+      this.$store.dispatch('site/setInfo',
+        { name: this.siteName,
+          description: this.description })
     }
   }
 }
