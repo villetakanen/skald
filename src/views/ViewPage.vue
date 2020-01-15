@@ -9,7 +9,7 @@
         </v-row>
       </v-container>
       <v-container v-if="!loading">
-        <h1 class="sitelink">{{siteid}}</h1>
+        <h1 class="sitelink">{{sitename}}</h1>
         <h1 class="pagetitle">{{title}}</h1>
 
         <v-row>
@@ -124,6 +124,9 @@ export default {
   computed: {
     isAuthz () {
       return this.$store.getters['isAuthz']()
+    },
+    sitename () {
+      return this.$store.getters['site/name']()
     },
     title () {
       if (this.$store.getters['binder/title']() === null) return ' '
