@@ -4,7 +4,7 @@
 
       <v-list-item :to="'/v/'+siteID">
         <v-list-item-action><v-icon>mdi-home</v-icon></v-list-item-action>
-        <v-list-item-title >{{siteID}}</v-list-item-title>
+        <v-list-item-title >{{siteName}}</v-list-item-title>
       </v-list-item>
 
       <v-list-item :to="'/l/pages/'+siteID">
@@ -75,6 +75,9 @@ export default {
     },
     siteID () {
       return this.$store.getters['site/id']()
+    },
+    siteName () {
+      return this.$store.getters['site/name']()
     }
   }
 }

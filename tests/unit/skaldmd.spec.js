@@ -55,6 +55,11 @@ describe('Render', () => {
     expect(result).toBe('<p><a href="/#/v/skald/page">page</a></p>\n')
   })
 
+  it('renders a [wiki:4.0 review] link to skald/4-0-review, when there is no wiki set', () => {
+    const result = renderer.toHtml('[wiki:4.0 review]')
+    expect(result).toBe('<p><a href="/#/v/skald/4-0-review">4.0 review</a></p>\n')
+  })
+
   it('renders a [wiki:test/page] link to test/page', () => {
     const result = renderer.toHtml('it links to [wiki:test/page ]')
     expect(result).toBe('<p>it links to <a href="/#/v/test/page">test/page</a></p>\n')
@@ -105,5 +110,14 @@ describe('Render', () => {
       '<li>a li</li>\n' +
       '</ul>\n' +
       '</ul>\n')
+  })
+
+  it('renders a legend box', () => {
+    const result = renderer.toHtml('[legend] \n' +
+     'some text\n' +
+     '[/legend]')
+    expect(result).toBe('<div class="legend">\n' +
+      '<p>some text</p>\n' +
+      '</div>')
   })
 })

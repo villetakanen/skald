@@ -169,12 +169,18 @@ div.v-card.v-sheet.theme--dark .wikipage {
   }
 
   // An info box
-  div.infodocpart{
+  div.infodocpart,
+  div.legend{
     // At the bottom of the info-box, we do not need bottom padding or
     // margin for these elements
     p:last-child {
       margin-bottom: 0;
       padding-bottom: 0;
+    }
+  }
+  div.legend{
+    p, ul, li, td, th {
+      font-size: 10px;
     }
   }
 

@@ -12,7 +12,7 @@ import 'firebase/firestore'
  * Replaces a String with a skald uri compatible slug
  * @param {string} s a String to be converted
  */
-const skaldURI = function (s) {
+export const skaldURI = function (s) {
   if (s === null) return null
   var re = new RegExp('[\\W]', 'gmu')
   var r = s.replace(re, '-')

@@ -1,3 +1,5 @@
+import { skaldURI } from '../plugins/skaldfire.js'
+
 const NEWLINE = '\n'
 
 const NONE = -1
@@ -6,6 +8,7 @@ const TABLE = 1
 const UL = 2
 const STATSBLOCK = 3
 const DP_INFO = 1001
+const DP_LEGEND = 1002
 
 /**
  * Stream parser for Skald Markdown subsyntax and wikitags
@@ -38,10 +41,13 @@ export default class Skaldmd {
 
       // if the line is emtpy, we always just reset the parsing mode
       if (line.trim().length === 0) this.resetMode()
-      // start a docpart?
+      // start a docpart DP_INFO
       else if (line.indexOf('[info]') === 0) this.startPart(DP_INFO)
+      // start a docpart DP_LEGEND
+      else if (line.indexOf('[legend]') === 0) this.startPart(DP_LEGEND)
       // start a docpart?
-      else if (line.indexOf('[/info]') === 0) this.endPart()
+      else if (line.indexOf('[/info]') === 0 ||
+        line.indexOf('[/legend]') === 0) this.endPart()
       // #... A header
       else if (line[0] === '#') this.parseH(line)
       // -... A bullet point
@@ -78,15 +84,22 @@ export default class Skaldmd {
     }
   }
   endPart () {
-    if (this.docpart === DP_INFO) {
+    this.resetMode()
+    if (this.docpart === DP_INFO ||
+      this.docpart === DP_LEGEND) {
       this.rendedHtml += '</div>'
     }
     this.docpart = NONE
   }
   startPart (type) {
+    this.endPart()
     if (type === DP_INFO) {
       this.docpart = DP_INFO
       this.rendedHtml += '<div class="infodocpart">'
+    }
+    if (type === DP_LEGEND) {
+      this.docpart = DP_LEGEND
+      this.rendedHtml += '<div class="legend">\n'
     }
   }
   parseText (line) {
@@ -279,16 +292,16 @@ export default class Skaldmd {
       let url = p2.split('|')[0]
       let siteid = this.siteLinkStub
       if (url.includes('/')) {
-        siteid = this.skaldURI(url.split('/')[0].trim())
+        siteid = skaldURI(url.split('/')[0].trim())
         url = url.split('/')[1]
       }
-      url = this.skaldURI(url.trim())
+      url = skaldURI(url.trim())
       return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a href' + p2 + '-'
     })
     return line
   }
 
-  skaldURI (s) {
+  /* skaldURI (s) {
     if (s === null) return null
     var re = new RegExp('[^\\p{L}]', 'gmu')
     var r = s.replace(re, '-')
@@ -296,7 +309,7 @@ export default class Skaldmd {
       r = r.split('--').join('-')
     }
     return r.toLowerCase()
-  }
+  } */
 
   /* console.log
   (inArrayBool)
