@@ -67,7 +67,8 @@
 
           <v-col
             cols="12"
-            md="4">
+            md="4"
+            class="sidebar-container">
             <v-card>
               <v-card-text>
                 <div class="sidebar">

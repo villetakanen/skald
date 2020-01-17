@@ -163,5 +163,6 @@ export default {
 @import './styles/hood.scss'
 @import './styles/quick.scss'
 @import './styles/dd.scss'
+@import './styles/print.scss'
 
 </style>
