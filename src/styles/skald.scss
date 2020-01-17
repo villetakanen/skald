@@ -44,6 +44,9 @@ div.wikipage{
   table.statblock.box+table.statblock.box{
     margin-left:16px;
   }
+  table.fullwidth{
+    min-width: 100%;
+  }
 }
 div.sidebar{
   h1,h2,h3,h4{
