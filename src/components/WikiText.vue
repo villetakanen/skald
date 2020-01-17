@@ -109,14 +109,3 @@ function attachLinks (page, siteid) {
   })
 }
 </script>
-
-<style lang="scss">
-table.border-1 {
-  border-collapse: collapse;
-  td {
-  border: solid 1px #666;
-  margin: 0;
-  padding: 4px;
-  }
-}
-</style>

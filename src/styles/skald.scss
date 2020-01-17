@@ -44,9 +44,6 @@ div.wikipage{
   table.statblock.box+table.statblock.box{
     margin-left:16px;
   }
-  table.fullwidth{
-    min-width: 100%;
-  }
 }
 div.sidebar{
   h1,h2,h3,h4{
@@ -163,6 +160,29 @@ div.v-card.v-sheet.theme--dark .wikipage {
       border-left-width: 1px;
     }
     margin-right: 16px;
+  }
+
+  table.border-1 {
+    border-collapse: collapse;
+    td, th {
+    border: solid 1px #666;
+    margin: 0;
+    padding: 4px;
+    }
+  }
+
+  table.fullwidth{
+    table-layout: fixed;
+    width: 100%;
+    margin: 1px 1px;
+    padding: 1px;
+    overflow: hidden;
+    th, td{
+      padding: 4px;
+      margin: 0;
+      // An ugly way to force the table to rend the cells same width
+      width: 1%;
+    }
   }
 
   // Eliminate extra spacing between non-space-needing elements
