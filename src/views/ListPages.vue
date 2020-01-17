@@ -2,7 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1>Page list</h1>
+        <h1 class="pagetitle">Page list</h1>
       </v-col>
     </v-row>
     <v-row>

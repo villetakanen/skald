@@ -42,6 +42,9 @@ const mutations = {
     Vue.set(context, 'siteid', siteid)
     Vue.set(context, 'data', data)
   },
+  siteid (context, siteid) {
+    Vue.set(context, 'siteid', siteid)
+  },
   sidebar (context, { data }) {
     Vue.set(context, 'sidebarContent', data.content)
   },
@@ -81,7 +84,9 @@ const actions = {
       return
     }
 
-    // console.log('site/open', siteid)
+    // Force Vuex current site siteid to the one we are trying to open,
+    // even if it does not exist in Firebase
+    context.commit('siteid', siteid)
 
     // unsubscribe from previous site
     context.state.unsubscibe()

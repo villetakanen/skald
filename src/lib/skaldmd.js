@@ -244,10 +244,13 @@ export default class Skaldmd {
     if (this.parsing !== TABLE) {
       this.setMode(TABLE)
       // No style set
-      let tag = '<table>\n'
+      let props = ''
+      let classes = ''
       // Border style set
-      if (line.includes('border=1')) tag = '<table class="border-1">\n'
-      this.rendedHtml += tag
+      if (line.includes('border=1')) classes += 'border-1 '
+      if (line.includes('wide')) classes += 'fullwidth '
+      if (classes.length > 2) props += ` class="${classes}"`
+      this.rendedHtml += `<table${props}>\n`
       return
     }
 
