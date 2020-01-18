@@ -65,6 +65,13 @@ const actions = {
     const profile = db.collection('profiles').doc(context.state.uid)
     profile.update({ vuetifyTheme: theme })
   },
+  nick (context, nick) {
+    if (nick === null || typeof nick === 'undefined') throw new Error()
+    context.commit('setNick', nick)
+    const db = firebase.firestore()
+    const profile = db.collection('profiles').doc(context.state.uid)
+    profile.update({ nick: nick })
+  },
   logout (context, user) {
     if (context.state.uid !== null) {
       context.commit('setUid', null)

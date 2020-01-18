@@ -9,6 +9,21 @@
       <v-col md='4'>
         <v-card>
           <v-card-text>
+            <v-container>
+              <v-form
+                 submit.prevent="save">
+                <v-text-field
+                  label="Nickname"
+                  v-model="nick"
+                  ></v-text-field>
+                <v-btn
+                  color="primary"
+                  small
+                  @click="save">
+                  Save</v-btn>
+              </v-form>
+            </v-container>
+            <v-divider></v-divider>
             <v-switch
               v-model="vuetifyTheme"
               color="primary"
@@ -53,7 +68,7 @@ export default {
     'nickname'
   ],
   data: () => ({
-    darkTheme: true
+    newNick: null
   }),
   computed: {
     pageLog () {
@@ -68,11 +83,27 @@ export default {
         // it is changed, so we do not need to do it here
         this.$store.dispatch('author/theme', value)
       }
+    },
+    nick: {
+      get () {
+        if (this.newNick !== null) return this.newNick
+        return this.$store.getters['author/nick']()
+      },
+      set (nick) {
+        this.newNick = nick
+      }
     }
   },
   methods: {
     isAuthorsProfile () {
       return this.$store.getters['author/nick']() === this.nickname
+    },
+    save () {
+      this.$store.dispatch('author/nick',
+        this.newNick).then(() => {
+        // this.nickname = this.newNick
+        this.$router.push('/u/' + this.newNick)
+      })
     }
   }
 }
