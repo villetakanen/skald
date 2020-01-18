@@ -2,9 +2,13 @@
   <v-container>
     <v-row>
       <v-col>
+        <h1 class="pagetitle">Attachments</h1>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
         <v-card>
           <v-card-text>
-            Attachments!
             <Loading v-if="loading"/>
             <div v-if="!loading">
                <template v-for="(file, index) in files">

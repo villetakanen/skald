@@ -182,18 +182,6 @@ export default {
 </script>
 
 <style lang="scss">
-h1.sitelink,
-h1.pagetitle {
-  text-shadow: 0px 0px 8px rgba(0,0,0,1);
-  font-weight: 500;
-}
-h1.sitelink{
-  font-size: 14px;
-  line-height: 16px;
-}
-h1.pagetitle{
-  font-size:28px;
-}
 div.infodocpart{
   border: 1px solid #666;
   padding: 8px;

@@ -1,6 +1,10 @@
 <template>
   <v-container>
-    <h1>Site settings</h1>
+    <v-row>
+      <v-col>
+        <h1 class="pagetitle">Site settings</h1>
+      </v-col>
+    </v-row>
     <v-row>
       <v-col>
         <SiteOwners :siteid="siteid"/>

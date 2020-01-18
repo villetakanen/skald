@@ -122,6 +122,23 @@ span.ndn{
    background-color: #222;
  }
 
+.theme--dark {
+  h1.sitelink,
+  h1.pagetitle {
+    text-shadow: 0px 0px 8px rgba(0,0,0,1);
+  }
+  h1.sitelink{
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+  }
+  h1.pagetitle{
+    font-size:28px;
+    font-weight: 300;
+  }
+}
+ 
+
 /** 
  * This style is applied by WikiText.vue component to all HTML rendered
  * by the component

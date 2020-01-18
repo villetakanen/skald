@@ -1,8 +1,12 @@
 <template>
   <v-container>
+    <v-row>
+      <v-col>
+        <h1 class="pagetitle">Your Personal Settings and Profile</h1>
+      </v-col>
+    </v-row>
     <v-row v-if="isAuthorsProfile()">
       <v-col md='4'>
-        <h1>{{nickname}}</h1>
         <v-card>
           <v-card-text>
             <v-switch
@@ -13,7 +17,6 @@
         </v-card>
       </v-col>
       <v-col md='4'>
-        <h1>{{nickname}}</h1>
         <v-card>
           <v-card-text>
             <h1>Pages I have been working on</h1>
@@ -29,7 +32,6 @@
         </v-card>
       </v-col>
       <v-col md='4'>
-        <h1>My Preferences</h1>
         <v-card>
           <v-card-text>
             Here you can set theme to either light or dark!
