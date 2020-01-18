@@ -30,6 +30,9 @@ const mutations = {
     let log = context.pageLog
     log.push(data)
     Vue.set(context, 'pageLog', log)
+  },
+  theme (context, theme) {
+    Vue.set(context, 'theme', theme)
   }
 }
 const actions = {
@@ -41,6 +44,7 @@ const actions = {
     const profile = db.collection('profiles').doc(user.uid)
     profile.get().then((doc) => {
       context.commit('setNick', doc.data().nick)
+      context.commit('theme', doc.data().vuetifyTheme)
     })
 
     // Subscribe to author pagelog
@@ -49,6 +53,17 @@ const actions = {
         context.commit('patchPageLog', { id: change.doc.id, data: change.doc.data() })
       })
     })
+  },
+  /**
+   * Set the Vuetify theme to dark or light
+   * @param {*} context Vuex context
+   * @param {boolean} theme true = dark, false = light
+   */
+  theme (context, theme) {
+    context.commit('theme', theme)
+    const db = firebase.firestore()
+    const profile = db.collection('profiles').doc(context.state.uid)
+    profile.update({ vuetifyTheme: theme })
   },
   logout (context, user) {
     if (context.state.uid !== null) {

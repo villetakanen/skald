@@ -1,7 +1,18 @@
 <template>
   <v-container>
     <v-row v-if="isAuthorsProfile()">
-      <v-col md='8'>
+      <v-col md='4'>
+        <h1>{{nickname}}</h1>
+        <v-card>
+          <v-card-text>
+            <v-switch
+              v-model="vuetifyTheme"
+              color="primary"
+              label="Use Dark Theme"></v-switch>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col md='4'>
         <h1>{{nickname}}</h1>
         <v-card>
           <v-card-text>
@@ -39,9 +50,22 @@ export default {
   props: [
     'nickname'
   ],
+  data: () => ({
+    darkTheme: true
+  }),
   computed: {
     pageLog () {
       return this.$store.getters['author/pageLog']()
+    },
+    vuetifyTheme: {
+      get () {
+        return this.$vuetify.theme.dark
+      },
+      set (value) {
+        // The main.js will update author/theme accordingly every time
+        // it is changed, so we do not need to do it here
+        this.$store.dispatch('author/theme', value)
+      }
     }
   },
   methods: {

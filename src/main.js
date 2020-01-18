@@ -36,6 +36,14 @@ new Vue({
         store.dispatch('author/logout', user)
       }
     })
+
+    this.$store.subscribe((mutation, state) => {
+      // After login, or theme switch, the vuetify theme is set to author/theme
+      // as a mutation, we need to listen to it here to catch that switch
+      if (mutation.type === 'author/theme') {
+        this.$vuetify.theme.dark = state.author.theme
+      }
+    })
   },
   render: h => h(App)
 }).$mount('#app')
