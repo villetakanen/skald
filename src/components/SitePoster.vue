@@ -12,7 +12,23 @@
         <img class="preview" :alt="siteid" :src="sitePosterURL"/>
         <h1 :class="`pagetitle siteTitlePreview ${titleColorClass}`">{{siteName}}</h1>
         <v-btn
-          @click="changeTitleColor()">Change title color</v-btn>
+          x-small
+          class="mx-1"
+          color="black"
+          @click="changeTitleColor('pageTitleLight')">
+          <span style="color:white">white</span></v-btn>
+        <v-btn
+          x-small
+          class="mx-1"
+          color="white"
+          @click="changeTitleColor('pageTitleDark')">
+          <span style="color:black">black</span></v-btn>
+        <v-btn
+          x-small
+          class="mx-1"
+          color="black"
+          @click="changeTitleColor('pageTitleLightBlue')">
+          <span style="color:#0091EA">#0091EA</span></v-btn>
       </div>
       <div v-if="sitePosterURL === null">
         Add an image!
@@ -47,8 +63,8 @@ export default {
   ],
   data: () => ({
     dialog: null,
-    file2: null,
-    titleColorClass: 'pageTitleLight'
+    file2: null
+    // titleColorClass: 'pageTitleLight'
   }),
   computed: {
     sitePosterURL () {
@@ -59,13 +75,16 @@ export default {
     },
     siteName () {
       return this.$store.getters['site/name']()
+    },
+    titleColorClass () {
+      return this.$store.getters['site/titleColorClass']()
     }
   },
   methods: {
-    changeTitleColor () {
-      if (this.titleColorClass === 'pageTitleLight') this.titleColorClass = 'pageTitleDark'
-      else this.titleColorClass = 'pageTitleLight'
-      this.$store.dispatch('site/setTitleColor', this.titleColorClass)
+    changeTitleColor (newColor) {
+      // if (this.titleColorClass === 'pageTitleLight') this.titleColorClass = 'pageTitleDark'
+      // else this.titleColorClass = 'pageTitleLight'
+      this.$store.dispatch('site/setTitleColor', newColor)
     },
     upload () {
       // var preview = document.querySelector('#demoimg')
