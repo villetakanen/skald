@@ -115,6 +115,7 @@ export default class Skaldmd {
     line = this.rendDice(line)
     line = this.rendColors(line)
     line = this.rendWikiLinks(line)
+    line = this.rendURLLinks(line)
     this.rendedHtml += line
   }
 
@@ -288,7 +289,7 @@ export default class Skaldmd {
 
   rendWikiLinks (line) {
     /* console.log('rendWikiLinks', siteLinkStub, line) */
-    const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gm')
+    const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gmu')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       p2 = p2.trim()
       const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
@@ -300,6 +301,16 @@ export default class Skaldmd {
       }
       url = skaldURI(url.trim())
       return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a href' + p2 + '-'
+    })
+    return line
+  }
+
+  rendURLLinks (line) {
+    const re = new RegExp('([\\[(]url:)(.+?)([\\])])', 'gmu')
+    line = line.replace(re, (match, p1, p2, p3, offset, string) => {
+      const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
+      const url = p2.split('|')[0]
+      return `<a href="${url}">${link}</a>`
     })
     return line
   }

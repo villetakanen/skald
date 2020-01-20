@@ -1,0 +1,18 @@
+@media only screen {
+  div.sidebar{
+    img.attachment {
+      margin-top: 8px;
+      margin-bottom: 8px;
+    }
+    div.infodocpart{
+        border-radius: 0;
+        margin-left: -16px;
+        margin-right: -16px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        border: 0;
+        border-top: solid 1px #666;
+        border-bottom: solid 1px #666;
+    }
+  }
+}

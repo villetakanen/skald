@@ -70,6 +70,16 @@ describe('Render', () => {
     expect(result).toBe('<p>it links to <a href="/#/v/test/page">Named</a></p>\n')
   })
 
+  it('renders a [url:http://mekanismi.web.app] link to http://mekanismi.web.app', () => {
+    const result = renderer.toHtml('it links to [url:http://mekanismi.web.app]')
+    expect(result).toBe('<p>it links to <a href="http://mekanismi.web.app">http://mekanismi.web.app</a></p>\n')
+  })
+
+  it('renders a [url:http://mekanismi.web.app|link] link to http://mekanismi.web.app', () => {
+    const result = renderer.toHtml('it links to [url:http://mekanismi.web.app|link]')
+    expect(result).toBe('<p>it links to <a href="http://mekanismi.web.app">link</a></p>\n')
+  })
+
   it('renders a HR', () => {
     const result = renderer.toHtml('a\n\n----\ngg')
     expect(result).toBe('<p>a</p>\n' +
