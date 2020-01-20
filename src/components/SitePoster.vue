@@ -8,8 +8,11 @@
         @click="dialog=!dialog">Change</v-btn>
     </v-toolbar>
     <v-card-text>
-      <div v-if="sitePosterURL !== null">
+      <div v-if="sitePosterURL !== null" class="previewBox">
         <img class="preview" :alt="siteid" :src="sitePosterURL"/>
+        <h1 :class="`pagetitle siteTitlePreview ${titleColorClass}`">{{siteName}}</h1>
+        <v-btn
+          @click="changeTitleColor()">Change title color</v-btn>
       </div>
       <div v-if="sitePosterURL === null">
         Add an image!
@@ -44,7 +47,8 @@ export default {
   ],
   data: () => ({
     dialog: null,
-    file2: null
+    file2: null,
+    titleColorClass: 'pageTitleLight'
   }),
   computed: {
     sitePosterURL () {
@@ -52,9 +56,17 @@ export default {
     },
     isAuthz () {
       return this.$store.getters['isAuthz']()
+    },
+    siteName () {
+      return this.$store.getters['site/name']()
     }
   },
   methods: {
+    changeTitleColor () {
+      if (this.titleColorClass === 'pageTitleLight') this.titleColorClass = 'pageTitleDark'
+      else this.titleColorClass = 'pageTitleLight'
+      this.$store.dispatch('site/setTitleColor', this.titleColorClass)
+    },
     upload () {
       // var preview = document.querySelector('#demoimg')
       var reader = new FileReader()
@@ -104,4 +116,13 @@ export default {
 img.preview {
   width:100%;
 }
+h1.siteTitlePreview {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+div.previewBox{
+  position: relative;
+}
+
 </style>

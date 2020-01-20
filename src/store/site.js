@@ -34,6 +34,10 @@ const getters = {
   name: (context) => () => {
     if (!context.data.name) return context.siteid
     return context.data.name
+  },
+  titleColorClass: (context) => () => {
+    if (!context.data.titleColorClass) return ''
+    return context.data.titleColorClass
   }
 }
 
@@ -167,6 +171,13 @@ const actions = {
     db.collection('sites').doc(siteid).update({
       'name': name,
       'description': description })
+  },
+  setTitleColor (context, titleColorClass) {
+    const siteid = context.state.siteid
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({
+      'titleColorClass': titleColorClass })
   }
 }
 

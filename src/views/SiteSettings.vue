@@ -2,18 +2,18 @@
   <v-container>
     <v-row>
       <v-col>
-        <h1 class="pagetitle">Site settings</h1>
+        <h1 :class="`pagetitle ${titleColorClass}`">Site settings</h1>
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        <SiteOwners :siteid="siteid"/>
-      </v-col>
       <v-col>
         <SiteDescription/>
       </v-col>
       <v-col>
         <SitePoster :siteid="siteid"/>
+      </v-col>
+      <v-col>
+        <SiteOwners :siteid="siteid"/>
       </v-col>
     </v-row>
   </v-container>
@@ -39,6 +39,12 @@ export default {
   watch: {
     '$route' (to, from) {
       this.updateSite(this.siteid)
+    }
+  },
+  computed: {
+    titleColorClass () {
+      if (this.$store.getters['site/titleColorClass']() === null) return ' '
+      return this.$store.getters['site/titleColorClass']()
     }
   },
   methods: {

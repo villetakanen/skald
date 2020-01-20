@@ -9,8 +9,8 @@
         </v-row>
       </v-container>
       <v-container v-if="!loading">
-        <h1 class="sitelink">{{sitename}}</h1>
-        <h1 class="pagetitle">{{title}}</h1>
+        <h1 :class="`sitelink ${titleColorClass}`">{{sitename}}</h1>
+        <h1 :class="`pagetitle ${titleColorClass}`">{{title}}</h1>
 
         <v-row>
 
@@ -132,6 +132,10 @@ export default {
     title () {
       if (this.$store.getters['binder/title']() === null) return ' '
       return this.$store.getters['binder/title']()
+    },
+    titleColorClass () {
+      if (this.$store.getters['site/titleColorClass']() === null) return ' '
+      return this.$store.getters['site/titleColorClass']()
     },
     content () {
       if (this.$store.getters['binder/content']() === null) return ' '
