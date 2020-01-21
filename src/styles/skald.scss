@@ -24,7 +24,36 @@ h1.pageTitleLightBlue{
   text-shadow: 0px 0px 22px rgba(0,0,0,1);
 }
 div.wikipage{
-  
+  div.attachment img{
+    max-width: 100%;
+  }
+  div.attachment-wide{
+    margin: 0 -12px;
+    img {
+      max-height: 100%;
+      width: 100%;
+    }
+  }
+  div.attachment-sm{
+    max-width: 25%;
+    max-height: 120px;
+    img {
+      max-width: 100%;
+      max-height: 120px;
+    }
+  }
+  div.attachment-xs.attachment img{
+    display: inline-block;
+    vertical-align: middle;
+    max-width: 100%;
+    max-height: 100%;
+  }
+  div.attachment-xs.attachment{
+    display: inline-block;
+    height: 42px;
+    width: 42px;
+    margin: 8px;
+  }
 
   font-family: Roboto, serif;
 

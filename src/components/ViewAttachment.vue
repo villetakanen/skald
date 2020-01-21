@@ -1,9 +1,9 @@
 <template>
-  <div :style="wide">
+  <div :class="`${wide} attachment`">
     <!-- This is the image itself, if it exists -->
     <img
       class = "attachment"
-      alt="-" style="max-width:100%; max-height:100%" v-if="exists" :src="url"/>
+      alt="-" v-if="exists" :src="url"/>
     <!-- upload -->
     <p v-if="!exists && !view">
       &nbsp;<v-btn v-if="!view" @click="dialog=!dialog" color="primary" text>upload {{path}}</v-btn>
@@ -50,7 +50,8 @@ export default {
         this.url = refurl
         this.exists = true
       }).catch((error) => {
-        console.log(error.code)
+        // console.log(error.code)
+        this.$store.commit('error', error)
         this.url = null
         this.exists = false
       })
