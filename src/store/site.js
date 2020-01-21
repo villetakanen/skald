@@ -38,6 +38,10 @@ const getters = {
   titleColorClass: (context) => () => {
     if (!context.data.titleColorClass) return ''
     return context.data.titleColorClass
+  },
+  theme: (context) => () => {
+    if (!context.data.theme) return 'Skald'
+    return context.data.theme
   }
 }
 
@@ -178,6 +182,13 @@ const actions = {
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
       'titleColorClass': titleColorClass })
+  },
+  setTheme (context, theme) {
+    const siteid = context.state.siteid
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({
+      'theme': theme })
   }
 }
 

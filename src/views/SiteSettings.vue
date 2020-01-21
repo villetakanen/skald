@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container :class="theme">
     <v-row>
       <v-col>
         <h1 :class="`pagetitle ${titleColorClass}`">Site settings</h1>
@@ -16,6 +16,13 @@
         <SiteOwners :siteid="siteid"/>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col
+        cols='12'
+        md='4'>
+        <SiteTheme/>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -23,12 +30,14 @@
 import SiteOwners from '../components/SiteOwners.vue'
 import SiteDescription from '../components/SiteDescription.vue'
 import SitePoster from '../components/SitePoster.vue'
+import SiteTheme from '../components/SiteTheme.vue'
 
 export default {
   components: {
     SiteOwners,
     SiteDescription,
-    SitePoster
+    SitePoster,
+    SiteTheme
   },
   props: [
     'siteid'
@@ -45,6 +54,9 @@ export default {
     titleColorClass () {
       if (this.$store.getters['site/titleColorClass']() === null) return ' '
       return this.$store.getters['site/titleColorClass']()
+    },
+    theme () {
+      return this.$store.getters['site/theme']()
     }
   },
   methods: {
