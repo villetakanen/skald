@@ -199,7 +199,11 @@ div.v-card.v-sheet.theme--dark .wikipage {
   p, li, td, th {
     font-size: 14px;
   }
-
+  hr{
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(100,100,100,0.5) 0%, rgba(100,100,100,1) 50%, rgba(100,100,100,0.5) 100%);
+  }
   table {
     display: block;
     overflow-x: auto;
