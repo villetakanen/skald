@@ -1,10 +1,13 @@
 
 div.Hood{
-    h1, h2, h3, h4 {
-      font-family: 'Merriweather', serif;
-      // color: darkgreen;
-    }
-    font-family: 'Lora', serif;
-    color: #373737;
+  h1, h2, h3, h4 {
+    font-family: 'Merriweather', serif;
+    // color: darkgreen;
   }
-  
+  font-family: 'Lora', serif;
+  color: #373737;
+}
+.theme--dark.Hood h1.pagetitle,
+.theme--dark.Hood h1.sitelink {
+  font-weight: 600;
+}
