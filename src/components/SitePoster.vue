@@ -13,22 +13,28 @@
         <h1 :class="`pagetitle siteTitlePreview ${titleColorClass}`">{{siteName}}</h1>
         <v-btn
           x-small
-          class="mx-1"
+          class="ma-1"
           color="black"
           @click="changeTitleColor('pageTitleLight')">
           <span style="color:white">white</span></v-btn>
         <v-btn
           x-small
-          class="mx-1"
+          class="ma-1"
           color="white"
           @click="changeTitleColor('pageTitleDark')">
           <span style="color:black">black</span></v-btn>
         <v-btn
           x-small
-          class="mx-1"
+          class="ma-1"
           color="black"
           @click="changeTitleColor('pageTitleLightBlue')">
           <span style="color:#0091EA">#0091EA</span></v-btn>
+        <v-btn
+          x-small
+          class="ma-1"
+          color="white"
+          @click="changeTitleColor('pageTitleDarkGreen')">
+          <span style="color:darkgreen">darkgreen</span></v-btn>
       </div>
       <div v-if="sitePosterURL === null">
         Add an image!

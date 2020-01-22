@@ -3,6 +3,7 @@
     <h1>Latest Changes</h1>
     <template v-for="(page, index) in latest">
       <PagelogEntry v-bind:key="index"
+        v-if="!page.silent || typeof page.silent ==='undefined'"
         :action="page.action"
         :creator="page.creator"
         :pageid="page.pageid"

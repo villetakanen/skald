@@ -12,15 +12,22 @@
       <v-col>
         <SitePoster :siteid="siteid"/>
       </v-col>
-      <v-col>
-        <SiteOwners :siteid="siteid"/>
+      <v-col
+        cols='12'
+        md='4'>
+        <SiteTheme/>
       </v-col>
     </v-row>
     <v-row>
       <v-col
         cols='12'
         md='4'>
-        <SiteTheme/>
+        <SiteVisibility/>
+      </v-col>
+      <v-col
+        cols='12'
+        md='4'>
+        <SiteOwners :siteid="siteid"/>
       </v-col>
     </v-row>
   </v-container>
@@ -31,13 +38,15 @@ import SiteOwners from '../components/SiteOwners.vue'
 import SiteDescription from '../components/SiteDescription.vue'
 import SitePoster from '../components/SitePoster.vue'
 import SiteTheme from '../components/SiteTheme.vue'
+import SiteVisibility from '../components/SiteVisibility.vue'
 
 export default {
   components: {
     SiteOwners,
     SiteDescription,
     SitePoster,
-    SiteTheme
+    SiteTheme,
+    SiteVisibility
   },
   props: [
     'siteid'

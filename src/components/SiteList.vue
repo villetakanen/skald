@@ -44,9 +44,10 @@ export default {
       var i = 0
       var rlist = {}
       for (var key in list) {
-        i++
-        if (i > count) break
+        if (list[key].hidden && typeof list[key].hidden !== 'undefined' && list[key].hidden !== null) continue
         rlist[key] = list[key]
+        i++
+        if (i >= count) break
       }
 
       return rlist

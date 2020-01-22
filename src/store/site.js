@@ -42,6 +42,14 @@ const getters = {
   theme: (context) => () => {
     if (!context.data.theme) return 'Skald'
     return context.data.theme
+  },
+  hidden: (context) => () => {
+    if (typeof context.data.hidden === 'undefined') return false
+    return context.data.hidden
+  },
+  silent: (context) => () => {
+    if (typeof context.data.hidden !== 'undefined' && context.data.hidden) return true
+    return typeof context.data.silent !== 'undefined' && context.data.silent
   }
 }
 
@@ -189,6 +197,22 @@ const actions = {
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
       'theme': theme })
+  },
+  setHidden (context, hidden) {
+    const siteid = context.state.siteid
+    const hide = !!hidden
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({
+      'hidden': hide })
+  },
+  setSilent (context, silent) {
+    const siteid = context.state.siteid
+    const silence = !!silent
+
+    const db = firebase.firestore()
+    db.collection('sites').doc(siteid).update({
+      'silent': silence })
   }
 }
 

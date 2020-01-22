@@ -45,16 +45,17 @@ const actions = {
       })
     })
   },
-  stamp (context, { action, pageid, siteid, authorNick, authorID }) {
+  stamp (context, { action, pageid, siteid, authorNick, authorID, silent }) {
     // console.log('pagelog/stamp', action, pageid, siteid, authorID)
-
+    const silenced = !!silent
     // console.log('updating firestore for', siteid, pageid
     var log = {
       action: action,
       pageid: pageid,
       siteid: siteid,
       creator: authorNick,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      silent: silenced
     }
 
     // Stamp to global pagelog
