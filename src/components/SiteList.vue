@@ -6,14 +6,14 @@
     <template v-for="(site, index) in sites">
       <v-flex xs6 md3 v-bind:key="index">
         <v-card
-          :class="site.theme">
+          >
           <v-img
             v-if="sitePoster(index) !== null"
             style="background-color: black;"
             class="white--text"
             height="128px"
             :src="sitePoster(index)">
-            <v-card-title><router-link :to="`/v/${index}`">{{site.name}}</router-link>
+            <v-card-title :class="site.titleColorClass"><router-link :to="`/v/${index}`">{{site.name}}</router-link>
           </v-card-title></v-img>
           <v-img
             v-if="sitePoster(index) === null"

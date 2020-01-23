@@ -55,11 +55,11 @@
 
       <v-list-item-title >{{version}}</v-list-item-title>
     </v-list-item>
-    <v-list-item :to="'/stylebook'">
+    <!--v-list-item :to="'/stylebook'">
       <v-list-item-action><v-icon>mdi-fridge</v-icon></v-list-item-action>
 
       <v-list-item-title >Stylebook</v-list-item-title>
-    </v-list-item>
+    </v-list-item-->
   </v-list>
 </template>
 

@@ -1,7 +1,4 @@
 
-h1 {
-  font-weight: 300;
-}
 h1#sitetitle {
   color: white;
   margin-bottom: 0;
@@ -295,5 +292,24 @@ div.v-card.v-sheet.theme--dark .sidebar .wikipage{
     margin-top: 8px;
   }
 }
-
+#app.theme--dark,
+#app.theme--light{
+  h1 {
+    font-weight: 300;
+  }
+  .pageTitleLight a{
+    color: white;
+    text-shadow: 0px 0px 8px rgba(0,0,0,1);
+  }
+  .pageTitleDark a{
+    color: Black;
+    text-shadow: 0px 0px 1px rgba(170,230,255,0.2);
+  }
+}
+#app.theme--light{
+  #sitelogo{
+    background-color: #039be5;
+    border-radius: 50%;
+  }
+}
 @import './skald-sidebar.scss'

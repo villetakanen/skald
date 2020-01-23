@@ -39,7 +39,7 @@ const actions = {
 
     const db = firebase.firestore()
 
-    db.collection('pagelog').orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => {
+    db.collection('pagelog').orderBy('timestamp', 'desc').onSnapshot((querySnapshot) => { /* where('silent', '==', false). */
       querySnapshot.forEach((doc) => {
         context.commit('patchLog', { data: doc.data() })
       })
