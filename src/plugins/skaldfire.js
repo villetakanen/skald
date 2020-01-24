@@ -14,7 +14,7 @@ import 'firebase/firestore'
  */
 export const skaldURI = function (s) {
   if (s === null) return null
-  var re = new RegExp('[\\W]', 'gmu')
+  const re = new RegExp('[\\W]', 'gmu')
   var r = s.replace(re, '-')
   while (r.includes('--')) {
     r = r.split('--').join('-')
@@ -27,7 +27,7 @@ export const skaldURI = function (s) {
  */
 const fireStoreURL = function (path) {
   return new Promise(function (resolve, reject) {
-    let url = localStorage.getItem(path)
+    const url = localStorage.getItem(path)
     if (url !== null) {
       resolve(url)
     }

@@ -101,7 +101,7 @@ const actions = {
   createPage (context, { pageid, name, content, siteid, author, nick }) {
     // console.log('firestore create for', siteid, pageid, name, content, author, nick)
 
-    let np = {
+    const np = {
       creator: author,
       creatorNick: nick,
       name: name,
@@ -118,7 +118,8 @@ const actions = {
         authorID: np.creator,
         action: 'create',
         pageid: pageid,
-        siteid: siteid }, { root: true })
+        siteid: siteid
+      }, { root: true })
       // Binder state management: force open created page as the current page
       context.dispatch('openPage', { siteid: siteid, pageid: pageid })
     })
@@ -146,7 +147,7 @@ const actions = {
         history.push(doc.data().content)
         // console.log(history)
 
-        u['history'] = history
+        u.history = history
 
         siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
         pageRef.update(u).then((e) => {
@@ -155,7 +156,8 @@ const actions = {
             authorID: author,
             action: 'update',
             pageid: pageid,
-            siteid: siteid }, { root: true })
+            siteid: siteid
+          }, { root: true })
           // Binder state management: force open created page as the current page
           context.dispatch('openPage', { siteid: siteid, pageid: pageid })
         })

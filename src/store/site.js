@@ -79,7 +79,7 @@ const mutations = {
     Vue.set(context, 'pages', {})
   },
   patchPage (context, { id, data }) {
-    if (!data.path) data['path'] = context.siteid + '/' + id
+    if (!data.path) data.path = context.siteid + '/' + id
     Vue.set(context.pages, id, data)
   }
 }
@@ -92,7 +92,7 @@ const actions = {
    */
   open (context, siteid) {
     if (!exists(siteid)) throw new Error('invalid site id')
-    if (siteid === context.getters['id']()) {
+    if (siteid === context.getters.id()) {
       // Nothing to do, as the site is open.
       //
       // Please note: this actually means, that we need to listen to changes
@@ -141,7 +141,8 @@ const actions = {
       snapshot.docChanges().forEach((change) => {
         context.commit('patchPage', {
           id: change.doc.id,
-          data: change.doc.data() })
+          data: change.doc.data()
+        })
       })
     })
 
@@ -181,22 +182,25 @@ const actions = {
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
-      'name': name,
-      'description': description })
+      name: name,
+      description: description
+    })
   },
   setTitleColor (context, titleColorClass) {
     const siteid = context.state.siteid
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
-      'titleColorClass': titleColorClass })
+      titleColorClass: titleColorClass
+    })
   },
   setTheme (context, theme) {
     const siteid = context.state.siteid
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
-      'theme': theme })
+      theme: theme
+    })
   },
   setHidden (context, hidden) {
     const siteid = context.state.siteid
@@ -204,7 +208,8 @@ const actions = {
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
-      'hidden': hide })
+      hidden: hide
+    })
   },
   setSilent (context, silent) {
     const siteid = context.state.siteid
@@ -212,7 +217,8 @@ const actions = {
 
     const db = firebase.firestore()
     db.collection('sites').doc(siteid).update({
-      'silent': silence })
+      silent: silence
+    })
   }
 }
 

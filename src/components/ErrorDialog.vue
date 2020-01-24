@@ -10,7 +10,7 @@
 export default {
   computed: {
     dialog () {
-      return this.$store.getters['error']() !== null
+      return this.$store.getters.error() !== null
     }
   }
 }

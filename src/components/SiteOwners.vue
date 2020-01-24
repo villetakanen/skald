@@ -58,7 +58,7 @@ export default {
       return this.$store.getters['author/uid']()
     },
     isAuthz () {
-      return this.$store.getters['isAuthz']()
+      return this.$store.getters.isAuthz()
     }
   },
   methods: {

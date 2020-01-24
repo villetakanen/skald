@@ -53,7 +53,7 @@ import 'firebase/auth'
 export default {
   computed: {
     isAuthz () {
-      return this.$store.getters['isAuthz']()
+      return this.$store.getters.isAuthz()
     },
     nick () {
       return this.$store.getters['author/nick']()

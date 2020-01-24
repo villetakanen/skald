@@ -21,11 +21,7 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.username, this.password).then(() => {
         this.$router.push('/')
       }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code
-        var errorMessage = error.message
-        // ...
-        console.log(errorCode, errorMessage)
+        this.$store.commit('error', error)
       })
     }
   }

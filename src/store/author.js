@@ -27,7 +27,7 @@ const mutations = {
     Vue.set(context, 'nick', uid)
   },
   patchPageLog (context, data) {
-    let log = context.pageLog
+    const log = context.pageLog
     log.push(data)
     Vue.set(context, 'pageLog', log)
   },

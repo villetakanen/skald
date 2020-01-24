@@ -35,13 +35,9 @@ const mutations = {
     Vue.set(context, 'siteID', siteid)
   },
   patchFile (context, { name, path, siteid }) {
-    // console.log(data)
-    let filesArray = context.files
+    const filesArray = context.files
     filesArray.push({ name, path })
     Vue.set(context, 'files', filesArray)
-    // const storageKey = siteid + '/' + name
-    // console.log('adding to local storage:', storageKey, path)
-    // localStorage.setItem(storageKey, path)
   }
 }
 
@@ -55,7 +51,7 @@ const actions = {
   fetch (context, { siteid }) {
     // console.log('fetch', siteid)
     // We are fetching with siteid, and that site is already fetched -> return
-    if (siteid === context.getters['siteID']()) return
+    if (siteid === context.getters.siteID()) return
     context.commit('siteID', siteid)
 
     context.commit('reset')

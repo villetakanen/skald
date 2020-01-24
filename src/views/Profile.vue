@@ -1,10 +1,13 @@
 <template>
   <v-container>
+
     <v-row>
       <v-col>
-        <h1 class="pagetitle">Your Personal Settings and Profile</h1>
+        <TabTitle
+          topic="Your Personal Settings and Profile"/>
       </v-col>
     </v-row>
+
     <v-row v-if="isAuthorsProfile()">
       <v-col md='4'>
         <v-card>
@@ -63,7 +66,12 @@
 </template>
 
 <script>
+import TabTitle from '../components/TabTitle'
+
 export default {
+  components: {
+    TabTitle
+  },
   props: [
     'nickname'
   ],

@@ -55,18 +55,23 @@ div.DD{
     }
   }*/
   }
-  h1.sitelink,
-  h1.pagetitle {
-    font-family: modesto-condensed, Smythe, serif;
-  }
-  h1.sitelink{
-    font-size: 20px;
-    line-height: 20px;
-    margin:0;
-  }
-  h1.pagetitle{
-    font-size:34px;
-    line-height: 34px;
-    margin: 0;
+  #app{
+    border: solid 3px red;
+    div.tabtitle{
+      h1.topic,
+      h1.subtopic {
+        font-family: modesto-condensed, Smythe, serif;
+      }
+      h1.subtopic{
+        font-size: 20px;
+        line-height: 20px;
+        margin:0;
+      }
+      h1.topic{
+        font-size:34px;
+        line-height: 34px;
+        margin: 0;
+      }
+    }
   }
 }

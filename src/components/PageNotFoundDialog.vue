@@ -19,10 +19,10 @@ export default {
       return this.$store.getters['binder/siteID']()
     },
     pageName () {
-      return this.$store.getters['pageNotFound']()
+      return this.$store.getters.pageNotFound()
     },
     dialog () {
-      return this.$store.getters['pageNotFound']() !== null
+      return this.$store.getters.pageNotFound() !== null
     }
   },
   methods: {
@@ -31,7 +31,8 @@ export default {
     },
     createPage () {
       this.$store.dispatch('binder/createPage',
-        { pageid: this.pageName,
+        {
+          pageid: this.pageName,
           name: this.pageName,
           content: '# ' + this.pageName,
           siteid: this.siteID,

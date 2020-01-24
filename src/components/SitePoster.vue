@@ -77,7 +77,7 @@ export default {
       return this.$store.getters['sites/posterURL']()
     },
     isAuthz () {
-      return this.$store.getters['isAuthz']()
+      return this.$store.getters.isAuthz()
     },
     siteName () {
       return this.$store.getters['site/name']()

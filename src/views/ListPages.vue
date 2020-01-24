@@ -1,10 +1,13 @@
 <template>
   <v-container>
+
     <v-row>
       <v-col>
-        <h1 class="pagetitle">Page list</h1>
+        <TabTitle
+          topic="Page list"/>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col>
         <v-card>
@@ -23,7 +26,12 @@
 </template>
 
 <script>
+import TabTitle from '../components/TabTitle'
+
 export default {
+  components: {
+    TabTitle
+  },
   props: [
     'siteid'
   ],

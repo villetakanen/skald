@@ -1,10 +1,12 @@
 <template>
   <v-container>
+
     <v-row>
-      <v-col>
-        <h1>All sites</h1>
+      <v-col cols="9">
+        <TabTitle
+          topic="Sites"/>
       </v-col>
-      <v-col>
+      <v-col cols="3" align="right">
         <CreateSiteButton/>
       </v-col>
     </v-row>
@@ -20,11 +22,13 @@
 <script>
 import CreateSiteButton from '../components/CreateSiteButton'
 import SiteList from '../components/SiteList'
+import TabTitle from '../components/TabTitle'
 
 export default {
   components: {
     SiteList,
-    CreateSiteButton
+    CreateSiteButton,
+    TabTitle
   }
 }
 </script>

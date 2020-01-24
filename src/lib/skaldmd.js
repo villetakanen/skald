@@ -21,6 +21,7 @@ export default class Skaldmd {
     this.docpart = NONE
     this.ulLevel = 0
   }
+
   /**
    * Sets current stream parsing mode to mode
    * @param {*} mode NONE, PARAGRAPH, TABLE, UL
@@ -29,12 +30,13 @@ export default class Skaldmd {
     this.resetMode()
     this.parsing = mode
   }
+
   toHtml (rawContent) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''
 
-    let linesArray = rawContent.split(NEWLINE)
+    const linesArray = rawContent.split(NEWLINE)
 
     linesArray.forEach((line) => {
       // console.log('line', line.substring(0, 3), line.trim().length)
@@ -68,6 +70,7 @@ export default class Skaldmd {
     this.endPart()
     return this.rendedHtml
   }
+
   resetMode () {
     if (this.parsing > -1) {
       if (this.parsing === PARAGRAPH) this.rendedHtml += '</p>\n'
@@ -83,6 +86,7 @@ export default class Skaldmd {
       this.parsing = NONE
     }
   }
+
   endPart () {
     this.resetMode()
     if (this.docpart === DP_INFO ||
@@ -91,6 +95,7 @@ export default class Skaldmd {
     }
     this.docpart = NONE
   }
+
   startPart (type) {
     this.endPart()
     if (type === DP_INFO) {
@@ -102,6 +107,7 @@ export default class Skaldmd {
       this.rendedHtml += '<div class="legend">\n'
     }
   }
+
   parseText (line) {
     // Italics
     let re = new RegExp('( _|^_)([-a-zA-Z \\x2c\\x2e]*)(_ |_$)', 'gm')
@@ -137,7 +143,7 @@ export default class Skaldmd {
   }
 
   rendDice (line) {
-    let re = new RegExp('\\[([0-9]*)d([0-9]*)\\]', 'gm')
+    const re = new RegExp('\\[([0-9]*)d([0-9]*)\\]', 'gm')
     line = line.replace(re, function (match, p1, p2, offset, string) {
       let die = p2
       if (p2 === '12') die = '<i aria-hidden="true" class="v-icon notranslate mdi mdi-dice-d12 theme--dark"></i>'
@@ -186,10 +192,12 @@ export default class Skaldmd {
 
     this.rendedHtml += '</tr>'
   }
+
   parseHR (line) {
     this.resetMode()
     this.rendedHtml += '<hr/>\n'
   }
+
   /**
    * Sets mode to UL (no nesting of ul, and table, or ul), and rends the line item
    * @param {string} line the ul
@@ -216,6 +224,7 @@ export default class Skaldmd {
     }
     this.rendedHtml += '</li>\n'
   }
+
   parseH (line) {
     this.resetMode()
     let level = 1
@@ -226,6 +235,7 @@ export default class Skaldmd {
     this.parseText(line.substring(level).trim())
     this.rendedHtml += '</h' + level + '>\n'
   }
+
   /**
    * A <p> is found on the stream
    * @param {*} line the linedata
@@ -240,6 +250,7 @@ export default class Skaldmd {
     }
     this.parseText(line)
   }
+
   parseTable (line) {
     // We are starting to parse a Table, add the table tag
     if (this.parsing !== TABLE) {
@@ -259,6 +270,7 @@ export default class Skaldmd {
     this.parseTableRow(line)
     this.rendedHtml += '</tr>\n'
   }
+
   /**
    * Should only be called from parseTable
    * @param {*} line line, inside table mode
@@ -271,7 +283,7 @@ export default class Skaldmd {
     lineArray.forEach((cell) => {
       // Table header cell starts with a !, remove it and parse as TD
       if (line.indexOf('!') === 1) {
-        this.rendedHtml += `<th>`
+        this.rendedHtml += '<th>'
         this.parseText(cell.substring(1, cell.length).trim())
         this.rendedHtml += '</th>'
       } else {

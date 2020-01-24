@@ -109,7 +109,7 @@ export default {
   }),
   computed: {
     version () {
-      return this.$store.getters['version']()
+      return this.$store.getters.version()
     },
     sitePoster () {
       const url = this.$store.getters['sites/posterURL']()
@@ -117,7 +117,7 @@ export default {
       return `background-image:url('${url}');`
     },
     snackMessage () {
-      return this.$store.getters['snack']()
+      return this.$store.getters.snack()
     }
   },
   created () {

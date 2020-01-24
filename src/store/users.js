@@ -21,7 +21,7 @@ const getters = {
 
 const mutations = {
   patchUser (context, { userid, data }) {
-    data['uid'] = userid
+    data.uid = userid
     var users = context.all
     users = users.filter(user => {
       return user.uid !== userid
@@ -43,7 +43,7 @@ const actions = {
   addOwner (context, { siteid, uid }) {
     const db = firebase.firestore()
 
-    var user = context.getters['get'](uid)
+    var user = context.getters.get(uid)
     var userSites = user.owns
     if (typeof userSites === 'undefined') userSites = []
     userSites.push(siteid)
@@ -54,7 +54,7 @@ const actions = {
   removeOwner (context, { siteid, uid }) {
     const db = firebase.firestore()
 
-    var user = context.getters['get'](uid)
+    var user = context.getters.get(uid)
     var userSites = user.owns
     if (typeof userSites === 'undefined') userSites = []
     userSites = userSites.filter((site) => {

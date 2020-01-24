@@ -41,7 +41,7 @@ export default {
   }),
   computed: {
     isAuthz () {
-      return this.$store.getters['isAuthz']()
+      return this.$store.getters.isAuthz()
     },
     description: {
       get () {
@@ -70,8 +70,10 @@ export default {
   methods: {
     save () {
       this.$store.dispatch('site/setInfo',
-        { name: this.siteName,
-          description: this.description })
+        {
+          name: this.siteName,
+          description: this.description
+        })
     }
   }
 }

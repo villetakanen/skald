@@ -1,10 +1,13 @@
 <template>
   <v-container :class="theme">
+
     <v-row>
       <v-col>
-        <h1 :class="`pagetitle ${titleColorClass}`">Site settings</h1>
+        <TabTitle
+          topic="Site Settings"/>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col>
         <SiteDescription/>
@@ -39,6 +42,7 @@ import SiteDescription from '../components/SiteDescription.vue'
 import SitePoster from '../components/SitePoster.vue'
 import SiteTheme from '../components/SiteTheme.vue'
 import SiteVisibility from '../components/SiteVisibility.vue'
+import TabTitle from '../components/TabTitle'
 
 export default {
   components: {
@@ -46,7 +50,8 @@ export default {
     SiteDescription,
     SitePoster,
     SiteTheme,
-    SiteVisibility
+    SiteVisibility,
+    TabTitle
   },
   props: [
     'siteid'

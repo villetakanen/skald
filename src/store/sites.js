@@ -121,10 +121,10 @@ const actions = {
     })
   },
   setDescription (context, description) {
-    const siteid = context.getters['activeSiteID']()
+    const siteid = context.getters.activeSiteID()
 
     const db = firebase.firestore()
-    db.collection('sites').doc(siteid).update({ 'description': description })
+    db.collection('sites').doc(siteid).update({ description: description })
 
     context.commit('setDescription', description)
   },
@@ -161,7 +161,8 @@ const actions = {
             content: description,
             siteid: siteid,
             author: author,
-            nick: nick },
+            nick: nick
+          },
           { root: true })
         })
       }

@@ -1,24 +1,55 @@
 @media only screen {
-  div.sidebar{
-    img.attachment {
-      margin-top: 8px;
-      margin-bottom: 8px;
-    }
-    div.attachment-wide{
-      margin: 0 -16px
-    }
-    div.infodocpart{
-        border-radius: 0;
-        margin-left: -16px;
-        margin-right: -16px;
+  #app.theme--dark, #app.theme--light{
+    div.sidebar{
+
+      // Sidebar headers are bit more condenced than the wikitext headers
+      h1,h2,h3,h4 {
+        margin:0;
+        padding: 0;
+        margin-bottom: 4px;
+      }
+
+      // Any combination of H+H should have additional margin between the headers
+      h1+h1, h1+h2, h1+h3, h1+h4,
+      h2+h1, h2+h2, h2+h3, h2+h4,
+      h3+h1, h3+h2, h3+h3, h3+h4,
+      h4+h1, h4+h2, h4+h3, h4+h4 {
+        margin-top: 8px;
+      }
+      
+      a{
+        text-decoration: none;
+      }
+
+      ul, ol{
+        margin: 0;
+        padding: 0;
+        padding-left: 1em;
+      }
+      li{
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      img.attachment {
         margin-top: 8px;
         margin-bottom: 8px;
-        border: 0;
-        border-top: solid 1px #666;
-        border-bottom: solid 1px #666;
-    }
-    h1+h1, h1+h2, h1+h3, h1+h4 {
-      margin-top: 8px;
+      }
+      div.attachment-wide{
+        margin: 0 -16px
+      }
+      div.infodocpart{
+          border-radius: 0;
+          margin-left: -16px;
+          margin-right: -16px;
+          margin-top: 8px;
+          margin-bottom: 8px;
+          border: 0;
+          border-top: solid 1px #666;
+          border-bottom: solid 1px #666;
+      }
+      
     }
   }
 }

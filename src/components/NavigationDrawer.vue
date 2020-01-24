@@ -71,7 +71,7 @@ export default {
   },
   computed: {
     version () {
-      return this.$store.getters['version']()
+      return this.$store.getters.version()
     },
     siteID () {
       return this.$store.getters['site/id']()

@@ -1,10 +1,13 @@
 <template>
   <v-container>
+
     <v-row>
       <v-col>
-        <h1 class="pagetitle">Attachments</h1>
+        <TabTitle
+          topic="Attachments"/>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col>
         <v-card>
@@ -35,10 +38,12 @@
 
 <script>
 import Loading from '../components/Loading'
+import TabTitle from '../components/TabTitle'
 
 export default {
   components: {
-    Loading
+    Loading,
+    TabTitle
   },
   props: [
     'siteid'
