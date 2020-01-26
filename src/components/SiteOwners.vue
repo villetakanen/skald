@@ -37,7 +37,7 @@ export default {
   }),
   computed: {
     owners () {
-      console.log(this.$store.getters['site/owners']())
+      // console.log(this.$store.getters['site/owners']())
       return this.$store.getters['site/owners']()
     },
     nonOwners () {

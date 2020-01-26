@@ -28,7 +28,7 @@ export default {
       this.$emit('cancel', true)
     },
     upload () {
-      console.log('upload:', this.path)
+      // console.log('upload:', this.path)
       var preview = document.querySelector('#demoimg')
       var reader = new FileReader()
 
