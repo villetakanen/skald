@@ -67,6 +67,7 @@
       ><v-icon>mdi-arrow-up-thick</v-icon></v-btn>
     <ErrorDialog/>
     <PageNotFoundDialog/>
+    <CreateProfileDialog/>
     <v-snackbar
       v-model="snackbar"
     >
@@ -87,6 +88,7 @@ import NavigationDrawer from './components/NavigationDrawer'
 import AccountMenu from './components/AccountMenu'
 import ErrorDialog from './components/ErrorDialog'
 import PageNotFoundDialog from './components/PageNotFoundDialog'
+import CreateProfileDialog from './components/CreateProfileDialog'
 
 export default {
   name: 'App',
@@ -94,7 +96,8 @@ export default {
     NavigationDrawer,
     AccountMenu,
     ErrorDialog,
-    PageNotFoundDialog
+    PageNotFoundDialog,
+    CreateProfileDialog
   },
   data: () => ({
     registration: null,

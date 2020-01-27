@@ -21,11 +21,6 @@ export default {
   ],
   computed: {
     rended () {
-      // TMP
-      // let skaldmd = new Skaldmd(this.content)
-      // console.log(skaldmd.toHtml())
-      // /TMP
-
       const skaldmd = new Skaldmd(this.siteid)
       let rendedContent = skaldmd.toHtml(this.content)
       // rendedContent = skaldmd.toHtml()

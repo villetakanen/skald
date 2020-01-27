@@ -15,7 +15,8 @@ const state = {
   version: unescape(process.env.VERSION || '%7Bversion%3A0%7D'),
   pageNotFound: null,
   error: null,
-  snack: null
+  snack: null,
+  profileMissing: false
 }
 const getters = {
   /**
@@ -47,7 +48,13 @@ const getters = {
   error: (context) => () => {
     return context.error
   },
-
+  /**
+   * An user has logged in, but does not have a profile -
+   * we need to ask for a profile to be created
+   */
+  profileMissing: (context) => () => {
+    return context.profileMissing
+  },
   /**
    * Global error state
    */
@@ -56,6 +63,9 @@ const getters = {
   }
 }
 const mutations = {
+  profileMissing (context, missing) {
+    Vue.set(context, 'profileMissing', missing)
+  },
   error (context, error) {
     Vue.set(context, 'error', error)
   },
@@ -65,6 +75,7 @@ const mutations = {
   clearErrors (context) {
     Vue.set(context, 'pageNotFound', null)
     Vue.set(context, 'error', null)
+    Vue.set(context, 'profileMissing', false)
   },
   snack (context, message) {
     Vue.set(context, 'snack', message)
