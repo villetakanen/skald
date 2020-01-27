@@ -77,7 +77,7 @@ const actions = {
       context.commit('setUid', null)
       context.commit('setNick', null)
     }
-    context.unsubscibePageLog()
+    context.state.unsubscibePageLog()
   }
 }
 export default {
