@@ -250,6 +250,15 @@ div.v-card.v-sheet.theme--dark .wikipage {
     ul, ol, table {
       margin-bottom: 16px;
     }
+    div.code {
+      font-family: Roboto Mono, Lucida Console, monospace;
+      font-size: 12px;
+      padding: 8px;
+      background-color: RGBA(100,100,100,0.2);
+      br:last-child{
+        display: none;
+      }
+    }
   }
   div.sidebar div.wikipage{
     h1,h2,h3,h4{

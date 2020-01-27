@@ -130,4 +130,13 @@ describe('Render', () => {
       '<p>some text</p>\n' +
       '</div>')
   })
+
+  it('renders a code block', () => {
+    const result = renderer.toHtml('``` \n' +
+     'some text\n' +
+     '```')
+    expect(result).toBe('<div class="code">\n' +
+      '<p>some text</p>\n' +
+      '</div>')
+  })
 })

@@ -9,6 +9,7 @@ const UL = 2
 const STATSBLOCK = 3
 const DP_INFO = 1001
 const DP_LEGEND = 1002
+const DP_CODE = 1003
 
 /**
  * Stream parser for Skald Markdown subsyntax and wikitags
@@ -39,16 +40,21 @@ export default class Skaldmd {
     const linesArray = rawContent.split(NEWLINE)
 
     linesArray.forEach((line) => {
+      // code is escaped
+      if (this.docpart === DP_CODE) this.parseCode(line)
       // console.log('line', line.substring(0, 3), line.trim().length)
 
       // if the line is emtpy, we always just reset the parsing mode
-      if (line.trim().length === 0) this.resetMode()
+      else if (line.trim().length === 0) this.resetMode()
       // start a docpart DP_INFO
       else if (line.indexOf('[info]') === 0) this.startPart(DP_INFO)
       // start a docpart DP_LEGEND
       else if (line.indexOf('[legend]') === 0) this.startPart(DP_LEGEND)
+      // start a docpart DP_CODE
+      else if (line.indexOf('```') === 0) this.startPart(DP_CODE)
       // start a docpart?
       else if (line.indexOf('[/info]') === 0 ||
+        line.indexOf('```') === 0 ||
         line.indexOf('[/legend]') === 0) this.endPart()
       // #... A header
       else if (line[0] === '#') this.parseH(line)
@@ -90,6 +96,7 @@ export default class Skaldmd {
   endPart () {
     this.resetMode()
     if (this.docpart === DP_INFO ||
+      this.docpart === DP_CODE ||
       this.docpart === DP_LEGEND) {
       this.rendedHtml += '</div>'
     }
@@ -97,6 +104,9 @@ export default class Skaldmd {
   }
 
   startPart (type) {
+    // Trying to start part when in part
+    if (type === this.docpart) return
+
     this.endPart()
     if (type === DP_INFO) {
       this.docpart = DP_INFO
@@ -105,6 +115,10 @@ export default class Skaldmd {
     if (type === DP_LEGEND) {
       this.docpart = DP_LEGEND
       this.rendedHtml += '<div class="legend">\n'
+    }
+    if (type === DP_CODE) {
+      this.docpart = DP_CODE
+      this.rendedHtml += '<div class="code">\n'
     }
   }
 
@@ -123,6 +137,11 @@ export default class Skaldmd {
     line = this.rendWikiLinks(line)
     line = this.rendURLLinks(line)
     this.rendedHtml += line
+  }
+
+  parseCode (line) {
+    if (line.indexOf('```') === 0) this.endPart()
+    else this.rendedHtml += line + '<br/>'
   }
 
   rendColors (line) {
