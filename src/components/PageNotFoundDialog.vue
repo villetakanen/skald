@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog">
+  <v-dialog v-model="dialog" width="600px">
     <v-card>
       <v-card-title>Page not Found</v-card-title>
       <v-card-text>The page {{siteID}}/{{pageName}} was not found, do you want to create it?</v-card-text>

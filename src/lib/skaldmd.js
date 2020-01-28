@@ -141,7 +141,7 @@ export default class Skaldmd {
 
   parseCode (line) {
     if (line.indexOf('```') === 0) this.endPart()
-    else this.rendedHtml += line + '<br/>'
+    else this.rendedHtml += line + '<br/>\n'
   }
 
   rendColors (line) {

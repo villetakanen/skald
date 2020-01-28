@@ -1,31 +1,4 @@
-h1#sitetitle {
-  color: white;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-p#sitedescription {
-  color: white;
-  margin-bottom: 16px;
-}
-h1.pageTitleLight{
-  color: white;
-  text-shadow: 0px 0px 22px rgba(0,0,0,1);
-}
-h1.pageTitleDark{
-  color: Black;
-  text-shadow: 0px 0px 1px rgba(170,230,255,0.2);
-}
-h1.pageTitleLightBlue{
-  color: #0091EA;
-  text-shadow: 0px 0px 22px rgba(0,0,0,1);
-}
-.theme--dark h1.pageTitleDarkGreen.pagetitle,
-.theme--dark h1.pageTitleDarkGreen.sitelink{
-  color: black;
-  text-shadow: 0px 0px 10px rgba(200,200,255,1);
-  -webkit-text-stroke: 1px darkgreen;
-  font-weight: 900;
-}
+
 div.wikipage{
   div.attachment img{
     max-width: 100%;
@@ -223,6 +196,24 @@ div.v-card.v-sheet.theme--dark .wikipage {
 
   h1 {
     font-weight: 300;
+  }
+  h1.pageTitleLight{
+    color: white;
+    text-shadow: 0px 0px 22px rgba(0,0,0,1);
+  }
+  h1.pageTitleDark{
+    color: Black;
+    text-shadow: 0px 0px 1px rgba(170,230,255,0.2);
+  }
+  h1.pageTitleLightBlue{
+    color: #0091EA;
+    text-shadow: 0px 0px 22px rgba(0,0,0,1);
+  }
+  h1.pageTitleDarkGreen{
+    color: black;
+    text-shadow: 0px 0px 10px rgba(200,200,255,1);
+    -webkit-text-stroke: 1px darkgreen;
+    font-weight: 900;
   }
   .pageTitleLight a{
     color: white;

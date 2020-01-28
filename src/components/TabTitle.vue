@@ -2,10 +2,10 @@
   <div class="tabtitle">
     <h1
       v-if="sub"
-      class="subtopic">{{sub}}</h1>
+      :class="`subtopic ${titleColorClass}`">{{sub}}</h1>
     <h1
       v-if="topic"
-      class="topic">{{topic}}</h1>
+      :class="`topic ${titleColorClass}`">{{topic}}</h1>
   </div>
 </template>
 
@@ -14,7 +14,12 @@ export default {
   props: [
     'topic',
     'sub'
-  ]
+  ],
+  computed: {
+    titleColorClass () {
+      return this.$store.getters['site/titleColorClass']()
+    }
+  }
 }
 </script>
 

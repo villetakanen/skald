@@ -136,7 +136,7 @@ describe('Render', () => {
      'some text\n' +
      '```')
     expect(result).toBe('<div class="code">\n' +
-      '<p>some text</p>\n' +
+      'some text<br/>\n' +
       '</div>')
   })
 })
