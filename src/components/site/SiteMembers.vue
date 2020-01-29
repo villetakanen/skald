@@ -33,6 +33,9 @@
 import _ from 'lodash'
 
 export default {
+  data: () => ({
+    newMember: null
+  }),
   computed: {
     userUID () {
       return this.$store.getters['author/uid']
@@ -40,7 +43,6 @@ export default {
     isOwner () {
       const authID = this.$store.getters['author/uid']()
       const owners = this.$store.getters['site/owners']()
-      console.log(authID, owners, authID in owners)
       return authID &&
         owners &&
         authID in owners
@@ -54,13 +56,11 @@ export default {
       return members
     },
     nonMembers () {
+      const members = this.$store.getters['site/members']()
       const allUsers = Object.assign({}, this.$store.getters['users/all']())
 
       // Remove all members from nonMembers
-      _.forEach(this.$store.getters['site/members'](),
-        (value, key) => {
-          delete allUsers[key]
-        })
+      _.forEach(members, (value, key) => { delete allUsers[key] })
 
       var r = []
       for (const i in allUsers) {
@@ -70,6 +70,11 @@ export default {
     }
   },
   methods: {
+    addMember () {
+      const allUsers = this.$store.getters['users/all']()
+      const userUID = _.findKey(allUsers, { nick: this.newMember })
+      this.$store.dispatch('site/addMember', { uid: userUID, nick: this.newMember })
+    },
     removeMember (uid) {
       this.$store.dispatch('site/removeMember', { uid: uid })
     }

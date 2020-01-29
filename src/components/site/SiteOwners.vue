@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 
 export default {
   props: [
@@ -38,20 +39,18 @@ export default {
   }),
   computed: {
     owners () {
-      // console.log(this.$store.getters['site/owners']())
       return this.$store.getters['site/owners']()
     },
     nonOwners () {
-      const allUsers = this.$store.getters['users/listArray']()
-      if (allUsers === []) return []
-      const all = allUsers.filter(user => {
-        if (user.owns === null || typeof user.owns === 'undefined') return true
-        return !user.owns.includes(this.siteid)
-      })
+      const owners = this.$store.getters['site/owners']()
+      const allUsers = Object.assign({}, this.$store.getters['users/all']())
+
+      // Remove all members from nonMembers
+      _.forEach(owners, (value, key) => { delete allUsers[key] })
+
       var r = []
-      // const all = this.$store.getters['users/nonOwners'](this.$store.state.binder.site.link)
-      for (const i in all) {
-        r.push(all[i].nick)
+      for (const i in allUsers) {
+        r.push(allUsers[i].nick)
       }
       return r
     },
@@ -61,7 +60,6 @@ export default {
     isOwner () {
       const authID = this.$store.getters['author/uid']()
       const owners = this.$store.getters['site/owners']()
-      console.log(authID, owners, authID in owners)
       return authID &&
         owners &&
         authID in owners
@@ -69,14 +67,12 @@ export default {
   },
   methods: {
     addOwner () {
-      const allUsers = this.$store.getters['users/listArray']()
-      const newUid = allUsers.filter((user) => {
-        if (user.nick === this.newOwner) return true
-      })[0].uid
-      this.$store.dispatch('site/addOwner', { uid: newUid, nick: this.newOwner })
+      const allUsers = this.$store.getters['users/all']()
+      const userUID = _.findKey(allUsers, { nick: this.newOwner })
+      this.$store.dispatch('site/addOwner', { uid: userUID, nick: this.newOwner })
     },
     removeOwner (uid) {
-      this.$store.dispatch('users/removeOwner', { siteid: this.siteid, uid: uid })
+      this.$store.dispatch('site/removeOwner', { uid: uid })
     }
   }
 }

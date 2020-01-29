@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import Vue from 'vue'
 
 const state = {
-  all: []
+  all: {}
 }
 const getters = {
   listArray: (context) => () => {
@@ -24,13 +24,7 @@ const getters = {
 
 const mutations = {
   patchUser (context, { userid, data }) {
-    data.uid = userid
-    var users = context.all
-    users = users.filter(user => {
-      return user.uid !== userid
-    })
-    users.push(data)
-    Vue.set(context, 'all', users)
+    Vue.set(context.all, userid, data)
   }
 }
 

@@ -238,8 +238,32 @@ const actions = {
     })
   },
   removeOwner (context, { uid }) {
+    const siteid = context.state.siteid
+    const db = firebase.firestore()
+    const siteOwnerRef = db.collection('sites').doc(siteid).collection('owners').doc(uid)
+    const authorRef = db.collection('profiles').doc(uid)
+
+    db.runTransaction(async (transaction) => {
+      const author = await transaction.get(authorRef)
+      transaction.delete(siteOwnerRef)
+      let owns = author.owns
+      // Backwards compatible with site membership before 0.7.x
+      if (!owns) {
+        owns = []
+      }
+      _.pull(owns, siteid)
+      transaction.update(authorRef, { owns: owns })
+      return Promise.resolve('done')
+    })
   },
-  removeMember (context, { uid }) {
+  /**
+   * Adds an user with uid and nick, to a owner of a site
+   *
+   * All permissions are checked by the firebase rules
+   * @param {*} context Vuex context
+   * @param {*} param1 { uid, nick }, where uid has to be an existing users uid
+   */
+  addMember (context, { uid, nick }) {
     const siteid = context.state.siteid
 
     const db = firebase.firestore()
@@ -247,14 +271,40 @@ const actions = {
     const authorRef = db.collection('profiles').doc(uid)
     db.runTransaction((transaction) => {
       return transaction.get(authorRef).then((author) => {
-        transaction.delete(siteMemberRef)
-        let member = author.member
-        // Backwards compatible with site membership before 0.7.x
-        if (!member) member = []
-        _.pull(member, siteid)
-        transaction.update(authorRef, { member: member })
+        transaction.set(siteMemberRef, { nick: nick })
+        let member = []
+        if (!author.member || !author.member.includes(siteid)) {
+          if (author.member) member = author.member
+          member.push(siteid)
+          transaction.update(authorRef, { member: member })
+        }
         return Promise.resolve('done')
       })
+    })
+  },
+  /**
+   * Removes a membership of a Site from an author. This method does not touch owner status at all
+   *
+   * @param {*} context Vuex
+   * @param {*} param1 {uid}, where uid has to be an existing users uid
+   */
+  removeMember (context, { uid }) {
+    const siteid = context.state.siteid
+    const db = firebase.firestore()
+    const siteMemberRef = db.collection('sites').doc(siteid).collection('members').doc(uid)
+    const authorRef = db.collection('profiles').doc(uid)
+
+    db.runTransaction(async (transaction) => {
+      const author = await transaction.get(authorRef)
+      transaction.delete(siteMemberRef)
+      let member = author.member
+      // Backwards compatible with site membership before 0.7.x
+      if (!member) {
+        member = []
+      }
+      _.pull(member, siteid)
+      transaction.update(authorRef, { member: member })
+      return Promise.resolve('done')
     })
   },
   setInfo (context, { name, description }) {
