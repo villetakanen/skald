@@ -9,6 +9,9 @@ const getters = {
   listArray: (context) => () => {
     return context.all
   },
+  all: (context) => () => {
+    return context.all
+  },
   get: (context) => (uid) => {
     const userArray = context.all.filter((user) => {
       if (user.uid === uid) return true

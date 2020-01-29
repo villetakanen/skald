@@ -6,20 +6,21 @@
     <v-card-text>
 
       <v-chip
+        class="ma-1"
         v-for="(owner, index) in owners"
         v-bind:key="index"
         :outlined="index === currentUser"
-        :close="!(index === currentUser) && isAuthz"
+        :close="!(index === currentUser) && isOwner"
         @click:close="removeOwner(index)"
         >
           {{owner.nick}}</v-chip>
 
       <v-autocomplete
-        v-if="isAuthz"
+        v-if="isOwner"
         v-model="newOwner"
         :items="nonOwners"></v-autocomplete>
       <v-btn
-        v-if="isAuthz"
+        v-if="isOwner"
         color="primary"
         @click="addOwner">Add to Owners</v-btn>
     </v-card-text>
@@ -57,8 +58,13 @@ export default {
     currentUser () {
       return this.$store.getters['author/uid']()
     },
-    isAuthz () {
-      return this.$store.getters.isAuthz()
+    isOwner () {
+      const authID = this.$store.getters['author/uid']()
+      const owners = this.$store.getters['site/owners']()
+      console.log(authID, owners, authID in owners)
+      return authID &&
+        owners &&
+        authID in owners
     }
   },
   methods: {
@@ -67,7 +73,7 @@ export default {
       const newUid = allUsers.filter((user) => {
         if (user.nick === this.newOwner) return true
       })[0].uid
-      this.$store.dispatch('users/addOwner', { siteid: this.siteid, uid: newUid })
+      this.$store.dispatch('site/addOwner', { uid: newUid, nick: this.newOwner })
     },
     removeOwner (uid) {
       this.$store.dispatch('users/removeOwner', { siteid: this.siteid, uid: uid })

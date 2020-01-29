@@ -31,7 +31,6 @@
         margin: 0;
         padding: 0;
       }
-
       img.attachment {
         margin-top: 8px;
         margin-bottom: 8px;
@@ -50,6 +49,13 @@
           border-bottom: solid 1px #666;
       }
       
+    }
+  }
+}
+@media only print{
+  #app.theme--dark, #app.theme--light{
+    div.sidebar{
+      display: none;
     }
   }
 }

@@ -1,14 +1,18 @@
 import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import _ from 'lodash'
+// const _ = require('lodash')
 
 const state = {
   siteid: null,
   owners: {},
+  members: {},
   data: {},
   sidebarContent: null,
   unsubscibe: () => {},
   unsubscibeOwners: () => {},
+  unsubscibeMembers: () => {},
   unsubscibeSidebar: () => {},
   pages: {},
   unsubscibePages: () => {}
@@ -23,6 +27,9 @@ const getters = {
   },
   owners: (context) => () => {
     return context.owners
+  },
+  members: (context) => () => {
+    return context.members
   },
   description: (context) => () => {
     return context.data.description
@@ -68,12 +75,23 @@ const mutations = {
     if (!exists(owners)) owners = {}
     Vue.set(context, 'owners', owners)
   },
+  members (context, members) {
+    if (!exists(members)) members = {}
+    Vue.set(context, 'members', members)
+  },
   patchOwner (context, { id, data }) {
     // console.log('site/patchOwner', id, data)
     Vue.set(context.owners, id, data)
   },
   dropOwner (context, { id }) {
     Vue.delete(context.owners, id)
+  },
+  patchMember (context, { id, data }) {
+    // console.log('site/patchOwner', id, data)
+    Vue.set(context.members, id, data)
+  },
+  dropMember (context, { id }) {
+    Vue.delete(context.members, id)
   },
   resetPageCache (context) {
     Vue.set(context, 'pages', {})
@@ -107,17 +125,20 @@ const actions = {
     // unsubscribe from previous site
     context.state.unsubscibe()
     context.state.unsubscibeOwners()
+    context.state.unsubscibeMembers()
     context.state.unsubscibeSidebar()
     context.state.unsubscibePages()
 
     // reset all patched data
     context.commit('owners', null)
+    context.commit('members', null)
     context.commit('resetPageCache')
 
     const db = firebase.firestore()
 
     const siteRef = db.collection('sites').doc(siteid)
     const ownersRef = siteRef.collection('owners')
+    const membersRef = siteRef.collection('members')
 
     // Subscribe to site data changes
     context.state.unsubscribe = siteRef.onSnapshot((doc) => {
@@ -132,6 +153,18 @@ const actions = {
           context.commit('dropOwner', { id: change.doc.id })
         } else {
           context.commit('patchOwner', { id: change.doc.id, data: change.doc.data() })
+        }
+      })
+    })
+
+    // Subscribe to owner data changes
+    context.state.unsubscribeMembers = membersRef.onSnapshot((querySnapshot) => {
+      // snapshot.docChanges().forEach(function(change)
+      querySnapshot.docChanges().forEach((change) => {
+        if (change.type === 'removed') {
+          context.commit('dropMember', { id: change.doc.id })
+        } else {
+          context.commit('patchMember', { id: change.doc.id, data: change.doc.data() })
         }
       })
     })
@@ -169,13 +202,60 @@ const actions = {
       context.commit('owners', newOwners)
     })
   }, */
-  addOwner (context, { nick }) {
-    // if (!exists(context.getters['id']())) return
-    // console.log('adding owner not implemented!', nick)
+
+  /**
+   * Adds an user with uid and nick, to a owner of a site
+   *
+   * All permissions are checked by the firebase rules
+   * @param {*} context Vuex context
+   * @param {*} param1 { uid, nick }, where uid has to be an existing users uid
+   */
+  addOwner (context, { uid, nick }) {
+    const siteid = context.state.siteid
+
+    const db = firebase.firestore()
+    const siteOwnerRef = db.collection('sites').doc(siteid).collection('owners').doc(uid)
+    const siteMemberRef = db.collection('sites').doc(siteid).collection('members').doc(uid)
+    const authorRef = db.collection('profiles').doc(uid)
+    db.runTransaction((transaction) => {
+      return transaction.get(authorRef).then((author) => {
+        transaction.set(siteOwnerRef, { nick: nick })
+        transaction.set(siteMemberRef, { nick: nick })
+        let owns = []
+        if (!author.owns || !author.owns.includes(siteid)) {
+          if (author.owns) owns = author.owns
+          owns.push(siteid)
+          transaction.update(authorRef, { owns: owns })
+        }
+        let member = []
+        if (!author.member || !author.member.includes(siteid)) {
+          if (author.member) member = author.member
+          member.push(siteid)
+          transaction.update(authorRef, { member: member })
+        }
+        return Promise.resolve('done')
+      })
+    })
   },
-  removeOwner (context, { nick }) {
-    // if (!exists(context.getters['id']())) return
-    // console.log('removing owner not implemented!', nick)
+  removeOwner (context, { uid }) {
+  },
+  removeMember (context, { uid }) {
+    const siteid = context.state.siteid
+
+    const db = firebase.firestore()
+    const siteMemberRef = db.collection('sites').doc(siteid).collection('members').doc(uid)
+    const authorRef = db.collection('profiles').doc(uid)
+    db.runTransaction((transaction) => {
+      return transaction.get(authorRef).then((author) => {
+        transaction.delete(siteMemberRef)
+        let member = author.member
+        // Backwards compatible with site membership before 0.7.x
+        if (!member) member = []
+        _.pull(member, siteid)
+        transaction.update(authorRef, { member: member })
+        return Promise.resolve('done')
+      })
+    })
   },
   setInfo (context, { name, description }) {
     const siteid = context.state.siteid
