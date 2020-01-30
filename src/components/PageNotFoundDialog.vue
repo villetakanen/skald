@@ -16,7 +16,7 @@
 export default {
   computed: {
     siteID () {
-      return this.$store.getters['binder/siteID']()
+      return this.$store.getters['site/id']()
     },
     pageName () {
       return this.$store.getters.pageNotFound()

@@ -62,6 +62,20 @@ export default new Router({
       component: () => import(/* webpackChunkName: "editor" */ './views/Editor.vue')
     },
     {
+      path: '/i/:siteid/:pageid',
+      name: 'pageInfo',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "pageinfo" */ './views/PageInfo.vue')
+    },
+    {
+      path: '/r/:siteid/:pageid/:revisionid',
+      name: 'pageRevision',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "pageinfo" */ './views/ViewRevision.vue')
+    },
+    {
       path: '/testlogin',
       name: 'testlogin',
       // lazy-loaded when the route is visited.

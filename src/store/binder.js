@@ -6,9 +6,8 @@ const state = {
   title: null,
   content: null,
   pageid: null,
-  siteid: null,
-  theme: null,
-  loading: false
+  loading: false,
+  revisions: {}
   // unsubscribe: null
 }
 const getters = {
@@ -26,37 +25,31 @@ const getters = {
     return context.content
   },
   /**
-   * Returns theme for current site
-   */
-  theme: (context) => () => {
-    return context.theme
-  },
-  /**
    * Returns true if binder is refreshing page content from firebase
    */
   loading: (context) => () => {
     return context.loading
   },
-  /**
-   * Returns true if binder is refreshing page content from firebase
-   */
-  siteID: (context) => () => {
-    return context.siteid
+  revisions: (context) => () => {
+    return context.revisions
   }
 }
 const mutations = {
-  setSiteid (context, siteid) {
-    Vue.set(context, 'siteid', siteid)
-  },
-  setData (context, data) {
+  data (context, data) {
     Vue.set(context, 'title', data.name)
     Vue.set(context, 'content', data.content)
+    // Vue.set(context, 'revisions', data.history)
   },
-  setTheme (context, theme) {
-    Vue.set(context, 'theme', theme)
-  },
-  setLoading (context, bool) {
+  loading (context, bool) {
     Vue.set(context, 'loading', bool)
+  },
+  flush (context) {
+    Vue.set(context, 'revisions', {})
+  },
+  revision (context, { key, revision }) {
+    console.log(key, revision)
+    Vue.set(context.revisions, key, revision)
+    console.log(context.revisions)
   }
 }
 const actions = {
@@ -65,28 +58,41 @@ const actions = {
    * @param {vuex context} context Vuex context
    */
   openPage (context, { siteid, pageid }) {
-    context.commit('setLoading', true)
+    context.commit('loading', true)
     // get the firestore
     const db = firebase.firestore()
 
     // get site reference
     const siteRef = db.collection('sites').doc(siteid)
+
     siteRef.get().then((doc) => {
       if (doc.exists) {
-        context.commit('setSiteid', siteid)
-        context.commit('setTheme', doc.data().theme)
         const pageRef = siteRef.collection('pages').doc(pageid)
         pageRef.get().then((doc) => {
           if (doc.exists) {
-            context.commit('setData', doc.data())
-            context.commit('setLoading', false)
+            context.commit('data', doc.data())
+            context.commit('loading', false)
+            pageRef.collection('revisions')
+              .get().then((querySnapshot) => {
+                context.commit('flush')
+                console.log('flushed')
+                querySnapshot.forEach((revision) => {
+                  console.log('commits', revision.id)
+                  context.commit('revision', {
+                    key: revision.id,
+                    revision: revision.data()
+                  })
+                })
+              })
           } else {
+            context.commit('loading', false)
             // @todo: 404 - page does not exist
             context.commit('pageNotFound', pageid, { root: true })
             // context.commit('httpStatusCode', '404', { root: true })
           }
         })
       } else {
+        context.commit('setLoading', false)
         // @todo: 404 - site does not exist
         context.commit('error', '404 - site does not exist', { root: true })
       }
@@ -139,15 +145,15 @@ const actions = {
     var siteRef = db.collection('sites').doc(siteid)
     var pageRef = siteRef.collection('pages').doc(pageid)
 
-    let history = []
+    // let history = []
 
     pageRef.get().then((doc) => {
       if (doc.exists) {
-        if (doc.data().history) history = doc.data().history
-        history.push(doc.data().content)
-        // console.log(history)
-
-        u.history = history
+        console.log(doc.data().lastUpdate.seconds)
+        pageRef.collection('revisions').doc('' + doc.data().lastUpdate.seconds).set({
+          author: doc.data().creatorNick,
+          revision: doc.data().content
+        })
 
         siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
         pageRef.update(u).then((e) => {

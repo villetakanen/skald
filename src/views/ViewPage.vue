@@ -1,5 +1,5 @@
 <template>
-  <div :class="theme">
+  <div>
     <div class="page-container">
       <v-container v-if="loading">
         <v-row>
@@ -66,6 +66,13 @@
                   @click="copyUrl"
                 >
                   <v-icon>mdi-link</v-icon>
+                </v-btn>
+                <v-btn
+                  fab
+                  dark
+                  small
+                  @click="showHistory">
+                  <v-icon>mdi-file-eye</v-icon>
                 </v-btn>
               </v-speed-dial>
           </v-card>
@@ -154,10 +161,6 @@ export default {
       if (this.$store.getters['site/sidebarContent']() === null) return ' '
       return this.$store.getters['site/sidebarContent']()
     },
-    theme () {
-      if (this.$store.getters['binder/theme']() === null) return 'Skald reader'
-      return this.$store.getters['binder/theme']() + ' reader'
-    },
     loading () {
       return this.$store.getters['binder/loading']()
     },
@@ -189,6 +192,9 @@ export default {
       document.execCommand('copy')
       document.body.removeChild(dummy)
       this.$store.commit('snack', 'Url copied to clipboard')
+    },
+    showHistory () {
+      this.$router.push('/i/' + this.siteid + '/' + this.pageid)
     }
   }
 }

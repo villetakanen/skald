@@ -101,10 +101,10 @@ export default {
     // If we reach this view without a page-id, we assume we want to
     // edit the root page of the site
     if (!this.pageid) this.pageid = this.siteid
-    this.updatePage(this.siteid, this.pageid)
+    this.update()
     this.$store.subscribe((mutation, state) => {
       switch (mutation.type) {
-        case 'binder/setData':
+        case 'binder/data':
           this.title = this.$store.getters['binder/title']()
           this.content = this.$store.getters['binder/content']()
           break
@@ -113,14 +113,14 @@ export default {
   },
   watch: {
     '$route' (to, from) {
-      this.updatePage(this.siteid, this.pageid)
+      this.updatePage()
     }
   },
   methods: {
-    updatePage (siteid, pageid) {
-      if (siteid === null || typeof siteid === 'undefined') siteid = 'skald'
-      if (pageid === null || typeof pageid === 'undefined') pageid = siteid
-      this.$store.dispatch('binder/openPage', { siteid: siteid, pageid: pageid })
+    update () {
+      this.$store.dispatch('site/open', this.siteid)
+      this.$store.dispatch('binder/openPage', { siteid: this.siteid, pageid: this.pageid })
+      window.scroll(0, 0)
     },
     savePage () {
       this.$store.dispatch('binder/savePage',
