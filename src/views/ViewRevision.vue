@@ -53,6 +53,7 @@ import Loading from '../components/Loading.vue'
 import TabTitle from '../components/TabTitle.vue'
 import PageHistoryList from '../components/page/PageHistoryList.vue'
 import WikiText from '../components/WikiText.vue'
+import _ from 'lodash'
 
 export default {
   components: {
@@ -77,8 +78,10 @@ export default {
       return this.$store.getters['binder/title']()
     },
     revision () {
-      if (!this.$store.getters['binder/revisions']()[this.revisionid]) return ' '
-      return this.$store.getters['binder/revisions']()[this.revisionid].revision
+      const revisions = this.$store.getters['binder/revisions']()
+      const chosen = _.find(revisions, { id: this.revisionid })
+      if (!chosen) return ' '
+      return chosen.revision
     }
   },
   methods: {

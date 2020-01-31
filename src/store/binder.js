@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import _ from 'lodash'
 
 const state = {
   title: null,
   content: null,
   pageid: null,
+  siteid: null,
   loading: false,
-  revisions: {}
+  revisions: []
   // unsubscribe: null
 }
 const getters = {
@@ -40,16 +42,35 @@ const mutations = {
     Vue.set(context, 'content', data.content)
     // Vue.set(context, 'revisions', data.history)
   },
+  id (context, id) {
+    Vue.set(context, 'pageid', id)
+  },
+  siteid (context, id) {
+    Vue.set(context, 'siteid', id)
+  },
   loading (context, bool) {
     Vue.set(context, 'loading', bool)
   },
   flush (context) {
-    Vue.set(context, 'revisions', {})
+    Vue.set(context, 'revisions', [])
   },
   revision (context, { key, revision }) {
-    console.log(key, revision)
-    Vue.set(context.revisions, key, revision)
+    const rev = {
+      id: key,
+      author: revision.author,
+      revision: revision.revision
+    }
+    const revisionsArray = context.revisions
+    const index = _.findIndex(revisionsArray, { id: key })
+    if (index > -1) revisionsArray[index] = rev
+    else revisionsArray.push(rev)
+    Vue.set(context, 'revisions', revisionsArray)
     console.log(context.revisions)
+  },
+  revisions (context, revisionsArray) {
+    // Force empty arg, to empty array
+    if (_.isEmpty(revisionsArray)) revisionsArray = []
+    Vue.set(context, 'revisions', revisionsArray)
   }
 }
 const actions = {
@@ -71,19 +92,9 @@ const actions = {
         pageRef.get().then((doc) => {
           if (doc.exists) {
             context.commit('data', doc.data())
+            context.commit('siteid', siteid)
+            context.commit('id', pageid)
             context.commit('loading', false)
-            pageRef.collection('revisions')
-              .get().then((querySnapshot) => {
-                context.commit('flush')
-                console.log('flushed')
-                querySnapshot.forEach((revision) => {
-                  console.log('commits', revision.id)
-                  context.commit('revision', {
-                    key: revision.id,
-                    revision: revision.data()
-                  })
-                })
-              })
           } else {
             context.commit('loading', false)
             // @todo: 404 - page does not exist
@@ -97,6 +108,25 @@ const actions = {
         context.commit('error', '404 - site does not exist', { root: true })
       }
     })
+  },
+  fetchRevisions (context) {
+    // get the firestore
+    const db = firebase.firestore()
+    console.log(context.state)
+    const revisionsRef = db.collection('sites').doc(context.state.siteid)
+      .collection('pages').doc(context.state.pageid)
+      .collection('revisions')
+
+    revisionsRef.orderBy(firebase.firestore.FieldPath.documentId())
+      .get().then((querySnapshot) => {
+        context.commit('revisions', [])
+        querySnapshot.forEach((revision) => {
+          context.commit('revision', {
+            key: revision.id,
+            revision: revision.data()
+          })
+        })
+      })
   },
   /**
    * Create a new page in Firebase Store
