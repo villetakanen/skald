@@ -65,7 +65,6 @@ const mutations = {
     if (index > -1) revisionsArray[index] = rev
     else revisionsArray.push(rev)
     Vue.set(context, 'revisions', revisionsArray)
-    console.log(context.revisions)
   },
   revisions (context, revisionsArray) {
     // Force empty arg, to empty array
@@ -112,7 +111,6 @@ const actions = {
   fetchRevisions (context) {
     // get the firestore
     const db = firebase.firestore()
-    console.log(context.state)
     const revisionsRef = db.collection('sites').doc(context.state.siteid)
       .collection('pages').doc(context.state.pageid)
       .collection('revisions')
@@ -135,8 +133,6 @@ const actions = {
    * @param {*} param1 JSON for page data, see below
    */
   createPage (context, { pageid, name, content, siteid, author, nick }) {
-    // console.log('firestore create for', siteid, pageid, name, content, author, nick)
-
     const np = {
       creator: author,
       creatorNick: nick,
@@ -161,8 +157,6 @@ const actions = {
     })
   },
   savePage (context, { pageid, name, content, siteid, author, nick }) {
-    // console.log('updating firestore for', siteid, pageid, name, content, author, nick)
-
     var u = {
       creator: author,
       creatorNick: nick,
@@ -179,7 +173,6 @@ const actions = {
 
     pageRef.get().then((doc) => {
       if (doc.exists) {
-        console.log(doc.data().lastUpdate.seconds)
         pageRef.collection('revisions').doc('' + doc.data().lastUpdate.seconds).set({
           author: doc.data().creatorNick,
           revision: doc.data().content
@@ -206,10 +199,7 @@ const actions = {
     var pageRef = siteRef.collection('pages').doc(pageid)
 
     pageRef.delete().then(() => {
-      // console.log(`Document ${pageid} successfully deleted!`)
-    })// .catch((error) => {
-    // console.error('Error removing document: ', error)
-    // })
+    })
   }
 }
 export default {
