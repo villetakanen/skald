@@ -73,7 +73,6 @@ const actions = {
         })
       })
     }).catch((error) => {
-      console.log(error)
       context.commit('error', error, { root: true })
     })
   },
