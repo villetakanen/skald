@@ -1,29 +1,31 @@
 <template>
   <v-list>
-    <template v-if="siteID !== null">
+    <template v-if="siteid !== null">
 
-      <v-list-item :to="'/v/'+siteID">
+      <v-list-item :to="'/v/'+siteid">
         <v-list-item-action><v-icon>mdi-home</v-icon></v-list-item-action>
         <v-list-item-title >{{siteName}}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item id="nav-page-list-link" :to="'/l/pages/'+siteID">
-        <v-list-item-action><v-icon>mdi-view-agenda</v-icon></v-list-item-action>
+      <v-list-item id="nav-page-list-link" :to="'/l/pages/'+siteid">
+        <v-list-item-action><v-icon>mdi-file-tree</v-icon></v-list-item-action>
         <v-list-item-title >Pages</v-list-item-title>
       </v-list-item>
 
-      <v-list-item>
-        <v-list-item-action><CreatePageButton/></v-list-item-action>
-        <v-list-item-title>Add Page</v-list-item-title>
-      </v-list-item>
-      <v-list-item :to="'/l/attachments/'+siteID">
-        <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>
+      <!-- @click: CreatePageCard, the dialog for adding a page -->
+      <AddPageListItem/>
 
+      <v-list-item
+        id="navi-attachment-list-link"
+        :to="'/l/attachments/'+siteid">
+        <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>
         <v-list-item-title >Attachments</v-list-item-title>
       </v-list-item>
-      <v-list-item :to="'/c/site/'+siteID">
-        <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
 
+      <v-list-item
+        id="navi-site-settings-link"
+        :to="'/c/site/'+siteid">
+        <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
         <v-list-item-title >Settings</v-list-item-title>
       </v-list-item>
     </template>
@@ -64,16 +66,17 @@
 </template>
 
 <script>
-import CreatePageButton from './CreatePageButton'
+import AddPageListItem from './AddPageListItem'
+
 export default {
   components: {
-    CreatePageButton
+    AddPageListItem
   },
   computed: {
     version () {
       return this.$store.getters.version()
     },
-    siteID () {
+    siteid () {
       return this.$store.getters['site/id']()
     },
     siteName () {

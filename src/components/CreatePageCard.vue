@@ -1,11 +1,10 @@
 <template>
   <v-card>
-    <v-card-title>Add a page to</v-card-title>
+    <v-card-title>New Page</v-card-title>
     <v-card-text>
       <v-container>
         <v-row>
           <v-col>
-            <p>...</p>
             <v-text-field
               label="Page name"
               placeholder="A new page"
@@ -22,13 +21,13 @@
       </v-container>
     </v-card-text>
     <v-card-actions>
+      <v-spacer></v-spacer>
+      <v-btn
+        text
+        @click="cancel">Cancel</v-btn>
       <v-btn
         color="primary"
         @click="create">Create</v-btn>
-      <v-btn
-        color="primary"
-        outlined
-        @click="cancel">Cancel</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -41,7 +40,7 @@ export default {
   }),
   computed: {
     siteid () {
-      return this.$store.getters['binder/siteID']()
+      return this.$store.getters['site/id']()
     },
     name: {
       get () {

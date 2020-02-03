@@ -11,6 +11,22 @@ describe('Sidebar works as intented', () => {
     cy.get('.mdi-home').should('be.visible')
   })
   // Pages tested below, skipping here
+  // Add page tested below, skipping here
+  it('Opens Attachments page', () => {
+    cy.visit('/#/v/skald')
+    cy.get('.v-app-bar__nav-icon').click()
+    cy.get('#navi-attachment-list-link').click()
+    cy.wait(3000)
+    // These attachments should always exist
+    cy.contains('logo.svg')
+    cy.contains('[wiki:demo.jpg]')
+  })
+  it('Opens Site Settings', () => {
+    cy.visit('/#/v/skald')
+    cy.get('.v-app-bar__nav-icon').click()
+    cy.get('#navi-site-settings-link').click()
+    cy.contains('Site Settings')
+  })
 })
 describe('Page listing is fuctional', () => {
   it('Opens page listing', () => {
@@ -22,5 +38,15 @@ describe('Page listing is fuctional', () => {
     cy.contains('Getting Started')
     cy.contains('About Skald')
     cy.contains('Welcome to Skald')
+  })
+})
+describe('Add a page dialog', () => {
+  it('sees the add a page dialog', () => {
+    cy.visit('/#/v/skald')
+    cy.get('.v-app-bar__nav-icon').click()
+    cy.get('#navi-add-page-action').click()
+    // do note, the last part there is the name of the site
+    // fetched from the Vuex store
+    cy.contains('URL: mekanismi.web.app/#/v/skald/')
   })
 })
