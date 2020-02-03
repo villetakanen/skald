@@ -1,7 +1,7 @@
 <template>
   <v-card>
+    <v-card-title>My Recent Changes</v-card-title>
     <v-card-text>
-      <h1>Pages I have been working on</h1>
       <ul>
       <template v-for="(logentry, index) in pageLog">
         <li :key='index'><a :href='`/#/v/${sitepart(logentry.id)}/${pagepart(logentry.id)}`'>{{logentry.id}}</a></li>
@@ -12,10 +12,13 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   computed: {
     pageLog () {
-      return this.$store.getters['author/pageLog']()
+      const log = _.sortBy(this.$store.getters['author/pageLog'](), ['seconds'])
+      return log.reverse()
     }
   },
   methods: {

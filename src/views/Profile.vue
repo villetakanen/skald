@@ -36,16 +36,11 @@
       </v-col>
       <v-col md='4'>
         <AuthorWorkLog/>
-        <v-card>
-          <v-card-text>
-            These are the Sites you have been working on!
-          </v-card-text>
-        </v-card>
       </v-col>
       <v-col md='4'>
-        <v-card>
+       <v-card>
           <v-card-text>
-            Here you can set theme to either light or dark!
+            These are the Sites you have been working on!
           </v-card-text>
         </v-card>
       </v-col>

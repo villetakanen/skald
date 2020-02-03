@@ -34,7 +34,9 @@ const mutations = {
     Vue.set(context, 'nick', uid)
   },
   patchPageLog (context, data) {
+    if (typeof data === 'undefined') return
     const log = context.pageLog
+    data.seconds = data.data.timestamp.seconds
     log.push(data)
     Vue.set(context, 'pageLog', log)
   },
