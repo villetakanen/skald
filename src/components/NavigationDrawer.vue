@@ -7,11 +7,11 @@
         <v-list-item-title >{{siteName}}</v-list-item-title>
       </v-list-item>
 
-      <v-list-item :to="'/l/pages/'+siteID">
+      <v-list-item id="nav-page-list-link" :to="'/l/pages/'+siteID">
         <v-list-item-action><v-icon>mdi-view-agenda</v-icon></v-list-item-action>
-
         <v-list-item-title >Pages</v-list-item-title>
       </v-list-item>
+
       <v-list-item>
         <v-list-item-action><CreatePageButton/></v-list-item-action>
         <v-list-item-title>Add Page</v-list-item-title>

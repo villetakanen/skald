@@ -36,11 +36,17 @@ const getters = {
     return context.revisions
   }
 }
+function setContent (context, content) {
+  if (context.content === content) return
+  Vue.set(context, 'content', content)
+}
 const mutations = {
   data (context, data) {
     Vue.set(context, 'title', data.name)
-    Vue.set(context, 'content', data.content)
-    // Vue.set(context, 'revisions', data.history)
+    setContent(context, data.content)
+  },
+  content (context, content) {
+    setContent(context, content)
   },
   id (context, id) {
     Vue.set(context, 'pageid', id)
@@ -164,6 +170,7 @@ const actions = {
       content: content,
       lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
     }
+    context.commit('content', content)
 
     const db = firebase.firestore()
     var siteRef = db.collection('sites').doc(siteid)
