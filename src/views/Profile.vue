@@ -35,14 +35,7 @@
         </v-card>
       </v-col>
       <v-col md='4'>
-        <v-card>
-          <v-card-text>
-            <h1>Pages I have been working on</h1>
-            <template v-for="(logentry, index) in pageLog">
-              <p :key='index'>{{logentry.id}}</p>
-            </template>
-          </v-card-text>
-        </v-card>
+        <AuthorWorkLog/>
         <v-card>
           <v-card-text>
             These are the Sites you have been working on!
@@ -67,10 +60,12 @@
 
 <script>
 import TabTitle from '../components/TabTitle'
+import AuthorWorkLog from '../components/profile/AuthorWorkLog'
 
 export default {
   components: {
-    TabTitle
+    TabTitle,
+    AuthorWorkLog
   },
   props: [
     'nickname'
