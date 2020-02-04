@@ -44,9 +44,9 @@ describe('Add a page dialog', () => {
   it('sees the add a page dialog', () => {
     cy.visit('/#/v/skald')
     cy.get('.v-app-bar__nav-icon').click()
+    cy.wait(100)
     cy.get('#navi-add-page-action').click()
-    // do note, the last part there is the name of the site
-    // fetched from the Vuex store
-    cy.contains('URL: mekanismi.web.app/#/v/skald/')
+    cy.wait(100)
+    cy.contains('New Page')
   })
 })

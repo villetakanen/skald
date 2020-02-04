@@ -226,7 +226,6 @@ const actions = {
     })
   },
   category (context, category) {
-    console.log('setting category to', category, context.state.siteid, context.state.pageid)
     const db = firebase.firestore()
     var siteRef = db.collection('sites').doc(context.state.siteid)
     var pageRef = siteRef.collection('pages').doc(context.state.pageid)
