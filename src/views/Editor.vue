@@ -28,6 +28,8 @@
       </v-toolbar>
       <v-card-text>
         <div v-if="menuVisible" class="pagetools">
+          <PageCategorySelect/>
+          <v-spacer/>
           <v-btn
             outlined
             @click="deletePageDialog=!deletePageDialog">Delete page</v-btn>
@@ -69,10 +71,12 @@
 
 <script>
 import Loading from '../components/Loading'
+import PageCategorySelect from '../components/page/PageCategorySelect.vue'
 
 export default {
   components: {
-    Loading
+    Loading,
+    PageCategorySelect
   },
   props: [
     'pageid',

@@ -9,6 +9,7 @@ const state = {
   pageid: null,
   siteid: null,
   loading: false,
+  category: null,
   revisions: []
   // unsubscribe: null
 }
@@ -34,16 +35,28 @@ const getters = {
   },
   revisions: (context) => () => {
     return context.revisions
+  },
+  category: (context) => () => {
+    if (context.category === null) return '-'
+    return context.category
   }
 }
 function setContent (context, content) {
   if (context.content === content) return
   Vue.set(context, 'content', content)
 }
+function setCategory (context, category) {
+  if (category === '-' || category === '- none -') category = null
+  Vue.set(context, 'category', category)
+}
 const mutations = {
   data (context, data) {
     Vue.set(context, 'title', data.name)
+    setCategory(context, data.category)
     setContent(context, data.content)
+  },
+  category (context, category) {
+    setCategory(context, category)
   },
   content (context, content) {
     setContent(context, content)
@@ -83,8 +96,8 @@ const actions = {
    * Opens a wikipage: Sets binder.siteid
    * @param {vuex context} context Vuex context
    */
-  openPage (context, { siteid, pageid }) {
-    context.commit('loading', true)
+  openPage (context, { siteid, pageid, skiploading }) {
+    if (!skiploading) context.commit('loading', true)
     // get the firestore
     const db = firebase.firestore()
 
@@ -195,7 +208,11 @@ const actions = {
             siteid: siteid
           }, { root: true })
           // Binder state management: force open created page as the current page
-          context.dispatch('openPage', { siteid: siteid, pageid: pageid })
+          context.dispatch('openPage', {
+            siteid: siteid,
+            pageid: pageid,
+            skiploading: true
+          })
         })
       }
     })
@@ -206,6 +223,16 @@ const actions = {
     var pageRef = siteRef.collection('pages').doc(pageid)
 
     pageRef.delete().then(() => {
+    })
+  },
+  category (context, category) {
+    console.log('setting category to', category, context.state.siteid, context.state.pageid)
+    const db = firebase.firestore()
+    var siteRef = db.collection('sites').doc(context.state.siteid)
+    var pageRef = siteRef.collection('pages').doc(context.state.pageid)
+
+    pageRef.update({ category: category }).then(() => {
+      context.commit('category', category)
     })
   }
 }

@@ -34,9 +34,10 @@ const getters = {
   description: (context) => () => {
     return context.data.description
   },
-  pageIndex: (context) => () => {
+  pageIndex: (context) => (category) => {
     // console.log(context.pages)
-    return context.pages
+    if (!category) return context.pages
+    return _.filter(context.pages, ['category', category])
   },
   name: (context) => () => {
     if (!context.data.name) return context.siteid
