@@ -41,4 +41,19 @@ describe('Editor as logged in user', () => {
   it('Deletes a page from wiki', () => {
 
   })
+  /* it('Page categories', () => {
+    // login
+    cy.visit('/#/testlogin')
+    cy.get('#un').type(Cypress.env('TEST_USER_EMAIL'))
+    cy.get('#pw').type(Cypress.env('TEST_USER_PASSWORD'))
+    cy.get('#login-button').click()
+    cy.wait(1000)
+
+    // open editor
+    cy.visit('/#/e/e2e-testing/category-page')
+    cy.wait(1000)
+    cy.get('create').click()
+    cy.wait(300)
+    cy.get('#page-category')
+  }) */
 })

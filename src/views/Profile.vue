@@ -31,6 +31,8 @@
               v-model="vuetifyTheme"
               color="primary"
               label="Use Dark Theme"></v-switch>
+            <v-divider></v-divider>
+            <ForgetMeButton/>
           </v-card-text>
         </v-card>
       </v-col>
@@ -56,11 +58,13 @@
 <script>
 import TabTitle from '../components/TabTitle'
 import AuthorWorkLog from '../components/profile/AuthorWorkLog'
+import ForgetMeButton from '../components/profile/ForgetMeButton'
 
 export default {
   components: {
     TabTitle,
-    AuthorWorkLog
+    AuthorWorkLog,
+    ForgetMeButton
   },
   props: [
     'nickname'
