@@ -1,15 +1,19 @@
 <template>
   <v-card>
+    <v-toolbar>
+      <v-toolbar-title>Uploads</v-toolbar-title>
+      <v-spacer/>
+      <FileUploadButton :siteid="siteid"/>
+    </v-toolbar>
     <v-card-text>
-      <Loading v-if="loading"/>
-        <h1>Uploads</h1>
-            <div v-if="!loading">
-               <template v-for="(file, index) in files">
-                <div class="attachment" v-bind:key="index">
-                  <div class="preview">
-                    <img :src="file.path" :alt="file.name"/>
-                  </div>
-                  <p class="name">[wiki:<a :href="file.path">{{file.name}}</a>]</p>
+      <Loading center v-if="loading"/>
+      <div v-if="!loading">
+        <template v-for="(file, index) in fileList">
+          <div class="attachment" v-bind:key="index">
+            <div class="preview">
+              <v-icon>mdi-file</v-icon>
+            </div>
+            <p class="name">[file:<a :href="file.path">{{file.name}}</a>]</p>
                   <div class="actions"><v-btn
                     x-small
                     class="ml-2"
@@ -25,18 +29,55 @@
 
 <script>
 import Loading from '../Loading.vue'
+import FileUploadButton from '../attachments/FileUploadButton'
+import firebase from 'firebase/app'
+import 'firebase/storage'
 
 export default {
   components: {
-    Loading
+    Loading,
+    FileUploadButton
   },
-  computed: {
-    loading () {
-      return this.$store.getters['attachments/loading']()
+  props: [
+    'siteid'
+  ],
+  data: () => ({
+    fileList: [],
+    loading: true
+  }),
+  methods: {
+    deleteFile (filename) {
+      const storage = firebase.storage()
+      const fileRef = storage.ref(this.siteid + '/uploads/' + filename)
+
+      fileRef.delete().then(() => {
+        this.refresh()
+      })
     },
-    files () {
-      return this.$store.getters['attachments/files']()
+    refresh () {
+      const storage = firebase.storage()
+
+      const listRef = storage.ref(this.siteid + '/uploads')
+
+      listRef.listAll().then((res) => {
+        res.prefixes.forEach((folderRef) => {
+          // All the prefixes under listRef.
+          // You may call listAll() recursively on them.
+        })
+        res.items.forEach((itemRef) => {
+          itemRef.getDownloadURL().then((url) => {
+            this.fileList.push({
+              name: itemRef.name,
+              path: url
+            })
+          })
+        })
+        this.loading = false
+      })
     }
+  },
+  mounted () {
+    this.refresh()
   }
 }
 </script>

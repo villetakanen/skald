@@ -38,7 +38,8 @@
       <v-col
         md='6'
         cols='12'>
-        <SiteUploadsListingCard/>
+        <SiteUploadsListingCard
+          :siteid="siteid"/>
       </v-col>
     </v-row>
   </v-container>
