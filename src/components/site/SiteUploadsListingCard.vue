@@ -1,22 +1,9 @@
 <template>
-  <v-container>
-
-    <v-row>
-      <v-col>
-        <TabTitle
-          topic="Attachments"/>
-      </v-col>
-    </v-row>
-
-    <v-row>
-      <v-col
-        md='6'
-        cols='12'>
-        <v-card>
-          <v-card-text>
-            <Loading v-if="loading"/>
+  <v-card>
+    <v-card-text>
+      <Loading v-if="loading"/>
+        <h1>Uploads</h1>
             <div v-if="!loading">
-               <h1>Images</h1>
                <template v-for="(file, index) in files">
                 <div class="attachment" v-bind:key="index">
                   <div class="preview">
@@ -32,49 +19,23 @@
                   </div>
               </template>
             </div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <v-col
-        md='6'
-        cols='12'>
-        <SiteUploadsListingCard/>
-      </v-col>
-    </v-row>
-  </v-container>
+    </v-card-text>
+  </v-card>
 </template>
 
 <script>
-import Loading from '../components/Loading'
-import TabTitle from '../components/TabTitle'
-import SiteUploadsListingCard from '../components/site/SiteUploadsListingCard'
+import Loading from '../Loading.vue'
 
 export default {
   components: {
-    Loading,
-    TabTitle,
-    SiteUploadsListingCard
+    Loading
   },
-  props: [
-    'siteid'
-  ],
   computed: {
     loading () {
       return this.$store.getters['attachments/loading']()
     },
     files () {
       return this.$store.getters['attachments/files']()
-    }
-  },
-  mounted: function () {
-    this.$store.dispatch('attachments/fetch', { siteid: this.siteid })
-  },
-  methods: {
-    deleteFile (filename) {
-      this.$store.dispatch('attachments/delete', {
-        siteid: this.siteid,
-        filename: filename
-      })
     }
   }
 }
