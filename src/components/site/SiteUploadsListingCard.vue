@@ -3,7 +3,7 @@
     <v-toolbar>
       <v-toolbar-title>Uploads</v-toolbar-title>
       <v-spacer/>
-      <FileUploadButton :siteid="siteid"/>
+      <FileUploadButton :siteid="siteid" v-on:refresh="this.refresh"/>
     </v-toolbar>
     <v-card-text>
       <Loading center v-if="loading"/>
@@ -55,6 +55,8 @@ export default {
       })
     },
     refresh () {
+      this.fileList = []
+
       const storage = firebase.storage()
 
       const listRef = storage.ref(this.siteid + '/uploads')
