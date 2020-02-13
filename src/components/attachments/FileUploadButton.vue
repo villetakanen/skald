@@ -1,6 +1,8 @@
 <template>
   <v-btn
     color="primary"
+    :x-small="inline"
+    :outlined="inline"
     @click="dialog=!dialog">Add
     <v-dialog
       v-model="dialog"
@@ -28,7 +30,8 @@ import 'firebase/storage'
 export default {
   props: [
     'siteid',
-    'filename'
+    'filename',
+    'inline'
   ],
   data: () => ({
     dialog: false,

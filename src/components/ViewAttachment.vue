@@ -50,7 +50,6 @@ export default {
         this.url = refurl
         this.exists = true
       }).catch((error) => {
-        // console.log(error.code)
         this.$store.commit('error', error)
         this.url = null
         this.exists = false
