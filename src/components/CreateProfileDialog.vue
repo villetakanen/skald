@@ -67,7 +67,7 @@ export default {
         this.$store.commit('profileMissing', false)
         this.dialog = false
       }).catch(function (error) {
-        console.log('logout failed ' + error)
+        this.$store.dispatch('error', error)
       })
     }
   }

@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import ViewAttachment from './ViewAttachment.vue'
+import ViewAttachment from './page/ViewAttachment.vue'
 import ViewUpload from './page/ViewUpload.vue'
 import Vue from 'vue'
 import Skaldmd from '../lib/skaldmd'
@@ -46,6 +46,11 @@ function attachLinks (page, siteid) {
       if (parts[1].trim() === 'wide') return `<ViewAttachment wide="attachment-wide" path="${siteid}/${parts[0]}"/>`
       if (parts[1].trim() === 'sm') return `<ViewAttachment wide="attachment-sm" path="${siteid}/${parts[0]}"/>`
       if (parts[1].trim() === 'xs') return `<ViewAttachment wide="attachment-xs" path="${siteid}/${parts[0]}"/>`
+      const opts = parts[1].split(' ')
+      let w = ''
+      if (opts.includes('inline')) w += ' inline'
+      if (opts.includes('sm')) w += ' attachment-sm'
+      return `<ViewAttachment wide="${w}" path="${siteid}/${parts[0]}"/>`
     }
     return `<ViewAttachment wide="attachment-normal" path="${siteid}/${p2}"/>`
   })

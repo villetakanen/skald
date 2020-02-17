@@ -21,7 +21,7 @@
   </div>
 </template>
 <script>
-import CardFileUpload from './CardFileUpload'
+import CardFileUpload from '../attachments/CardFileUpload'
 
 export default {
   props: [
@@ -50,11 +50,18 @@ export default {
         this.url = refurl
         this.exists = true
       }).catch((error) => {
-        this.$store.commit('error', error)
-        this.url = null
-        this.exists = false
+        if (error.code && error.code === 'storage/object-not-found') {
+          this.url = null
+          this.exists = false
+        } else this.$store.commit('error', error)
       })
     }
   }
 }
 </script>
+
+<style scoped>
+.inline {
+  display: inline-block;
+}
+</style>
