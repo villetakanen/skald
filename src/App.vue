@@ -1,8 +1,7 @@
 <template>
-  <v-app>
+  <v-app :class="theme">
     <div
       id="cover"
-      :class="theme"
       :style="sitePoster">
       <div
         v-if="sitePoster !== null"
@@ -105,7 +104,7 @@ export default {
     newContent: false,
     drawer: false,
     timeout: 10000000,
-    theme: 'Skald',
+    // theme: 'Skald',
     scrollFab: false,
     snackbar: false
     //
@@ -113,6 +112,9 @@ export default {
   computed: {
     version () {
       return this.$store.getters.version()
+    },
+    theme () {
+      return this.$store.getters['site/theme']()
     },
     sitePoster () {
       const url = this.$store.getters['sites/posterURL']()
