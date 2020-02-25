@@ -12,28 +12,8 @@
       <v-col
         md='6'
         cols='12'>
-        <v-card>
-          <v-card-text>
-            <Loading v-if="loading"/>
-            <div v-if="!loading">
-               <h1>Images</h1>
-               <template v-for="(file, index) in files">
-                <div class="attachment" v-bind:key="index">
-                  <div class="preview">
-                    <img :src="file.path" :alt="file.name"/>
-                  </div>
-                  <p class="name">[wiki:<a :href="file.path">{{file.name}}</a>]</p>
-                  <div class="actions"><v-btn
-                    x-small
-                    class="ml-2"
-                    outlined
-                    @click="deleteFile(file.name)">Delete</v-btn>
-                  </div>
-                  </div>
-              </template>
-            </div>
-          </v-card-text>
-        </v-card>
+        <SiteImagesListingCard
+          :siteid="siteid"/>
       </v-col>
       <v-col
         md='6'
@@ -46,38 +26,19 @@
 </template>
 
 <script>
-import Loading from '../components/Loading'
 import TabTitle from '../components/TabTitle'
 import SiteUploadsListingCard from '../components/site/SiteUploadsListingCard'
+import SiteImagesListingCard from '../components/site/SiteImagesListingCard'
 
 export default {
   components: {
-    Loading,
     TabTitle,
-    SiteUploadsListingCard
+    SiteUploadsListingCard,
+    SiteImagesListingCard
   },
   props: [
     'siteid'
-  ],
-  computed: {
-    loading () {
-      return this.$store.getters['attachments/loading']()
-    },
-    files () {
-      return this.$store.getters['attachments/files']()
-    }
-  },
-  mounted: function () {
-    this.$store.dispatch('attachments/fetch', { siteid: this.siteid })
-  },
-  methods: {
-    deleteFile (filename) {
-      this.$store.dispatch('attachments/delete', {
-        siteid: this.siteid,
-        filename: filename
-      })
-    }
-  }
+  ]
 }
 </script>
 
@@ -119,7 +80,7 @@ div.attachment{
   }
 }
 div.attachment:hover{
-  background-color: rgba(0, 0, 0, 0.2)
+  background-color: rgba(0, 0, 0, 0.5)
 }
 div.attachment + div.attachment {
   border-top: solid 1px #666;
