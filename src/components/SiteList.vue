@@ -1,10 +1,13 @@
 <template>
-    <v-container
-    fluid
-    grid-list-md>
-    <v-layout wrap>
+  <v-container
+    ma-0
+    pa-0>
+    <v-row>
     <template v-for="(site, index) in sites">
-      <v-flex xs6 md3 v-bind:key="index">
+      <v-col
+        md="3"
+        cols="6"
+        v-bind:key="index">
         <v-card
           >
           <v-img
@@ -26,10 +29,10 @@
             {{site.description}}
           </v-card-text>
         </v-card>
-      </v-flex>
+      </v-col>
     </template>
-    </v-layout>
-    </v-container>
+    </v-row>
+  </v-container>
 </template>
 <script>
 export default {
