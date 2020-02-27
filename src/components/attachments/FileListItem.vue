@@ -2,7 +2,10 @@
   <div class="list_row">
 
     <!-- div wrapper required for styling svg with the ~same params, than other images -->
-    <div class="preview"><img :src="url" :alt="name"/></div>
+    <div class="preview">
+      <img v-if="type != 'upload'" :src="url" :alt="name"/>
+      <v-icon v-if="type == 'upload'">mdi-file</v-icon>
+    </div>
     <p>[attach: <a :href="url">{{name}}</a>]</p>
     <div class="actions">
       <v-btn
@@ -23,7 +26,8 @@ export default {
   props: [
     'name',
     'path',
-    'url'
+    'url',
+    'type'
   ],
   methods: {
     deleteFile () {

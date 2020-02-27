@@ -9,20 +9,15 @@
       <Loading center v-if="loading"/>
       <div v-if="!loading">
         <template v-for="(file, index) in fileList">
-          <div class="attachment" v-bind:key="index">
-            <div class="preview">
-              <v-icon>mdi-file</v-icon>
-            </div>
-            <p class="name">[file:<a :href="file.path">{{file.name}}</a>]</p>
-                  <div class="actions"><v-btn
-                    x-small
-                    class="ml-2"
-                    outlined
-                    @click="deleteFile(file.name)">Delete</v-btn>
-                  </div>
-                  </div>
-              </template>
-            </div>
+          <FileListItem
+                v-bind:key="index"
+                :name="file.name"
+                :url="file.path"
+                type="upload"
+                :path="`${siteid}/uploads/${file.name}`"
+                v-on:refresh="refresh()"/>
+        </template>
+      </div>
     </v-card-text>
   </v-card>
 </template>
@@ -32,11 +27,13 @@ import Loading from '../Loading.vue'
 import FileUploadButton from '../attachments/FileUploadButton'
 import firebase from 'firebase/app'
 import 'firebase/storage'
+import FileListItem from '../attachments/FileListItem'
 
 export default {
   components: {
     Loading,
-    FileUploadButton
+    FileUploadButton,
+    FileListItem
   },
   props: [
     'siteid'
@@ -46,14 +43,14 @@ export default {
     loading: true
   }),
   methods: {
-    deleteFile (filename) {
+    /* bdeleteFile (filename) {
       const storage = firebase.storage()
       const fileRef = storage.ref(this.siteid + '/uploads/' + filename)
 
       fileRef.delete().then(() => {
         this.refresh()
       })
-    },
+    }, */
     refresh () {
       this.fileList = []
 
