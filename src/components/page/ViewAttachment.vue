@@ -10,7 +10,7 @@
         v-if="!view"
         @click="dialog=!dialog"
         color="primary"
-        class="add-image-button"
+        class="button-add-image"
         text>upload {{path}}</v-btn>
     </p>
     <v-dialog

@@ -3,6 +3,7 @@
     color="primary"
     :x-small="inline"
     :outlined="inline"
+    class="button-add-file"
     @click="dialog=!dialog">Add
     <v-dialog
       v-model="dialog"

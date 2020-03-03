@@ -2,7 +2,7 @@
   <div class="fileUpload">
     <span v-if="loading"><Loading inline/></span>
     <span v-if="!loading">
-      <template v-if="!exists">
+      <template v-if="!exists && isAuthz">
         <span class="filename">{{fileName}}</span> not found:
         <FileUploadButton
           :siteid="siteid"
@@ -44,6 +44,9 @@ export default {
     },
     siteid () {
       return this.path.split('/')[0]
+    },
+    isAuthz () {
+      return this.$store.getters.isAuthz()
     }
   },
   methods: {
