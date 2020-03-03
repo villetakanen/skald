@@ -3,10 +3,15 @@
     <!-- This is the image itself, if it exists -->
     <img
       class = "attachment"
-      alt="-" v-if="exists" :src="url"/>
+      :alt="path" v-if="exists" :src="url"/>
     <!-- upload -->
-    <p v-if="!exists && !view">
-      &nbsp;<v-btn v-if="!view" @click="dialog=!dialog" color="primary" text>upload {{path}}</v-btn>
+    <p v-if="!exists && !view && isAuthz">
+      <v-btn
+        v-if="!view"
+        @click="dialog=!dialog"
+        color="primary"
+        class="add-image-button"
+        text>upload {{path}}</v-btn>
     </p>
     <v-dialog
       v-model="dialog"
@@ -39,6 +44,11 @@ export default {
   }),
   mounted () {
     this.refresh()
+  },
+  computed: {
+    isAuthz () {
+      return this.$store.getters.isAuthz()
+    }
   },
   methods: {
     cancel () {

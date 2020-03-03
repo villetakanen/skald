@@ -29,7 +29,7 @@ export default {
   },
   computed: {
     isAuthz () {
-      return this.$store.getters.isAuthz
+      return this.$store.getters.isAuthz()
     }
   }
 }

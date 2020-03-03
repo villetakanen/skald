@@ -6,11 +6,17 @@
       <img v-if="type != 'upload'" :src="url" :alt="name"/>
       <v-icon v-if="type == 'upload'">mdi-file</v-icon>
     </div>
-    <p>[attach: <a :href="url">{{name}}</a>]</p>
-    <div class="actions">
+    <p>
+      <template v-if="isAuthz">[attach: </template>
+      <a :href="url">{{name}}</a>
+      <template v-if="isAuthz">]</template>
+    </p>
+    <div
+      class="actions"
+      v-if="isAuthz">
       <v-btn
         small
-        class="ml-2"
+        class="ml-2 button-delete"
         text
         color="primary"
         @click="deleteFile()">Delete</v-btn>
@@ -29,6 +35,11 @@ export default {
     'url',
     'type'
   ],
+  computed: {
+    isAuthz () {
+      return this.$store.getters.isAuthz()
+    }
+  },
   methods: {
     deleteFile () {
       const storage = firebase.storage()

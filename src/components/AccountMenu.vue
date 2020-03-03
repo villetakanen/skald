@@ -4,6 +4,7 @@
       <template v-slot:activator="{ on }">
         <v-btn
           icon
+          id="account-menu-button"
           color="primary"
           v-on="on">
           <v-icon>mdi-account</v-icon>
@@ -65,14 +66,14 @@ export default {
       firebase.auth().signInWithPopup(provider).then((result) => {
         this.$store.dispatch('author/login', result.user)
       }).catch(function (error) {
-        console.log('login failed', error.message)
+        this.$store.commit('error', error)
       })
     },
     logout () {
       firebase.auth().signOut().then(() => {
         this.$store.dispatch('author/logout')
       }).catch(function (error) {
-        console.log('logout failed ' + error)
+        this.$store.commit('error', error)
       })
     }
   }
