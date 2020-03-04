@@ -60,6 +60,11 @@ describe('Render', () => {
     expect(result).toBe('<p><a href="/#/v/skald/4-0-review">4.0 review</a></p>\n')
   })
 
+  it('renders a [wiki:kääpiö] link to skald/kääpiö, when there is no wiki set', () => {
+    const result = renderer.toHtml('[wiki:kääpiö]')
+    expect(result).toBe('<p><a href="/#/v/skald/kääpiö">kääpiö</a></p>\n')
+  })
+
   it('renders a [wiki:test/page] link to test/page', () => {
     const result = renderer.toHtml('it links to [wiki:test/page ]')
     expect(result).toBe('<p>it links to <a href="/#/v/test/page">test/page</a></p>\n')
