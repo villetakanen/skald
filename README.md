@@ -1,56 +1,48 @@
 # Skald
 
-A Gaming focused wiki PWA powered by a Vue.js and Firebase.
+_A Firebase Powered wiki PWA for Role Playing Games._
 
-N.B: this projec contains only the PWA part. The security rules and firestore config required are not available via the GiHub Project.
+A Live Example of the app can be seen at <https://mekanismi.web.app>
+n
+Please note: this GitHub repository does not include the security rules, and firebase config required to run the Wiki. An example of Firebase condig required can be found below. An example Firestore ruleset available upon request.
 
 ## Project setup
 
-- _Tested 12.9.2019, and verified to work -vt._
+Clone the repo, and run:
 
 ```bash
 npm install
 ```
 
-## Deploy
-
-### Setup Firebase hosting
+Create the Firebase project in the Firebase console, and use the Firebase CLI to initialize your App. Rest of this readme expexts you to add Firebase hosting to your app.
 
 ```bash
 firebase init
 ```
 
-Do note: we add a custom site definition to the generated files:
-
-```json
-"site": "mekanismi",
+### Compiles and hot-reloads for development
+ß
+```bash
+npm run serve
 ```
 
-### deploy to firebase
+### Compiles and minifies for production
+
+```bash
+npm run build
+```
+
+## Deploy
 
 ```bash
 firebase deploy
 ```
 
-## Other
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
+## Other usefull commands
 
 ### Lints and fixes files
-```
+
+```bash
 npm run lint
 ```
 
@@ -73,9 +65,7 @@ npm run test:e2e
 ```
 
 ### Run your unit tests
-```
+
+```bash
 npm run test:unit
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
