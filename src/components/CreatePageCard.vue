@@ -6,6 +6,7 @@
         <v-row>
           <v-col>
             <v-text-field
+              id="new-page-name"
               label="Page name"
               placeholder="A new page"
               filled
@@ -67,9 +68,9 @@ export default {
           author: this.$store.getters['author/uid'](),
           nick: this.$store.getters['author/nick']()
         })
-      this.name = null
       this.$emit('closeDialog', true)
       this.$router.push('/v/' + this.siteid + '/' + this.newPageid)
+      this.name = null
     }
   }
 }

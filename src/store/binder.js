@@ -10,7 +10,8 @@ const state = {
   siteid: null,
   loading: false,
   category: null,
-  revisions: []
+  revisions: [],
+  creating: null
   // unsubscribe: null
 }
 const getters = {
@@ -70,6 +71,9 @@ const mutations = {
   loading (context, bool) {
     Vue.set(context, 'loading', bool)
   },
+  creating (context, str) {
+    Vue.set(context, 'creating', str)
+  },
   flush (context) {
     Vue.set(context, 'revisions', [])
   },
@@ -113,11 +117,12 @@ const actions = {
             context.commit('siteid', siteid)
             context.commit('id', pageid)
             context.commit('loading', false)
+            context.commit('creating', false)
           } else {
-            context.commit('loading', false)
-            // @todo: 404 - page does not exist
-            context.commit('pageNotFound', pageid, { root: true })
-            // context.commit('httpStatusCode', '404', { root: true })
+            if (context.state.creating !== siteid + '/' + pageid) {
+              context.commit('loading', false)
+              context.commit('pageNotFound', pageid, { root: true })
+            }
           }
         })
       } else {
@@ -152,6 +157,10 @@ const actions = {
    * @param {*} param1 JSON for page data, see below
    */
   createPage (context, { pageid, name, content, siteid, author, nick }) {
+    // State management - we are posting a page, and some other component might try
+    // to fetch it
+    context.commit('creating', siteid + '/' + pageid)
+
     const np = {
       creator: author,
       creatorNick: nick,

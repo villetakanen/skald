@@ -40,20 +40,22 @@ describe('Editor as logged in user', () => {
   })
   it('Deletes a page from wiki', () => {
 
-  })
-  /* it('Page categories', () => {
-    // login
+  }) 
+  it('Creates a new page with editor, and deletes it', () => {
+    // Login
     cy.visit('/#/testlogin')
     cy.get('#un').type(Cypress.env('TEST_USER_EMAIL'))
     cy.get('#pw').type(Cypress.env('TEST_USER_PASSWORD'))
     cy.get('#login-button').click()
     cy.wait(1000)
 
-    // open editor
-    cy.visit('/#/e/e2e-testing/category-page')
+    // Create page
+    cy.visit('/#/v/e2e-testing')
     cy.wait(1000)
-    cy.get('create').click()
+    cy.get('.v-app-bar__nav-icon').click() // Open the sidebar navigation
+    cy.get('#navi-add-page-action').click()
     cy.wait(300)
-    cy.get('#page-category')
-  }) */
+    cy.get('#new-page-name').type('testing page creation')
+    // @TODO: the actual creation-deletion test
+  })
 })
