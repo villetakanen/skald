@@ -5,6 +5,7 @@ import 'firebase/firestore'
 const state = {
   uid: null,
   nick: null,
+  photoURL: null,
   pageLog: [],
   ssoUser: null,
   unsubscibePageLog: () => {}
@@ -23,8 +24,8 @@ const getters = {
     return context.ssoUser
   },
   photoURL: (context) => () => {
-    if (!context.ssoUser) return null
-    return context.ssoUser.photoURL
+    if (!context.photoURL) return null
+    return context.photoURL
   },
   ssoPhotoURL: (context) => () => {
     if (!context.ssoUser) return null
@@ -49,13 +50,20 @@ const mutations = {
   },
   theme (context, theme) {
     Vue.set(context, 'theme', theme)
+  },
+  setProfileData (context, data) {
+    if (data.photoURL) Vue.set(context, 'photoURL', data.photoURL)
+  },
+  setPhotoURL (context, url) {
+    Vue.set(context, 'photoURL', url)
   }
 }
 const actions = {
   login (context, user) {
     context.commit('setUid', user.uid)
     context.commit('setSSOUser', user)
-    // console.log(user)
+
+    // context.dispatch('savePhotoURL', user.photoURL)
 
     const db = firebase.firestore()
 
@@ -72,6 +80,7 @@ const actions = {
       }
 
       context.commit('setNick', doc.data().nick)
+      context.commit('setProfileData', doc.data())
       // Set theme to light, if the user wants to use the light theme :D
       context.commit('theme', doc.data().vuetifyTheme)
       // Subscribe to author pagelog
@@ -94,6 +103,30 @@ const actions = {
     const db = firebase.firestore()
     const profile = db.collection('profiles').doc(context.state.uid)
     profile.update({ vuetifyTheme: theme })
+  },
+  /**
+   * Saves said photo url to firebase, as the photo url
+   * @param {*} context Vuex context
+   * @param {*} photoURL URL, do note if you post a non valid URL, an error will be thrown.
+   */
+  savePhotoURL (context, photoURL) {
+    try {
+      photoURL = new URL(photoURL).toString()
+    } catch (error) {
+      context.commit('error', error, { root: true })
+    }
+    const db = firebase.firestore()
+    const profile = db.collection('profiles').doc(context.state.uid)
+    profile.update({ photoURL: photoURL }).then(
+      context.commit('setPhotoURL', photoURL)
+    )
+  },
+  removePhotoURL (context) {
+    const db = firebase.firestore()
+    const profile = db.collection('profiles').doc(context.state.uid)
+    profile.update({ photoURL: null }).then(
+      context.commit('setPhotoURL', null)
+    )
   },
   nick (context, nick) {
     if (nick === null || typeof nick === 'undefined') throw new Error()
