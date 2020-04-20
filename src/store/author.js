@@ -21,6 +21,14 @@ const getters = {
   },
   ssoUser: (context) => () => {
     return context.ssoUser
+  },
+  photoURL: (context) => () => {
+    if (!context.ssoUser) return null
+    return context.ssoUser.photoURL
+  },
+  ssoPhotoURL: (context) => () => {
+    if (!context.ssoUser) return null
+    return context.ssoUser.photoURL
   }
 }
 const mutations = {
@@ -47,6 +55,7 @@ const actions = {
   login (context, user) {
     context.commit('setUid', user.uid)
     context.commit('setSSOUser', user)
+    // console.log(user)
 
     const db = firebase.firestore()
 

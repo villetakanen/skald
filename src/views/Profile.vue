@@ -40,6 +40,7 @@
         <AuthorWorkLog/>
       </v-col>
       <v-col md='4'>
+        <AuthorPersonalInfo/>
        <v-card>
           <v-card-text>
             These are the Sites you have been working on!
@@ -59,12 +60,14 @@
 import TabTitle from '../components/TabTitle'
 import AuthorWorkLog from '../components/profile/AuthorWorkLog'
 import ForgetMeButton from '../components/profile/ForgetMeButton'
+import AuthorPersonalInfo from '../components/profile/AuthorPersonalnfo'
 
 export default {
   components: {
     TabTitle,
     AuthorWorkLog,
-    ForgetMeButton
+    ForgetMeButton,
+    AuthorPersonalInfo
   },
   props: [
     'nickname'

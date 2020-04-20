@@ -40,7 +40,7 @@ describe('Editor as logged in user', () => {
   })
   it('Deletes a page from wiki', () => {
 
-  }) 
+  })
   it('Creates a new page with editor, and deletes it', () => {
     // Login
     cy.visit('/#/testlogin')
