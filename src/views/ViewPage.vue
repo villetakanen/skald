@@ -76,6 +76,7 @@
                 </v-btn>
               </v-speed-dial>
           </v-card>
+            <ViewSiteMembers/>
           </div>
           </v-col>
 
@@ -115,13 +116,15 @@ import LatestChanges from '../components/LatestChanges'
 import WikiText from '../components/WikiText'
 import Loading from '../components/Loading'
 import TabTitle from '../components/TabTitle'
+import ViewSiteMembers from '../components/site/ViewSiteMembers'
 
 export default {
   components: {
     LatestChanges,
     WikiText,
     Loading,
-    TabTitle
+    TabTitle,
+    ViewSiteMembers
   },
   props: [
     'pageid',
