@@ -30,6 +30,13 @@ const getters = {
   ssoPhotoURL: (context) => () => {
     if (!context.ssoUser) return null
     return context.ssoUser.photoURL
+  },
+  profile: (context) => () => {
+    return {
+      uid: JSON.stringify(context.uid),
+      nick: JSON.stringify(context.nick),
+      photoURL: JSON.stringify(context.photoURL)
+    }
   }
 }
 const mutations = {

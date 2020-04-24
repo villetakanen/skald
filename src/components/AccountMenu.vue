@@ -23,6 +23,19 @@
             </v-btn>
           </v-list-item-title>
         </v-list-item>
+        <v-list-item>
+          <v-list-item-title>
+            <v-btn
+              outlined
+              rounded
+              large
+              color="primary"
+              @click="socialFacebookLogin">
+              <v-icon>mdi-facebook</v-icon>
+              <span style="padding-left:11px">Facebook</span>
+            </v-btn>
+          </v-list-item-title>
+        </v-list-item>
       </v-list>
       <v-list v-if="isAuthz">
         <v-subheader>Welcome {{nick}}</v-subheader>
@@ -63,6 +76,14 @@ export default {
   methods: {
     socialGoogleLogin () {
       const provider = new firebase.auth.GoogleAuthProvider()
+      firebase.auth().signInWithPopup(provider).then((result) => {
+        this.$store.dispatch('author/login', result.user)
+      }).catch(function (error) {
+        this.$store.commit('error', error)
+      })
+    },
+    socialFacebookLogin () {
+      const provider = new firebase.auth.FacebookAuthProvider()
       firebase.auth().signInWithPopup(provider).then((result) => {
         this.$store.dispatch('author/login', result.user)
       }).catch(function (error) {

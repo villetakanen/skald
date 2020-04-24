@@ -35,6 +35,18 @@
             <ForgetMeButton/>
           </v-card-text>
         </v-card>
+        <v-card class="my-4">
+          <v-card-text>
+            <h1>All SSO data</h1>
+              <template v-for="(object, index) in ssodata">
+                <p v-bind:key="index">{{index}}: {{object}}</p>
+              </template>
+            <h1>All Profile data</h1>
+            <template v-for="(object, index) in profiledata">
+                <p v-bind:key="index">{{index}}: {{object}}</p>
+              </template>
+          </v-card-text>
+        </v-card>
       </v-col>
       <v-col md='4'>
         <AuthorWorkLog/>
@@ -76,6 +88,12 @@ export default {
     newNick: null
   }),
   computed: {
+    ssodata () {
+      return JSON.parse(stringify(this.$store.getters['author/ssoUser']()))
+    },
+    profiledata () {
+      return this.$store.getters['author/profile']()
+    },
     pageLog () {
       return this.$store.getters['author/pageLog']()
     },
@@ -110,6 +128,32 @@ export default {
         this.$router.push('/u/' + this.newNick)
       })
     }
+  }
+}
+function stringify (obj, replacer, spaces, cycleReplacer) {
+  return JSON.stringify(obj, serializer(replacer, cycleReplacer), spaces)
+}
+
+function serializer (replacer, cycleReplacer) {
+  const stack = []
+  const keys = []
+
+  if (cycleReplacer == null) {
+    cycleReplacer = function (key, value) {
+      if (stack[0] === value) return '[Circular ~]'
+      return '[Circular ~.' + keys.slice(0, stack.indexOf(value)).join('.') + ']'
+    }
+  }
+
+  return function (key, value) {
+    if (stack.length > 0) {
+      var thisPos = stack.indexOf(this)
+      ~thisPos ? stack.splice(thisPos + 1) : stack.push(this)
+      ~thisPos ? keys.splice(thisPos, Infinity, key) : keys.push(key)
+      if (~stack.indexOf(value)) value = cycleReplacer.call(this, key, value)
+    } else stack.push(value)
+
+    return replacer == null ? value : replacer.call(this, key, value)
   }
 }
 </script>
