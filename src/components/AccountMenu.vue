@@ -84,6 +84,7 @@ export default {
     },
     socialFacebookLogin () {
       const provider = new firebase.auth.FacebookAuthProvider()
+      provider.addScope('email')
       firebase.auth().signInWithPopup(provider).then((result) => {
         this.$store.dispatch('author/login', result.user)
       }).catch(function (error) {

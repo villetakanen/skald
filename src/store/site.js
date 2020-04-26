@@ -31,6 +31,9 @@ const getters = {
   members: (context) => () => {
     return context.members
   },
+  isMember: (context) => (uid) => {
+    return _.keys(context.members).includes(uid) || _.keys(context.owners).includes(uid)
+  },
   description: (context) => () => {
     return context.data.description
   },

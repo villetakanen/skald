@@ -102,6 +102,12 @@ export default {
       this.$router.push('/v/' + this.siteid + '/' + this.pageid)
       return
     }
+    // If the user is not a member of the site, the firebase db will not let user to save the page
+    if (!this.$store.getters['site/isMember'](this.$store.getters['author/uid']())) {
+      this.$store.commit('error', 'To edit this page: please ask an owner of this group to add you to site members')
+      this.$router.push('/v/' + this.siteid + '/' + this.pageid)
+      return
+    }
     // If we reach this view without a page-id, we assume we want to
     // edit the root page of the site
     if (!this.pageid) this.pageid = this.siteid
