@@ -73,13 +73,13 @@ export default {
     firebase.initializeApp(config)
 
     firebase.firestore().enablePersistence()
-      .catch(function (err) {
+    /* .catch(function (err) {
         if (err.code === 'failed-precondition') {
           console.log(err)
         } else if (err.code === 'unimplemented') {
           console.log(err)
         }
-      })
+      }) */
 
     Vue.prototype.$skaldURI = skaldURI
     Vue.prototype.$fireStoreURL = fireStoreURL
