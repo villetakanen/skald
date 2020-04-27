@@ -1,4 +1,8 @@
 {
+  "navigation_to_pages": "Pages",
+  "navigation_to_attachments": "Attachments",
+  "navigation_to_site_settings": "Site Settings",
+  "navigation_action_add_page": "Add a Page",
   "set_lang_subheader": "Language",
   "set_lang_fi": "FI",
   "set_lang_en": "EN"

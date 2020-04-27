@@ -9,7 +9,7 @@
 
       <v-list-item id="nav-page-list-link" :to="'/l/pages/'+siteid">
         <v-list-item-action><v-icon>mdi-file-tree</v-icon></v-list-item-action>
-        <v-list-item-title >Pages</v-list-item-title>
+        <v-list-item-title >{{$t('navigation_to_pages')}}</v-list-item-title>
       </v-list-item>
 
       <!-- @click: CreatePageCard, the dialog for adding a page -->
@@ -19,14 +19,14 @@
         id="navi-attachment-list-link"
         :to="'/l/attachments/'+siteid">
         <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>
-        <v-list-item-title >Attachments</v-list-item-title>
+        <v-list-item-title >{{$t('navigation_to_attachments')}}</v-list-item-title>
       </v-list-item>
 
       <v-list-item
         id="navi-site-settings-link"
         :to="'/c/site/'+siteid">
         <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
-        <v-list-item-title >Settings</v-list-item-title>
+        <v-list-item-title >{{$t('navigation_to_site_settings')}}</v-list-item-title>
       </v-list-item>
     </template>
 

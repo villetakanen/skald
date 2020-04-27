@@ -4,7 +4,7 @@
     :inactive="!isAuthz"
     @click="openDialog">
     <v-list-item-action><v-icon>mdi-file-plus</v-icon></v-list-item-action>
-    <v-list-item-title>New Page</v-list-item-title>
+    <v-list-item-title>{{$t('navigation_action_add_page')}}</v-list-item-title>
     <v-dialog
       v-if="isAuthz"
       v-model="dialog"

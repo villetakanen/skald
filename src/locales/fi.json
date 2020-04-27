@@ -1,5 +1,9 @@
 {
-    "set_lang_subheader": "Kieli",
-    "set_lang_fi": "FI",
-    "set_lang_en": "EN"
-  }
+  "navigation_to_pages": "Sivut",
+  "navigation_to_attachments": "Liitteet",
+  "navigation_to_site_settings": "Sivuston hallinta",
+  "navigation_action_add_page": "Luo sivu",
+  "set_lang_subheader": "Kieli",
+  "set_lang_fi": "FI",
+  "set_lang_en": "EN"
+}
