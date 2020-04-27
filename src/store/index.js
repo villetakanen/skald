@@ -13,6 +13,7 @@ Vue.use(Vuex)
 
 const state = {
   version: unescape(process.env.VERSION || '%7Bversion%3A0%7D'),
+  siteName: process.env.VUE_APP_SITE_NAME,
   pageNotFound: null,
   error: null,
   snack: null,
@@ -24,6 +25,12 @@ const getters = {
    */
   version: (context) => () => {
     return context.version
+  },
+  /**
+   * Returns the version number
+   */
+  siteName: (context) => () => {
+    return context.siteName
   },
   /**
    * If the author module has a set UID, we should have an actual logged in user.

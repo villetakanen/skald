@@ -24,7 +24,8 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <img style="height:48px;margin-right:8px;margin-left:8px" alt="S" src="./assets/fox.svg" id="sitelogo"/>
       <v-toolbar-title class="headline text-uppercase">
-        Skald<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span> {{version}}
+        {{siteName}}<span style="text-transform:lowercase;font-style:italic;font-size:0.7em">β</span>
+        <span style="opacity: 50%; font-size: 0.7em; vertical-align: top; padding-left: 0.5em">{{version}}</span>
       </v-toolbar-title>
 
      <v-spacer></v-spacer>
@@ -112,6 +113,9 @@ export default {
   computed: {
     version () {
       return this.$store.getters.version()
+    },
+    siteName () {
+      return this.$store.getters.siteName()
     },
     theme () {
       return this.$store.getters['site/theme']()
