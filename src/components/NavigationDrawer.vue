@@ -34,13 +34,13 @@
     <v-list-item :to="'/'">
       <v-list-item-action><v-icon>mdi-home</v-icon></v-list-item-action>
 
-      <v-list-item-title >Home</v-list-item-title>
+      <v-list-item-title >{{$t('navigation_to_skald_home')}}</v-list-item-title>
     </v-list-item>
 
     <v-list-item :to="'/l/sites'">
       <v-list-item-action><v-icon>mdi-view-dashboard</v-icon></v-list-item-action>
 
-      <v-list-item-title>All sites</v-list-item-title>
+      <v-list-item-title>{{$t('navigation_to_site_index')}}</v-list-item-title>
     </v-list-item>
 
     <v-list-item :to="'/v/skald/beta-about'">
