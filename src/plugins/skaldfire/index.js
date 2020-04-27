@@ -45,6 +45,16 @@ const fireStoreURL = function (path) {
   })
 }
 
+const toPageID = function (siteid, pageid) {
+  if (pageid) return pageid
+  else return this.toSiteID(siteid)
+}
+
+const toSiteID = function (siteid) {
+  if (siteid) return siteid
+  else return 'skald'
+}
+
 // This exports the plugin object.
 export default {
   // The install method will be called with the Vue constructor as
@@ -62,7 +72,18 @@ export default {
     }
     firebase.initializeApp(config)
 
+    firebase.firestore().enablePersistence()
+      .catch(function (err) {
+        if (err.code === 'failed-precondition') {
+          console.log(err)
+        } else if (err.code === 'unimplemented') {
+          console.log(err)
+        }
+      })
+
     Vue.prototype.$skaldURI = skaldURI
     Vue.prototype.$fireStoreURL = fireStoreURL
+    Vue.prototype.$toPageID = toPageID
+    Vue.prototype.$toPageID = toSiteID
   }
 }

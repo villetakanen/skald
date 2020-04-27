@@ -3,7 +3,7 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import Vue from 'vue'
 
-const LS_SITE_LIST = 'store/site/list'
+// const LS_SITE_LIST = 'store/site/list'
 
 const state = {
   list: {},
@@ -68,14 +68,14 @@ const actions = {
      * @param {*} contex Vuex context
      */
   init (context) {
-    const cachedList = window.localStorage.getItem(LS_SITE_LIST)
+    /* const cachedList = window.localStorage.getItem(LS_SITE_LIST)
     if (cachedList) {
       try {
         context.commit('setList', JSON.parse(cachedList))
       } catch (e) {
         context.commit('error', e.message, { root: true })
       }
-    }
+    } */
 
     const db = firebase.firestore()
     db.collection('sites').orderBy('lastUpdate', 'desc').onSnapshot((querySnapshot) => {
@@ -100,7 +100,7 @@ const actions = {
           }
         }
       })
-      window.localStorage.setItem(LS_SITE_LIST, JSON.stringify(context.state.list))
+      // window.localStorage.setItem(LS_SITE_LIST, JSON.stringify(context.state.list))
     })
   },
   /**
