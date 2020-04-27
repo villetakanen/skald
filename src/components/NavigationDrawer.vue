@@ -57,6 +57,11 @@
 
       <v-list-item-title >{{version}}</v-list-item-title>
     </v-list-item>
+
+    <v-divider></v-divider>
+
+    <LanguageSwitcher/>
+
     <!--v-list-item :to="'/stylebook'">
       <v-list-item-action><v-icon>mdi-fridge</v-icon></v-list-item-action>
 
@@ -67,10 +72,12 @@
 
 <script>
 import AddPageListItem from './AddPageListItem'
+import LanguageSwitcher from './LanguageSwitcher'
 
 export default {
   components: {
-    AddPageListItem
+    AddPageListItem,
+    LanguageSwitcher
   },
   computed: {
     version () {
