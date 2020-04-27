@@ -123,14 +123,15 @@ export default class Skaldmd {
   }
 
   parseText (line) {
+    const wikiTextExpr = '[-a-zA-Z \\x2c\\x2e\\x5B\\x3A\\x7C\\x5D\\x2F]'
     // Italics
-    let re = new RegExp('( _|^_)([-a-zA-Z \\x2c\\x2e]*)(_ |_$)', 'gm')
+    let re = new RegExp('( _|^_)(' + wikiTextExpr + '*)(_ |_$)', 'gmu')
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {
-      return '<i> ' + p2 + ' </i>'
+      return ' <i>' + p2 + '</i>'
     })
-    re = new RegExp('(\\*)([^\\*]*)(\\*)', 'gm')
+    re = new RegExp('( \\*|^\\*)(' + wikiTextExpr + '*)(\\* |\\*$)', 'gmu')
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {
-      return '<b>' + p2 + '</b>'
+      return ' <b>' + p2 + '</b>'
     })
     line = this.rendDice(line)
     line = this.rendColors(line)
