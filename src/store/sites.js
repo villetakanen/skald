@@ -3,6 +3,8 @@ import 'firebase/firestore'
 import 'firebase/storage'
 import Vue from 'vue'
 
+const LS_SITE_LIST = 'store/site/list'
+
 const state = {
   list: {},
   description: {},
@@ -44,6 +46,9 @@ const mutations = {
     }
     Vue.set(state.list, key, data)
   },
+  setList (context, list) {
+    Vue.set(context, 'list', list)
+  },
   setDescription (context, desc) {
     Vue.set(context, 'description', desc)
   },
@@ -63,6 +68,15 @@ const actions = {
      * @param {*} contex Vuex context
      */
   init (context) {
+    const cachedList = window.localStorage.getItem(LS_SITE_LIST)
+    if (cachedList) {
+      try {
+        context.commit('setList', JSON.parse(cachedList))
+      } catch (e) {
+        context.commit('error', e.message, { root: true })
+      }
+    }
+
     const db = firebase.firestore()
     db.collection('sites').orderBy('lastUpdate', 'desc').onSnapshot((querySnapshot) => {
       querySnapshot.forEach((doc) => {
@@ -86,6 +100,7 @@ const actions = {
           }
         }
       })
+      window.localStorage.setItem(LS_SITE_LIST, JSON.stringify(context.state.list))
     })
   },
   /**

@@ -5,7 +5,7 @@
       :class="`subtopic ${titleColorClass}`">{{sub}}</h1>
     <h1
       v-if="topic"
-      :class="`topic ${titleColorClass}`">{{topic}}</h1>
+      :class="`topic ${titleColorClass}`">{{topic}} &nbsp;</h1>
   </div>
 </template>
 

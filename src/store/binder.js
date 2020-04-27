@@ -3,6 +3,8 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import _ from 'lodash'
 
+const LS_PAGE_SLUG = 'store/binder/pages'
+
 const state = {
   title: null,
   content: null,
@@ -101,7 +103,18 @@ const actions = {
    * @param {vuex context} context Vuex context
    */
   openPage (context, { siteid, pageid, skiploading }) {
-    if (!skiploading) context.commit('loading', true)
+    const cachedPage = window.localStorage.getItem(LS_PAGE_SLUG + siteid + '/' + pageid)
+    if (cachedPage) {
+      try {
+        const cachedState = JSON.parse(cachedPage)
+        context.commit('data', cachedState)
+        context.commit('setLoading', false)
+      } catch (e) {
+        context.commit('error', e.message, { root: true })
+      }
+    }
+
+    if (!skiploading && !cachedPage) context.commit('loading', true)
     // get the firestore
     const db = firebase.firestore()
 
@@ -118,6 +131,8 @@ const actions = {
             context.commit('id', pageid)
             context.commit('loading', false)
             context.commit('creating', false)
+            window.localStorage.setItem(LS_PAGE_SLUG + siteid + '/' + pageid,
+              JSON.stringify(context.state))
           } else {
             if (context.state.creating !== siteid + '/' + pageid) {
               context.commit('loading', false)

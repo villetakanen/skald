@@ -1,4 +1,4 @@
-import { skaldURI } from '../plugins/skaldfire.js'
+import { skaldURI } from '../plugins/skaldfire'
 
 const NEWLINE = '\n'
 
