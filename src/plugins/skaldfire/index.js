@@ -72,14 +72,9 @@ export default {
     }
     firebase.initializeApp(config)
 
+    /* Quite Boringly: we just enable this with the defaults, if the browser supports
+       persistence. If it does not, an error is thrown here */
     firebase.firestore().enablePersistence()
-    /* .catch(function (err) {
-        if (err.code === 'failed-precondition') {
-          console.log(err)
-        } else if (err.code === 'unimplemented') {
-          console.log(err)
-        }
-      }) */
 
     Vue.prototype.$skaldURI = skaldURI
     Vue.prototype.$fireStoreURL = fireStoreURL
