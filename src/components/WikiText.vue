@@ -10,11 +10,12 @@
 <script>
 import ViewAttachment from './page/ViewAttachment.vue'
 import ViewUpload from './page/ViewUpload.vue'
+import GameTrack from './site/GameTrack.vue'
 import Vue from 'vue'
 import Skaldmd from '../lib/skaldmd'
 Vue.component('ViewAttachment', ViewAttachment)
 Vue.component('ViewUpload', ViewUpload)
-
+Vue.component('GameTrack', GameTrack)
 export default {
   props: [
     'content',
@@ -30,6 +31,7 @@ export default {
       // These we need to run on html
       rendedContent = attachLinks(rendedContent, this.siteid)
       rendedContent = fileLinks(rendedContent, this.siteid)
+      rendedContent = tracks(rendedContent, this.siteid)
 
       return {
         template: '<div>' + rendedContent + '</div>'
@@ -64,6 +66,17 @@ function fileLinks (page, siteid) {
       return `<ViewUpload path="${siteid}/uploads/${parts[0].trim()}" title="${parts[1].trim()}"/>`
     }
     return `<ViewUpload path="${siteid}/uploads/${p1}"/>`
+  })
+}
+/**
+ * [track Kalkki-Tarmo]
+ */
+function tracks (page, siteid) {
+  const re = new RegExp('\\[track([a-öA-Ö. \\-_0-9]*)\\]', 'gmu')
+  return page.replace(re, (match, p1) => {
+    const name = p1.trim()
+    if (name) return `<GameTrack site="${siteid}" id="${name}"/>`
+    return '[track: ... ]'
   })
 }
 </script>

@@ -7,5 +7,10 @@
   "navigation_action_add_page": "Add a Page",
   "set_lang_subheader": "Language",
   "set_lang_fi": "FI",
-  "set_lang_en": "EN"
+  "set_lang_en": "EN",
+  "GameTrack": { 
+    "Create": "Create track",
+    "Edit": "Edit",
+    "EditingDone": "Close Edit"
+  }
 }
