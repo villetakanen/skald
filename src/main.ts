@@ -10,19 +10,18 @@ import i18n from './i18n'
 
 // Here it gets interesting: bring in the Firebase and our middleware
 import firebase from 'firebase/app'
-import skaldfire from './plugins/skaldfire'
+import { Skaldfire } from './plugins/skaldfire'
 
 Vue.config.productionTip = false
 
 // Firestore is initiated here!
-Vue.use(skaldfire)
+Vue.use(Skaldfire)
 
 new Vue({
   router,
   store,
   i18n,
   vuetify,
-  skaldfire,
   created: function () {
     // Fetch all base site pages to Vuex store
     store.dispatch('metaBinder/init')

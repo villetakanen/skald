@@ -2,6 +2,7 @@ var manifestJSON = require('./public/manifest.json')
 
 module.exports = {
   runtimeCompiler: true,
+  transpileDependencies: ['vuetify'],
   pwa: {
     workboxPluginMode: 'InjectManifest',
     workboxOptions: {

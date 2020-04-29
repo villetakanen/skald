@@ -10,7 +10,7 @@
 <script>
 import ViewAttachment from './page/ViewAttachment.vue'
 import ViewUpload from './page/ViewUpload.vue'
-import GameTrack from './site/GameTrack.vue'
+import GameTrack from './trackers/GameTrack.vue'
 import Vue from 'vue'
 import Skaldmd from '../lib/skaldmd'
 Vue.component('ViewAttachment', ViewAttachment)

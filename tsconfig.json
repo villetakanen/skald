@@ -11,10 +11,15 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "baseUrl": ".",
+    "baseUrl": ".","typeRoots": [
+      "./node_modules/@types",
+      "./node_modules/vuetify/types"
+    ],
     "types": [
       "webpack-env",
-      "jest"
+      "jest",
+      "vuetify",
+      "skaldfire"
     ],
     "paths": {
       "@/*": [
