@@ -13,19 +13,19 @@
     >
       <!-- Editing -->
       <div v-if="modeEdit">
-        Editing {{track}}
-        <template v-for="(type, index) in track">
-          <div
-             style="display: inline-block"
-             v-bind:key="index">
-             <TrackTicker
-               disabled
-               :type="type"
-               :index="index"
-               :clock="clock"
-              />
-          </div>
-        </template>
+        <div
+          class="track"
+          :style="`width: ${trackWidth}`">
+          <template v-for="(type, index) in track">
+            <TrackTicker
+              v-bind:key="index"
+              :type="type"
+              :index="index"
+              :checked="! (clock < index + 1)"
+              v-on:clicked="trackUpdate"
+            />
+          </template>
+        </div>
         <v-btn
           x-small
           outlined
@@ -40,25 +40,42 @@
         </div>
         <v-btn
           icon
+          color="secondary"
           @click="addStep(newType)">
           <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        <v-btn
+          icon
+          color="secondary"
+          @click="dropStep()">
+          <v-icon>mdi-minus</v-icon>
         </v-btn>
       </div>
 
       <!-- Using -->
-      <div v-if="!modeEdit">
-        Using ({{clock}})
-        <template v-for="(type, index) in track">
-          <div
-             style="display: inline-block"
-             v-bind:key="index">
-            <TrackTicker
-               :type="type"
-               :index="index"
-               :clock="clock"
+      <div
+        v-if="!modeEdit"
+      >
+        <div
+          class="track"
+          :style="`width: ${trackWidth}`">
+          <template v-for="(type, index) in track">
+            <div v-bind:key="index">
+              <TrackTicker
+                v-if="type ==='box' || type ==='circle'"
+                :type="type"
+                :index="index"
+                :checked="! (clock < index + 1)"
+                v-on:clicked="trackUpdate"
               />
-          </div>
-        </template>
+              <div
+                class="trackseparator"
+                v-if="type === 'line'">
+                <p>//</p>
+              </div>
+            </div>
+          </template>
+        </div>
         <v-btn
           x-small
           outlined
@@ -87,10 +104,17 @@ export default {
     track: null,
     creator: null,
     modeEdit: false,
-    types: ['box', 'circle'],
+    types: ['box', 'circle', 'line'],
     newType: 'box',
-    clock: 4
+    clock: 0
   }),
+  computed: {
+    trackWidth () {
+      if (!this.track) return '1em'
+      const width = (this.track.length * 30 + 4)
+      return width + 'px'
+    }
+  },
   methods: {
     /**
      * Create a new Track in the Site
@@ -111,6 +135,7 @@ export default {
       trackRef.onSnapshot((doc) => {
         const data = doc.data()
         this.track = data.track
+        this.clock = data.clock ? data.clock : 0
         this.creator = data.creator
         /* var source = doc.metadata.hasPendingWrites ? "Local" : "Server";
         console.log(source, " data: ", doc.data()); */
@@ -122,6 +147,17 @@ export default {
       const nTrack = this.track ? this.track : []
       nTrack.push(type)
       trackRef.update({ track: nTrack })
+    },
+    dropStep () {
+      const db = firebase.firestore()
+      const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.id)
+      const nTrack = this.track
+      nTrack.pop()
+      trackRef.update({ track: nTrack })
+    },
+    trackUpdate (event) {
+      if (this.clock === event + 1) this.clock = event
+      else this.clock = event + 1
     }
   },
   created () {
@@ -137,6 +173,27 @@ export default {
   background-color: RGBA(0,0,0,0.5);
   h1 {
     color: white;
+  }
+}
+.track {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  margin: 4px;
+  .trackseparator {
+    text-align: center;
+    width: 22px;
+    color: black;
+    position: relative;
+    p {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      left: 5px;
+      top: 3px;
+      line-height: 22px;
+    }
   }
 }
 </style>
