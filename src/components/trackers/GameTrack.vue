@@ -1,6 +1,6 @@
 <template>
   <div class="GameTrack">
-    <h1>{{id}}</h1>
+    <h2 style="padding-left: 8px;">{{id}}</h2>
     <v-btn
       v-if="!creator"
       x-small
@@ -61,7 +61,15 @@
       <!-- Using -->
       <div
         v-if="!modeEdit"
+        style="position:relative"
       >
+        <v-btn
+          style="position:absolute;right:8px;top:-55px;"
+          fab
+          x-small
+          color="primary"
+          @click="modeEdit=true"
+        ><v-icon>mdi-pencil</v-icon></v-btn>
         <div
           class="track"
           :style="`width: ${trackWidth}`">
@@ -82,13 +90,7 @@
             </div>
           </template>
         </div>
-        <v-btn
-          x-small
-          outlined
-          @click="modeEdit=true"
-        >{{$t('GameTrack.Edit')}}</v-btn>
       </div>
-      <p>{{creator}}</p>
     </div>
   </div>
 </template>
@@ -176,7 +178,7 @@ export default {
 <style lang="scss" scoped>
 .GameTrack {
   width: 100%;
-  background-color: RGBA(0,0,0,0.5);
+  border: solid 2px black;
   h1 {
     color: white;
   }
@@ -187,6 +189,7 @@ export default {
   flex-direction: row;
   padding: 2px;
   margin: 4px;
+  position: relative;
   .trackseparator {
     text-align: center;
     width: 30px;
