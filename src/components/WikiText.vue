@@ -11,11 +11,13 @@
 import ViewAttachment from './page/ViewAttachment.vue'
 import ViewUpload from './page/ViewUpload.vue'
 import GameTrack from './trackers/GameTrack.vue'
+import PointCounter from './trackers/PointCounter.vue'
 import Vue from 'vue'
 import Skaldmd from '../lib/skaldmd'
 Vue.component('ViewAttachment', ViewAttachment)
 Vue.component('ViewUpload', ViewUpload)
 Vue.component('GameTrack', GameTrack)
+Vue.component('PointCounter', PointCounter)
 export default {
   props: [
     'content',
@@ -32,6 +34,7 @@ export default {
       rendedContent = attachLinks(rendedContent, this.siteid)
       rendedContent = fileLinks(rendedContent, this.siteid)
       rendedContent = tracks(rendedContent, this.siteid)
+      rendedContent = counters(rendedContent, this.siteid)
 
       return {
         template: '<div>' + rendedContent + '</div>'
@@ -76,6 +79,17 @@ function tracks (page, siteid) {
   return page.replace(re, (match, p1) => {
     const name = p1.trim()
     if (name) return `<GameTrack site="${siteid}" id="${name}"/>`
+    return '[track: ... ]'
+  })
+}
+/**
+ * [track Kalkki-Tarmo]
+ */
+function counters (page, siteid) {
+  const re = new RegExp('\\[counter([a-öA-Ö. \\-_0-9]*)\\]', 'gmu')
+  return page.replace(re, (match, p1) => {
+    const name = p1.trim()
+    if (name) return `<PointCounter max=33 name="${name}"/>`
     return '[track: ... ]'
   })
 }

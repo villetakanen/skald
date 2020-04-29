@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="page-container">
+
       <v-container v-if="loading">
         <v-row>
           <v-col align='center'>
