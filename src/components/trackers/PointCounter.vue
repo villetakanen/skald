@@ -37,7 +37,6 @@ export default class extends Vue {
   name!: String
 
   created () {
-    console.log('PointCounter Created!', this.name, this.current, this.max)
     // If current is not set, and max is set, make currentValue = max
     this.currentValue = this.max > -1 && this.current === -1 ? this.max : this.current
   }
