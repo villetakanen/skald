@@ -17,13 +17,19 @@
           class="track"
           :style="`width: ${trackWidth}`">
           <template v-for="(type, index) in track">
-            <TrackTicker
-              v-bind:key="index"
-              :type="type"
-              :index="index"
-              :checked="! (clock < index + 1)"
-              v-on:clicked="trackUpdate"
-            />
+            <div v-bind:key="index">
+              <TrackTicker
+                v-if="type ==='box' || type ==='circle'"
+                :type="type"
+                :index="index"
+                :checked="! (clock < index + 1)"
+              />
+              <div
+                class="trackseparator"
+                v-if="type === 'line'">
+                <p>//</p>
+              </div>
+            </div>
           </template>
         </div>
         <v-btn
@@ -183,14 +189,14 @@ export default {
   margin: 4px;
   .trackseparator {
     text-align: center;
-    width: 22px;
+    width: 30px;
     color: black;
     position: relative;
     p {
       position: absolute;
       margin: 0;
       padding: 0;
-      left: 5px;
+      left: 10px;
       top: 3px;
       line-height: 22px;
     }
