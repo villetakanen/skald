@@ -1,19 +1,24 @@
 module.exports = {
   root: true,
+
   env: {
     node: true
   },
+
   extends: [
     'plugin:vue/essential',
     '@vue/standard'
   ],
+
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
   },
+
   parserOptions: {
-    parser: 'babel-eslint'
+    parser: '@typescript-eslint/parser'
   },
+
   overrides: [
     {
       files: [
@@ -23,5 +28,11 @@ module.exports = {
         jest: true
       }
     }
+  ],
+
+  extends: [
+    'plugin:vue/essential',
+    '@vue/standard',
+    '@vue/typescript'
   ]
 }
