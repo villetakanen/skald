@@ -166,6 +166,11 @@ export default {
     trackUpdate (event) {
       if (this.clock === event + 1) this.clock = event
       else this.clock = event + 1
+
+      const db = firebase.firestore()
+      const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.id)
+
+      trackRef.update({ clock: this.clock })
     }
   },
   created () {

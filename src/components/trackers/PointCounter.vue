@@ -1,26 +1,38 @@
 <template>
   <div class="PointCounter">
-    <div class="CounterTitle">
-      {{name}}
-    </div>
-    <v-btn
-      class="add"
-      icon><v-icon>mdi-plus</v-icon></v-btn>
-    <div class="values">
-      <div class="current">
-        {{currentValue}}
+    <template v-if="this.exists">
+      <div class="CounterTitle">
+        {{name}}
       </div>
-      <div class="max">
-        {{max}}
+      <v-btn
+        class="add"
+        icon><v-icon>mdi-plus</v-icon></v-btn>
+      <div class="values">
+        <div class="current">
+          {{currentValue}}
+        </div>
+        <div class="max">
+          {{max}}
+        </div>
       </div>
-    </div>
-    <v-btn
-      class="reduce"
-      icon><v-icon>mdi-minus</v-icon></v-btn>
+      <v-btn
+        class="reduce"
+        icon><v-icon>mdi-minus</v-icon></v-btn>
+    </template>
+    <template v-if="!exists">
+      <div class="CounterTitle">
+        {{name}}
+      </div>
+      <v-btn
+        color=secondary
+        @click="addNew"><v-icon>Create</v-icon></v-btn>
+    </template>
   </div>
 </template>
 
 <script lang="ts">
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
@@ -28,17 +40,70 @@ export default class extends Vue {
   @Prop({ default: -1 })
   max!: Number
 
+  maxValue!: Number
+
   @Prop({ default: -1 })
   current!: Number
 
   currentValue!: Number
 
   @Prop({ required: true })
-  name!: String
+  name!: string
+
+  @Prop({ default: 'skald' })
+  site!: string
+
+  exists: boolean = false
+
+  fireBaseUnsubscribe!: Function
 
   created () {
     // If current is not set, and max is set, make currentValue = max
     this.currentValue = this.max > -1 && this.current === -1 ? this.max : this.current
+    this.maxValue = this.max
+
+    const db = firebase.firestore()
+    const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.name)
+
+    trackRef.get().then((doc) => {
+      if (doc.exists) {
+        this.exists = true
+        this.firebaseSubscribe()
+      }
+    })
+  }
+
+  addNew (): void {
+    const db = firebase.firestore()
+    const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.name)
+
+    trackRef.set({
+      type: 'PointsCounter',
+      max: this.maxValue,
+      current: this.currentValue
+    }).then(() => {
+      this.exists = true
+      this.firebaseSubscribe()
+    })
+  }
+
+  firebaseSubscribe (): void {
+    const db = firebase.firestore()
+    const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.name)
+
+    // Subscribe to the tracker in Firebase
+    this.fireBaseUnsubscribe = trackRef.onSnapshot((doc) => {
+      const data = doc.data()
+      if (data) {
+        this.currentValue = data.current ? data.current : -1
+        this.maxValue = data.max ? data.max : -1
+      }
+    })
+  }
+
+  destroyed () {
+    // Stop subscribing to the changes
+    if (this.fireBaseUnsubscribe) this.fireBaseUnsubscribe()
   }
 }
 </script>
