@@ -30,6 +30,8 @@
     "vuex": "^3.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^2.26.0",
     "@typescript-eslint/parser": "^2.26.0",
@@ -48,11 +50,20 @@
     "babel-jest": "^25.4.0",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
+    "husky": "^4.2.5",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
     "typescript": "~3.8.3",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.4.3"
+  },
+  "husky": {
+    "hooks": {
+        "commit-msg": "commitlint -E  HUSKY_GIT_PARAMS"
+     }
+  },
+  "commitlint": {
+    "extends": ["@commitlint/config-conventional"]
   }
 }
