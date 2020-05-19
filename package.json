@@ -1,6 +1,6 @@
 {
   "name": "skald",
-  "version": "0.11.9",
+  "version": "0.11.10",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --https",
@@ -8,7 +8,7 @@
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
     "lint": "vue-cli-service lint",
-    "release": "standard-version && git push"
+    "release": "standard-version"
   },
   "dependencies": {
     "@mdi/font": "^4.9.95",
