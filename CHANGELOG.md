@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.11](https://github.com/vitku/skald/compare/v0.11.10...v0.11.11) (2020-05-19)
+
+
+### Features
+
+* skaldmd as ts ([a6a8f3f](https://github.com/vitku/skald/commit/a6a8f3f7dc6ee3122d20bf28a2f7b4cf9d2a94f6))
+
 ### [0.11.10](https://github.com/vitku/skald/compare/v0.11.9...v0.11.10) (2020-05-19)
 
 ### [0.11.9](https://github.com/vitku/skald/compare/v0.11.8...v0.11.9) (2020-05-19)
