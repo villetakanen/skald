@@ -7,7 +7,8 @@
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "test:e2e": "vue-cli-service test:e2e",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "release": "vue-cli-service lint && vue-cli-service test:unit && standard-version && git push --follow-tags origin $(git branch)"
   },
   "dependencies": {
     "@mdi/font": "^4.9.95",
@@ -53,6 +54,7 @@
     "husky": "^4.2.5",
     "sass": "^1.26.5",
     "sass-loader": "^8.0.2",
+    "standard-version": "^8.0.0",
     "typescript": "~3.8.3",
     "vue-cli-plugin-vuetify": "^2.0.5",
     "vue-template-compiler": "^2.6.11",
@@ -60,10 +62,12 @@
   },
   "husky": {
     "hooks": {
-        "commit-msg": "commitlint -E  HUSKY_GIT_PARAMS"
-     }
+      "commit-msg": "commitlint -E  HUSKY_GIT_PARAMS"
+    }
   },
   "commitlint": {
-    "extends": ["@commitlint/config-conventional"]
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
