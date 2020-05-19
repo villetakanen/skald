@@ -100,7 +100,7 @@ export default class extends Vue {
   }
 
   reducePoints (): void {
-    console.log('reducePoints', this.currentValue, this.maxValue)
+    // console.log('reducePoints', this.currentValue, this.maxValue)
     // Do nothing if we reached max value
     if (this.currentValue < 1) return
     this.currentValue--
