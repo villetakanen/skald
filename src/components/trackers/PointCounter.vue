@@ -5,21 +5,23 @@
         {{name}}
       </div>
       <v-btn
+        @click="addPoints"
         class="add"
         icon><v-icon>mdi-plus</v-icon></v-btn>
       <div class="values">
         <div class="current">
-          {{currentValue}}
+          {{this.currentValue}}
         </div>
         <div class="max">
           {{max}}
         </div>
       </div>
       <v-btn
+        @click="reducePoints"
         class="reduce"
         icon><v-icon>mdi-minus</v-icon></v-btn>
     </template>
-    <template v-if="!exists">
+    <template v-if="!this.exists">
       <div class="CounterTitle">
         {{name}}
       </div>
@@ -38,14 +40,14 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class extends Vue {
   @Prop({ default: -1 })
-  max!: Number
+  max!: number
 
-  maxValue!: Number
+  maxValue!: number
 
   @Prop({ default: -1 })
-  current!: Number
+  current!: number
 
-  currentValue!: Number
+  currentValue!: number
 
   @Prop({ required: true })
   name!: string
@@ -85,6 +87,27 @@ export default class extends Vue {
       this.exists = true
       this.firebaseSubscribe()
     })
+  }
+
+  addPoints (): void {
+    // Do nothing if we reached max value
+    if (this.maxValue > 0 || this.currentValue < this.maxValue + 1) return
+    this.currentValue++
+    const db = firebase.firestore()
+    const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.name)
+
+    trackRef.update({ current: this.currentValue })
+  }
+
+  reducePoints (): void {
+    // console.log('reducePoints', this.currentValue, this.maxValue)
+    // Do nothing if we reached max value
+    if (this.currentValue < 1) return
+    this.currentValue--
+    const db = firebase.firestore()
+    const trackRef = db.collection('sites').doc(this.site).collection('GameTracks').doc(this.name)
+
+    trackRef.update({ current: this.currentValue })
   }
 
   firebaseSubscribe (): void {
