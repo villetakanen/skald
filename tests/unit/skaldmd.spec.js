@@ -1,4 +1,4 @@
-import Skaldmd from '@/lib/skaldmd.js'
+import Skaldmd from '@/lib/skaldmd.ts'
 
 describe('Render', () => {
   let renderer

@@ -13,8 +13,8 @@ import 'firebase/firestore'
  * Replaces a String with a skald uri compatible slug
  * @param {string} s a String to be converted
  */
-export const skaldURI = function (s: string) {
-  if (s === null) return null
+export const skaldURI = function (s: string): string {
+  if (s === null) return ''
   const re = new RegExp('[^a-öA-Ö0-9]', 'gmu')
   var r = s.replace(re, '-')
   while (r.includes('--')) {

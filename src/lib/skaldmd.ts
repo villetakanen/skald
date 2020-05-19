@@ -1,4 +1,4 @@
-import { skaldURI } from '../plugins/skaldfire'
+import { skaldURI } from '@/plugins/skaldfire'
 
 const NEWLINE = '\n'
 
@@ -15,7 +15,12 @@ const DP_CODE = 1003
  * Stream parser for Skald Markdown subsyntax and wikitags
  */
 export default class Skaldmd {
-  constructor (siteid) {
+  siteLinkStub: string
+  parsing: number
+  rendedHtml: string
+  docpart: number
+  ulLevel:number
+  constructor (siteid: string) {
     siteid ? this.siteLinkStub = siteid : this.siteLinkStub = 'skald'
     this.parsing = NONE
     this.rendedHtml = ''
@@ -27,12 +32,12 @@ export default class Skaldmd {
    * Sets current stream parsing mode to mode
    * @param {*} mode NONE, PARAGRAPH, TABLE, UL
    */
-  setMode (mode) {
+  setMode (mode: number) {
     this.resetMode()
     this.parsing = mode
   }
 
-  toHtml (rawContent) {
+  toHtml (rawContent: string) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''
@@ -103,7 +108,7 @@ export default class Skaldmd {
     this.docpart = NONE
   }
 
-  startPart (type) {
+  startPart (type: number) {
     // Trying to start part when in part
     if (type === this.docpart) return
 
@@ -122,7 +127,7 @@ export default class Skaldmd {
     }
   }
 
-  parseText (line) {
+  parseText (line: string) {
     const wikiTextExpr = '[-a-zA-Z \\x2c\\x2e\\x5B\\x3A\\x7C\\x5D\\x2F]'
     // Italics
     let re = new RegExp('( _|^_)(' + wikiTextExpr + '*)(_ |_$)', 'gmu')
@@ -140,12 +145,12 @@ export default class Skaldmd {
     this.rendedHtml += line
   }
 
-  parseCode (line) {
+  parseCode (line: string) {
     if (line.indexOf('```') === 0) this.endPart()
     else this.rendedHtml += line + '<br/>\n'
   }
 
-  rendColors (line) {
+  rendColors (line: string) {
     /* console.log('rendWikiLinks', siteLinkStub, line) */
     const re = new RegExp('\\[color:(.+?)\\[\\/color\\]', 'gmu')
     line = line.replace(re, (match, p1, offset, string) => {
@@ -162,7 +167,7 @@ export default class Skaldmd {
     return line
   }
 
-  rendDice (line) {
+  rendDice (line: string) {
     const re = new RegExp('\\[([0-9]*)d([0-9]*)\\]', 'gm')
     line = line.replace(re, function (match, p1, p2, offset, string) {
       let die = p2
@@ -172,7 +177,7 @@ export default class Skaldmd {
     return line
   }
 
-  parseStatBlock (line) {
+  parseStatBlock (line: string) {
     // console.log('parseStatBlock', line, this.parsing)
     // We are starting to parse a Table, add the table tag
     if (this.parsing !== STATSBLOCK) {
@@ -213,7 +218,7 @@ export default class Skaldmd {
     this.rendedHtml += '</tr>'
   }
 
-  parseHR (line) {
+  parseHR (line: string) {
     this.resetMode()
     this.rendedHtml += '<hr/>\n'
   }
@@ -222,7 +227,7 @@ export default class Skaldmd {
    * Sets mode to UL (no nesting of ul, and table, or ul), and rends the line item
    * @param {string} line the ul
    */
-  parseUL (line) {
+  parseUL (line: string) {
     if (this.parsing !== UL) {
       this.setMode(UL)
       this.rendedHtml += '<ul>\n'
@@ -245,7 +250,7 @@ export default class Skaldmd {
     this.rendedHtml += '</li>\n'
   }
 
-  parseH (line) {
+  parseH (line: string) {
     this.resetMode()
     let level = 1
     if (line.indexOf('##') === 0) level = 2
@@ -260,7 +265,7 @@ export default class Skaldmd {
    * A <p> is found on the stream
    * @param {*} line the linedata
    */
-  parseP (line) {
+  parseP (line: string) {
     if (this.parsing !== PARAGRAPH) {
       // console.log('parseP starts paragraph')
       this.setMode(PARAGRAPH)
@@ -271,7 +276,7 @@ export default class Skaldmd {
     this.parseText(line)
   }
 
-  parseTable (line) {
+  parseTable (line: string) {
     // We are starting to parse a Table, add the table tag
     if (this.parsing !== TABLE) {
       this.setMode(TABLE)
@@ -295,7 +300,7 @@ export default class Skaldmd {
    * Should only be called from parseTable
    * @param {*} line line, inside table mode
    */
-  parseTableRow (line) {
+  parseTableRow (line: string) {
     // remobe pipe at the end, if any!
     if (line[line.length - 1] === '|') line = line.substring(0, line.length - 1)
     // remove pipe at the beginning
@@ -319,7 +324,7 @@ export default class Skaldmd {
     })
   }
 
-  rendWikiLinks (line) {
+  rendWikiLinks (line: string) {
     /* console.log('rendWikiLinks', siteLinkStub, line) */
     const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gmu')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
@@ -337,7 +342,7 @@ export default class Skaldmd {
     return line
   }
 
-  rendURLLinks (line) {
+  rendURLLinks (line: string) {
     const re = new RegExp('([\\[(]url:)(.+?)([\\])])', 'gmu')
     line = line.replace(re, (match, p1, p2, p3, offset, string) => {
       const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
@@ -346,120 +351,4 @@ export default class Skaldmd {
     })
     return line
   }
-
-  /* skaldURI (s) {
-    if (s === null) return null
-    var re = new RegExp('[^\\p{L}]', 'gmu')
-    var r = s.replace(re, '-')
-    while (r.includes('--')) {
-      r = r.split('--').join('-')
-    }
-    return r.toLowerCase()
-  } */
-
-  /* console.log
-  (inArrayBool)
-      // h1...h4
-      if (line.substring(0, 2) === '# ') rendedHtml += '<h1>' + this.rendLine(line.substring(2)) + '</h1>\n'
-      else if (line.substring(0, 3) === '## ') rendedHtml += '<h2>' + this.rendLine(line.substring(3)) + '</h2>\n'
-      else if (line.substring(0, 4) === '### ') rendedHtml += '<h3>' + this.rendLine(line.substring(4)) + '</h3>\n'
-      else if (line.substring(0, 5) === '#### ') rendedHtml += '<h4>' + this.rendLine(line.substring(5)) + '</h4>\n'
-
-      // Here stars an Array!
-      else if (!inArray && line.indexOf('|') === 0) {
-        console.log('start of array')
-        rendedHtml += '<table>'
-        inArray = true
-        inArrayBool = true
-      } else if (inArray && line.indexOf('|') === 0) {
-        console.log('inArray', line)
-        rendedHtml += this.rendTableLine(line)
-      } else if (inArray) {
-        rendedHtml += '<tr><td>' + this.rendLine(line) + '</td></tr></table>'
-        inArray = false
-        console.log('endOfArray', line)
-        inArrayBool = false
-      } else rendedHtml += this.rendLine(line) + '<br/>\n' * /
-    })
-    // console.log('raw, ', rawContent, 'rended,', rendedHtml)
-    return rendedHtml
-  } */
-  /* rendHeaderLine (line) {
-    rendedHtml = ''
-    if (line.substring(0, 2) === '# ') rendedHtml += '<h1>' + this.rendLine(line.substring(2)) + '</h1>\n'
-    else if (line.substring(0, 3) === '## ') rendedHtml += '<h2>' + this.rendLine(line.substring(3)) + '</h2>\n'
-    else if (line.substring(0, 4) === '### ') rendedHtml += '<h3>' + this.rendLine(line.substring(4)) + '</h3>\n'
-    else if (line.substring(0, 5) === '#### ') rendedHtml += '<h4>' + this.rendLine(line.substring(5)) + '</h4>\n'
-    return rendedHtml
-  } */
-
-  /* rendTableLine (line) {
-    console.log('rend-tabe', inArrayBool)
-    let tr = '<tr>'
-    const cells = line.split('|')
-    cells.forEach((cell) => {
-      if (cell.length > 0) {
-        let styleClass = ''
-        let cellType = 'td'
-        if (cell[0] === '!') {
-          cell = cell.substring(1)
-          cellType = 'th'
-        }
-        if (cell[cell.length - 1] === ' ') {
-          if (cell[0] === ' ') styleClass = 'align-center'
-          else styleClass = 'align-left'
-        } else if (cell[0] === ' ') styleClass = 'align-right'
-        else styleClass = 'align-left'
-        tr += '<' + cellType + ' class="' + styleClass + '">' + this.rendLine(cell) + '</' + cellType + ' >'
-      }
-    })
-    return tr + '</tr>'
-  }
-
-  rendLine (line) {
-    console.log('rendline', inArrayBool)
-    // _italic_
-    const re = new RegExp('(^_| _)(\\w+[\\w ]*)(_ |_$)', 'gm')
-    line = line.replace(re, function (match, p1, p2, p3, offset, string) {
-      return '<i>' + p2 + '</i>'
-    })
-    // line = this.wikiLinks(page, siteid)
-    // *bold*
-    return line
-  }
-  /*
-  function wikiLinks (page, siteid) {
-    const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'g')
-    return page.replace(re, function (match, p1, p2, p3, offset, string) {
-      p2 = p2.trim()
-      // First we ned to separate written and linked part
-      var link = p2
-      // If link contains a site id, we use it, if not, we use the parameter siteid
-      if (link.includes('/')) {
-        const parts = link.split('/')
-        return `[${p2}](/#/v/${toURI(parts[0])}/${toURI(parts[1])})`
-      } else {
-        return `[${p2}](/#/v/${siteid}/${toURI(link)})`
-      }
-    })
-  }
-  /* streamRend (remainingContent, parsed, ends) {
-    console.log('parsing: ', remainingContent.substring(5), parsed, ends)
-    // This is the last line, return the whole set, after parsing the line
-    if (!remainingContent.includes(NEWLINE)) {
-      return parsed + this.parseLine(remainingContent)[0] + ends
-    }
-
-    let currentBuffer = this.parseLine(
-      remainingContent.substring(0, remainingContent.indexOf(NEWLINE)))
-
-    return this.streamRend(
-      remainingContent.substring(remainingContent.indexOf(NEWLINE)),
-      parsed + currentBuffer[0],
-      currentBuffer[1])
-  }
-  parseLine (line) {
-    if (line.indexOf('# ') === 0) return '<h1>' + line + '</h1>'
-    return [line, '<br/>']
-  } */
 }
