@@ -92,7 +92,7 @@ describe('render wikitext', () => {
   })
   it('renders a _[url:http://mekanismi.web.app|link]_ link to _http://mekanismi.web.app_', () => {
     const result = renderer.toHtml('it links _to [url:http://mekanismi.web.app|link]_')
-    expect(result).toBe('<p>it links <i>to <a href="http://mekanismi.web.app">link</a></i></p>\n')
+    expect(result).toBe('<p>it links <i>to <a href="http://mekanismi.web.app">link</a></i> </p>\n')
   })
 
   it('renders a HR', () => {
@@ -153,5 +153,10 @@ describe('render wikitext', () => {
     expect(result).toBe('<div class="code">\n' +
       'some text<br/>\n' +
       '</div>')
+  })
+
+  it('renders italics', () => {
+    const result = renderer.toHtml('_Lawful Evil, level 13 Wayfinder Fighter_ testTest')
+    expect(result).toBe('<p> <i>Lawful Evil, level 13 Wayfinder Fighter</i> testTest</p>\n')
   })
 })
