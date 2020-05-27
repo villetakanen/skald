@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.14](https://github.com/vitku/skald/compare/v0.11.13...v0.11.14) (2020-05-27)
+
+
+### Bug Fixes
+
+* punctuation in italics ([2fd11b6](https://github.com/vitku/skald/commit/2fd11b6f927701337131f98a3a795957b4def10b))
+
 ### [0.11.13](https://github.com/vitku/skald/compare/v0.11.12...v0.11.13) (2020-05-27)
 
 
