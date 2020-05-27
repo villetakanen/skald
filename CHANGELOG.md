@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.13](https://github.com/vitku/skald/compare/v0.11.12...v0.11.13) (2020-05-27)
+
+
+### Features
+
+* unit tests to TS ([04b082c](https://github.com/vitku/skald/commit/04b082cba67c5c34e8ab58b35c8af397de8c8c2a))
+
 ### [0.11.12](https://github.com/vitku/skald/compare/v0.11.11...v0.11.12) (2020-05-27)
 
 ### [0.11.11](https://github.com/vitku/skald/compare/v0.11.10...v0.11.11) (2020-05-19)
