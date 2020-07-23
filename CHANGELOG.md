@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.11.15](https://github.com/vitku/skald/compare/v0.11.14...v0.11.15) (2020-07-23)
+
+
+### Features
+
+* navigation to site archive added ([59e6c76](https://github.com/vitku/skald/commit/59e6c7668a2492cb206cedce53a6ec30777d3a6b))
+
 ### [0.11.14](https://github.com/vitku/skald/compare/v0.11.13...v0.11.14) (2020-05-27)
 
 
