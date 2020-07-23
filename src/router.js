@@ -27,6 +27,12 @@ export default new Router({
       component: ViewPage
     },
     {
+      path: '/archive/:siteid',
+      name: 'viewFullSite',
+      props: true,
+      component: () => import(/* webpackChunkName: "site" */ './views/ViewFullSite.vue')
+    },
+    {
       path: '/u/:nickname',
       name: 'profile',
       // lazy-loaded when the route is visited.

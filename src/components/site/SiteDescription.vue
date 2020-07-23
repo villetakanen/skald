@@ -30,6 +30,13 @@
 
       </v-form>
     </v-card-text>
+    <v-card-actions>
+      <v-btn
+        color="secondary"
+        text
+        :to="'/archive/' + siteid"
+        >View Full Contents</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -65,6 +72,9 @@ export default {
         this.rawSiteName = value
       }
 
+    },
+    siteid () {
+      return this.$store.getters['site/id']()
     }
   },
   methods: {
