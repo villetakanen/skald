@@ -20,10 +20,9 @@
         <v-row>
           <v-col>
             <v-card>
-              <v-container>
-                ... {{siteid}} <br/>
-                ... {{description}}
-              </v-container>
+              <v-card-text>
+                <WikiText :content="contents" :siteid="siteid"/>
+              </v-card-text>
             </v-card>
           </v-col>
         </v-row>
@@ -36,6 +35,7 @@ import Vue from 'vue'
 import VueCompositionApi, { reactive, toRefs, onMounted, defineComponent } from '@vue/composition-api'
 import Loading from '../components/Loading.vue'
 import TabTitle from '../components/TabTitle.vue'
+import WikiText from '../components/WikiText.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -48,7 +48,8 @@ interface PropData {
 export default defineComponent({
   components: {
     Loading,
-    TabTitle
+    TabTitle,
+    WikiText
   },
   props: {
     siteid: {
@@ -59,6 +60,7 @@ export default defineComponent({
   setup (props) {
     const site = reactive({
       description: null,
+      contents: '',
       loading: true
     })
     onMounted(() => {
@@ -67,6 +69,12 @@ export default defineComponent({
       siteRef.get().then((siteData) => {
         if (siteData.exists) {
           site.description = siteData.data()?.description
+          siteRef.collection('pages').get().then((pages) => {
+            pages.forEach((page) => {
+              site.contents += '# ' + page.data()?.name + '\n----\n'
+              site.contents += page.data()?.content
+            })
+          })
         }
         site.loading = false
       })
