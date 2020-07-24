@@ -19,7 +19,7 @@
 
         <v-row>
           <v-col>
-            <v-card>
+            <v-card id="reader-text">
               <v-btn
                 fab
                 top

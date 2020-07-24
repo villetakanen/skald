@@ -6,4 +6,14 @@
   #app header div{
     display: none;
   }
+  button.v-btn {
+    display: none;
+  }
+  #reader-text {
+    border: none;
+    box-shadow: none;
+  }
+  .theme--dark.v-card > .v-card__text, .theme--dark.v-card .v-card__subtitle {
+    color: black
+  }
 }
