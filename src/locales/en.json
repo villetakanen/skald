@@ -12,5 +12,16 @@
     "Create": "Create track",
     "Edit": "Edit",
     "EditingDone": "Close Edit"
-  }
+  },
+  "syntax_help_title": "Markdown+",
+  "syntax_help_h1": "Heading, H1",
+  "syntax_help_h2": "Heading, H2",
+  "syntax_help_h3": "Heading, H3",
+  "syntax_help_h4": "Heading, H4",
+  "syntax_help_wikilink": "Links to page 'link' of this site",
+  "syntax_help_wikilink_title": "Links to page 'link' with text 'title' of this site",
+  "syntax_help_italic": "Makes text italic",
+  "syntax_help_bold": "Makes text bold",
+  "syntax_help_list": "Makes the row a list item"
+
 }

@@ -1,54 +1,51 @@
 <template>
-  <v-container
-    fluid
-    grid-list-md>
+  <v-container>
 
-    <v-layout row>
+    <v-row v-if="loading">
+      <v-col>
+        <Loading/>
+      </v-col>
+    </v-row>
 
-    <v-flex xs12 v-if="loading">
-      <Loading/>
-    </v-flex>
+    <v-row v-if="!loading">
+      <v-col cols="12" md="8">
+        <v-card outlined>
+          <v-toolbar
+            dense>
+            <v-toolbar-title>Editing {{title}}</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-btn icon @click="menuVisible=!menuVisible"><v-icon>mdi-menu</v-icon></v-btn>
+            <v-btn color="primary"
+              @click="savePage"
+              id="save-editor-button">save</v-btn>
+          </v-toolbar>
+          <v-card-text>
+            <div v-if="menuVisible" class="pagetools">
+              <PageCategorySelect/>
+              <v-spacer/>
+              <v-btn
+                outlined
+                @click="deletePageDialog=!deletePageDialog">Delete page</v-btn>
+            </div>
+            <v-form  @submit.prevent="savePage">
+              <v-text-field
+                v-model="title"
+                filled></v-text-field>
+              <v-textarea
+                class="editor"
+                :rows="rows"
+                outlined
+                style="font-family: 'Source Code Pro', monospace;"
+                v-model="content"></v-textarea>
+            </v-form>
+          </v-card-text>
+        </v-card>
+      </v-col>
+      <v-col cols="12" md="4">
+        <EditorHelpCard/>
+      </v-col>
+    </v-row>
 
-    <v-flex xs12>
-      <v-card
-        v-if="!loading"
-        outlined>
-
-      <v-toolbar
-        dense>
-        <v-toolbar-title>Editing {{title}}</v-toolbar-title>
-
-        <v-spacer></v-spacer>
-
-        <v-btn icon @click="menuVisible=!menuVisible"><v-icon>mdi-menu</v-icon></v-btn>
-
-        <v-btn color="primary"
-          @click="savePage"
-          id="save-editor-button">save</v-btn>
-      </v-toolbar>
-      <v-card-text>
-        <div v-if="menuVisible" class="pagetools">
-          <PageCategorySelect/>
-          <v-spacer/>
-          <v-btn
-            outlined
-            @click="deletePageDialog=!deletePageDialog">Delete page</v-btn>
-        </div>
-        <v-form  @submit.prevent="savePage">
-          <v-text-field
-            v-model="title"
-            filled></v-text-field>
-          <v-textarea
-            class="editor"
-            :rows="rows"
-            outlined
-            style="font-family: 'Source Code Pro', monospace;"
-            v-model="content"></v-textarea>
-        </v-form>
-      </v-card-text>
-    </v-card>
-      </v-flex>
-    </v-layout>
     <v-dialog
       v-model="deletePageDialog"
       max-width="800px">
@@ -72,11 +69,13 @@
 <script>
 import Loading from '../components/Loading'
 import PageCategorySelect from '../components/page/PageCategorySelect.vue'
+import EditorHelpCard from '../components/page/EditorHelpCard.vue'
 
 export default {
   components: {
     Loading,
-    PageCategorySelect
+    PageCategorySelect,
+    EditorHelpCard
   },
   props: [
     'pageid',
