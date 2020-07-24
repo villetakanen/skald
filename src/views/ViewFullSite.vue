@@ -20,6 +20,26 @@
         <v-row>
           <v-col>
             <v-card>
+              <v-btn
+                fab
+                top
+                right
+                absolute
+                color="secondary"
+                @click="print"
+              >
+                <v-icon>mdi-printer</v-icon>
+              </v-btn>
+              <!--v-btn
+                fab
+                top
+                right
+                absolute
+                color="secondary"
+                style="margin-right: 64px"
+              >
+                <v-icon>mdi-download</v-icon>
+              </v-btn-->
               <v-card-text>
                 <WikiText :content="contents" :siteid="siteid"/>
               </v-card-text>
@@ -79,7 +99,10 @@ export default defineComponent({
         site.loading = false
       })
     })
-    return { ...toRefs(site) }
+    const print = () => {
+      window.print()
+    }
+    return { ...toRefs(site), print }
   }
 })
 </script>
