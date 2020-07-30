@@ -30,6 +30,15 @@
               <v-container>
                 <WikiText :content="content" :siteid="siteid"/>
               </v-container>
+            <v-btn
+              :disabled="!isAuthz"
+              fab
+              small
+              top right absolute
+              style= "margin-right: 48px; margin-top:4px"
+              color="primary"
+              v-bind:to="editlink"
+              ><v-icon>mdi-pencil</v-icon></v-btn>
             <v-speed-dial
                 v-model="fab"
                 top
@@ -40,7 +49,7 @@
                 <template v-slot:activator>
                   <v-btn
                     v-model="fab"
-                    color="secondary"
+                    color="primary"
                     small
                     top
                     right
@@ -50,27 +59,18 @@
                     <v-icon v-else>mdi-menu-down</v-icon>
                   </v-btn>
                 </template>
-                 <v-btn
-                  :disabled="!isAuthz"
-                  fab
-                  small
-                  color="primary"
-                  v-bind:to="editlink"
-                  >
-                  <v-icon>mdi-pencil</v-icon>
-                </v-btn>
                 <v-btn
                   fab
                   dark
                   small
-                  color="primary"
+                  color="secondary"
                   @click="copyUrl"
                 >
                   <v-icon>mdi-link</v-icon>
                 </v-btn>
                 <v-btn
                   fab
-                  dark
+                  color="secondary"
                   small
                   @click="showHistory">
                   <v-icon>mdi-file-eye</v-icon>
