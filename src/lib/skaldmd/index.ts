@@ -10,6 +10,7 @@ const STATSBLOCK = 3
 const DP_INFO = 1001
 const DP_LEGEND = 1002
 const DP_CODE = 1003
+const DP_RESTRICTED = 1004
 
 /**
  * Stream parser for Skald Markdown subsyntax and wikitags
@@ -20,12 +21,14 @@ export default class Skaldmd {
   rendedHtml: string
   docpart: number
   ulLevel:number
+  hiddenContent: boolean
   constructor (siteid: string) {
     siteid ? this.siteLinkStub = siteid : this.siteLinkStub = 'skald'
     this.parsing = NONE
     this.rendedHtml = ''
     this.docpart = NONE
     this.ulLevel = 0
+    this.hiddenContent = false
   }
 
   /**
@@ -37,7 +40,7 @@ export default class Skaldmd {
     this.parsing = mode
   }
 
-  toHtml (rawContent: string) {
+  toHtml (rawContent: string, userTags = [], allowTags = [] ) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''
@@ -45,6 +48,8 @@ export default class Skaldmd {
     const linesArray = rawContent.split(NEWLINE)
 
     linesArray.forEach((line) => {
+
+      if (this.hiddenContent) return
       // code is escaped
       if (this.docpart === DP_CODE) this.parseCode(line)
       // console.log('line', line.substring(0, 3), line.trim().length)
