@@ -1,4 +1,5 @@
 import { skaldURI } from '@/plugins/skaldfire'
+import { hideContent } from './hideContent'
 
 const NEWLINE = '\n'
 
@@ -45,9 +46,11 @@ export default class Skaldmd {
 
     this.rendedHtml = ''
 
-    const linesArray = rawContent.split(NEWLINE)
+    let content = hideContent(rawContent, userTags, allowTags)
 
-    linesArray.forEach((line) => {
+    const linesArray = content.split(NEWLINE)
+
+    linesArray.forEach((line: string) => {
 
       if (this.hiddenContent) return
       // code is escaped
