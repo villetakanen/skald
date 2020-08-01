@@ -41,19 +41,18 @@ export default class Skaldmd {
     this.parsing = mode
   }
 
-  toHtml (rawContent: string, userTags:string[] = [] ) {
+  toHtml (rawContent: string, userTags:string[] = []) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''
 
-    // HideContent extension, hides content commented with // and allows gor some 
+    // HideContent extension, hides content commented with // and allows gor some
     // in-game-text-display magic.
-    let content = hideContent(rawContent, userTags)
+    const content = hideContent(rawContent, userTags)
 
     const linesArray = content.split(NEWLINE)
 
     linesArray.forEach((line: string) => {
-
       if (this.hiddenContent) return
       // code is escaped
       if (this.docpart === DP_CODE) this.parseCode(line)

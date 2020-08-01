@@ -13,21 +13,21 @@ describe('hideContents', () => {
   it('returns a file with a comment, without the comment', () => {
     const t = 'a\n// b\n'
     const result = hideContent(t)
-    expect(result).toBe('a\n\n') 
+    expect(result).toBe('a\n\n')
   })
   it('hides a block of text, if that text starts with // restricted', () => {
-    const result = hideContent('Some Hidden Stuff, below\n'+
-      '// reSTRicted for members only\n'+
+    const result = hideContent('Some Hidden Stuff, below\n' +
+      '// reSTRicted for members only\n' +
       'the hidden text is here')
     expect(result).toBe('Some Hidden Stuff, below\n')
   })
   it('hides a block of text, if that text starts with // restricted, and ends with // end restricted', () => {
-    const result = hideContent('Some Hidden Stuff, below\n'+
-      '// reSTRicted for members only\n'+
+    const result = hideContent('Some Hidden Stuff, below\n' +
+      '// reSTRicted for members only\n' +
       'the hidden text is here \n' +
       '// end restricTed for now\n' +
       'and here is public again')
-      expect(result).toBe('Some Hidden Stuff, below\n'+
+    expect(result).toBe('Some Hidden Stuff, below\n' +
       '\n' +
       'and here is public again\n')
   })

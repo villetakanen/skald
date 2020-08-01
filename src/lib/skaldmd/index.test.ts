@@ -159,7 +159,7 @@ describe('render wikitext', () => {
     const result = renderer.toHtml('_Lawful Evil, level 13 Wayfinder Fighter_ testTest')
     expect(result).toBe('<p> <i>Lawful Evil, level 13 Wayfinder Fighter</i> testTest</p>\n')
   })
-  it ('hides comments', () => {
+  it('hides comments', () => {
     const result = renderer.toHtml('Comment below\n' +
     '// And some commentary')
     expect(result).toBe('<p>Comment below</p>\n')
@@ -183,8 +183,8 @@ describe('render wikitext', () => {
       'This should not be Hidden\n' +
       '// End resTricted  \n' +
       '\n' +
-      'And ends before this line\n', 
-      userTags)
+      'And ends before this line\n',
+    userTags)
     expect(result).toBe('<p>Hidden text Follows</p>\n' +
       '<p>This should not be Hidden</p>\n' +
       '<p>And ends before this line</p>\n')
