@@ -28,6 +28,14 @@
         <v-list-item-action><v-icon>mdi-settings</v-icon></v-list-item-action>
         <v-list-item-title >{{$t('navigation_to_site_settings')}}</v-list-item-title>
       </v-list-item>
+
+      <v-list-item
+        id="navi-site-in-game-secrets-link"
+        :to="`/g/${siteid}/gm/players`">
+        <v-list-item-action><v-icon>mdi-account-multiple</v-icon></v-list-item-action>
+        <v-list-item-title >{{$t('navigation_to_gm_players')}}</v-list-item-title>
+      </v-list-item>
+
     </template>
 
     <v-subheader>Meta</v-subheader>
