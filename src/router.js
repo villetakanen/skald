@@ -94,6 +94,13 @@ export default new Router({
       // lazy-loaded when the route is visited.
       props: true,
       component: () => import(/* webpackChunkName: "site" */ './views/SiteSettings.vue')
+    },
+    {
+      path: '/g/:siteid/gm/players',
+      name: 'gmplayers',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "site" */ './views/gm/PlayerList.vue')
     }
   ]
 })

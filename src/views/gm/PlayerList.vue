@@ -1,0 +1,11 @@
+<template>
+  <v-container>
+    <v-card>
+      <v-card-title>{{$t('view_gm_players.title')}}</v-card-title>
+      <v-card-text>...</v-card-text>
+      <v-card-actions>
+        <v-btn>{{$t('view_gm_players.add_a_player')}}</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-container>
+</template>
