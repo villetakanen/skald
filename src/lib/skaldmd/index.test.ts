@@ -174,4 +174,19 @@ describe('render wikitext', () => {
     expect(result).toBe('<p>Hidden text Follows</p>\n' +
       '<p>And ends before this line</p>\n')
   })
+
+  it('shows restricted, when user has tags', () => {
+    const userTags = ['cat', 'dog']
+    const result = renderer.toHtml('Hidden text Follows\n' +
+      '// Restricted\n' +
+      '// Allow: cat, dog\n' +
+      'This should not be Hidden\n' +
+      '// End resTricted  \n' +
+      '\n' +
+      'And ends before this line\n', 
+      userTags)
+    expect(result).toBe('<p>Hidden text Follows</p>\n' +
+      '<p>This should not be Hidden</p>\n' +
+      '<p>And ends before this line</p>\n')
+  })
 })

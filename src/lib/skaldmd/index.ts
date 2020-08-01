@@ -41,12 +41,14 @@ export default class Skaldmd {
     this.parsing = mode
   }
 
-  toHtml (rawContent: string, userTags = [], allowTags = [] ) {
+  toHtml (rawContent: string, userTags:string[] = [] ) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''
 
-    let content = hideContent(rawContent, userTags, allowTags)
+    // HideContent extension, hides content commented with // and allows gor some 
+    // in-game-text-display magic.
+    let content = hideContent(rawContent, userTags)
 
     const linesArray = content.split(NEWLINE)
 
