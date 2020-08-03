@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.13.0](https://github.com/vitku/skald/compare/v0.12.4...v0.13.0) (2020-08-03)
+
+
+### Features
+
+* added add player action to players ([84e6e00](https://github.com/vitku/skald/commit/84e6e00d73f139232b4ccbc2d2f6e86f2a8f3d94))
+* added players to firebase, and cRud in place ([ee25da9](https://github.com/vitku/skald/commit/ee25da92c9c996b7819b0814e884a564b5a96ca1))
+* adding tags for player ([1271de9](https://github.com/vitku/skald/commit/1271de967cd8aab8f4887040c11e64a2a5c9943e))
+* rest of the player tags feature ([318cd06](https://github.com/vitku/skald/commit/318cd062a7389f2e4e8ecacf69f0bbd139d7cdd8))
+
 ### [0.12.4](https://github.com/vitku/skald/compare/v0.12.3...v0.12.4) (2020-08-01)
 
 ### [0.12.3](https://github.com/vitku/skald/compare/v0.12.2...v0.12.3) (2020-08-01)
