@@ -1,12 +1,16 @@
 <template>
   <div class="AddPlayersAction">
-    <v-select
-      v-model="selectedUser"
-      :items="allUserNicks">
-    </v-select>
-    <v-btn
-      @click="addPlayer(selectedUser)"
-      >Add a Player</v-btn>
+    <div class="AddPlayersAction-column1">
+      <v-select
+        v-model="selectedUser"
+        :items="allUserNicks">
+      </v-select>
+    </div>
+    <div class="AddPlayersAction-column2">
+      <v-btn
+        @click="addPlayer(selectedUser)"
+        >Add a Player</v-btn>
+    </div>
   </div>
 </template>
 
@@ -62,3 +66,19 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.AddPlayersAction{
+  display: grid;
+  grid-template-columns: auto auto;
+  .AddPlayersAction-column1{
+    padding-right: 4px;
+    justify-self: stretch;
+  }
+  .AddPlayersAction-column2{
+    padding-left: 4px;
+    justify-self: start;
+    align-self: center;
+  }
+}
+</style>

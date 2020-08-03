@@ -11,7 +11,6 @@
       <v-col>
         <Loading v-if='loading'/>
         <v-card v-if="!loading">
-          <v-card-title>{{$t('view_gm_players.title')}}</v-card-title>
           <v-card-text>
             <AddPlayersAction :siteid="siteid"/>
             <template v-for="(player, index) in players">
