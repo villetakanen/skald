@@ -7,5 +7,10 @@
   "navigation_action_add_page": "Luo sivu",
   "set_lang_subheader": "Kieli",
   "set_lang_fi": "FI",
-  "set_lang_en": "EN"
+  "set_lang_en": "EN",
+  "frontpage": {
+    "title": "Mekanismi",
+    "ingress": "Wiki roolipeleille ja pelien dokumentointiin",
+    "blurp": "Mekanismi (2) on Betassa. Parannusehdotukset menevät parhaiten perille sivupalkissa linkatun GitHub -projektin kautta."
+  }
 }
