@@ -196,7 +196,7 @@ export default {
         const playerRef = db.collection('sites').doc(siteid).collection('players').doc(firebase.auth().currentUser.uid)
         playerRef.get().then((player) => {
           this.userTags = player.data().tags
-          console.info('setting player tags to', this.userTags)
+          // console.info('setting player tags to', this.userTags)
         })
       }
       // in case we are updating the same page, without route change:
