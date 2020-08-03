@@ -14,6 +14,7 @@ import GameTrack from './trackers/GameTrack.vue'
 import PointCounter from './trackers/PointCounter.vue'
 import Vue from 'vue'
 import Skaldmd from '../lib/skaldmd'
+
 Vue.component('ViewAttachment', ViewAttachment)
 Vue.component('ViewUpload', ViewUpload)
 Vue.component('GameTrack', GameTrack)
@@ -22,12 +23,13 @@ export default {
   props: [
     'content',
     'theme',
-    'siteid'
+    'siteid',
+    'userTags'
   ],
   computed: {
     rended () {
       const skaldmd = new Skaldmd(this.siteid)
-      let rendedContent = skaldmd.toHtml(this.content)
+      let rendedContent = skaldmd.toHtml(this.content, this.userTags)
       // rendedContent = skaldmd.toHtml()
 
       // These we need to run on html

@@ -23,6 +23,13 @@
           @click="addTag(newTag)"><v-icon>mdi-plus</v-icon></v-btn>
       </div>
     </div>
+    <div>
+      <v-btn
+        color="secondary"
+        text
+        @click="dropPlayer()"
+        >{{$t('view_gm_players.drop_player')}}</v-btn>
+    </div>
   </div>
 </template>
 
@@ -91,7 +98,14 @@ export default defineComponent({
       })
     }
 
-    return { addTag, dropTag, newTag }
+    const dropPlayer = () => {
+      const db = firebase.firestore()
+      const playerRef = db.collection('sites').doc(props.siteid)
+        .collection('players').doc(props.uid)
+      playerRef.delete()
+    }
+
+    return { addTag, dropPlayer, dropTag, newTag }
   }
 })
 </script>
@@ -99,7 +113,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .pri{
   display: grid;
-  grid-template-columns: 30% 30% 40%;
+  grid-template-columns: 30% 30% 20% 20%;
   div.pri-add-tags{
     display: flex;
     div{

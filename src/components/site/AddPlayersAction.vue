@@ -19,7 +19,7 @@ import Vue from 'vue'
 import VueCompositionApi, { defineComponent, onMounted, ref } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
-import 'firebase/auth'
+// import 'firebase/auth'
 
 Vue.use(VueCompositionApi)
 
@@ -36,7 +36,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const currentUser = firebase.auth().currentUser
+    // const currentUser = firebase.auth().currentUser
     const selectedUser = ref('')
     const userArray: profile[] = []
     const userNickArray: string[] = []
@@ -45,10 +45,10 @@ export default defineComponent({
       const playerRef = db.collection('profiles')
       playerRef.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.id !== currentUser?.uid) {
-            userArray.push({ uid: doc.id, nick: doc.data().nick })
-            userNickArray.push(doc.data().nick)
-          }
+          // if (doc.id !== currentUser?.uid) {
+          userArray.push({ uid: doc.id, nick: doc.data().nick })
+          userNickArray.push(doc.data().nick)
+          // } // end if
         })
       })
     })

@@ -217,8 +217,9 @@ const actions = {
 
     pageRef.get().then((doc) => {
       if (doc.exists) {
+        const revAuthor = doc.data().creatorNick ? doc.data().creatorNick : 'unknown'
         pageRef.collection('revisions').doc('' + doc.data().lastUpdate.seconds).set({
-          author: doc.data().creatorNick,
+          author: revAuthor,
           revision: doc.data().content
         })
 

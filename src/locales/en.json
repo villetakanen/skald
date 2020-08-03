@@ -24,6 +24,8 @@
   "syntax_help_bold": "Makes text bold",
   "syntax_help_list": "Makes the row a list item",
   "view_gm_players": {
-    "title": "Players"
+    "title": "Players", 
+    "link_to": "Players",
+    "drop_player": "Drop player"
   }
 }

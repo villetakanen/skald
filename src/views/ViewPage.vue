@@ -28,7 +28,10 @@
           <div id="reader-text">
             <v-card>
               <v-container>
-                <WikiText :content="content" :siteid="siteid"/>
+                <WikiText
+                  :content="content"
+                  :siteid="siteid"
+                  :userTags="userTags"/>
               </v-container>
             <v-btn
               :disabled="!isAuthz"
@@ -118,6 +121,9 @@ import WikiText from '../components/WikiText'
 import Loading from '../components/Loading'
 import TabTitle from '../components/TabTitle'
 import ViewSiteMembers from '../components/site/ViewSiteMembers'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
 
 export default {
   components: {
@@ -132,9 +138,10 @@ export default {
     'siteid'
   ],
   data: () => ({
-    fab: false
+    fab: false,
+    userTags: []
   }),
-  created () {
+  mounted () {
     this.updatePage(this.siteid, this.pageid)
   },
   watch: {
@@ -184,6 +191,14 @@ export default {
       this.$store.dispatch('sites/openSite', siteid)
       this.$store.dispatch('site/open', siteid)
 
+      if (firebase.auth().currentUser) {
+        const db = firebase.firestore()
+        const playerRef = db.collection('sites').doc(siteid).collection('players').doc(firebase.auth().currentUser.uid)
+        playerRef.get().then((player) => {
+          this.userTags = player.data().tags
+          console.info('setting player tags to', this.userTags)
+        })
+      }
       // in case we are updating the same page, without route change:
       // we need to manually scroll to top
       window.scroll(0, 0)

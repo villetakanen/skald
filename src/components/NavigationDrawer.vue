@@ -33,7 +33,7 @@
         id="navi-site-in-game-secrets-link"
         :to="`/g/${siteid}/gm/players`">
         <v-list-item-action><v-icon>mdi-account-multiple</v-icon></v-list-item-action>
-        <v-list-item-title >{{$t('navigation_to_gm_players')}}</v-list-item-title>
+        <v-list-item-title >{{$t('view_gm_players.link_to')}}</v-list-item-title>
       </v-list-item>
 
     </template>
