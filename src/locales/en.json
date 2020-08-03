@@ -27,5 +27,10 @@
     "title": "Players", 
     "link_to": "Players",
     "drop_player": "Drop player"
+  },
+  "frontpage": {
+    "title": "Mekanismi",
+    "ingress": "A wiki for analog role playing games.",
+    "blurp": "Mekanismi is currently in Beta testing. Please report all findings via the Skald Github Project."
   }
 }

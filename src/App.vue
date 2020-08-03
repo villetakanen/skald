@@ -32,13 +32,10 @@
 
       <AccountMenu class="mx-2"/>
     </v-app-bar>
-
     <v-main>
       <router-view/>
     </v-main>
-
-    <v-main>
-      <v-snackbar
+    <v-snackbar
         v-model="newContent"
         bottom
         left
@@ -54,7 +51,6 @@
           icon
           @click.native="newContent=!newContent"
         ><v-icon>mdi-close</v-icon></v-btn></v-snackbar>
-    </v-main>
     <v-btn
       v-scroll="onScroll"
       v-show="scrollFab"
