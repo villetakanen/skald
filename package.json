@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@mdi/font": "^4.9.95",
+    "@types/lodash": "^4.14.158",
     "@vue/composition-api": "^1.0.0-beta.6",
     "core-js": "^3.6.5",
     "eslint-plugin-import": "^2.22.0",

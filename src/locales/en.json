@@ -22,6 +22,8 @@
   "syntax_help_wikilink_title": "Links to page 'link' with text 'title' of this site",
   "syntax_help_italic": "Makes text italic",
   "syntax_help_bold": "Makes text bold",
-  "syntax_help_list": "Makes the row a list item"
-
+  "syntax_help_list": "Makes the row a list item",
+  "view_gm_players": {
+    "title": "Players"
+  }
 }

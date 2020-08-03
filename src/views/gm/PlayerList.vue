@@ -7,26 +7,29 @@
           :topic="siteid"/>
       </v-col>
     </v-row>
-    <v-card>
-      <v-card-title>{{$t('view_gm_players.title')}}</v-card-title>
-      <v-card-text>
-        <template v-for="(player, index) in players">
-          <div v-bind:key="index">
-            <div class="playerlist-cell">
-              {{player.nick}}
-            </div>
-            <div class="playerlist-cell">
-              <template v-for="(tag, tagIndex) in player.tags">
-                <span v-bind:key="tagIndex" class="playerlist-tag">{{tag}}</span>
-              </template>
-            </div>
-          </div>
-        </template>
-      </v-card-text>
-      <v-card-actions>
-        <v-btn>{{$t('view_gm_players.add_a_player')}}</v-btn>
-      </v-card-actions>
-    </v-card>
+    <v-row>
+      <v-col>
+        <Loading v-if='loading'/>
+        <v-card v-if="!loading">
+          <v-card-title>{{$t('view_gm_players.title')}}</v-card-title>
+          <v-card-text>
+            <AddPlayersAction :siteid="siteid"/>
+            <template v-for="(player, index) in players">
+              <div v-bind:key="index">
+                <div class="playerlist-cell">
+                  {{player.nick}}
+                </div>
+                <div class="playerlist-cell">
+                  <template v-for="(tag, tagIndex) in player.tags">
+                    <span v-bind:key="tagIndex" class="playerlist-tag">{{tag}}</span>
+                  </template>
+                </div>
+              </div>
+            </template>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 
@@ -35,6 +38,7 @@ import Vue from 'vue'
 import VueCompositionApi, { /* reactive, toRefs, */ ref, defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
 import Loading from '../../components/Loading.vue'
 import TabTitle from '../../components/TabTitle.vue'
+import AddPlayersAction from '../../components/site/AddPlayersAction.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -43,7 +47,8 @@ Vue.use(VueCompositionApi)
 export default defineComponent({
   components: {
     Loading,
-    TabTitle
+    TabTitle,
+    AddPlayersAction
   },
   props: {
     siteid: {
