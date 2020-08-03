@@ -15,14 +15,20 @@
             <AddPlayersAction :siteid="siteid"/>
             <template v-for="(player, index) in players">
               <div v-bind:key="index">
-                <div class="playerlist-cell">
+                <PlayerRowItem
+                  v-bind:key="index"
+                  :siteid="siteid"
+                  :uid="player.uid"
+                  :nick="player.nick"
+                  :tags="player.tags"/>
+                <!--div class="playerlist-cell">
                   {{player.nick}}
                 </div>
                 <div class="playerlist-cell">
                   <template v-for="(tag, tagIndex) in player.tags">
                     <span v-bind:key="tagIndex" class="playerlist-tag">{{tag}}</span>
                   </template>
-                </div>
+                </div-->
               </div>
             </template>
           </v-card-text>
@@ -38,6 +44,7 @@ import VueCompositionApi, { /* reactive, toRefs, */ ref, defineComponent, onMoun
 import Loading from '../../components/Loading.vue'
 import TabTitle from '../../components/TabTitle.vue'
 import AddPlayersAction from '../../components/site/AddPlayersAction.vue'
+import PlayerRowItem from '../../components/site/PlayerRowItem.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
@@ -47,7 +54,8 @@ export default defineComponent({
   components: {
     Loading,
     TabTitle,
-    AddPlayersAction
+    AddPlayersAction,
+    PlayerRowItem
   },
   props: {
     siteid: {
@@ -66,7 +74,8 @@ export default defineComponent({
       unsubscribePlayers = playerRef.onSnapshot((data) => {
         const playerData:object[] = []
         data.forEach((player) => {
-          playerData.push(player.data())
+          const data = player.data()
+          playerData.push({ uid: player.id, ...data })
         })
         players.value = playerData
         loading.value = false
