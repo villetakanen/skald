@@ -31,6 +31,7 @@
   "frontpage": {
     "title": "Mekanismi",
     "ingress": "A wiki for analog role playing games.",
-    "blurp": "Mekanismi is currently in Beta testing. Please report all findings via the Skald Github Project."
+    "blurp": "Mekanismi is currently in Beta testing. Please report all findings via the Skald Github Project.",
+    "sitelist": "Highlights"
   }
 }

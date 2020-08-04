@@ -4,7 +4,7 @@
       <v-col
         md="6"
         cols=12>
-        <div style="text-align:center;padding:16px">
+        <div class="logo-image">
           <img alt="V" src="../assets/fox.svg" style="max-width: 128px"/>
         </div>
         <v-card>
@@ -18,7 +18,13 @@
       <v-col
         md="6"
         cols="12">
-        ...
+        <TabTitle
+          :topic="$t('frontpage.sitelist')"
+          />
+        <SiteList
+          cols="2"
+          count="8"
+          paging />
       </v-col>
     </v-row>
   </v-container>
@@ -27,6 +33,8 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueCompositionApi, { defineComponent } from '@vue/composition-api'
+import SiteList from '../components/SiteList2.vue'
+import TabTitle from '../components/TabTitle.vue'
 // import WikiText from '../components/WikiText.vue'
 // import firebase from 'firebase/app'
 // import 'firebase/firestore'
@@ -34,11 +42,17 @@ import VueCompositionApi, { defineComponent } from '@vue/composition-api'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
+  components: {
+    SiteList,
+    TabTitle
+  }
 
 })
 </script>
 
 <style lang="scss">
 div.logo-image{
+  text-align:center;
+  padding:16px;
 }
 </style>
