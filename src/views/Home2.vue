@@ -22,8 +22,8 @@
           :topic="$t('frontpage.sitelist')"
           />
         <SiteList
-          cols="2"
-          count="8"
+          :cols='2'
+          :count='8'
           paging />
       </v-col>
     </v-row>
