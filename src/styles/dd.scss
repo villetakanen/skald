@@ -35,3 +35,18 @@
     }
   }
 }
+#app a.theme--dark.v-sheet.DD {
+  background-color: rgb(7, 27, 37);
+  div.sitecard .v-card__title {
+    font-family: modesto-condensed, Smythe, serif;
+    font-weight: 400;
+    font-style: normal;
+    color: 	lightblue;
+  }
+  .sitecard-theme-poster-blur{
+    background: linear-gradient(63deg, rgb(7, 27, 37) 10%, rgba(255, 238, 0, 0) 100%);
+  }
+  .v-avatar {
+    box-shadow: 0px 0px 16px 0px lightblue;
+  }
+}

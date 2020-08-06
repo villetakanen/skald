@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.14.0](https://github.com/vitku/skald/compare/v0.13.1...v0.14.0) (2020-08-06)
+
+
+### Features
+
+* added sitecard ([4eebf12](https://github.com/vitku/skald/commit/4eebf122373e9e7a2a86621062af80591f210f95))
+* new frontpage looks pt1 ([101d646](https://github.com/vitku/skald/commit/101d646bb44bb5013089921a9503e87cf3e83571))
+
 ### [0.13.1](https://github.com/vitku/skald/compare/v0.13.0...v0.13.1) (2020-08-03)
 
 ## [0.13.0](https://github.com/vitku/skald/compare/v0.12.4...v0.13.0) (2020-08-03)
