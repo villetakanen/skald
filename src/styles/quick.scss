@@ -23,3 +23,17 @@ div#cover.Quick{
   background-image: url('./assets/quick-poster.jpg');
   background-size: 100% auto;
 }
+
+#app a.theme--dark.v-sheet.Quick {
+    background-color: rgb(50, 72, 97);
+  div.sitecard .v-card__title {
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+  .sitecard-theme-poster-blur{
+    background: linear-gradient(90deg, rgb(50, 72, 97) 0%, rgba(0,0,0,0.3) 100%);
+  }
+  .v-avatar {
+    box-shadow: 0px 0px 22px 0px white;
+  }
+}

@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <div>Props: {{count}} {{paging}} {{cols}}</div>
     <template v-for="(site, index) in allSites">
       <SiteCard
         class = "my-2"
@@ -8,9 +7,11 @@
         :siteid="site.siteid"
         :title="site.name"
         :description="site.description"
-        :posterURL="site.posterURL">
+        :posterURL="site.posterURL"
+        :theme="site.theme">
       </SiteCard>
     </template>
+    <div>Props: {{count}} {{paging}} {{cols}}</div>
   </v-container>
 </template>
 
@@ -56,7 +57,8 @@ export default defineComponent({
               siteid: doc.id,
               name: doc.data().name,
               posterURL: doc.data().posterURL,
-              description: doc.data().description
+              description: doc.data().description,
+              theme: doc.data().theme
             }
             allSites.value.push(site)
           }

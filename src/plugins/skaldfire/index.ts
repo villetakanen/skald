@@ -13,7 +13,8 @@ export interface Site {
   siteid: string,
   name: string,
   description?: string,
-  posterURL?:string
+  posterURL?:string,
+  theme?:string
 }
 
 /**
