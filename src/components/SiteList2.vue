@@ -2,11 +2,14 @@
   <v-container>
     <div>Props: {{count}} {{paging}} {{cols}}</div>
     <template v-for="(site, index) in allSites">
-      <v-card
-        class = "my-1"
-        v-bind:key="index">
-        <v-card-text>{{site.name}}</v-card-text>
-      </v-card>
+      <SiteCard
+        class = "my-2"
+        v-bind:key="index"
+        :siteid="site.siteid"
+        :title="site.name"
+        :description="site.description"
+        :posterURL="site.posterURL">
+      </SiteCard>
     </template>
   </v-container>
 </template>
@@ -16,15 +19,15 @@ import Vue from 'vue'
 import VueCompositionApi, { defineComponent, onMounted, ref, onUnmounted } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { Site } from '../plugins/skaldfire'
+import SiteCard from './site/SiteCard.vue'
 
 Vue.use(VueCompositionApi)
 
-interface site{
-   siteid: string,
-   name: string
-}
-
 export default defineComponent({
+  components: {
+    SiteCard
+  },
   props: {
     count: {
       type: [Number],
@@ -40,7 +43,7 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const allSitesArray: site[] = []
+    const allSitesArray: Site[] = []
     const allSites = ref(allSitesArray)
     let unsubscibe = () => {}
     onMounted(() => {
@@ -49,16 +52,19 @@ export default defineComponent({
       unsubscibe = sitesRef.onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
           if (doc.data().nonlisted !== true) {
-            allSites.value.push({
+            const site: Site = {
               siteid: doc.id,
-              name: doc.data().name
-            })
+              name: doc.data().name,
+              posterURL: doc.data().posterURL,
+              description: doc.data().description
+            }
+            allSites.value.push(site)
           }
-          console.info('pushing', doc.data())
         })
       })
     })
     onUnmounted(() => { unsubscibe() })
+
     return { allSites }
   }
 })

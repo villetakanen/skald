@@ -9,6 +9,13 @@ import _Vue from 'vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 
+export interface Site {
+  siteid: string,
+  name: string,
+  description?: string,
+  posterURL?:string
+}
+
 /**
  * Replaces a String with a skald uri compatible slug
  * @param {string} s a String to be converted
@@ -26,8 +33,8 @@ export function skaldURI (s: string): string {
 /**
  * Firestore URL fetching with cache
  */
-const fireStoreURL = function (path: string) {
-  return new Promise(function (resolve, reject) {
+export const fireStoreURL = function (path: string) {
+  return new Promise<String | Error>(function (resolve, reject) {
     const url = localStorage.getItem(path)
     if (url !== null) {
       resolve(url)
