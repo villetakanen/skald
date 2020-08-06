@@ -54,12 +54,10 @@ export default defineComponent({
     }
   },
   setup (props) {
-    console.log(props)
     const poster = ref('')
     onMounted(() => {
       if (typeof props.posterURL === 'string') {
         fireStoreURL(props.siteid + '/' + props.posterURL).then((url) => {
-          console.log(url)
           if (typeof url === 'string') poster.value = url
         })
       }
