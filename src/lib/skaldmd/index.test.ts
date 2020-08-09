@@ -161,8 +161,8 @@ describe('render wikitext', () => {
   })
 
   it('renders italics with " and , ', () => {
-    const result = renderer.toHtml('_Palvelu on beta-vaiheen kehityksessä. Se toimii "täysin",_')
-    expect(result).toBe('<p> <i>Palvelu on beta-vaiheen kehityksessä. Se toimii "täysin",</i> </p>\n')
+    const result = renderer.toHtml('_Palvelu on beta-vaihee’n kehityksessä. Se toimii "täysin",_')
+    expect(result).toBe('<p> <i>Palvelu on beta-vaihee’n kehityksessä. Se toimii "täysin",</i> </p>\n')
   })
 
   it('hides comments', () => {
