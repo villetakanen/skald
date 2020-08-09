@@ -1,7 +1,8 @@
 <template>
-  <v-container>
+  <div class="sitelist">
     <template v-for="(site, index) in allSites">
       <SiteCard
+        v-if="index < count + 1"
         class = "my-2"
         v-bind:key="index"
         :siteid="site.siteid"
@@ -12,7 +13,7 @@
       </SiteCard>
     </template>
     <div>Props: {{count}} {{paging}} {{cols}}</div>
-  </v-container>
+  </div>
 </template>
 
 <script lang="ts">
@@ -52,7 +53,8 @@ export default defineComponent({
       const sitesRef = db.collection('sites').orderBy('lastUpdate', 'desc')// .where('hidden', '==', 'false')
       unsubscibe = sitesRef.onSnapshot((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          if (doc.data().nonlisted !== true) {
+          if (doc.data().nonlisted !== true &&
+            doc.data().hidden !== true) {
             const site: Site = {
               siteid: doc.id,
               name: doc.data().name,
@@ -71,3 +73,11 @@ export default defineComponent({
   }
 })
 </script>
+
+<style lang="scss" scoped>
+.v-application .sitelist {
+  a.my-2:first-of-type {
+    margin-top: 0 !important;
+  }
+}
+</style>
