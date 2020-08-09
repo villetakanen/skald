@@ -12,6 +12,14 @@
       <v-col
         md="6"
         cols="12">
+        <SiteList
+          :cols='2'
+          :count='8'
+          paging />
+      </v-col>
+      <v-col
+        md="6"
+        cols="12">
         <v-card>
           <v-card-title>{{$t('frontpage.title')}}</v-card-title>
           <v-card-text>
@@ -24,14 +32,6 @@
             <LatestChanges/>
           </v-card-text>
         </v-card>
-      </v-col>
-      <v-col
-        md="6"
-        cols="12">
-        <SiteList
-          :cols='2'
-          :count='8'
-          paging />
       </v-col>
     </v-row>
   </v-container>
