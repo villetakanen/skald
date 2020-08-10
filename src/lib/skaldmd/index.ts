@@ -137,7 +137,7 @@ export default class Skaldmd {
   }
 
   parseText (line: string) {
-    const wikiTextExpr = '[-a-zA-Z0-9 ,.’\\x2c\\x2e\\x5B\\x3A\\x7C\\x5D\\xE2\\x2F\\xE4\\x22]'
+    const wikiTextExpr = '[-a-zA-Z0-9 ,.?’\\x2c\\x2e\\x5B\\x3A\\x7C\\x5D\\xE2\\x2F\\xE4\\x22]'
     // Italics
     let re = new RegExp('( _|^_)(' + wikiTextExpr + '*)(_ |_$)', 'gmu')
     line = line.replace(re, function (match, p1, p2, p3, offset, string) {

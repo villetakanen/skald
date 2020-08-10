@@ -156,8 +156,8 @@ describe('render wikitext', () => {
   })
 
   it('renders italics', () => {
-    const result = renderer.toHtml('_Lawful Evil, level 13 Wayfinder Fighter_ testTest')
-    expect(result).toBe('<p> <i>Lawful Evil, level 13 Wayfinder Fighter</i> testTest</p>\n')
+    const result = renderer.toHtml('_Lawful Evil, level 13 Wayfinder? Fighter_ testTest')
+    expect(result).toBe('<p> <i>Lawful Evil, level 13 Wayfinder? Fighter</i> testTest</p>\n')
   })
 
   it('renders italics with " and , ', () => {
