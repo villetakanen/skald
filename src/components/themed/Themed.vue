@@ -4,17 +4,19 @@
     <div id="debug">
       siteid: {{ siteid }} <br/>
       Theme: {{ theme }} <br/>
-      Poster: {{ poster }}
+      Poster: {{ poster }} <br/>
+      PosterImageURL: {{ posterImageURL }}
     </div>
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
-import VueCompositionApi, { defineComponent, ref, watch, onMounted } from '@vue/composition-api'
+import VueCompositionApi, { defineComponent, ref, watch, onMounted, computed } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useParams } from '../../lib/useParams'
+import { fireStoreURL } from '../../plugins/skaldfire'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
@@ -22,6 +24,7 @@ export default defineComponent({
     const theme = ref('')
     const poster = ref('')
     const siteid = ref('')
+    const posterImageURL = ref('')
 
     function setTheme (params) {
       siteid.value = params.siteid
@@ -32,7 +35,13 @@ export default defineComponent({
         siteRef.get().then((doc) => {
           if (doc.exists) {
             theme.value = doc.data().theme
-            poster.value = doc.data().posterURL
+            const p = doc.data().posterURL
+            poster.value = p
+            if (p) {
+              fireStoreURL(params.siteid + '/' + p).then((url) => {
+                if (typeof url === 'string') posterImageURL.value = url
+              })
+            }
           }
         })
       } else {
@@ -47,7 +56,7 @@ export default defineComponent({
     // route changed
     watch(params, setTheme)
 
-    return { siteid, theme, poster }
+    return { siteid, theme, poster, posterImageURL }
   }
 })
 </script>
