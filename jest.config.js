@@ -16,7 +16,9 @@ module.exports = {
     // process *.vue files with vue-jest
     '^.+\\.vue$': require.resolve('vue-jest'),
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
-    require.resolve('jest-transform-stub')
+    require.resolve('jest-transform-stub'),
+    '^.+\\.jsx?$': 'babel-jest'
   },
-  snapshotSerializers: ['jest-serializer-vue']
+  snapshotSerializers: ['jest-serializer-vue'],
+  setupFiles: ['<rootDir>/jest.init.js']
 }

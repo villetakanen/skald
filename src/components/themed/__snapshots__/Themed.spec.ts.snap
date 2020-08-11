@@ -3,5 +3,16 @@
 exports[`Mounted App renders correctly 1`] = `
 <div
   class="skald-themed"
-/>
+>
+  <div
+    id="debug"
+  >
+    Theme skald
+    <br />
+    
+    Poster: 
+  
+  </div>
+   
+</div>
 `;

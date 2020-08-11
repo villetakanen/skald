@@ -1,5 +1,6 @@
 <template>
   <v-app :class="theme">
+    <Themed>
     <div
       id="cover"
       :style="sitePoster">
@@ -76,6 +77,7 @@
         Close
       </v-btn>
     </v-snackbar>
+    </Themed>
   </v-app>
 </template>
 
@@ -85,6 +87,7 @@ import AccountMenu from './components/AccountMenu'
 import ErrorDialog from './components/ErrorDialog'
 import PageNotFoundDialog from './components/PageNotFoundDialog'
 import CreateProfileDialog from './components/CreateProfileDialog'
+import Themed from './components/themed/Themed.vue'
 
 export default {
   name: 'App',
@@ -93,7 +96,8 @@ export default {
     AccountMenu,
     ErrorDialog,
     PageNotFoundDialog,
-    CreateProfileDialog
+    CreateProfileDialog,
+    Themed
   },
   data: () => ({
     registration: null,
