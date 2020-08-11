@@ -20,5 +20,6 @@ module.exports = {
     '^.+\\.jsx?$': 'babel-jest'
   },
   snapshotSerializers: ['jest-serializer-vue'],
-  setupFiles: ['<rootDir>/jest.init.js']
+  setupFiles: ['<rootDir>/jest.init.js'],
+  coverageDirectory: './coverage'
 }
