@@ -17,12 +17,18 @@ export default defineComponent({
   setup (props) {
     const theme = ref('skald')
     const poster = ref('')
-    const params = useParams()
-    function setTheme (siteid) {
-      this.theme.value = siteid
-      this.poster.value = siteid
+
+    function setTheme (params) {
+      theme.value = params.siteid
+      poster.value = params.siteid
     }
-    watch(() => params.siteid, setTheme)
+    // useParams, and set theme based on the site opened
+    const params = useParams()
+    // reload/remount etc
+    setTheme(params)
+    // route changed
+    watch(params, setTheme)
+
     return { theme, poster }
   }
 })
