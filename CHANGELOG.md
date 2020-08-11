@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.15.0](https://github.com/vitku/skald/compare/v0.14.3...v0.15.0) (2020-08-11)
+
+
+### Features
+
+* composition api testing ([759172c](https://github.com/vitku/skald/commit/759172c9f668683fc72a03b6f7e2f0f4b8ef3a4e))
+* re-enable vue-cli-jest ([4b60725](https://github.com/vitku/skald/commit/4b607258bbeb514005d27ec4f3e3b8621eb659ad))
+* theme from "themed" ([39355e5](https://github.com/vitku/skald/commit/39355e542de7001bc0fae3bf9710edc9add9a8c2))
+* theming moved to Themed component ([04d8959](https://github.com/vitku/skald/commit/04d8959ef7de4c5328d1315c42e0a57d42bc9870))
+* useParams ([f3a2451](https://github.com/vitku/skald/commit/f3a2451cb933c81113bab2ff3bf9d0777ff9ce7c))
+
 ### [0.14.3](https://github.com/vitku/skald/compare/v0.14.2...v0.14.3) (2020-08-10)
 
 
