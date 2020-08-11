@@ -43,7 +43,7 @@ export default defineComponent({
     // useParams, and set theme based on the site opened
     const params = useParams()
     // reload/remount etc
-    onMounted(() => { setTheme(params) })
+    onMounted(() => { setTheme(params.value) })
     // route changed
     watch(params, setTheme)
 
