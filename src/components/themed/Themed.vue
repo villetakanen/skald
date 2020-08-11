@@ -1,12 +1,30 @@
 <template>
   <div :class="`skald-themed ${theme}`">
+    <!-- default background -->
+    <div
+      id="cover"
+      :style="`height: ${posterHeight}px`"
+      v-if="!poster">
+      <div id="posterFadeOut"
+        :style="`min-height: ${posterHeight/4}px`"></div>
+    </div>
+    <!-- site background -->
+    <div
+      id="cover"
+      v-if="poster"
+      :style="`height: ${posterHeight}px; background-image:url('${posterImageURL}')`">
+      <div id="posterFadeOut"
+        :style="`min-height: ${posterHeight/4}px`"></div>
+    </div>
+
     <slot></slot>
-    <div id="debug">
+    <!--div id="debug">
       siteid: {{ siteid }} <br/>
       Theme: {{ theme }} <br/>
       Poster: {{ poster }} <br/>
-      PosterImageURL: {{ posterImageURL }}
-    </div>
+      PosterImageURL: {{ posterImageURL }} <br/>
+      PosterHeight: {{ posterHeight }}
+    </div-->
   </div>
 </template>
 
@@ -25,6 +43,7 @@ export default defineComponent({
     const poster = ref('')
     const siteid = ref('')
     const posterImageURL = ref('')
+    const posterHeight = ref(window.innerHeight)
 
     function setTheme (params) {
       siteid.value = params.siteid
@@ -56,7 +75,7 @@ export default defineComponent({
     // route changed
     watch(params, setTheme)
 
-    return { siteid, theme, poster, posterImageURL }
+    return { siteid, theme, poster, posterImageURL, posterHeight }
   }
 })
 </script>
@@ -73,5 +92,19 @@ export default defineComponent({
   color: greenyellow;
   z-index: 900000;
   padding: 8px;
+}
+// Cover image positioning and scaffold
+div#cover{
+  position: absolute;
+  width: 100%;
+  min-height: 300px;
+  background-image: url('../../assets/skald-poster.svg');
+  background-size: cover;
+}
+div#posterFadeOut{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba(35,35,35,1) 0%, rgba(35,35,35,0) 100%);
 }
 </style>

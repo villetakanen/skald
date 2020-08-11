@@ -276,22 +276,6 @@ div.v-card.v-sheet.theme--dark .wikipage {
     border-radius: 50%;
   }
 }
-// Cover image positioning and scaffold
-div#cover{
-  position: absolute;
-  width: 100%;
-  height: 1080px;
-  background-image: url('./assets/skald-poster.svg');
-  background-size: cover; 
-}
-div#cover-image{
-  position: absolute;
-  width: 100%;
-  min-height: 200px;
-  bottom: 0;
-  // background-image: url('./assets/site-shader.svg');
-  background: linear-gradient(0deg, rgba(35,35,35,1) 0%, rgba(35,35,35,0) 100%);
-}
 
 .sitecard-theme-poster {
   background-image: url('./assets/skald-poster.svg');

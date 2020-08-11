@@ -4,22 +4,17 @@ exports[`Mounted App renders correctly 1`] = `
 <div
   class="skald-themed "
 >
-   
   <div
-    id="debug"
+    id="cover"
+    style="height: 768px;"
   >
-    
-    siteid:  
-    <br />
-    
-    Theme:  
-    <br />
-    
-    Poster:  
-    <br />
-    
-    PosterImageURL: 
-  
+    <div
+      id="posterFadeOut"
+      style="min-height: 192px;"
+    />
   </div>
+   
+  <!---->
+   
 </div>
 `;
