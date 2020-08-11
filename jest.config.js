@@ -17,5 +17,6 @@ module.exports = {
     '^.+\\.vue$': require.resolve('vue-jest'),
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$':
     require.resolve('jest-transform-stub')
-  }
+  },
+  snapshotSerializers: ['jest-serializer-vue']
 }

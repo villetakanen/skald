@@ -7,4 +7,9 @@ describe('Mounted App', () => {
   test('is a Vue instance', () => {
     expect(wrapper.find('div').vm).toBeTruthy()
   })
+
+  it('renders correctly', () => {
+    const wrapper = mount(Themed)
+    expect(wrapper.element).toMatchSnapshot()
+  })
 })
