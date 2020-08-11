@@ -1,7 +1,9 @@
 <template>
-  <div class="skald-themed">
+  <div :class="`skald-themed ${theme}`">
     <slot></slot>
-    <div id="debug">Theme {{ theme }}<br/>
+    <div id="debug">
+      siteid: {{ siteid }} <br/>
+      Theme: {{ theme }} <br/>
       Poster: {{ poster }}
     </div>
   </div>
@@ -9,27 +11,43 @@
 
 <script>
 import Vue from 'vue'
-import VueCompositionApi, { defineComponent, ref, watch } from '@vue/composition-api'
+import VueCompositionApi, { defineComponent, ref, watch, onMounted } from '@vue/composition-api'
+import firebase from 'firebase/app'
+import 'firebase/firestore'
 import { useParams } from '../../lib/useParams'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
   setup (props) {
-    const theme = ref('skald')
+    const theme = ref('')
     const poster = ref('')
+    const siteid = ref('')
 
     function setTheme (params) {
-      theme.value = params.siteid
-      poster.value = params.siteid
+      siteid.value = params.siteid
+
+      if (params.siteid) {
+        const db = firebase.firestore()
+        const siteRef = db.collection('sites').doc(params.siteid)
+        siteRef.get().then((doc) => {
+          if (doc.exists) {
+            theme.value = doc.data().theme
+            poster.value = doc.data().posterURL
+          }
+        })
+      } else {
+        theme.value = ''
+        poster.value = ''
+      }
     }
     // useParams, and set theme based on the site opened
     const params = useParams()
     // reload/remount etc
-    setTheme(params)
+    onMounted(() => { setTheme(params) })
     // route changed
     watch(params, setTheme)
 
-    return { theme, poster }
+    return { siteid, theme, poster }
   }
 })
 </script>
@@ -40,10 +58,11 @@ export default defineComponent({
   top: 16px;
   right: 16px;
   height: 128px;
-  width: 720px;
+  width: 256px;
   opacity: 0.75;
   background-color: black;
   color: greenyellow;
   z-index: 900000;
+  padding: 8px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <v-app :class="theme">
+  <v-app>
     <Themed>
     <div
       id="cover"
