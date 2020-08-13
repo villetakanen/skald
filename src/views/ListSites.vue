@@ -13,7 +13,8 @@
 
     <v-row>
       <v-col>
-        <SiteList />
+        <SiteList
+          :cols="4"/>
       </v-col>
     </v-row>
   </v-container>
