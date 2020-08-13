@@ -3,8 +3,8 @@
     <v-row>
       <v-col>
         <TabTitle
-          :sub="$t('view_gm_players.title')"
-          :topic="siteid"/>
+          :topic="$t('view_gm_players.title')"
+          :sub="siteid"/>
       </v-col>
     </v-row>
     <v-row>
@@ -12,7 +12,6 @@
         <Loading v-if='loading'/>
         <v-card v-if="!loading">
           <v-card-text>
-            <AddPlayersAction :siteid="siteid"/>
             <template v-for="(player, index) in players">
               <div v-bind:key="index">
                 <PlayerRowItem
@@ -21,17 +20,12 @@
                   :uid="player.uid"
                   :nick="player.nick"
                   :tags="player.tags"/>
-                <!--div class="playerlist-cell">
-                  {{player.nick}}
-                </div>
-                <div class="playerlist-cell">
-                  <template v-for="(tag, tagIndex) in player.tags">
-                    <span v-bind:key="tagIndex" class="playerlist-tag">{{tag}}</span>
-                  </template>
-                </div-->
               </div>
             </template>
           </v-card-text>
+          <v-card-actions>
+            <AddPlayersAction :siteid="siteid"/>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -69,6 +63,7 @@ export default defineComponent({
     const players = ref(pr)
     let unsubscribePlayers = () => {}
     onMounted(() => {
+      if (!props.siteid) return
       const db = firebase.firestore()
       const playerRef = db.collection('sites').doc(props.siteid).collection('players')
       unsubscribePlayers = playerRef.onSnapshot((data) => {
