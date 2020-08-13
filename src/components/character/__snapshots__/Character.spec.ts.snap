@@ -6,7 +6,7 @@ exports[`Mounted App renders correctly 1`] = `
   tag="div"
 >
   
-  ...
+  I am the Character.vue component, with no actual implementation in place ;D
 
 </v-card-stub>
 `;

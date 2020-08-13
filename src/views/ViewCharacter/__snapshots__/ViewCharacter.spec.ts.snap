@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-container-stub
+  tag="div"
+>
+  <v-row-stub
+    tag="div"
+  >
+    <v-column>
+      <character-stub
+        playerid=""
+        siteid=""
+      />
+    </v-column>
+  </v-row-stub>
+</v-container-stub>
+`;

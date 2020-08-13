@@ -27,6 +27,12 @@ export default new Router({
       component: ViewPage
     },
     {
+      path: '/g/:siteid/characters/:playerid',
+      name: 'viewCharacter',
+      props: true,
+      component: () => import(/* webpackChunkName: "site" */ './views/ViewCharacter/ViewCharacter.vue')
+    },
+    {
       path: '/archive/:siteid',
       name: 'viewFullSite',
       props: true,
