@@ -1,17 +1,39 @@
 <template>
-  <div class="AddPlayersAction">
-    <div class="AddPlayersAction-column1">
-      <v-select
-        v-model="selectedUser"
-        :items="allUserNicks">
-      </v-select>
-    </div>
-    <div class="AddPlayersAction-column2">
+  <v-dialog
+    v-model="dialog"
+    width="500"
+    >
+    <template v-slot:activator="{ on, attrs }">
       <v-btn
-        @click="addPlayer(selectedUser)"
-        >Add a Player</v-btn>
-    </div>
-  </div>
+        color="primary"
+        v-bind="attrs"
+        v-on="on"
+        >{{$t('view_gm_players.addPlayerToSite')}}</v-btn>
+    </template>
+
+    <v-card>
+      <v-card-title>
+        {{$t('view_gm_players.addPlayerToSite')}}
+      </v-card-title>
+
+      <v-card-text>
+        <v-select
+          v-model="selectedUser"
+          :items="allUserNicks"></v-select>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+          @click="addPlayer(selectedUser)"
+          :disabled="!selectedUser"
+          color="primary"
+          >{{$t('view_gm_players.addPlayerToSiteButton')}}</v-btn>
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script lang="ts">
@@ -35,6 +57,7 @@ export default defineComponent({
     }
   },
   setup (props) {
+    const dialog = ref(false)
     const selectedUser = ref('')
     const userArray: profile[] = []
     const userNickArray: string[] = []
@@ -55,10 +78,12 @@ export default defineComponent({
       const db = firebase.firestore()
       const playersRef = db.collection('sites').doc(props.siteid).collection('players')
       const player = allUsers.value.find((user) => { return user.nick === userNick })
-      playersRef.doc(player?.uid).set({ nick: userNick, tags: [] })
+      playersRef.doc(player?.uid).set({ nick: userNick, tags: [] }).then(() => {
+        dialog.value = false
+      })
     }
 
-    return { allUserNicks, allUsers, addPlayer, selectedUser }
+    return { allUserNicks, allUsers, addPlayer, dialog, selectedUser }
   }
 })
 </script>

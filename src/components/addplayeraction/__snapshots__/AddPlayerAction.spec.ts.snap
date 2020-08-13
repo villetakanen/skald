@@ -1,32 +1,48 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Mounted App renders correctly 1`] = `
-<div
-  class="AddPlayersAction"
+<v-dialog-stub
+  closedelay="0"
+  contentclass=""
+  maxwidth="none"
+  opendelay="0"
+  origin="center center"
+  retainfocus="true"
+  transition="dialog-transition"
+  width="500"
 >
-  <div
-    class="AddPlayersAction-column1"
+   
+  <v-card-stub
+    loaderheight="4"
+    tag="div"
   >
-    <v-select-stub
-      appendicon="$dropdown"
-      backgroundcolor=""
-      clearicon="$clear"
-      errorcount="1"
-      errormessages=""
-      itemcolor="primary"
-      itemdisabled="disabled"
-      items=""
-      itemtext="text"
-      itemvalue="value"
-      loaderheight="2"
-      menuprops="[object Object]"
-      messages=""
-      nodatatext="$vuetify.noDataText"
-      rules=""
-      successmessages=""
-      type="text"
-      value=""
-      valuecomparator="function deepEqual(a, b) {
+    <v-card-title-stub>
+      
+      
+    
+    </v-card-title-stub>
+     
+    <v-card-text-stub>
+      <v-select-stub
+        appendicon="$dropdown"
+        backgroundcolor=""
+        clearicon="$clear"
+        errorcount="1"
+        errormessages=""
+        itemcolor="primary"
+        itemdisabled="disabled"
+        items=""
+        itemtext="text"
+        itemvalue="value"
+        loaderheight="2"
+        menuprops="[object Object]"
+        messages=""
+        nodatatext="$vuetify.noDataText"
+        rules=""
+        successmessages=""
+        type="text"
+        value=""
+        valuecomparator="function deepEqual(a, b) {
   if (a === b) return true;
 
   if (a instanceof Date && b instanceof Date) {
@@ -50,19 +66,24 @@ exports[`Mounted App renders correctly 1`] = `
     return deepEqual(a[p], b[p]);
   });
 }"
-    />
-  </div>
-   
-  <div
-    class="AddPlayersAction-column2"
-  >
-    <v-btn-stub
-      activeclass=""
-      tag="button"
-      type="button"
-    >
-      Add a Player
-    </v-btn-stub>
-  </div>
-</div>
+      />
+    </v-card-text-stub>
+     
+    <v-divider-stub />
+     
+    <v-card-actions-stub>
+      <v-spacer-stub />
+       
+      <v-btn-stub
+        activeclass=""
+        color="primary"
+        disabled="true"
+        tag="button"
+        type="button"
+      >
+        
+      </v-btn-stub>
+    </v-card-actions-stub>
+  </v-card-stub>
+</v-dialog-stub>
 `;

@@ -24,6 +24,7 @@
             </template>
           </v-card-text>
           <v-card-actions>
+            <v-spacer></v-spacer>
             <AddPlayerAction :siteid="siteid"/>
           </v-card-actions>
         </v-card>

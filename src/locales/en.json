@@ -26,7 +26,9 @@
   "view_gm_players": {
     "title": "Players", 
     "link_to": "Players",
-    "drop_player": "Drop player"
+    "drop_player": "Drop player",
+    "addPlayerToSite": "New Player",
+    "addPlayerToSiteButton": "Add to Site"
   },
   "frontpage": {
     "title": "Mekanismi",
