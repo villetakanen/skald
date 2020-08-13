@@ -1,6 +1,4 @@
-// import { config } from '@vue/test-utils'
-// import translations from "./src/translations.js"
+import Vue from 'vue'
+import Vuetify from 'vuetify'
 
-// const locale = "en"
-
-// config.mocks["$t"] = (msg) => translations[locale][msg]
+Vue.use(Vuetify)

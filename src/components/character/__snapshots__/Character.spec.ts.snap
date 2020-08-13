@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-card-stub
+  loaderheight="4"
+  tag="div"
+>
+  
+  ...
+
+</v-card-stub>
+`;
