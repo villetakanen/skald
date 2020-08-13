@@ -27,6 +27,10 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
+          text
+          @click="dialog=!dialog"
+          >{{$t('actions.cancel')}}</v-btn>
+        <v-btn
           @click="addPlayer(selectedUser)"
           :disabled="!selectedUser"
           color="primary"

@@ -76,6 +76,15 @@ exports[`Mounted App renders correctly 1`] = `
        
       <v-btn-stub
         activeclass=""
+        tag="button"
+        text="true"
+        type="button"
+      >
+        
+      </v-btn-stub>
+       
+      <v-btn-stub
+        activeclass=""
         color="primary"
         disabled="true"
         tag="button"

@@ -36,5 +36,8 @@
     "blurp": "Mekanismi is currently in Beta testing. Please report all findings via the Skald Github Project.",
     "sitelist": "Highlights",
     "fullSiteListingButton": "Open Site Index"
+  },
+  "actions": {
+    "cancel": "cancel"
   }
 }
