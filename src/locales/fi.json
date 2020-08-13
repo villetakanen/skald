@@ -12,5 +12,10 @@
     "title": "Mekanismi",
     "ingress": "Wiki roolipeleille ja pelien dokumentointiin",
     "blurp": "Mekanismi (2) on Betassa. Parannusehdotukset menevät parhaiten perille sivupalkissa linkatun GitHub -projektin kautta."
+  },
+  "view_gm_players": {
+    "title": "Pelaajat", 
+    "link_to": "Pelaajat",
+    "drop_player": "Poista pelaaja"
   }
 }
