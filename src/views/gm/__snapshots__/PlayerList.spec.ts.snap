@@ -10,7 +10,9 @@ exports[`Mounted App renders correctly 1`] = `
     <v-col-stub
       tag="div"
     >
-      <tabtitle-stub />
+      <tabtitle-stub
+        sub=""
+      />
     </v-col-stub>
   </v-row-stub>
    

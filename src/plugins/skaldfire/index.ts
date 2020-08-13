@@ -80,7 +80,7 @@ export function Skaldfire (Vue: typeof _Vue, options?: any): void {
 
   /* Quite Boringly: we just enable this with the defaults, if the browser supports
        persistence. If it does not, an error is thrown here */
-  firebase.firestore().enablePersistence()
+  if (process.env.VUE_APP_FIREBASE_PERSISTENCY) firebase.firestore().enablePersistence()
 
   Vue.prototype.$skaldURI = skaldURI
   Vue.prototype.$fireStoreURL = fireStoreURL

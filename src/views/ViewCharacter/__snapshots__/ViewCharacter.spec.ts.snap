@@ -7,12 +7,14 @@ exports[`Mounted App renders correctly 1`] = `
   <v-row-stub
     tag="div"
   >
-    <v-column>
+    <v-col-stub
+      tag="div"
+    >
       <character-stub
         playerid=""
         siteid=""
       />
-    </v-column>
+    </v-col-stub>
   </v-row-stub>
 </v-container-stub>
 `;

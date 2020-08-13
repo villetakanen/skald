@@ -6,7 +6,5 @@ require('dotenv').config({ path: '.env.development.local' })
 
 Vue.use(Vuetify)
 
-console.log('a', process.env.VUE_APP_FIREBASE_API_KEY)
-
 // Firestore is initiated here!
 Vue.use(Skaldfire)

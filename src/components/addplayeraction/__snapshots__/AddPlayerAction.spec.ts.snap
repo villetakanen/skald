@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<div
+  class="AddPlayersAction"
+>
+  <div
+    class="AddPlayersAction-column1"
+  >
+    <v-select-stub
+      appendicon="$dropdown"
+      backgroundcolor=""
+      clearicon="$clear"
+      errorcount="1"
+      errormessages=""
+      itemcolor="primary"
+      itemdisabled="disabled"
+      items=""
+      itemtext="text"
+      itemvalue="value"
+      loaderheight="2"
+      menuprops="[object Object]"
+      messages=""
+      nodatatext="$vuetify.noDataText"
+      rules=""
+      successmessages=""
+      type="text"
+      value=""
+      valuecomparator="function deepEqual(a, b) {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date) {
+    // If the values are Date, they were convert to timestamp with getTime and compare it
+    if (a.getTime() !== b.getTime()) return false;
+  }
+
+  if (a !== Object(a) || b !== Object(b)) {
+    // If the values aren't objects, they were already checked for equality
+    return false;
+  }
+
+  var props = Object.keys(a);
+
+  if (props.length !== Object.keys(b).length) {
+    // Different number of props, don't bother to check
+    return false;
+  }
+
+  return props.every(function (p) {
+    return deepEqual(a[p], b[p]);
+  });
+}"
+    />
+  </div>
+   
+  <div
+    class="AddPlayersAction-column2"
+  >
+    <v-btn-stub
+      activeclass=""
+      tag="button"
+      type="button"
+    >
+      Add a Player
+    </v-btn-stub>
+  </div>
+</div>
+`;

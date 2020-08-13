@@ -1,12 +1,12 @@
 <template>
   <v-container>
     <v-row>
-      <v-column>
+      <v-col>
         <Character
           siteid=""
           playerid=""
           />
-      </v-column>
+      </v-col>
     </v-row>
   </v-container>
 </template>

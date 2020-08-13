@@ -24,7 +24,7 @@
             </template>
           </v-card-text>
           <v-card-actions>
-            <AddPlayersAction :siteid="siteid"/>
+            <AddPlayerAction :siteid="siteid"/>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -37,7 +37,7 @@ import Vue from 'vue'
 import VueCompositionApi, { /* reactive, toRefs, */ ref, defineComponent, onMounted, onUnmounted } from '@vue/composition-api'
 import Loading from '../../components/Loading.vue'
 import TabTitle from '../../components/TabTitle.vue'
-import AddPlayersAction from '../../components/site/AddPlayersAction.vue'
+import AddPlayerAction from '../../components/addplayeraction/AddPlayerAction.vue'
 import PlayerRowItem from '../../components/site/PlayerRowItem.vue'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
@@ -48,7 +48,7 @@ export default defineComponent({
   components: {
     Loading,
     TabTitle,
-    AddPlayersAction,
+    AddPlayerAction,
     PlayerRowItem
   },
   props: {

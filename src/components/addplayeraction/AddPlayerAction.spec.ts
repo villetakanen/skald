@@ -1,14 +1,14 @@
 import { shallowMount } from '@vue/test-utils'
-import PlayerList from './PlayerList.vue'
+import AddPlayerAction from './AddPlayerAction.vue'
 
 describe('Mounted App', () => {
   it('renders correctly', () => {
-    const wrapper = shallowMount(PlayerList, {
+    const wrapper = shallowMount(AddPlayerAction, {
       mocks: {
         $t: () => {}
       },
       propsData: {
-        siteid: ''
+        siteid: 'skald'
       }
     })
     expect(wrapper.element).toMatchSnapshot()
