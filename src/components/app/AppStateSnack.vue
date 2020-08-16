@@ -24,11 +24,17 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueCompositionApi, { defineComponent, ref } from '@vue/composition-api'
+import { appState, raiseError, clearErrors } from '@/lib/useAppState'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
   setup (props) {
     const visible = ref(true)
+
+    // listen to appstate
+    // clear error on close
+    // etc
+    
     return { visible }
   }
 })
