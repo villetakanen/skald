@@ -1,6 +1,6 @@
 {
   "name": "skald",
-  "version": "0.15.3",
+  "version": "0.16.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --https",

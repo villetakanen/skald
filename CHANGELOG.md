@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.16.0](https://github.com/vitku/skald/compare/v0.15.3...v0.16.0) (2020-08-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* needs deletion of node_modules and possible rebase
+
+### Bug Fixes
+
+* security and vue cli updates ([2fd20b4](https://github.com/vitku/skald/commit/2fd20b45d456947f371b83b0f83e66422f3db502))
+
 ### [0.15.3](https://github.com/vitku/skald/compare/v0.15.2...v0.15.3) (2020-08-13)
 
 ### [0.15.2](https://github.com/vitku/skald/compare/v0.15.1...v0.15.2) (2020-08-13)
