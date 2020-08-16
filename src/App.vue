@@ -68,6 +68,7 @@
         Close
       </v-btn>
     </v-snackbar>
+    <AppStateSnack/>
     </Themed>
   </v-app>
 </template>
@@ -79,6 +80,7 @@ import ErrorDialog from './components/ErrorDialog'
 import PageNotFoundDialog from './components/PageNotFoundDialog'
 import CreateProfileDialog from './components/CreateProfileDialog'
 import Themed from './components/themed/Themed.vue'
+import AppStateSnack from '@/components/app/AppStateSnack.vue'
 
 export default {
   name: 'App',
@@ -88,7 +90,8 @@ export default {
     ErrorDialog,
     PageNotFoundDialog,
     CreateProfileDialog,
-    Themed
+    Themed,
+    AppStateSnack
   },
   data: () => ({
     registration: null,

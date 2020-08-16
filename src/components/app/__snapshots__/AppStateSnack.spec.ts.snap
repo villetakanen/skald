@@ -2,9 +2,23 @@
 
 exports[`Mounted App renders correctly 1`] = `
 <v-snackbar-stub
+  color="error"
   contentclass=""
+  multiline="true"
   tag="div"
   timeout="5000"
+  top="true"
   transition="v-snack-transition"
-/>
+  value="true"
+>
+  <div>
+    <h1>
+      Hi!
+    </h1>
+     
+    <p>
+      It's a Snack!
+    </p>
+  </div>
+</v-snackbar-stub>
 `;
