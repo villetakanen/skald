@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/vitku/skald/compare/v1.0.0...v1.1.0) (2020-08-19)
+
+
+### Features
+
+* appstatennackbar component available ([1da6940](https://github.com/vitku/skald/commit/1da69408ad66d0edd97e1324fa7b049507c5875a))
+* appstatesnack functional ([135643f](https://github.com/vitku/skald/commit/135643f0a76546294e4e5e579f417a76b384a02e))
+* useappstate ([2616877](https://github.com/vitku/skald/commit/2616877f56099142bbcba695537c5551b1b5d4cc))
+
 ## [1.0.0](https://github.com/vitku/skald/compare/v0.16.1...v1.0.0) (2020-08-16)
 
 ### [0.16.1](https://github.com/vitku/skald/compare/v0.16.0...v0.16.1) (2020-08-16)
