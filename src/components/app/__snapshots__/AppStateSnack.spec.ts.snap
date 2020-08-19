@@ -9,15 +9,15 @@ exports[`Mounted App renders correctly 1`] = `
   timeout="5000"
   top="true"
   transition="v-snack-transition"
-  value="true"
+  value=""
 >
   <div>
     <h1>
-      Hi!
+      
     </h1>
      
     <p>
-      It's a Snack!
+      
     </p>
   </div>
 </v-snackbar-stub>

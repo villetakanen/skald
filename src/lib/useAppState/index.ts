@@ -19,7 +19,6 @@ function raiseError (name:string, message:string, code?:string) {
   state.value.errorName = name
   state.value.errorMessage = message
   state.value.errorCode = code
-  console.log('raiseError', localState, state)
 }
 function clearErrors () {
   state.value.errorName = undefined
