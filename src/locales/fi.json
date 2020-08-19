@@ -17,5 +17,9 @@
     "title": "Pelaajat", 
     "link_to": "Pelaajat",
     "drop_player": "Poista pelaaja"
+  },
+  "actions": {
+    "cancel": "peruuta",
+    "close": "sulje"
   }
 }

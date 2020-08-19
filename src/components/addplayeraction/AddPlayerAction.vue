@@ -45,6 +45,7 @@ import Vue from 'vue'
 import VueCompositionApi, { defineComponent, onMounted, ref } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
+import { useAppState } from '@/lib/useAppState'
 
 Vue.use(VueCompositionApi)
 
@@ -65,6 +66,7 @@ export default defineComponent({
     const selectedUser = ref('')
     const userArray: profile[] = []
     const userNickArray: string[] = []
+    const { raiseError } = useAppState()
     onMounted(() => {
       const db = firebase.firestore()
       const playerRef = db.collection('profiles')
@@ -82,7 +84,11 @@ export default defineComponent({
       const db = firebase.firestore()
       const playersRef = db.collection('sites').doc(props.siteid).collection('players')
       const player = allUsers.value.find((user) => { return user.nick === userNick })
+
       playersRef.doc(player?.uid).set({ nick: userNick, tags: [] }).then(() => {
+        dialog.value = false
+      }).catch((error:Error) => {
+        raiseError(error.name, error.message)
         dialog.value = false
       })
     }

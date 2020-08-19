@@ -38,6 +38,7 @@
     "fullSiteListingButton": "Open Site Index"
   },
   "actions": {
-    "cancel": "cancel"
+    "cancel": "cancel",
+    "close": "close"
   }
 }

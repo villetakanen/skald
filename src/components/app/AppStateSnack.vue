@@ -6,15 +6,15 @@
     top>
 
     <div>
-      <h1>Hi!</h1>
-      <p>It's a Snack!</p>
+      <h1>{{title}}</h1>
+      <p>{{message}}</p>
     </div>
 
     <template v-slot:action="{ attrs }">
         <v-btn
           text
           v-bind="attrs"
-          @click="visible = false"
+          @click="clear"
         >
           {{$t('actions.close')}}
         </v-btn>
@@ -23,19 +23,22 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import VueCompositionApi, { defineComponent, ref } from '@vue/composition-api'
-import { appState, raiseError, clearErrors } from '@/lib/useAppState'
+import VueCompositionApi, { defineComponent, ref, watch, computed } from '@vue/composition-api'
+import { useAppState, alerts } from '@/lib/useAppState'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
   setup (props) {
-    const visible = ref(true)
+    const { alerts, clearErrors, raiseError, state } = useAppState()
+    const visible = alerts
+    const title = computed(() => state.value.errorName)
+    const message = computed(() => state.value.errorMessage)
 
-    // listen to appstate
-    // clear error on close
-    // etc
-    
-    return { visible }
+    function clear () {
+      clearErrors()
+    }
+
+    return { visible, title, clear, message }
   }
 })
 </script>
