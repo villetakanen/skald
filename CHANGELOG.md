@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/vitku/skald/compare/v1.1.0...v1.2.0) (2020-08-20)
+
+
+### Features
+
+* useProfile hook added ([e9c1b54](https://github.com/vitku/skald/commit/e9c1b54373d88ecd33d05fe14fc0903a04d71baf))
+
 ## [1.1.0](https://github.com/vitku/skald/compare/v1.0.0...v1.1.0) (2020-08-19)
 
 
