@@ -17,6 +17,13 @@ export interface Site {
   theme?:string
 }
 
+export interface Profile {
+  uid: string,
+  nick: string,
+  owns?: string[]
+  memberOf?: string[]
+  playerOf?: string[]
+}
 /**
  * Replaces a String with a skald uri compatible slug
  * @param {string} s a String to be converted

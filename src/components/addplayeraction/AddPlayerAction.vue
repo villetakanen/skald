@@ -8,6 +8,7 @@
         color="primary"
         v-bind="attrs"
         v-on="on"
+        :disabled="!isOwner(siteid)"
         >{{$t('view_gm_players.addPlayerToSite')}}</v-btn>
     </template>
 
@@ -46,6 +47,7 @@ import VueCompositionApi, { defineComponent, onMounted, ref } from '@vue/composi
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useAppState } from '@/lib/useAppState'
+import { useProfile } from '@/lib/useProfile'
 
 Vue.use(VueCompositionApi)
 
@@ -67,6 +69,7 @@ export default defineComponent({
     const userArray: profile[] = []
     const userNickArray: string[] = []
     const { raiseError } = useAppState()
+    const { isOwner, activeProfile } = useProfile()
     onMounted(() => {
       const db = firebase.firestore()
       const playerRef = db.collection('profiles')
@@ -93,7 +96,7 @@ export default defineComponent({
       })
     }
 
-    return { allUserNicks, allUsers, addPlayer, dialog, selectedUser }
+    return { allUserNicks, allUsers, addPlayer, dialog, selectedUser, isOwner }
   }
 })
 </script>
