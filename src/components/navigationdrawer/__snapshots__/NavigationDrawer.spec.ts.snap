@@ -21,5 +21,41 @@ exports[`Mounted App renders correctly 1`] = `
       
     </v-list-item-title-stub>
   </v-list-item-stub>
+   
+  <v-list-item-stub
+    activeclass=""
+    tag="div"
+    to="/l/sites"
+  >
+    <v-list-item-action-stub>
+      <v-icon-stub>
+        mdi-view-dashboard
+      </v-icon-stub>
+    </v-list-item-action-stub>
+     
+    <v-list-item-title-stub>
+      
+    </v-list-item-title-stub>
+  </v-list-item-stub>
+   
+  <v-list-item-stub
+    activeclass=""
+    href="https://github.com/vitku/skald"
+    tag="div"
+  >
+    <v-list-item-action-stub>
+      <v-icon-stub>
+        mdi-language-javascript
+      </v-icon-stub>
+    </v-list-item-action-stub>
+     
+    <v-list-item-title-stub>
+      GitHub
+    </v-list-item-title-stub>
+  </v-list-item-stub>
+   
+  <v-divider-stub />
+   
+  <languageswitcher-stub />
 </v-list-stub>
 `;
