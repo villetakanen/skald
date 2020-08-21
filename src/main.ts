@@ -7,7 +7,7 @@ import vuetify from './plugins/vuetify'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 import i18n from './i18n'
-
+import VueCompositionApi from '@vue/composition-api'
 // Here it gets interesting: bring in the Firebase and our middleware
 import firebase from 'firebase/app'
 import { Skaldfire } from './plugins/skaldfire'
@@ -16,6 +16,8 @@ Vue.config.productionTip = false
 
 // Firestore is initiated here!
 Vue.use(Skaldfire)
+
+Vue.use(VueCompositionApi)
 
 new Vue({
   router,

@@ -16,12 +16,14 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueCompositionApi, { defineComponent, computed } from '@vue/composition-api'
+import { useSite } from '@/lib/useSite'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
   setup () {
-    const siteid = computed(() => 'temp')
-    const siteName = computed(() => 'temp')
+    const { site } = useSite()
+    const siteid = computed(() => site.value.siteid)
+    const siteName = computed(() => site.value.name)
     return { siteid, siteName }
   }
 })

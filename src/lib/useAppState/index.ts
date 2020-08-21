@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import { computed, ref } from '@vue/composition-api'
+import VueCompositionApi, { computed, ref } from '@vue/composition-api'
+
+Vue.use(VueCompositionApi)
 
 interface State {
   errorName?:string
