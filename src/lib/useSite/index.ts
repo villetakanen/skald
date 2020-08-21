@@ -47,6 +47,7 @@ function subscribeToSite (siteid:string|null):void {
         site.value.name = ''
         const { raiseError } = useAppState()
         raiseError('This is curious...', `We can not match the url parameter [${siteid}] to any existing record.`, '404')
+        router.push('/')
       }
       loading.value = false
     })

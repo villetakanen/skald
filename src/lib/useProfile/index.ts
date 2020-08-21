@@ -20,7 +20,7 @@ const activeProfile = computed(():undefined|Profile => {
   }
 })
 let unsubscribe = () => {}
-
+let init:boolean = false
 /**
  * resets local state vars and
  * unsubscribes to firebase profile changes
@@ -34,35 +34,37 @@ function resetState () {
   }
 }
 
-firebase.auth().onAuthStateChanged((user) => {
-  // Login or logout happened:
-  // stop listening to profile changes, and reset the state
-  resetState()
-
-  if (user) {
-    // Subscribe to profile data from Firestore
-    const db = firebase.firestore()
-    const fbProfileRef = db.collection('profiles').doc(user.uid)
-    unsubscribe = fbProfileRef.onSnapshot((profileDoc) => {
-      if (profileDoc) {
-        profileRef.value.uid = profileDoc.id
-        profileRef.value.nick = profileDoc.data()?.nick
-        profileRef.value.owns = profileDoc.data()?.owns
-      } else {
-        const { raiseError } = useAppState()
-        raiseError('Missing Profile',
-          'Fetching profile for ' + user.uid + ' / ' + user.email + ' failed',
-          'errors.missingProfile')
-      }
-    })
-  }
-})
-
 function isOwner (siteid:string):Boolean {
   if (!profileRef.value.owns) return false
   return profileRef.value.owns.includes(siteid)
 }
 
 export function useProfile () {
+  if (!init) {
+    firebase.auth().onAuthStateChanged((user) => {
+    // Login or logout happened:
+    // stop listening to profile changes, and reset the state
+      resetState()
+
+      if (user) {
+      // Subscribe to profile data from Firestore
+        const db = firebase.firestore()
+        const fbProfileRef = db.collection('profiles').doc(user.uid)
+        unsubscribe = fbProfileRef.onSnapshot((profileDoc) => {
+          if (profileDoc) {
+            profileRef.value.uid = profileDoc.id
+            profileRef.value.nick = profileDoc.data()?.nick
+            profileRef.value.owns = profileDoc.data()?.owns
+          } else {
+            const { raiseError } = useAppState()
+            raiseError('Missing Profile',
+              'Fetching profile for ' + user.uid + ' / ' + user.email + ' failed',
+              'errors.missingProfile')
+          }
+        })
+      }
+    })
+    init = true
+  }
   return { activeProfile, isOwner }
 }
