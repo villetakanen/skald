@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/vitku/skald/compare/v1.2.0...v1.3.0) (2020-08-21)
+
+
+### Features
+
+* navigation refresh ([36dec8a](https://github.com/vitku/skald/commit/36dec8ab847a7a5af7ac10f320e208f80475c623))
+* useSite hook added ([e2f5677](https://github.com/vitku/skald/commit/e2f5677bcbb84e6bac92e4e98c57adcf24d5db73))
+
 ## [1.2.0](https://github.com/vitku/skald/compare/v1.1.0...v1.2.0) (2020-08-20)
 
 
