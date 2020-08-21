@@ -29,7 +29,7 @@ function subscribeToSite (siteid:string|null):void {
   if (loading.value) return
 
   // We need to start listening to another site from Firestore
-  console.debug('subscribeToSite switching to', siteid, 'from', activeSiteid)
+  // console.debug('subscribeToSite switching to', siteid, 'from', activeSiteid)
   loading.value = true
   activeSiteid = siteid
   // Subscribe to new site data from Firestore
