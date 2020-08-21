@@ -3,5 +3,23 @@
 exports[`Mounted App renders correctly 1`] = `
 <v-list-stub
   tag="div"
-/>
+>
+  <!---->
+   
+  <v-list-item-stub
+    activeclass=""
+    tag="div"
+    to="/"
+  >
+    <v-list-item-action-stub>
+      <v-icon-stub>
+        mdi-home
+      </v-icon-stub>
+    </v-list-item-action-stub>
+     
+    <v-list-item-title-stub>
+      
+    </v-list-item-title-stub>
+  </v-list-item-stub>
+</v-list-stub>
 `;

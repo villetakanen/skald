@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import NavigationDrawer from './components/NavigationDrawer'
+import NavigationDrawer from './components/navigationdrawer/NavigationDrawer'
 import AccountMenu from './components/AccountMenu'
 import ErrorDialog from './components/ErrorDialog'
 import PageNotFoundDialog from './components/PageNotFoundDialog'
@@ -97,7 +97,7 @@ export default {
     registration: null,
     refreshing: false,
     newContent: false,
-    drawer: false,
+    drawer: true,
     timeout: 10000000,
     // theme: 'Skald',
     scrollFab: false,
