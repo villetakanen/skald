@@ -1,40 +1,38 @@
 <template>
-  <div>
-    <div class="page-container">
+  <div class="page-container">
 
-      <v-container v-if="loading">
-        <v-row>
-          <v-col align='center'>
-            <Loading/>
-          </v-col>
-        </v-row>
-      </v-container>
+    <v-container v-if="loading">
+      <v-row>
+        <v-col align='center'>
+          <Loading/>
+        </v-col>
+      </v-row>
+    </v-container>
 
-      <v-container v-if="!loading">
+    <v-container v-if="!loading">
 
-        <v-row>
-          <v-col>
-            <TabTitle
-              :sub="sitename"
-              :sublink="`/v/${siteid}`"
-              :topic="title"
-              :link="`/v/${siteid}/${pageid}`"/>
-          </v-col>
-        </v-row>
+      <v-row>
+        <v-col>
+          <TabTitle
+            :sub="sitename"
+            :sublink="`/v/${siteid}`"
+            :topic="title"
+            :link="`/v/${siteid}/${pageid}`"/>
+        </v-col>
+      </v-row>
 
-        <v-row>
-
+      <v-row>
         <v-col
-            cols="12"
-            md="8">
-          <div id="reader-text">
+          cols="12"
+          md="8"
+          ><div id="reader-text">
             <v-card>
-              <v-container>
+              <div class="pa-4">
                 <WikiText
                   :content="content"
                   :siteid="siteid"
                   :userTags="userTags"/>
-              </v-container>
+              </div>
             <v-btn
               :disabled="!isAuthz"
               fab
@@ -113,7 +111,6 @@
           </v-col>
         </v-row>
       </v-container>
-    </div>
   </div>
 </template>
 
