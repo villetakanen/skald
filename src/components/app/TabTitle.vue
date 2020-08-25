@@ -17,7 +17,7 @@
         v-if="link"
         :to="link"
         :class="titleColorClass"
-        >{{ sub }}</router-link></h1>
+        >{{ title }}</router-link></h1>
   </div>
 </template>
 
