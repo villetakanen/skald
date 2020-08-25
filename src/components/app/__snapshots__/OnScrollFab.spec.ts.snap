@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-btn-stub
+  activeclass=""
+  bottom="true"
+  color="primary"
+  fab="true"
+  fixed="true"
+  right="true"
+  style="display: none;"
+  tag="button"
+  type="button"
+>
+  <v-icon-stub>
+    mdi-arrow-up-thick
+  </v-icon-stub>
+</v-btn-stub>
+`;
