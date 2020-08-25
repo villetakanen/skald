@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.3.4](https://github.com/vitku/skald/compare/v1.3.3...v1.3.4) (2020-08-25)
+
+
+### Bug Fixes
+
+* tabtitle title works ([e5092f9](https://github.com/vitku/skald/commit/e5092f971bc5be5b6725c547327f37f95890646f))
+* tabtitle topic ([f8ae1a3](https://github.com/vitku/skald/commit/f8ae1a325e640cd13e6974226b68c827c7b96db4))
+
 ### [1.3.3](https://github.com/vitku/skald/compare/v1.3.2...v1.3.3) (2020-08-25)
 
 ### [1.3.2](https://github.com/vitku/skald/compare/v1.3.1...v1.3.2) (2020-08-25)
