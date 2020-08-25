@@ -12,12 +12,12 @@
     <h1
       v-if="topic"
       :class="`topic ${titleColorClass}`">
-      <template v-if="!link">{{ title }}</template>
+      <template v-if="!link">{{ topic }}</template>
       <router-link
         v-if="link"
         :to="link"
         :class="titleColorClass"
-        >{{ title }}</router-link></h1>
+        >{{ topic }}</router-link></h1>
   </div>
 </template>
 

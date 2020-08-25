@@ -9,7 +9,7 @@ exports[`Mounted App renders correctly 1`] = `
   <h1
     class="topic "
   >
-     
+    skald 
     <!---->
   </h1>
 </div>
