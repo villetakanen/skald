@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<div
+  class="tabtitle"
+>
+  <!---->
+   
+  <h1
+    class="topic "
+  >
+     
+    <!---->
+  </h1>
+</div>
+`;

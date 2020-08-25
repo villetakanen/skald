@@ -35,7 +35,6 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useParams } from '../../lib/useParams'
 import { fireStoreURL } from '../../plugins/skaldfire'
-Vue.use(VueCompositionApi)
 
 export default defineComponent({
   setup (props) {

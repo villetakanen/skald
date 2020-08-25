@@ -16,7 +16,9 @@
           <v-col>
             <TabTitle
               :sub="sitename"
-              :topic="title"/>
+              :sublink="`/v/${siteid}`"
+              :topic="title"
+              :link="`/v/${siteid}/${pageid}`"/>
           </v-col>
         </v-row>
 
@@ -119,7 +121,7 @@
 import LatestChanges from '../components/LatestChanges'
 import WikiText from '../components/WikiText'
 import Loading from '../components/Loading'
-import TabTitle from '../components/TabTitle'
+import TabTitle from '../components/app/TabTitle.vue'
 import ViewSiteMembers from '../components/site/ViewSiteMembers'
 import firebase from 'firebase/app'
 import 'firebase/firestore'

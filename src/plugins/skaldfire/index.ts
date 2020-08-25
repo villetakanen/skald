@@ -14,7 +14,8 @@ export interface Site {
   name: string,
   description?: string,
   posterURL?:string,
-  theme?:string
+  theme?:string,
+  titleColorClass?:string
 }
 
 export interface Profile {
