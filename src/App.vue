@@ -43,16 +43,7 @@
           icon
           @click.native="newContent=!newContent"
         ><v-icon>mdi-close</v-icon></v-btn></v-snackbar>
-    <v-btn
-      v-scroll="onScroll"
-      v-show="scrollFab"
-      fab
-      fixed
-      bottom
-      right
-      color="primary"
-      @click="toTop"
-      ><v-icon>mdi-arrow-up-thick</v-icon></v-btn>
+      <OnScrollFab/>
     <ErrorDialog/>
     <PageNotFoundDialog/>
     <CreateProfileDialog/>
@@ -81,6 +72,7 @@ import PageNotFoundDialog from './components/PageNotFoundDialog'
 import CreateProfileDialog from './components/CreateProfileDialog'
 import Themed from './components/themed/Themed.vue'
 import AppStateSnack from '@/components/app/AppStateSnack.vue'
+import OnScrollFab from '@/components/app/OnScrollFab.vue'
 
 export default {
   name: 'App',
@@ -91,7 +83,8 @@ export default {
     PageNotFoundDialog,
     CreateProfileDialog,
     Themed,
-    AppStateSnack
+    AppStateSnack,
+    OnScrollFab
   },
   data: () => ({
     registration: null,
@@ -99,8 +92,6 @@ export default {
     newContent: false,
     drawer: false,
     timeout: 10000000,
-    // theme: 'Skald',
-    scrollFab: false,
     snackbar: false
     //
   }),
@@ -127,14 +118,6 @@ export default {
     })
   },
   methods: {
-    onScroll (e) {
-      if (typeof window === 'undefined') return
-      const top = window.pageYOffset || e.target.scrollTop || 0
-      this.scrollFab = top > 20
-    },
-    toTop () {
-      window.scroll(0, 0)
-    },
     showRefreshUI (e) {
       // Display a snackbar inviting the user to refresh/reload the app due
       // to an app update being available.
