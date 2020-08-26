@@ -1,66 +1,85 @@
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import Vue from 'vue'
-import VueCompositionApi, { ref } from '@vue/composition-api'
+import VueCompositionApi, { ref, computed } from '@vue/composition-api'
 import { Site } from '@/plugins/skaldfire'
 import { useAppState } from '@/lib/useAppState'
 import router from '@/router'
+import site from '@/store/site'
 
 Vue.use(VueCompositionApi)
 
-let activeSiteid:string|null = null
-let unsubscribe = () => {}
-const activeSite:Site = {
-  siteid: '',
+/**
+ * Local struct and template for Site data from Firebase
+ */
+const siteData:Site = {
   name: '',
-  titleColorClass: ''
+  siteid: '',
+  titleColorClass: '',
+  description: '',
+  posterURL: '',
+  theme: ''
 }
-const site = ref(activeSite)
-const loading = ref(false)
+const siteState = Vue.observable(siteData)
+const metaState = Vue.observable({
+  loading: false,
+  activeSiteid: ''
+})
 
+/**
+ * Firebase unsubscribe for subscribed data.
+ */
+let unsubscribe = () => {}
+
+/**
+ * Sets the siteState observable to initial state
+ */
 function resetSite ():void {
-  site.value.siteid = ''
-  site.value.name = ''
-  site.value.titleColorClass = ''
+  siteState.name = ''
+  siteState.siteid = ''
+  siteState.titleColorClass = ''
+  siteState.description = ''
+  siteState.posterURL = ''
+  siteState.theme = ''
 }
 
 /**
  * Subscribe to a Site from Firestore
  *
- * @param siteid id of the site we want to start watching
+ * @param siteid id of the site we want to start watching. A null is intrepeted as "watch none", as is ''.
  */
-function subscribeToSite (siteid:string|null):void {
-  // If are currently subscribing this site, do no-op:
-  if (siteid === activeSiteid) return
-  // If we are currently in process of subscribing to a site, no op:
-  if (loading.value) return
+function subscribeToSite (newSiteid:string|null):void {
+  // Trying to subscribe to current site, cancel op
+  if (newSiteid === metaState.activeSiteid) return
+  metaState.activeSiteid = newSiteid === null ? '' : newSiteid
+  metaState.loading = true
 
-  // We need to start listening to another site from Firestore
-  // console.debug('subscribeToSite switching to', siteid, 'from', activeSiteid)
-  loading.value = true
-  activeSiteid = siteid
-  // Subscribe to new site data from Firestore
+  // Firestore unsubscribe for the old sitedata
   unsubscribe()
 
-  if (siteid) {
+  // If we have siteid, lets start listening to it from Firestore
+  if (newSiteid) {
     const db = firebase.firestore()
-    const firebaseSiteRef = db.collection('sites').doc(siteid)
+    const firebaseSiteRef = db.collection('sites').doc(newSiteid)
     unsubscribe = firebaseSiteRef.onSnapshot((siteDoc) => {
-      if (siteDoc && siteDoc.data()?.name) {
-        site.value.siteid = siteDoc.id
-        site.value.name = siteDoc.data()?.name
-        site.value.titleColorClass = siteDoc.data()?.titleColorClass
+      if (siteDoc.exists && siteDoc.data()?.name) {
+        siteState.siteid = siteDoc.id
+        siteState.name = siteDoc.data()?.name
+        siteState.titleColorClass = siteDoc.data()?.titleColorClass
+        siteState.description = siteDoc.data()?.description
+        siteState.posterURL = siteDoc.data()?.posterURL
+        siteState.theme = siteDoc.data()?.theme
       } else {
         resetSite()
+        metaState.loading = false
         const { raiseError } = useAppState()
-        raiseError('This is curious...', `We can not match the url parameter [${siteid}] to any existing record.`, '404')
+        raiseError('This is curious...', `We can not match the url parameter [${newSiteid}] to any existing record.`, '404')
         router.push('/')
       }
-      loading.value = false
     })
   } else {
     resetSite()
-    loading.value = false
+    metaState.loading = false
   }
 }
 
@@ -74,5 +93,7 @@ export function useSite () {
     }
     subscribeToSite(siteid)
   })
+  const site = computed(() => siteState)
+  const loading = computed(() => metaState.loading)
   return { loading, site }
 }
