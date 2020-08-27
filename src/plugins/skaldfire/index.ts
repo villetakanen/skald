@@ -18,6 +18,15 @@ export interface Site {
   titleColorClass?:string
 }
 
+export interface Page {
+  pageid: string,
+  siteid: string,
+  name: string,
+  content: string,
+  htmlContent?: string,
+  htmlContentDraft?: string
+}
+
 export interface Profile {
   uid: string,
   nick: string,

@@ -2,12 +2,7 @@
   <v-container>
     <v-row>
       <v-col cols="8">
-        <v-card>
-          <v-toolbar><v-toolbar-title>CKEditor alpha</v-toolbar-title></v-toolbar>
-           <v-card-text>
-            <CKEditor/>
-           </v-card-text>
-          </v-card>
+        <CKEditorCard/>
       </v-col>
       <v-col cols="4">
         <v-card>
@@ -25,7 +20,7 @@
 <script lang="ts">
 import { defineComponent, ref, onMounted, watch, ComputedRef } from '@vue/composition-api'
 import { useParams } from '@/lib/useParams'
-import CKEditor from '@/components/ckeditor/CKEditor.vue'
+import CKEditorCard from '@/components/ckeditorcard/CKEditorCard.vue'
 
 interface PageRoute {
   siteid:string,
@@ -34,7 +29,7 @@ interface PageRoute {
 
 export default defineComponent({
   components: {
-    CKEditor
+    CKEditorCard
   },
   setup (props) {
     const siteid = ref('')
