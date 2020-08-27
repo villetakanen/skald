@@ -44,7 +44,13 @@ exports[`Mounted App renders correctly 1`] = `
         </v-card-title-stub>
          
         <v-card-text-stub>
-          ...
+          <p>
+            siteid: []
+          </p>
+           
+          <p>
+            pageid: []
+          </p>
         </v-card-text-stub>
       </v-card-stub>
     </v-col-stub>
