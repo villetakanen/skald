@@ -34,6 +34,13 @@ export default defineComponent({
     const siteid = ref('')
     const pageid = ref('')
 
+    /**
+     * reactive update of all components of the view,
+     * based on siteid and pageid? values of route.
+     * If no pageid is give, we use the siteid as pageid.
+     *
+     * @param p The Vue router `route.params` value from `useParams()`
+     */
     function setPage (p:Object) {
       const pageRoute = p as PageRoute
       siteid.value = pageRoute.siteid
