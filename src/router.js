@@ -74,6 +74,20 @@ export default new Router({
       component: () => import(/* webpackChunkName: "editor" */ './views/Editor.vue')
     },
     {
+      path: '/edit/:siteid',
+      name: 'cKEditSiteFrontPage',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "editor" */ '@/views/ckeditor/CKEditor.vue')
+    },
+    {
+      path: '/edit/:siteid/:pageid',
+      name: 'cKEditPage',
+      // lazy-loaded when the route is visited.
+      props: true,
+      component: () => import(/* webpackChunkName: "editor" */ '@/views/ckeditor/CKEditor.vue')
+    },
+    {
       path: '/i/:siteid/:pageid',
       name: 'pageInfo',
       // lazy-loaded when the route is visited.

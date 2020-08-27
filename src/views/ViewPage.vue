@@ -42,6 +42,15 @@
               color="primary"
               v-bind:to="editlink"
               ><v-icon>mdi-pencil</v-icon></v-btn>
+            <v-btn
+              :disabled="!isAuthz"
+              fab
+              small
+              top right absolute
+              style= "margin-right: 96px; margin-top:4px"
+              color="secondary"
+              v-bind:to="ckeditlink"
+              ><v-icon>mdi-pen</v-icon></v-btn>
             <v-speed-dial
                 v-model="fab"
                 top
@@ -178,6 +187,11 @@ export default {
       // If we are showing the root of site, no pageid is set.
       if (!this.pageid) return `/e/${this.siteid}/${this.siteid}`
       return `/e/${this.siteid}/${this.pageid}`
+    },
+    ckeditlink () {
+      // If we are showing the root of site, no pageid is set.
+      if (!this.pageid) return `/edit/${this.siteid}`
+      return `/edit/${this.siteid}/${this.pageid}`
     }
   },
   methods: {

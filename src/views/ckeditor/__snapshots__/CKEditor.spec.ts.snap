@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-container-stub
+  tag="div"
+>
+  <v-row-stub
+    tag="div"
+  >
+    <v-col-stub
+      cols="8"
+      tag="div"
+    >
+      <v-card-stub
+        loaderheight="4"
+        tag="div"
+      >
+        <v-toolbar-stub
+          extensionheight="48"
+          src=""
+          tag="header"
+        >
+          <v-toolbar-title-stub>
+            CKEditor alpha
+          </v-toolbar-title-stub>
+        </v-toolbar-stub>
+         
+        <v-card-text-stub>
+          ...
+        </v-card-text-stub>
+      </v-card-stub>
+    </v-col-stub>
+     
+    <v-col-stub
+      cols="4"
+      tag="div"
+    >
+      <v-card-stub
+        loaderheight="4"
+        tag="div"
+      >
+        <v-card-title-stub>
+          Debug
+        </v-card-title-stub>
+         
+        <v-card-text-stub>
+          ...
+        </v-card-text-stub>
+      </v-card-stub>
+    </v-col-stub>
+  </v-row-stub>
+</v-container-stub>
+`;
