@@ -26,7 +26,7 @@ exports[`Mounted App renders correctly 1`] = `
         </v-toolbar-stub>
          
         <v-card-text-stub>
-          ...
+          <ckeditor-stub />
         </v-card-text-stub>
       </v-card-stub>
     </v-col-stub>
