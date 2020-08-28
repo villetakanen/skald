@@ -1,13 +1,15 @@
 <template>
   <v-card class="sidebar">
+    <v-card-title>{{page.name}}</v-card-title>
     <v-card-text>
       <div v-html="content"></div>
     </v-card-text>
     <v-card-actions
       v-if="editorActions">
+      <v-spacer></v-spacer>
       <v-btn
         text
-        :to="`/edit/${site.siteid}`">{{$t('sidebar.editAction')}}</v-btn>
+        :to="`/edit/${site.siteid}/sidebar`">{{$t('sidebar.editAction')}}</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -79,7 +81,7 @@ export default defineComponent({
       activeProfile.value &&
       activeProfile.value.owns &&
       activeProfile.value.owns.includes(site.value.siteid))
-    return { loading, page, site, content }
+    return { loading, page, site, content, editorActions }
   }
 })
 </script>

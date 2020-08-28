@@ -40,5 +40,8 @@
   "actions": {
     "cancel": "cancel",
     "close": "close"
+  },
+  "sidebar": {
+    "editAction": "Edit Sidebar"
   }
 }
