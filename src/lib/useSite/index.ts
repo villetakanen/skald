@@ -95,5 +95,6 @@ export function useSite () {
   })
   const site = computed(() => siteState)
   const loading = computed(() => metaState.loading)
-  return { loading, site }
+  const meta = computed(() => metaState)
+  return { loading, meta, site }
 }

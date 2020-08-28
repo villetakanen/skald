@@ -20,7 +20,7 @@ const pageData:Page = {
 }
 const pageState = Vue.observable(pageData)
 const metaState = {
-  loading: false
+  loading: true
 }
 let activeSite = ''
 let activePage = '-1'
@@ -70,6 +70,6 @@ export function usePage () {
     subscribeToPage(route.params)
   })
   const page = computed(() => pageState)
-  const loading = computed(() => metaState.loading)
-  return { loading, page }
+  const meta = computed(() => metaState)
+  return { meta, page }
 }
