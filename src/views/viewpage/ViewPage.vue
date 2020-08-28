@@ -27,6 +27,52 @@
                       <div v-html="content"></div>
                     </div>
                 </div>
+                <v-btn
+                  :disabled="!editorActions"
+                  fab
+                  small
+                  top right absolute
+                  style= "margin-right: 48px; margin-top:4px"
+                  color="primary"
+                  v-bind:to="`/edit/${site.siteid}/${page.pageid}`"
+                  ><v-icon>mdi-pen</v-icon></v-btn>
+                <v-speed-dial
+                  v-model="fab"
+                  top
+                  right
+                  direction="bottom"
+                  absolute
+                  style="margin-top:-32px">
+                  <template v-slot:activator>
+                    <v-btn
+                      v-model="fab"
+                      color="primary"
+                      small
+                      top
+                      right
+                      fab
+                      elevation="2">
+                      <v-icon v-if="fab">mdi-close</v-icon>
+                      <v-icon v-else>mdi-menu-down</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-btn
+                    fab
+                    dark
+                    small
+                    color="secondary"
+                    @click="copyUrl"
+                    >
+                    <v-icon>mdi-link</v-icon>
+                  </v-btn>
+                  <v-btn
+                    fab
+                    color="secondary"
+                    small
+                    @click="showHistory">
+                    <v-icon>mdi-file-eye</v-icon>
+                  </v-btn>
+                </v-speed-dial>
             </v-card-text>
           </v-card>
         </v-col>
@@ -44,6 +90,7 @@ import TabTitle from '@/components/app/TabTitle.vue'
 import SideBar from '@/components/site/SideBar.vue'
 import { useSite } from '@/lib/useSite'
 import Skaldmd from '@/lib/skaldmd'
+import { useProfile } from '@/lib/useProfile'
 export default defineComponent({
   components: {
     Loading,
@@ -60,7 +107,12 @@ export default defineComponent({
       const skaldmd = new Skaldmd(site.value.siteid)
       return skaldmd.toHtml(page.value.content)
     })
-    return { meta, page, site, content }
+    const { activeProfile } = useProfile()
+    const editorActions = computed(() =>
+      activeProfile.value &&
+      activeProfile.value.owns &&
+      activeProfile.value.owns.includes(site.value.siteid))
+    return { meta, page, site, content, editorActions }
   }
 })
 </script>

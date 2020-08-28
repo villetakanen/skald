@@ -8,6 +8,10 @@ exports[`Mounted App renders correctly 1`] = `
   siteid="mekanismi"
   tag="div"
 >
+  <v-card-title-stub>
+    
+  </v-card-title-stub>
+   
   <v-card-text-stub>
     <div />
   </v-card-text-stub>
