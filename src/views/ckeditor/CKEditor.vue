@@ -5,7 +5,8 @@
         <CKEditorCard/>
       </v-col>
       <v-col cols="4">
-        <v-card>
+        <PageMetadataCard/>
+        <v-card class="my-4">
           <v-card-title>Debug</v-card-title>
           <v-card-text>
             <p>siteid: [{{ siteid }}]</p>
@@ -21,6 +22,7 @@
 import { defineComponent, ref, onMounted, watch, ComputedRef } from '@vue/composition-api'
 import { useParams } from '@/lib/useParams'
 import CKEditorCard from '@/components/ckeditorcard/CKEditorCard.vue'
+import PageMetadataCard from '@/components/ckeditorcard/PageMetadataCard.vue'
 
 interface PageRoute {
   siteid:string,
@@ -29,7 +31,8 @@ interface PageRoute {
 
 export default defineComponent({
   components: {
-    CKEditorCard
+    CKEditorCard,
+    PageMetadataCard
   },
   setup (props) {
     const siteid = ref('')

@@ -24,7 +24,8 @@ export interface Page {
   name: string,
   content: string,
   htmlContent?: string,
-  htmlContentDraft?: string
+  htmlContentDraft?: string,
+  category?: string
 }
 
 export interface Profile {

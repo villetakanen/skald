@@ -1,10 +1,17 @@
 <template>
   <v-card>
     <v-toolbar>
-      <v-toolbar-title>CKEditor alpha</v-toolbar-title>
+      <v-toolbar-title>{{ page.name }} <v-chip small v-if="page.category">{{page.category}}</v-chip></v-toolbar-title>
+      <v-spacer></v-spacer>
       <v-btn
+        text
+        :to="`/v/${site.siteid}/${page.pageid}`">{{$t('actions.cancel')}}</v-btn>
+      <v-btn
+        icon
+        class="mx-2"
         @click="preview=!preview"
-        >Preview</v-btn>
+        ><v-icon v-if="!preview">mdi-eye</v-icon>
+        <v-icon v-if="preview">mdi-pen</v-icon></v-btn>
       <v-btn
         @click="publish"
         color="primary"
@@ -14,7 +21,13 @@
         <div v-if="!preview" style="margin:-8px">
           <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
         </div>
-        <div v-if="preview" v-html="editorData"></div>
+        <div
+          v-if="preview"
+          class="wikipage">
+          <div :class="site.theme">
+            <div v-html="editorData"></div>
+          </div>
+        </div>
       </v-card-text>
   </v-card>
 </template>
@@ -28,12 +41,15 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { usePage } from '@/lib/usePage'
 import Skaldmd from '@/lib/skaldmd'
+import { useSite } from '@/lib/useSite'
+import router from '@/router'
 
 Vue.use(CKEditor)
 
 export default defineComponent({
   setup (props) {
     const { page } = usePage()
+    const { site } = useSite()
     const preview = ref(false)
 
     const editorData = computed({
@@ -54,7 +70,9 @@ export default defineComponent({
     const publish = () => {
       const db = firebase.firestore()
       const draftRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
-      draftRef.update({ htmlContent: editorData.value })
+      draftRef.update({ htmlContent: editorData.value }).then(() => {
+        router.push(`/v/${site.value.siteid}/${page.value.pageid}`)
+      })
     }
 
     const editorSetup = reactive({
@@ -63,7 +81,7 @@ export default defineComponent({
       }
     })
 
-    return { ...toRefs(editorSetup), editorData, page, preview, publish }
+    return { ...toRefs(editorSetup), editorData, page, preview, publish, site }
   }
 })
 </script>

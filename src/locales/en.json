@@ -43,5 +43,10 @@
   },
   "sidebar": {
     "editAction": "Edit Sidebar"
+  },
+  "editor": {
+    "pageMetadataTitle" : "Page meta",
+    "pageName": "Page title",
+    "categorySelect": "Select category"
   }
 }

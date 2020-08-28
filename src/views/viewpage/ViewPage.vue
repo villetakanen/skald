@@ -37,7 +37,7 @@
                   v-bind:to="`/edit/${site.siteid}/${page.pageid}`"
                   ><v-icon>mdi-pen</v-icon></v-btn>
                 <v-speed-dial
-                  v-model="fab"
+                  v-model="dial"
                   top
                   right
                   direction="bottom"
@@ -45,7 +45,7 @@
                   style="margin-top:-32px">
                   <template v-slot:activator>
                     <v-btn
-                      v-model="fab"
+                      v-model="dial"
                       color="primary"
                       small
                       top
@@ -83,7 +83,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from '@vue/composition-api'
+import { defineComponent, computed, ref } from '@vue/composition-api'
 import { usePage } from '@/lib/usePage'
 import Loading from '@/components/Loading.vue'
 import TabTitle from '@/components/app/TabTitle.vue'
@@ -100,6 +100,7 @@ export default defineComponent({
   setup () {
     const { site } = useSite()
     const { meta, page } = usePage()
+    const dial = ref(false)
     const content = computed(() => {
       if (!page) return ''
       if (page.value.htmlContentDraft) return page.value.htmlContentDraft
@@ -112,7 +113,7 @@ export default defineComponent({
       activeProfile.value &&
       activeProfile.value.owns &&
       activeProfile.value.owns.includes(site.value.siteid))
-    return { meta, page, site, content, editorActions }
+    return { meta, page, site, content, editorActions, dial }
   }
 })
 </script>

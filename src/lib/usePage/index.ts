@@ -16,7 +16,8 @@ const pageData:Page = {
   name: '',
   content: '',
   htmlContent: '',
-  htmlContentDraft: ''
+  htmlContentDraft: '',
+  category: ''
 }
 const pageState = Vue.observable(pageData)
 const metaState = {
@@ -33,6 +34,7 @@ function resetPageState () {
   pageState.content = ''
   pageState.htmlContent = ''
   pageState.htmlContentDraft = ''
+  pageState.category = ''
 }
 
 function subscribeToPage (params:Object) {
@@ -53,6 +55,7 @@ function subscribeToPage (params:Object) {
         pageState.name = pageSnapShot.data()?.name
         pageState.content = pageSnapShot.data()?.content
         pageState.htmlContent = pageSnapShot.data()?.htmlContent
+        pageState.category = pageSnapShot.data()?.category
         if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
         else pageState.htmlContentDraft = ''
         metaState.loading = false
