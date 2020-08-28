@@ -19,7 +19,7 @@
         </v-col>
       </v-row>
       <v-row v-if="!meta.loading">
-        <v-col>
+        <v-col cols="12" md="8">
           <v-card>
             <v-card-text>
                 <div class="wikipage">
@@ -30,6 +30,7 @@
             </v-card-text>
           </v-card>
         </v-col>
+        <v-col cols="12" md="4"><SideBar/></v-col>
       </v-row>
     </v-container>
   </div>
@@ -40,12 +41,14 @@ import { defineComponent, computed } from '@vue/composition-api'
 import { usePage } from '@/lib/usePage'
 import Loading from '@/components/Loading.vue'
 import TabTitle from '@/components/app/TabTitle.vue'
+import SideBar from '@/components/site/SideBar.vue'
 import { useSite } from '@/lib/useSite'
 import Skaldmd from '@/lib/skaldmd'
 export default defineComponent({
   components: {
     Loading,
-    TabTitle
+    TabTitle,
+    SideBar
   },
   setup () {
     const { site } = useSite()
