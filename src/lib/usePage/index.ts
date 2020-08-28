@@ -23,7 +23,7 @@ const metaState = {
   loading: false
 }
 let activeSite = ''
-let activePage = ''
+let activePage = '-1'
 let unsubscribe = () => {}
 
 function resetPageState () {
@@ -37,7 +37,6 @@ function resetPageState () {
 
 function subscribeToPage (params:Object) {
   const pageRoute = params as PageRoute
-  console.log('"' + pageRoute.siteid + '"')
   if (pageRoute.siteid !== activeSite || pageRoute.pageid !== activePage) {
     activeSite = pageRoute.siteid
     if (pageRoute.pageid) activePage = pageRoute.pageid
@@ -55,7 +54,6 @@ function subscribeToPage (params:Object) {
         pageState.htmlContent = pageSnapShot.data()?.htmlContent
         if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
         else pageState.htmlContentDraft = ''
-        console.log(pageState)
       })
     }
   }
@@ -63,7 +61,7 @@ function subscribeToPage (params:Object) {
 
 export function usePage () {
   // Route changed, subscribe to the siteid in the route, if any
-  subscribeToPage(router.currentRoute.params)
+  if (activePage === '-1') subscribeToPage(router.currentRoute.params)
   router.afterEach(route => {
     subscribeToPage(route.params)
   })

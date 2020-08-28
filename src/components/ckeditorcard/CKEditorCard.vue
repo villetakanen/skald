@@ -1,11 +1,20 @@
 <template>
   <v-card>
-    <v-toolbar><v-toolbar-title>CKEditor alpha</v-toolbar-title></v-toolbar>
+    <v-toolbar>
+      <v-toolbar-title>CKEditor alpha</v-toolbar-title>
+      <v-btn
+        @click="preview=!preview"
+        >Preview</v-btn>
+      <v-btn
+        @click="publish"
+        color="primary"
+        >Publish</v-btn>
+    </v-toolbar>
       <v-card-text>
-        <div style="margin:-8px">
+        <div v-if="!preview" style="margin:-8px">
           <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
         </div>
-        <div v-html="editorData"></div>
+        <div v-if="preview" v-html="editorData"></div>
       </v-card-text>
   </v-card>
 </template>
@@ -25,6 +34,7 @@ Vue.use(CKEditor)
 export default defineComponent({
   setup (props) {
     const { page } = usePage()
+    const preview = ref(false)
 
     const editorData = computed({
       get: () => {
@@ -35,19 +45,25 @@ export default defineComponent({
         return skaldmd.toHtml(page.value.content)
       },
       set: (val) => {
-        console.log('set', val)
         const db = firebase.firestore()
         const draftRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
         draftRef.update({ htmlContentDraft: val })
       }
     })
+
+    const publish = () => {
+      const db = firebase.firestore()
+      const draftRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
+      draftRef.update({ htmlContent: editorData.value })
+    }
+
     const editorSetup = reactive({
       editor: ClassicEditor,
       editorConfig: {
       }
     })
 
-    return { ...toRefs(editorSetup), editorData, page }
+    return { ...toRefs(editorSetup), editorData, page, preview, publish }
   }
 })
 </script>
