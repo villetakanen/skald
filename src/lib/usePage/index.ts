@@ -39,6 +39,7 @@ function subscribeToPage (params:Object) {
   const pageRoute = params as PageRoute
   if (pageRoute.siteid !== activeSite || pageRoute.pageid !== activePage) {
     activeSite = pageRoute.siteid
+    metaState.loading = true
     if (pageRoute.pageid) activePage = pageRoute.pageid
     else activePage = pageRoute.siteid
     unsubscribe()
@@ -54,7 +55,10 @@ function subscribeToPage (params:Object) {
         pageState.htmlContent = pageSnapShot.data()?.htmlContent
         if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
         else pageState.htmlContentDraft = ''
+        metaState.loading = false
       })
+    } else {
+      metaState.loading = false
     }
   }
 }
@@ -66,5 +70,6 @@ export function usePage () {
     subscribeToPage(route.params)
   })
   const page = computed(() => pageState)
-  return { page }
+  const loading = computed(() => metaState.loading)
+  return { loading, page }
 }
