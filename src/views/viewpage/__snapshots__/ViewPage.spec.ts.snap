@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<div
+  class="page-container"
+  pageid="ohjeita"
+  siteid="mekanismi"
+>
+  <v-container-stub
+    tag="div"
+  >
+    <v-row-stub
+      tag="div"
+    >
+      <v-col-stub
+        tag="div"
+      >
+        <tabtitle-stub
+          link="/v//"
+          sub=""
+          sublink="/v/"
+          topic=""
+        />
+      </v-col-stub>
+    </v-row-stub>
+     
+    <v-row-stub
+      tag="div"
+    >
+      <v-col-stub
+        tag="div"
+      >
+        <!---->
+      </v-col-stub>
+    </v-row-stub>
+     
+    <v-row-stub
+      tag="div"
+    >
+      <v-col-stub
+        cols="12"
+        md="8"
+        tag="div"
+      >
+        <v-card-stub
+          loaderheight="4"
+          tag="div"
+        >
+          <v-card-text-stub>
+            <div
+              class="wikipage"
+            >
+              <div
+                class=""
+              >
+                <div />
+              </div>
+            </div>
+          </v-card-text-stub>
+        </v-card-stub>
+      </v-col-stub>
+       
+      <v-col-stub
+        cols="12"
+        md="4"
+        tag="div"
+      >
+        <sidebar-stub />
+      </v-col-stub>
+    </v-row-stub>
+  </v-container-stub>
+</div>
+`;

@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-card-stub
+  class="sidebar"
+  loaderheight="4"
+  pageid="ohjeita"
+  siteid="mekanismi"
+  tag="div"
+>
+  <v-card-text-stub>
+    <div />
+  </v-card-text-stub>
+   
+  <!---->
+</v-card-stub>
+`;

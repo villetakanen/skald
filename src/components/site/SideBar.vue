@@ -3,6 +3,12 @@
     <v-card-text>
       <div v-html="content"></div>
     </v-card-text>
+    <v-card-actions
+      v-if="editorActions">
+      <v-btn
+        text
+        :to="`/edit/${site.siteid}`">{{$t('sidebar.editAction')}}</v-btn>
+    </v-card-actions>
   </v-card>
 </template>
 
@@ -15,6 +21,7 @@ import { Page } from '@/plugins/skaldfire'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { update } from 'lodash'
+import { useProfile } from '@/lib/useProfile'
 
 export default defineComponent({
   components: {
@@ -67,6 +74,11 @@ export default defineComponent({
     }
     onMounted(() => { updateSidebar() })
     watch(site, updateSidebar)
+    const { activeProfile } = useProfile()
+    const editorActions = computed(() =>
+      activeProfile.value &&
+      activeProfile.value.owns &&
+      activeProfile.value.owns.includes(site.value.siteid))
     return { loading, page, site, content }
   }
 })

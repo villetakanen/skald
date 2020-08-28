@@ -11,24 +11,7 @@ exports[`Mounted App renders correctly 1`] = `
       cols="8"
       tag="div"
     >
-      <v-card-stub
-        loaderheight="4"
-        tag="div"
-      >
-        <v-toolbar-stub
-          extensionheight="48"
-          src=""
-          tag="header"
-        >
-          <v-toolbar-title-stub>
-            CKEditor alpha
-          </v-toolbar-title-stub>
-        </v-toolbar-stub>
-         
-        <v-card-text-stub>
-          <ckeditor-stub />
-        </v-card-text-stub>
-      </v-card-stub>
+      <ckeditorcard-stub />
     </v-col-stub>
      
     <v-col-stub
