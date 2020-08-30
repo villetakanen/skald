@@ -7,12 +7,16 @@ interface State {
   errorName?:string
   errorCode?:string,
   errorMessage?:string
+  snackTitle?:string,
+  snackMessage?:string
 }
 
 const localState:State = {
   errorCode: '',
   errorName: '',
-  errorMessage: ''
+  errorMessage: '',
+  snackTitle: '',
+  snackMessage: ''
 }
 
 const state = ref(localState)
@@ -23,10 +27,18 @@ function raiseError (name:string, message:string, code?:string) {
   state.value.errorCode = code
 }
 function clearErrors () {
-  state.value.errorName = undefined
-  state.value.errorCode = undefined
-  state.value.errorMessage = undefined
+  state.value.errorName = ''
+  state.value.errorCode = ''
+  state.value.errorMessage = ''
+}
+function clearSnack () {
+  state.value.snackTitle = ''
+  state.value.snackMessage = ''
+}
+function pushSnack (title:string, message:string) {
+  state.value.snackTitle = title
+  state.value.snackMessage = message
 }
 export function useAppState () {
-  return { state, alerts, raiseError, clearErrors }
+  return { state, alerts, raiseError, clearErrors, pushSnack, clearSnack }
 }

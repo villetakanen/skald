@@ -52,7 +52,7 @@
                       right
                       fab
                       elevation="2">
-                      <v-icon v-if="fab">mdi-close</v-icon>
+                      <v-icon v-if="dial">mdi-close</v-icon>
                       <v-icon v-else>mdi-menu-down</v-icon>
                     </v-btn>
                   </template>
@@ -91,6 +91,8 @@ import SideBar from '@/components/site/SideBar.vue'
 import { useSite } from '@/lib/useSite'
 import Skaldmd from '@/lib/skaldmd'
 import { useProfile } from '@/lib/useProfile'
+import { useAppState } from '@/lib/useAppState'
+import router from '@/router'
 export default defineComponent({
   components: {
     Loading,
@@ -100,6 +102,7 @@ export default defineComponent({
   setup () {
     const { site } = useSite()
     const { meta, page } = usePage()
+    const { pushSnack } = useAppState()
     const dial = ref(false)
     const content = computed(() => {
       if (!page) return ''
@@ -113,7 +116,20 @@ export default defineComponent({
       activeProfile.value &&
       activeProfile.value.owns &&
       activeProfile.value.owns.includes(site.value.siteid))
-    return { meta, page, site, content, editorActions, dial }
+
+    const copyUrl = () => {
+      const dummy = document.createElement('input')
+      document.body.appendChild(dummy)
+      dummy.value = window.location.href
+      dummy.select()
+      document.execCommand('copy')
+      document.body.removeChild(dummy)
+      pushSnack('Success', 'Url copied to clipboard')
+    }
+    const showHistory = () => {
+      router.push('/i/' + site.value.siteid + '/' + page.value.pageid)
+    }
+    return { meta, page, site, content, editorActions, dial, copyUrl, showHistory }
   }
 })
 </script>
