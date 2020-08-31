@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.3](https://github.com/vitku/skald/compare/v2.0.2...v2.0.3) (2020-08-31)
+
+
+### Bug Fixes
+
+* missing page shows error ([696f83b](https://github.com/vitku/skald/commit/696f83b747677ef3723f16ab62263fbdc95f3b5e))
+
 ### [2.0.2](https://github.com/vitku/skald/compare/v2.0.1...v2.0.2) (2020-08-31)
 
 ### [2.0.1](https://github.com/vitku/skald/compare/v2.0.0...v2.0.1) (2020-08-31)
