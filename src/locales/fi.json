@@ -21,5 +21,13 @@
   "actions": {
     "cancel": "peruuta",
     "close": "sulje"
+  },
+  "sidebar": {
+    "editAction": "Muokkaa"
+  },
+  "editor": {
+    "pageMetadataTitle" : "Metatiedot",
+    "pageName": "Otsikko",
+    "categorySelect": "Kategoria"
   }
 }

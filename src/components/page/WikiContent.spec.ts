@@ -3,7 +3,7 @@ import WikiContent from './WikiContent.vue'
 
 describe('Mounted App', () => {
   it('renders correctly', () => {
-    const wrapper = shallowMount(WikiContent,{
+    const wrapper = shallowMount(WikiContent, {
       mocks: {
         $t: () => {}
       },
