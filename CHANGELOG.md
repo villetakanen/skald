@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/vitku/skald/compare/v1.3.5...v2.0.0) (2020-08-31)
+
+
+### Features
+
+* ckeditor beta ready ([11e8ffd](https://github.com/vitku/skald/commit/11e8ffdf8f64a62f62672d67e7e43c71ef271d11))
+* ckeditor component ([a87d2ac](https://github.com/vitku/skald/commit/a87d2ac7d59e28dbcb9865423b649d557c571994))
+* editor uses real data ([fa93825](https://github.com/vitku/skald/commit/fa93825b8e6734cee2f307c4c2b9c4c1210ba1f6))
+* updated viewpage ([971def0](https://github.com/vitku/skald/commit/971def0ad7cb2684a74cdc1d52eb634f663b86ba))
+* wikicontent for html ([7352dec](https://github.com/vitku/skald/commit/7352decac6f7b4121d49d84fa08920273962aced))
+
+
+### Bug Fixes
+
+* small refactor bugs fixed ([3bc6aa6](https://github.com/vitku/skald/commit/3bc6aa6939ed397ea5a5270d845fecacbd76c5ad))
+
 ### [1.3.5](https://github.com/vitku/skald/compare/v1.3.4...v1.3.5) (2020-08-26)
 
 ### [1.3.4](https://github.com/vitku/skald/compare/v1.3.3...v1.3.4) (2020-08-25)
