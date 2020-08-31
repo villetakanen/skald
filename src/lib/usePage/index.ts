@@ -4,6 +4,7 @@ import firebase from 'firebase/app'
 import 'firebase/firestore'
 import router from '@/router'
 import { Page } from '@/plugins/skaldfire'
+import { useAppState } from '../useAppState'
 
 interface PageRoute {
     siteid:string,
@@ -50,14 +51,21 @@ function subscribeToPage (params:Object) {
       const pageRef = db.collection('sites').doc(activeSite).collection('pages').doc(activePage)
       unsubscribe = pageRef.onSnapshot((pageSnapShot) => {
         resetPageState()
-        pageState.siteid = activeSite
-        pageState.pageid = activePage
-        pageState.name = pageSnapShot.data()?.name
-        pageState.content = pageSnapShot.data()?.content
-        pageState.htmlContent = pageSnapShot.data()?.htmlContent
-        pageState.category = pageSnapShot.data()?.category
-        if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
-        else pageState.htmlContentDraft = ''
+        if (pageSnapShot.exists) {
+          pageState.siteid = activeSite
+          pageState.pageid = activePage
+          pageState.name = pageSnapShot.data()?.name
+          // Some historical pages lack name, and use slug instead
+          if (!pageState.name) pageState.name = activePage
+          pageState.content = pageSnapShot.data()?.content
+          pageState.htmlContent = pageSnapShot.data()?.htmlContent
+          pageState.category = pageSnapShot.data()?.category
+          if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
+          else pageState.htmlContentDraft = ''
+        } else {
+          const { raiseError } = useAppState()
+          raiseError('Page not found', 'The page you are looking for, does not exist', '404')
+        }
         metaState.loading = false
       })
     } else {

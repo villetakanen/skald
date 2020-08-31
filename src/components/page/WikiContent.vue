@@ -10,6 +10,7 @@ import VueCompositionApi, { defineComponent, computed } from '@vue/composition-a
 import ViewAttachment from '@/components/page/ViewAttachment.vue'
 import ViewUpload from '@/components/page/ViewUpload.vue'
 import { useSite } from '@/lib/useSite'
+import { skaldURI } from '@/plugins/skaldfire'
 
 Vue.component('ViewAttachment', ViewAttachment)
 Vue.component('ViewUpload', ViewUpload)
@@ -42,6 +43,7 @@ export default defineComponent({
         return `<ViewAttachment wide="attachment-normal" path="${siteid}/${p2}"/>`
       })
     }
+
     function fileLinks (page:string, siteid:string) {
       const re = new RegExp('\\[file:([a-öA-Ö. \\-_0-9]*)\\]', 'gmu')
       return page.replace(re, (match, p1) => {
@@ -54,10 +56,29 @@ export default defineComponent({
       })
     }
 
+    function rendWikiLinks (line: string) {
+    /* console.log('rendWikiLinks', siteLinkStub, line) */
+      const re = new RegExp('([\\[(]wiki:)(.+?)([\\])])', 'gmu')
+      line = line.replace(re, (match, p1, p2, p3, offset, string) => {
+        p2 = p2.trim()
+        const link = p2.includes('|') ? p2.substring(p2.indexOf('|') + 1).trim() : p2
+        let url = p2.split('|')[0]
+        let siteid = site.value.siteid
+        if (url.includes('/')) {
+          siteid = skaldURI(url.split('/')[0].trim())
+          url = url.split('/')[1]
+        }
+        url = skaldURI(url.trim())
+        return `<a href="/#/v/${siteid}/${url}">${link}</a>`// '<a href' + p2 + '-'
+      })
+      return line
+    }
+
     const rendedContent = computed(() => {
       let r = props.html
       r = attachLinks(r, site.value.siteid)
       r = fileLinks(r, site.value.siteid)
+      r = rendWikiLinks(r)
       return {
         template: '<div>' + r + '</div>'
       }

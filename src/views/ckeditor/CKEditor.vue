@@ -1,6 +1,23 @@
 <template>
   <v-container>
-    <v-row>
+     <v-row>
+        <v-col>
+          <TabTitle
+            :sub="site.name"
+            :sublink="`/v/${site.siteid}`"
+            :topic="page.name"
+            :link="`/v/${site.siteid}/${page.pageid}`"/>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <Loading
+            center
+            class="ma-4"
+            v-if="meta.loading"/>
+        </v-col>
+      </v-row>
+      <v-row v-if="!meta.loading">
       <v-col cols="8">
         <CKEditorCard/>
       </v-col>
@@ -23,6 +40,10 @@ import { defineComponent, ref, onMounted, watch, ComputedRef } from '@vue/compos
 import { useParams } from '@/lib/useParams'
 import CKEditorCard from '@/components/ckeditorcard/CKEditorCard.vue'
 import PageMetadataCard from '@/components/ckeditorcard/PageMetadataCard.vue'
+import { usePage } from '@/lib/usePage'
+import { useSite } from '@/lib/useSite'
+import Loading from '@/components/Loading.vue'
+import TabTitle from '@/components/app/TabTitle.vue'
 
 interface PageRoute {
   siteid:string,
@@ -32,11 +53,15 @@ interface PageRoute {
 export default defineComponent({
   components: {
     CKEditorCard,
-    PageMetadataCard
+    PageMetadataCard,
+    Loading,
+    TabTitle
   },
   setup (props) {
     const siteid = ref('')
     const pageid = ref('')
+    const { page, meta } = usePage()
+    const { site } = useSite()
 
     /**
      * reactive update of all components of the view,
@@ -59,7 +84,7 @@ export default defineComponent({
     // route changed
     watch(params, setPage)
 
-    return { siteid, pageid }
+    return { siteid, pageid, site, page, meta }
   }
 })
 </script>
