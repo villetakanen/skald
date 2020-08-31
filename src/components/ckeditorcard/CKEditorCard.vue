@@ -82,7 +82,23 @@ export default defineComponent({
     })
     onMounted(() => {
       // Very blunt way to force override of ckeditor bundle conflict with vue-cli
-      document.head.insertAdjacentHTML('beforeend', require('@/styles/ckeditor.scss'))
+      document.head.insertAdjacentHTML('beforeend', `<style>:root {
+  /* Overrides the border radius setting in the theme. */
+  --ck-border-radius: 4px;
+
+  /* Overrides the default font size in the theme. */
+  --ck-font-size-base: 14px;
+
+  --ck-color-base-background:  black;
+  --ck-color-base-foreground:  #222;
+  --ck-color-base-border:  #333;
+  --ck-color-base-action: hsl(104, 44%, 48%);
+  --ck-color-base-focus: hsl(209, 92%, 70%);
+  --ck-color-base-text: #eee;
+  --ck-color-base-active: hsl(208, 88%, 52%);
+  --ck-color-base-active-focus: hsl(208, 88%, 47%);
+  --ck-color-base-error: hsl(15, 100%, 43%);
+}</style>`)
     })
 
     return { ...toRefs(editorSetup), editorData, page, preview, publish, site }
