@@ -80,12 +80,16 @@ export default defineComponent({
       editorConfig: {
       }
     })
+    onMounted(() => {
+      // Very blunt way to force override of ckeditor bundle conflict with vue-cli
+      document.head.insertAdjacentHTML('beforeend', require('@/styles/ckeditor.scss'))
+    })
 
     return { ...toRefs(editorSetup), editorData, page, preview, publish, site }
   }
 })
 </script>
 
-<style lang="sass">
+<!--style lang="sass">
 @import '@/styles/ckeditor.scss'
-</style>
+</style-->
