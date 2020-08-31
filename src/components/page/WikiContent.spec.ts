@@ -1,9 +1,9 @@
 import { shallowMount } from '@vue/test-utils'
-import Character from './Character.vue'
+import WikiContent from './WikiContent.vue'
 
 describe('Mounted App', () => {
   it('renders correctly', () => {
-    const wrapper = shallowMount(Character)
+    const wrapper = shallowMount(WikiContent)
     expect(wrapper.element).toMatchSnapshot()
   })
 })

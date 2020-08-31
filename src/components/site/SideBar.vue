@@ -2,7 +2,7 @@
   <v-card class="sidebar">
     <v-card-title>{{page.name}}</v-card-title>
     <v-card-text>
-      <div v-html="content"></div>
+      <WikiContent :html="content"/>
     </v-card-text>
     <v-card-actions
       v-if="editorActions">
@@ -17,6 +17,7 @@
 <script lang="ts">
 import { defineComponent, computed, ref, onMounted, watch } from '@vue/composition-api'
 import Loading from '@/components/Loading.vue'
+import WikiContent from '@/components/page/WikiContent.vue'
 import { useSite } from '@/lib/useSite'
 import Skaldmd from '@/lib/skaldmd'
 import { Page } from '@/plugins/skaldfire'
@@ -27,7 +28,8 @@ import { useProfile } from '@/lib/useProfile'
 
 export default defineComponent({
   components: {
-    Loading
+    Loading,
+    WikiContent
   },
   setup () {
     const { site } = useSite()

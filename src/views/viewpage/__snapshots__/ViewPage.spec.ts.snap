@@ -53,9 +53,67 @@ exports[`Mounted App renders correctly 1`] = `
               <div
                 class=""
               >
-                <div />
+                <wikicontent-stub
+                  html=""
+                />
               </div>
             </div>
+             
+            <v-btn-stub
+              absolute="true"
+              activeclass=""
+              color="primary"
+              disabled="true"
+              fab="true"
+              right="true"
+              small="true"
+              style="margin-right: 48px; margin-top: 4px;"
+              tag="button"
+              to="/edit//"
+              top="true"
+              type="button"
+            >
+              <v-icon-stub>
+                mdi-pen
+              </v-icon-stub>
+            </v-btn-stub>
+             
+            <v-speed-dial-stub
+              absolute="true"
+              direction="bottom"
+              right="true"
+              style="margin-top: -32px;"
+              top="true"
+              transition="scale-transition"
+            >
+               
+              <v-btn-stub
+                activeclass=""
+                color="secondary"
+                dark="true"
+                fab="true"
+                small="true"
+                tag="button"
+                type="button"
+              >
+                <v-icon-stub>
+                  mdi-link
+                </v-icon-stub>
+              </v-btn-stub>
+               
+              <v-btn-stub
+                activeclass=""
+                color="secondary"
+                fab="true"
+                small="true"
+                tag="button"
+                type="button"
+              >
+                <v-icon-stub>
+                  mdi-file-eye
+                </v-icon-stub>
+              </v-btn-stub>
+            </v-speed-dial-stub>
           </v-card-text-stub>
         </v-card-stub>
       </v-col-stub>

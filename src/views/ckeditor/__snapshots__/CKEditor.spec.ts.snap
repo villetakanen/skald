@@ -18,7 +18,10 @@ exports[`Mounted App renders correctly 1`] = `
       cols="4"
       tag="div"
     >
+      <pagemetadatacard-stub />
+       
       <v-card-stub
+        class="my-4"
         loaderheight="4"
         tag="div"
       >

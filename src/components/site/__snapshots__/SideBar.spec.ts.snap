@@ -13,7 +13,9 @@ exports[`Mounted App renders correctly 1`] = `
   </v-card-title-stub>
    
   <v-card-text-stub>
-    <div />
+    <wikicontent-stub
+      html=""
+    />
   </v-card-text-stub>
    
   <!---->

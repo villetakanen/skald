@@ -24,7 +24,7 @@
             <v-card-text>
                 <div class="wikipage">
                     <div :class="site.theme">
-                      <div v-html="content"></div>
+                      <WikiContent :html="content"/>
                     </div>
                 </div>
                 <v-btn
@@ -88,6 +88,7 @@ import { usePage } from '@/lib/usePage'
 import Loading from '@/components/Loading.vue'
 import TabTitle from '@/components/app/TabTitle.vue'
 import SideBar from '@/components/site/SideBar.vue'
+import WikiContent from '@/components/page/WikiContent.vue'
 import { useSite } from '@/lib/useSite'
 import Skaldmd from '@/lib/skaldmd'
 import { useProfile } from '@/lib/useProfile'
@@ -97,7 +98,8 @@ export default defineComponent({
   components: {
     Loading,
     TabTitle,
-    SideBar
+    SideBar,
+    WikiContent
   },
   setup () {
     const { site } = useSite()
