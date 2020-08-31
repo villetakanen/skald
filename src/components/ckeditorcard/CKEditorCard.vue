@@ -18,14 +18,19 @@
         >Publish</v-btn>
     </v-toolbar>
       <v-card-text>
-        <div v-if="!preview" style="margin:-8px">
-          <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+        <div
+          v-if="!preview"
+          style="margin:-8px"
+          class="wikipage">
+          <div :class="site.theme">
+            <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+          </div>
         </div>
         <div
           v-if="preview"
           class="wikipage">
           <div :class="site.theme">
-            <div v-html="editorData"></div>
+            <WikiContent :html="editorData"/>
           </div>
         </div>
       </v-card-text>
@@ -43,10 +48,14 @@ import { usePage } from '@/lib/usePage'
 import Skaldmd from '@/lib/skaldmd'
 import { useSite } from '@/lib/useSite'
 import router from '@/router'
+import WikiContent from '@/components/page/WikiContent.vue'
 
 Vue.use(CKEditor)
 
 export default defineComponent({
+  components: {
+    WikiContent
+  },
   setup (props) {
     const { page } = usePage()
     const { site } = useSite()
