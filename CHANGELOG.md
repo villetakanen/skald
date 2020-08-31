@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/vitku/skald/compare/v2.0.0...v2.0.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* override ckeditor styles ([44bb6d9](https://github.com/vitku/skald/commit/44bb6d94ecf91ac9f41dced1fd9ea29862c13df0))
+
 ## [2.0.0](https://github.com/vitku/skald/compare/v1.3.5...v2.0.0) (2020-08-31)
 
 
