@@ -17,6 +17,7 @@
       </v-list-item>
       <!-- @click: CreatePageCard, the dialog for adding a page -->
       <AddPageListItem v-if="editorActions"/>
+      <CreatePageAction v-if="editorActions"/>
       <v-list-item id="navi-attachment-list-link" :to="'/l/attachments/'+siteid">
         <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>
         <v-list-item-title >{{$t('navigation_to_attachments')}}</v-list-item-title>
@@ -58,6 +59,7 @@ import Vue from 'vue'
 import VueCompositionApi, { defineComponent, computed } from '@vue/composition-api'
 import AddPageListItem from '@/components/AddPageListItem.vue'
 import LanguageSwitcher from '@/components/LanguageSwitcher.vue'
+import CreatePageAction from '@/components/createpageaction/CreatePageAction.vue'
 import { useSite } from '@/lib/useSite'
 import { useProfile } from '@/lib/useProfile'
 Vue.use(VueCompositionApi)
@@ -65,7 +67,8 @@ Vue.use(VueCompositionApi)
 export default defineComponent({
   components: {
     AddPageListItem,
-    LanguageSwitcher
+    LanguageSwitcher,
+    CreatePageAction
   },
   setup () {
     const { site } = useSite()

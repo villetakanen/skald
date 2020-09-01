@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreatePageAction renders correctly 1`] = `
+<v-dialog-stub
+  closedelay="0"
+  contentclass=""
+  maxwidth="570"
+  opendelay="0"
+  origin="center center"
+  persistent="true"
+  retainfocus="true"
+  transition="dialog-transition"
+  width="auto"
+>
+   
+  <v-card-stub
+    loaderheight="4"
+    tag="div"
+  >
+    <v-card-title-stub
+      class="headline"
+    >
+      Use Google's location service?
+    </v-card-title-stub>
+     
+    <v-card-text-stub>
+      Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+    </v-card-text-stub>
+     
+    <v-card-actions-stub>
+      <v-spacer-stub />
+       
+      <v-btn-stub
+        activeclass=""
+        color="green darken-1"
+        tag="button"
+        text="true"
+        type="button"
+      >
+        Disagree
+      </v-btn-stub>
+       
+      <v-btn-stub
+        activeclass=""
+        color="green darken-1"
+        tag="button"
+        text="true"
+        type="button"
+      >
+        Agree
+      </v-btn-stub>
+    </v-card-actions-stub>
+  </v-card-stub>
+</v-dialog-stub>
+`;
