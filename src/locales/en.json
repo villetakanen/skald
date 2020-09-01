@@ -49,5 +49,10 @@
     "pageMetadataTitle" : "Page meta",
     "pageName": "Page title",
     "categorySelect": "Select category"
-  }
+  },
+  "createPage": {
+    "title": "Create a new page?",
+    "pageSlugLabel": "Title",
+    "pageSlugPlaceholder": "An awesome new page"
+  } 
 }
