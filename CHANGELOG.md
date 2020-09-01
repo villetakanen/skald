@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.2.1](https://github.com/vitku/skald/compare/v2.2.0...v2.2.1) (2020-09-01)
+
+
+### Bug Fixes
+
+* objects to values ([21f03d2](https://github.com/vitku/skald/commit/21f03d25e92a901da62f7d4baa5ef3c147410054))
+
 ## [2.2.0](https://github.com/vitku/skald/compare/v2.1.0...v2.2.0) (2020-09-01)
 
 
