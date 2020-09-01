@@ -101,7 +101,7 @@ export default defineComponent({
               timestamp: firebase.firestore.FieldValue.serverTimestamp(),
               silent: site.value.silent
             }
-            const logRef = db.collection('pagelog').doc(site.value.siteid + '.' + newPageid)
+            const logRef = db.collection('pagelog').doc(site.value.siteid + '.' + newPageid.value)
             logRef.set(stamp)
 
             const siteRef = db.collection('sites').doc(site.value.siteid)

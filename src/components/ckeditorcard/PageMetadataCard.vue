@@ -45,6 +45,8 @@ import { defineComponent, computed, ref } from '@vue/composition-api'
 import PageCategorySelect from '@/components/ckeditorcard/PageCategorySelect.vue'
 import { usePage } from '@/lib/usePage'
 import router from '@/router'
+import { useProfile } from '@/lib/useProfile'
+import { useSite } from '@/lib/useSite'
 
 export default defineComponent({
   components: {
@@ -65,7 +67,24 @@ export default defineComponent({
     const deletePage = () => {
       const db = firebase.firestore()
       const pageRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
-      pageRef.delete()
+      pageRef.delete().then(() => {
+        const { activeProfile } = useProfile()
+        const { site } = useSite()
+        const stamp = {
+          action: 'create',
+          pageid: page.value.pageid,
+          siteid: site.value.siteid,
+          creator: activeProfile.value?.uid,
+          creatorNick: activeProfile.value?.uid,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+          silent: site.value.silent
+        }
+        const logRef = db.collection('pagelog').doc(site.value.siteid + '.' + page.value.pageid)
+        logRef.set(stamp)
+
+        const siteRef = db.collection('sites').doc(site.value.siteid)
+        siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
+      })
       router.push('/v/' + page.value.siteid)
       deleteConfirm.value = false
     }
