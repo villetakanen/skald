@@ -16,7 +16,7 @@
         <v-list-item-title >{{$t('navigation_to_pages')}}</v-list-item-title>
       </v-list-item>
       <!-- @click: CreatePageCard, the dialog for adding a page -->
-      <AddPageListItem v-if="editorActions"/>
+      <!-- AddPageListItem v-if="editorActions" -->
       <CreatePageAction v-if="editorActions"/>
       <v-list-item id="navi-attachment-list-link" :to="'/l/attachments/'+siteid">
         <v-list-item-action><v-icon>mdi-view-grid-plus</v-icon></v-list-item-action>

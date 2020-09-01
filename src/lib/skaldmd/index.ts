@@ -41,7 +41,7 @@ export default class Skaldmd {
     this.parsing = mode
   }
 
-  toHtml (rawContent: string, userTags:string[] = []) {
+  toHtml (rawContent: string|undefined|null, userTags:string[] = []) {
     if (!rawContent) return ''
 
     this.rendedHtml = ''

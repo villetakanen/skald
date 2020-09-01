@@ -40,7 +40,8 @@
   "actions": {
     "cancel": "cancel",
     "close": "close",
-    "createPage": "Create Page"
+    "createPage": "Create Page",
+    "deletePage": "Delete page"
   },
   "sidebar": {
     "editAction": "Edit Sidebar"
@@ -48,7 +49,9 @@
   "editor": {
     "pageMetadataTitle" : "Page meta",
     "pageName": "Page title",
-    "categorySelect": "Select category"
+    "categorySelect": "Select category",
+    "deletePageTitle": "Delete page permanently?",
+    "deletePageInfo": "Pressing yes, will erase all data on the page for good."
   },
   "createPage": {
     "title": "Create a new page?",

@@ -71,9 +71,42 @@ export default defineComponent({
             '409'
           )
         } else {
-          // Here is the actual creation of the new page
           const { activeProfile } = useProfile()
-          
+
+          if (!activeProfile.value) {
+            raiseError(
+              'Missing profile',
+              'Internal error, contact support',
+              '400')
+            return
+          }
+
+          // Set page data
+          const newPageData = {
+            // pageid: newPageid.value,
+            // siteid: site.value.siteid,
+            creator: activeProfile.value.uid,
+            creatorNick: activeProfile.value?.uid,
+            name: name.value,
+            content: name.value,
+            lastUpdate: firebase.firestore.FieldValue.serverTimestamp()
+          }
+          pageRef.set(newPageData).then(() => {
+            const stamp = {
+              action: 'create',
+              pageid: newPageid,
+              siteid: site.value.siteid,
+              creator: activeProfile.value?.uid,
+              creatorNick: activeProfile.value?.uid,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              silent: site.value.silent
+            }
+            const logRef = db.collection('pagelog').doc(site.value.siteid + '.' + newPageid)
+            logRef.set(stamp)
+
+            const siteRef = db.collection('sites').doc(site.value.siteid)
+            siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
+          })
         }
       })
       dialog.value = false

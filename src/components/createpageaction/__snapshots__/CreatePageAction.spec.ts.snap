@@ -17,14 +17,29 @@ exports[`CreatePageAction renders correctly 1`] = `
     loaderheight="4"
     tag="div"
   >
-    <v-card-title-stub
-      class="headline"
-    >
-      Use Google's location service?
+    <v-card-title-stub>
+      
     </v-card-title-stub>
      
     <v-card-text-stub>
-      Let Google help apps determine location. This means sending anonymous location data to Google, even when no apps are running.
+      <v-text-field-stub
+        backgroundcolor=""
+        clearicon="$clear"
+        errorcount="1"
+        errormessages=""
+        filled="true"
+        id="new-page-name"
+        loaderheight="2"
+        messages=""
+        rules=""
+        successmessages=""
+        type="text"
+        value=""
+      />
+       
+      <p>
+        URL: mekanismi.web.app/#/v//
+      </p>
     </v-card-text-stub>
      
     <v-card-actions-stub>
@@ -32,22 +47,22 @@ exports[`CreatePageAction renders correctly 1`] = `
        
       <v-btn-stub
         activeclass=""
-        color="green darken-1"
+        color="primary"
         tag="button"
         text="true"
         type="button"
       >
-        Disagree
+        
       </v-btn-stub>
        
       <v-btn-stub
         activeclass=""
-        color="green darken-1"
+        color="primary"
+        disabled="true"
         tag="button"
-        text="true"
         type="button"
       >
-        Agree
+        
       </v-btn-stub>
     </v-card-actions-stub>
   </v-card-stub>

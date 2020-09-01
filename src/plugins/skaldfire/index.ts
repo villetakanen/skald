@@ -15,17 +15,22 @@ export interface Site {
   description?: string,
   posterURL?:string,
   theme?:string,
-  titleColorClass?:string
+  titleColorClass?:string,
+  silent?: boolean
+  hidden?: boolean
 }
 
 export interface Page {
   pageid: string,
   siteid: string,
   name: string,
-  content: string,
+  content?: string,
   htmlContent?: string,
   htmlContentDraft?: string,
   category?: string
+  creator?: string
+  creatorNick?: string
+  lastUpdate?: firebase.firestore.FieldValue
 }
 
 export interface Profile {

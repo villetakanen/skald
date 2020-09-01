@@ -18,7 +18,8 @@ const siteData:Site = {
   titleColorClass: '',
   description: '',
   posterURL: '',
-  theme: ''
+  theme: '',
+  silent: false
 }
 const siteState = Vue.observable(siteData)
 const metaState = Vue.observable({
@@ -41,6 +42,7 @@ function resetSite ():void {
   siteState.description = ''
   siteState.posterURL = ''
   siteState.theme = ''
+  siteState.silent = false
 }
 
 /**
@@ -69,6 +71,7 @@ function subscribeToSite (newSiteid:string|null):void {
         siteState.description = siteDoc.data()?.description
         siteState.posterURL = siteDoc.data()?.posterURL
         siteState.theme = siteDoc.data()?.theme
+        siteState.silent = siteDoc.data()?.silent
       } else {
         resetSite()
         metaState.loading = false
