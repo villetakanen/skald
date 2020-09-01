@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.2.0](https://github.com/vitku/skald/compare/v2.1.0...v2.2.0) (2020-09-01)
+
+
+### Features
+
+* cd page ([6a8f0a1](https://github.com/vitku/skald/commit/6a8f0a1d58ddda8723c03cdc1009fe37bbc45afb))
+
 ## [2.1.0](https://github.com/vitku/skald/compare/v2.0.3...v2.1.0) (2020-09-01)
 
 
