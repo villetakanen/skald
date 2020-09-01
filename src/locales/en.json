@@ -39,7 +39,8 @@
   },
   "actions": {
     "cancel": "cancel",
-    "close": "close"
+    "close": "close",
+    "createPage": "Create Page"
   },
   "sidebar": {
     "editAction": "Edit Sidebar"
