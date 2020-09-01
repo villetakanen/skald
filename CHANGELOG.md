@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/vitku/skald/compare/v2.0.3...v2.1.0) (2020-09-01)
+
+
+### Features
+
+* addpageaction ([37fddfa](https://github.com/vitku/skald/commit/37fddfa4dcdda80ae7c4b1f54d34801f3ac4a590))
+* addpageaction error handling ([183eb74](https://github.com/vitku/skald/commit/183eb74d840fc2b40d4d73b3a2cc19b87401673f))
+* create page nav action added ([d0d63f9](https://github.com/vitku/skald/commit/d0d63f9cb3dd38c822e08c828d06a4f6b94d2219))
+
 ### [2.0.3](https://github.com/vitku/skald/compare/v2.0.2...v2.0.3) (2020-08-31)
 
 
