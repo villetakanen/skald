@@ -1,5 +1,8 @@
-import { computed, ref } from '@vue/composition-api'
+import Vue from 'vue'
+import VueCompositionAPI, { computed, ref } from '@vue/composition-api'
 import { FirebaseError } from 'firebase'
+
+Vue.use(VueCompositionAPI)
 
 interface State {
   errorName?:string
@@ -24,14 +27,15 @@ function raiseError (error:FirebaseError): void
 function raiseError (name:string, message:string, code?:string): void
 
 function raiseError (error:string | FirebaseError, message?:string, code?:string) {
-  const fbError = error as FirebaseError
-  if (fbError) {
-    setError(fbError.name, fbError.message, fbError.code)
-  } else {
+  if (typeof error === 'string') {
     if (!message) message = error as string
     setError(error as string, message, code)
+  } else {
+    const fbError = error as FirebaseError
+    setError(fbError.name, fbError.message, fbError.code)
   }
 }
+
 function setError (name:string, message:string, code?:string): void {
   state.value.errorName = name
   state.value.errorMessage = message

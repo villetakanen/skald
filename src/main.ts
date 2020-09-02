@@ -14,10 +14,10 @@ import { Skaldfire } from './plugins/skaldfire'
 
 Vue.config.productionTip = false
 
+Vue.use(VueCompositionApi)
+
 // Firestore is initiated here!
 Vue.use(Skaldfire)
-
-Vue.use(VueCompositionApi)
 
 new Vue({
   router,
