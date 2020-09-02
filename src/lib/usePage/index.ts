@@ -1,10 +1,12 @@
 import Vue from 'vue'
-import { computed } from '@vue/composition-api'
+import VueCompositionAPI, { computed } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import router from '@/router'
 import { Page } from '@/plugins/skaldfire'
 import { useAppState } from '../useAppState'
+
+Vue.use(VueCompositionAPI)
 
 interface PageRoute {
     siteid:string,

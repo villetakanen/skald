@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueCompositionAPI, { computed, ref } from '@vue/composition-api'
 import { FirebaseError } from 'firebase'
+import { useProfile } from '../useProfile'
+import { useSite } from '../useSite'
 
 Vue.use(VueCompositionAPI)
 
@@ -10,6 +12,7 @@ interface State {
   errorMessage?:string
   snackTitle?:string,
   snackMessage?:string
+  createPageDialog:boolean
 }
 
 const localState:State = {
@@ -17,7 +20,8 @@ const localState:State = {
   errorName: '',
   errorMessage: '',
   snackTitle: '',
-  snackMessage: ''
+  snackMessage: '',
+  createPageDialog: false
 }
 
 const state = ref(localState)
@@ -27,6 +31,15 @@ function raiseError (error:FirebaseError): void
 function raiseError (name:string, message:string, code?:string): void
 
 function raiseError (error:string | FirebaseError, message?:string, code?:string) {
+  // Page not found error, lets check if the user has create rights, and show create-dialog instead
+  if (code === '404') {
+    const { isOwner } = useProfile()
+    const { site } = useSite()
+    if (isOwner(site.value.siteid)) {
+      state.value.createPageDialog = true
+      return
+    }
+  }
   if (typeof error === 'string') {
     if (!message) message = error as string
     setError(error as string, message, code)
@@ -55,6 +68,9 @@ function pushSnack (title:string, message:string) {
   state.value.snackTitle = title
   state.value.snackMessage = message
 }
+
+const launchCreatePageDialog = computed({ get: () => state.value.createPageDialog, set: (trigger:boolean) => { state.value.createPageDialog = trigger } })
+
 export function useAppState () {
-  return { state, alerts, raiseError, clearErrors, pushSnack, clearSnack }
+  return { state, alerts, raiseError, clearErrors, pushSnack, clearSnack, launchCreatePageDialog }
 }

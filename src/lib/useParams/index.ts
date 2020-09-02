@@ -1,6 +1,8 @@
 import Vue from 'vue'
-import { computed } from '@vue/composition-api'
+import VueCompositionAPI, { computed } from '@vue/composition-api'
 import router from '../../router'
+
+Vue.use(VueCompositionAPI)
 
 const routeData = Vue.observable({ params: {}, query: {} })
 router.afterEach(route => {

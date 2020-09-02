@@ -1,10 +1,12 @@
 import Vue from 'vue'
-import { computed, ref } from '@vue/composition-api'
+import VueCompositionAPI, { computed, ref } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 import { Profile } from '@/plugins/skaldfire'
 import { useAppState } from '@/lib/useAppState'
+
+Vue.use(VueCompositionAPI)
 
 const profile:Profile = {
   uid: '',

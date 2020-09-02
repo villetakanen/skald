@@ -36,13 +36,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api'
+import { defineComponent, ref, computed, watch } from '@vue/composition-api'
 import { skaldURI } from '@/plugins/skaldfire'
 import { useSite } from '@/lib/useSite'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { useAppState } from '@/lib/useAppState'
 import { useProfile } from '@/lib/useProfile'
+import { useParams } from '@/lib/useParams'
 
 export default defineComponent({
   setup (props) {
@@ -94,7 +95,7 @@ export default defineComponent({
           pageRef.set(newPageData).then(() => {
             const stamp = {
               action: 'create',
-              pageid: newPageid,
+              pageid: newPageid.value,
               siteid: site.value.siteid,
               creator: activeProfile.value?.uid,
               creatorNick: activeProfile.value?.uid,
@@ -111,6 +112,26 @@ export default defineComponent({
       })
       dialog.value = false
     }
+
+    const { launchCreatePageDialog } = useAppState()
+
+    interface Params {
+      siteid: string,
+      pageid?: string
+    }
+
+    function launchDialog (trigger:boolean) {
+      if (trigger) {
+        dialog.value = true
+        const params = useParams().value as Params
+        if (params.pageid) name.value = params.pageid
+        else name.value = params.siteid
+        launchCreatePageDialog.value = false
+      }
+    }
+
+    watch(launchCreatePageDialog, launchDialog)
+
     return { dialog, name, newPageid, site, createPage }
   }
 })
