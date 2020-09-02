@@ -39,7 +39,7 @@
 </template>
 
 <script lang="ts">
-import firebase from 'firebase/app'
+import firebase, { FirebaseError } from 'firebase/app'
 import 'firebase/firestore'
 import { defineComponent, computed, ref } from '@vue/composition-api'
 import PageCategorySelect from '@/components/ckeditorcard/PageCategorySelect.vue'
@@ -47,6 +47,7 @@ import { usePage } from '@/lib/usePage'
 import router from '@/router'
 import { useProfile } from '@/lib/useProfile'
 import { useSite } from '@/lib/useSite'
+import { useAppState } from '@/lib/useAppState'
 
 export default defineComponent({
   components: {
@@ -84,6 +85,9 @@ export default defineComponent({
 
         const siteRef = db.collection('sites').doc(site.value.siteid)
         siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() })
+      }).catch((error:Error) => {
+        const { raiseError } = useAppState()
+        raiseError(error as FirebaseError)
       })
       router.push('/v/' + page.value.siteid)
       deleteConfirm.value = false
