@@ -1,8 +1,5 @@
-import Vue from 'vue'
-import VueCompositionApi, { computed, ref } from '@vue/composition-api'
+import { computed, ref } from '@vue/composition-api'
 import { FirebaseError } from 'firebase'
-
-Vue.use(VueCompositionApi)
 
 interface State {
   errorName?:string

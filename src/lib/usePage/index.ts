@@ -40,7 +40,9 @@ function resetPageState () {
 
 function subscribeToPage (params:Object) {
   const pageRoute = params as PageRoute
+  // console.log('routing to ', pageRoute.siteid, pageRoute.pageid)
   if (pageRoute.siteid !== activeSite || pageRoute.pageid !== activePage) {
+    // console.log('and subscribing if available')
     activeSite = pageRoute.siteid
     metaState.loading = true
     if (pageRoute.pageid) activePage = pageRoute.pageid
@@ -62,11 +64,11 @@ function subscribeToPage (params:Object) {
           pageState.category = pageSnapShot.data()?.category
           if (pageSnapShot.data()?.htmlContentDraft) pageState.htmlContentDraft = pageSnapShot.data()?.htmlContentDraft
           else pageState.htmlContentDraft = ''
+          metaState.loading = false
         } else {
           const { raiseError } = useAppState()
           raiseError('Page not found', 'The page you are looking for, does not exist', '404')
         }
-        metaState.loading = false
       })
     } else {
       metaState.loading = false
@@ -74,13 +76,16 @@ function subscribeToPage (params:Object) {
   }
 }
 
+const page = computed(() => pageState)
+const meta = computed(() => metaState)
+
 export function usePage () {
-  // Route changed, subscribe to the siteid in the route, if any
-  if (activePage === '-1') subscribeToPage(router.currentRoute.params)
-  router.afterEach(route => {
-    subscribeToPage(route.params)
-  })
-  const page = computed(() => pageState)
-  const meta = computed(() => metaState)
+  // This happens after mounting etc.
+  if (activePage === '-1') {
+    subscribeToPage(router.currentRoute.params)
+    router.afterEach(route => {
+      subscribeToPage(route.params)
+    })
+  }
   return { meta, page }
 }
