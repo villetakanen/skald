@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.3.2](https://github.com/vitku/skald/compare/v2.3.1...v2.3.2) (2020-09-03)
+
+
+### Bug Fixes
+
+* i to em ([727226f](https://github.com/vitku/skald/commit/727226ff8fd8e2823431f8b2b69762bf96e5bf9d))
+* lcov info only on repo ([6bbe4ed](https://github.com/vitku/skald/commit/6bbe4ed64687ad9b8aacf70aacd6a07ebacb0c80))
+
 ### [2.3.1](https://github.com/vitku/skald/compare/v2.3.0...v2.3.1) (2020-09-03)
 
 
