@@ -1,6 +1,13 @@
 <template>
   <div class="page-container">
     <v-container >
+      <v-row v-if="meta.loading">
+        <v-col>
+          <Loading
+            center
+            class="ma-4"/>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <TabTitle
@@ -8,14 +15,6 @@
             :sublink="`/v/${site.siteid}`"
             :topic="page.name"
             :link="`/v/${site.siteid}/${page.pageid}`"/>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <Loading
-            center
-            class="ma-4"
-            v-if="meta.loading"/>
         </v-col>
       </v-row>
       <v-row v-if="!meta.loading">
