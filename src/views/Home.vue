@@ -30,7 +30,7 @@
         <v-card>
           <v-card-title>{{$t('frontpage.title')}}</v-card-title>
           <v-card-text>
-            <p><i>{{$t('frontpage.ingress')}}</i></p>
+            <p><em>{{$t('frontpage.ingress')}}</em></p>
             <p>{{$t('frontpage.blurp')}}</p>
           </v-card-text>
         </v-card>
