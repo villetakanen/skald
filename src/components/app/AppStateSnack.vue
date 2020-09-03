@@ -24,7 +24,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueCompositionApi, { defineComponent, computed } from '@vue/composition-api'
-import { useAppState, alerts } from '@/lib/useAppState'
+import { useAppState } from '@/lib/useAppState'
 import { useSite } from '@/lib/useSite'
 import router from '@/router'
 
