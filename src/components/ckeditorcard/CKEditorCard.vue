@@ -45,6 +45,7 @@ import { defineComponent, reactive, toRefs, watch, ref, onMounted, computed } fr
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import { usePage } from '@/lib/usePage'
+import { usePagelog } from '@/lib/usePagelog'
 import Skaldmd from '@/lib/skaldmd'
 import { useSite } from '@/lib/useSite'
 import router from '@/router'
@@ -59,6 +60,7 @@ export default defineComponent({
   setup (props) {
     const { page } = usePage()
     const { site } = useSite()
+    const { stamp } = usePagelog()
     const preview = ref(false)
 
     const editorData = computed({
@@ -81,6 +83,7 @@ export default defineComponent({
       const draftRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
       draftRef.update({ htmlContent: editorData.value }).then(() => {
         router.push(`/v/${site.value.siteid}/${page.value.pageid}`)
+        stamp('update', site.value.siteid, page.value.pageid, site.value.silent)
       })
     }
 

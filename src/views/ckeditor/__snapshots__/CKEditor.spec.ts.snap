@@ -33,14 +33,16 @@ exports[`Mounted App renders correctly 1`] = `
     tag="div"
   >
     <v-col-stub
-      cols="8"
+      cols="12"
+      md="8"
       tag="div"
     >
       <ckeditorcard-stub />
     </v-col-stub>
      
     <v-col-stub
-      cols="4"
+      cols="12"
+      md="4"
       tag="div"
     >
       <pagemetadatacard-stub />

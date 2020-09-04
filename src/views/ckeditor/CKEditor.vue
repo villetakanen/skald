@@ -18,10 +18,10 @@
         </v-col>
       </v-row>
       <v-row v-if="!meta.loading">
-      <v-col cols="8">
+      <v-col cols="12" md="8">
         <CKEditorCard/>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4">
         <PageMetadataCard/>
         <v-card class="my-4">
           <v-card-title>Debug</v-card-title>
