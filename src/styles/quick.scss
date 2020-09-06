@@ -1,19 +1,12 @@
 
-div.Quick h1#sitetitle,
-div.Quick p#sitedescription {
-  color: black;
-}
 div.Quick{
   h1, h2, h3, h4 {
     font-family: 'Lato', sans-serif;
     text-transform: uppercase;
-    // color: white;
+    color: white;
   }
-  div.page-container{
+  div.wikitext {
     color: #f1f1f1;
-    /* background-image: url('./assets/quick-poster.jpg');
-    background-size: 100% auto;
-    padding-top: 200px; */
   }
 }
 div#cover.Quick{
@@ -25,13 +18,13 @@ div#cover.Quick{
 }
 
 #app a.theme--dark.v-sheet.Quick {
-    background-color: rgb(50, 72, 97);
+    background-color: rgb(21, 35, 51);
   div.sitecard .v-card__title {
     font-weight: 300;
     text-transform: uppercase;
   }
   .sitecard-theme-poster-blur{
-    background: linear-gradient(90deg, rgb(50, 72, 97) 0%, rgba(0,0,0,0.3) 100%);
+    background: linear-gradient(90deg, rgb(21, 35, 51) 0%, rgba(0,0,0,0.3) 100%);
   }
   .v-avatar {
     box-shadow: 0px 0px 22px 0px white;
