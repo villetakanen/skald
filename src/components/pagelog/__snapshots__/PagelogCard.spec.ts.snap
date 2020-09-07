@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-card-stub
+  class="sidebar"
+  loaderheight="4"
+  siteid="skald"
+  tag="div"
+/>
+`;
