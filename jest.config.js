@@ -21,6 +21,7 @@ module.exports = {
   },
   snapshotSerializers: ['jest-serializer-vue'],
   setupFiles: ['dotenv/config', '<rootDir>/jest.init.js'],
+  testResultsProcessor: 'jest-sonar-reporter',
   coverageDirectory: './coverage',
   coverageReporters: ['json', 'lcov', 'text'],
   coverageThreshold: {
