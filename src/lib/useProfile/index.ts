@@ -41,6 +41,15 @@ function isOwner (siteid:string):Boolean {
   return profileRef.value.owns.includes(siteid)
 }
 
+const activeUid = computed(():string => {
+  if (activeProfile.value?.uid) return activeProfile.value?.uid
+  return ''
+})
+const activeNick = computed(():string => {
+  if (activeProfile.value?.nick) return activeProfile.value?.nick
+  return 'anonymoud'
+})
+
 export function useProfile () {
   if (!init) {
     firebase.auth().onAuthStateChanged((user) => {
@@ -68,5 +77,5 @@ export function useProfile () {
     })
     init = true
   }
-  return { activeProfile, isOwner }
+  return { activeUid, activeNick, activeProfile, isOwner }
 }

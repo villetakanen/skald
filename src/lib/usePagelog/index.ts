@@ -7,9 +7,19 @@ import 'firebase/firestore'
 import { useAppState } from '../useAppState'
 import { useProfile } from '../useProfile'
 
+interface PageLogItem {
+    action: string,
+    siteid: string,
+    pageid: string,
+    creator: string
+    creatorNick: string
+    timestamp: firebase.firestore.FieldValue
+    silent: boolean
+  }
+
 const stamp = (action: string, siteid:string, pageid?:string, silent?:boolean):void => {
   const { raiseError } = useAppState()
-  const { activeProfile } = useProfile()
+  const { activeUid, activeNick } = useProfile()
   if (!action || !siteid) {
     raiseError('Invalid stamp', 'Missing action or site id')
     return
@@ -18,12 +28,12 @@ const stamp = (action: string, siteid:string, pageid?:string, silent?:boolean):v
   if (!p) p = siteid
   let silence = false
   if (silent) silence = true
-  const logRow = {
+  const logRow:PageLogItem = {
     action: action,
     siteid: siteid,
     pageid: p,
-    creator: activeProfile.value?.uid,
-    creatorNick: activeProfile.value?.nick,
+    creator: activeUid.value,
+    creatorNick: activeNick.value,
     timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     silent: silence
   }
@@ -35,6 +45,28 @@ const stamp = (action: string, siteid:string, pageid?:string, silent?:boolean):v
   siteRef.update({ lastUpdate: firebase.firestore.FieldValue.serverTimestamp() }).catch((error:Error) => { raiseError(error as FirebaseError) })
 }
 
+const pageLogStruct:PageLogItem[] = []
+const pageLogState = Vue.observable(pageLogStruct)
+const pagelog = computed(() => pageLogState.values)
+let _init = false
+
+function init () {
+  if (_init) return
+  const db = firebase.firestore()
+  const logRef = db.collection('pagelog')
+  logRef.onSnapshot((logSnapshot) => {
+    logSnapshot.docChanges().forEach((logEntryChange) => {
+      const data = logEntryChange.doc.data()
+      const logRow:PageLogItem = data as PageLogItem
+      if (logEntryChange.type === 'added') {
+        pageLogState.push(logRow)
+      }
+    })
+  })
+  _init = true
+}
+
 export function usePagelog () {
-  return { stamp }
+  init()
+  return { pagelog, stamp }
 }
