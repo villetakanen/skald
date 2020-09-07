@@ -1,18 +1,18 @@
 <template>
-  <v-card class="sidebar">
-    <v-card-title>{{$t('pagelog.card-title')}}</v-card-title>
-    <v-card-text>
-      <PagelogItem
-        :siteid="'siteid'"
-        :count="11"/>
-    </v-card-text>
-  </v-card>
+  <div>
+      <template v-for="(item, index) in visiblePagelog.reverse()">
+        <PagelogItem
+          v-bind:key="index"
+          :item="item"/>
+      </template>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
-import VueCompositionApi, { defineComponent, ref } from '@vue/composition-api'
+import VueCompositionApi, { defineComponent, ref, computed, watch } from '@vue/composition-api'
 import PagelogItem from './PagelogItem.vue'
+import { usePagelog } from '@/lib/usePagelog'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
@@ -23,12 +23,21 @@ export default defineComponent({
     siteid: {
       type: [String],
       required: false
+    },
+    count: {
+      type: [Number],
+      required: false
     }
   },
   setup (props) {
-    const siteid = ref('')
-    if (props.siteid) siteid.value = props.siteid
-    return { siteid }
+    const { pagelog } = usePagelog()
+    const visiblePagelog = computed(() => {
+      if (!props.count) return pagelog.value
+      const arr = pagelog.value
+      const subs = arr.length - props.count > -1 ? arr.length - props.count : 0
+      return arr.slice(subs, arr.length)
+    })
+    return { visiblePagelog, pagelog }
   }
 })
 </script>

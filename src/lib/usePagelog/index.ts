@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueCompositionAPI, { computed } from '@vue/composition-api'
+import VueCompositionAPI, { computed, ref } from '@vue/composition-api'
 import firebase, { FirebaseError } from 'firebase/app'
 import 'firebase/firestore'
 // import router from '@/router'
@@ -46,20 +46,20 @@ const stamp = (action: string, siteid:string, pageid?:string, silent?:boolean):v
 }
 
 const pageLogStruct:PageLogItem[] = []
-const pageLogState = Vue.observable(pageLogStruct)
-const pagelog = computed(() => pageLogState.values)
+const pageLogState = ref({ log: pageLogStruct })
+const pagelog = computed(() => pageLogState.value.log.reverse())
 let _init = false
 
 function init () {
   if (_init) return
   const db = firebase.firestore()
   const logRef = db.collection('pagelog')
-  logRef.onSnapshot((logSnapshot) => {
+  logRef.orderBy('timestamp', 'desc').onSnapshot((logSnapshot) => {
     logSnapshot.docChanges().forEach((logEntryChange) => {
       const data = logEntryChange.doc.data()
       const logRow:PageLogItem = data as PageLogItem
       if (logEntryChange.type === 'added') {
-        pageLogState.push(logRow)
+        pageLogState.value.log.push(logRow)
       }
     })
   })

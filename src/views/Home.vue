@@ -34,11 +34,7 @@
             <p>{{$t('frontpage.blurp')}}</p>
           </v-card-text>
         </v-card>
-        <v-card class="my-2">
-          <v-card-text>
-            <LatestChanges/>
-          </v-card-text>
-        </v-card>
+        <PagelogCard class="my-2"/>
       </v-col>
     </v-row>
   </v-container>
@@ -49,6 +45,7 @@ import Vue from 'vue'
 import VueCompositionApi, { defineComponent } from '@vue/composition-api'
 import SiteList from '../components/SiteList.vue'
 import LatestChanges from '../components/LatestChanges.vue'
+import PagelogCard from '@/components/pagelog/PagelogCard.vue'
 
 Vue.use(VueCompositionApi)
 
@@ -56,7 +53,8 @@ export default defineComponent({
   components: {
     SiteList,
     // TabTitle,
-    LatestChanges
+    LatestChanges,
+    PagelogCard
   }
 
 })

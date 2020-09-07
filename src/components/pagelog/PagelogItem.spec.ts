@@ -8,7 +8,12 @@ describe('Mounted App', () => {
         $t: () => {}
       },
       propsData: {
-        siteid: 'skald'
+        item: {
+          action: 'create',
+          timestamp: {
+            seconds: 1
+          }
+        }
       }
     })
     expect(wrapper.element).toMatchSnapshot()

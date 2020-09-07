@@ -17,7 +17,8 @@ describe('usePagelog integration tests', () => {
     // const update = jest.fn();
     // const doc = jest.fn(() => ({update}));
     const onSnapshot = jest.fn()
-    const collection = jest.spyOn(firebase.firestore(), 'collection').mockReturnValue(({ onSnapshot } as unknown) as any)
+    const orderBy = jest.fn(() => ({ onSnapshot }))
+    const collection = jest.spyOn(firebase.firestore(), 'collection').mockReturnValue(({ orderBy } as unknown) as any)
 
     const { pagelog } = usePagelog()
 

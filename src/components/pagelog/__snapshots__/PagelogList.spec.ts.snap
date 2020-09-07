@@ -1,20 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Mounted App renders correctly 1`] = `
-<v-card-stub
-  class="sidebar"
-  loaderheight="4"
-  tag="div"
->
-  <v-card-title-stub>
-    
-  </v-card-title-stub>
-   
-  <v-card-text-stub>
-    <pagelogitem-stub
-      count="11"
-      siteid="siteid"
-    />
-  </v-card-text-stub>
-</v-card-stub>
-`;
+exports[`Mounted App renders correctly 1`] = `<div />`;

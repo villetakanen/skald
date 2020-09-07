@@ -1,6 +1,6 @@
 <template>
   <v-card class="sidebar">
-    <v-card-title>{{$t('pagelog.card-title')}}</v-card-title>
+    <v-card-title>{{$t('pagelog.cardTitle')}}</v-card-title>
     <v-card-text>
       <PagelogList
         :siteid="'siteid'"
@@ -26,9 +26,6 @@ export default defineComponent({
     }
   },
   setup (props) {
-    const siteid = ref('')
-    if (props.siteid) siteid.value = props.siteid
-    return { siteid }
   }
 })
 </script>
