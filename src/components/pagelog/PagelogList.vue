@@ -2,7 +2,7 @@
   <v-card class="sidebar">
     <v-card-title>{{$t('pagelog.card-title')}}</v-card-title>
     <v-card-text>
-      <PagelogList
+      <PagelogItem
         :siteid="'siteid'"
         :count="11"/>
     </v-card-text>
@@ -12,12 +12,12 @@
 <script lang="ts">
 import Vue from 'vue'
 import VueCompositionApi, { defineComponent, ref } from '@vue/composition-api'
-import PagelogList from './PagelogList.vue'
+import PagelogItem from './PagelogItem.vue'
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
   components: {
-    PagelogList
+    PagelogItem
   },
   props: {
     siteid: {
