@@ -67,13 +67,6 @@ export default new Router({
       component: () => import(/* webpackChunkName: "listAttachments" */ './views/ListAttachments.vue')
     },
     {
-      path: '/e/:siteid/:pageid',
-      name: 'editPage',
-      // lazy-loaded when the route is visited.
-      props: true,
-      component: () => import(/* webpackChunkName: "editor" */ './views/Editor.vue')
-    },
-    {
       path: '/edit/:siteid',
       name: 'cKEditSiteFrontPage',
       // lazy-loaded when the route is visited.
