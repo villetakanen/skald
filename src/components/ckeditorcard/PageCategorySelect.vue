@@ -15,16 +15,13 @@ import { usePage } from '@/lib/usePage'
 
 export default defineComponent({
   setup () {
-    const categories = ref(['-', 'Character', 'Game Log'])
-    const { page } = usePage()
+    const { page, categories } = usePage()
     const category = computed({
       get: () => page.value.category,
       set: (category) => {
-        let cat = category
-        if (category === categories.value[0]) cat = ''
         const db = firebase.firestore()
         const draftRef = db.collection('sites').doc(page.value.siteid).collection('pages').doc(page.value.pageid)
-        draftRef.update({ category: cat })
+        draftRef.update({ category: category })
       }
     })
     return { category, categories, page }

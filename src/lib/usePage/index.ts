@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueCompositionAPI, { computed } from '@vue/composition-api'
+import VueCompositionAPI, { computed, ref } from '@vue/composition-api'
 import firebase from 'firebase/app'
 import 'firebase/firestore'
 import router from '@/router'
@@ -81,6 +81,18 @@ function subscribeToPage (params:Object) {
 const page = computed(() => pageState)
 const meta = computed(() => metaState)
 
+interface Category {
+  text: string,
+  value: string
+}
+const categoryArray: Category[] = [
+  { text: '-', value: '' },
+  { text: 'Character', value: 'character' },
+  { text: 'Game Log', value: 'gameLog' },
+  { text: 'Rules', value: 'rules' },
+  { text: 'Fiction', value: 'fiction' }]
+const categories = ref(categoryArray)
+
 export function usePage () {
   // This happens after mounting etc.
   if (activePage === '-1') {
@@ -89,5 +101,5 @@ export function usePage () {
       subscribeToPage(route.params)
     })
   }
-  return { meta, page }
+  return { meta, page, categories }
 }
