@@ -57,7 +57,7 @@ export default new Router({
       name: 'listPages',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "listPages" */ './views/ListPages.vue')
+      component: () => import(/* webpackChunkName: "listPages" */ './views/listpages/ListPages.vue')
     },
     {
       path: '/l/attachments/:siteid',

@@ -5,7 +5,6 @@ import VueCompositionApi, { ref, computed } from '@vue/composition-api'
 import { Site } from '@/plugins/skaldfire'
 import { useAppState } from '@/lib/useAppState'
 import router from '@/router'
-import site from '@/store/site'
 
 Vue.use(VueCompositionApi)
 
@@ -79,6 +78,7 @@ function subscribeToSite (newSiteid:string|null):void {
         raiseError('This is curious...', `We can not match the url parameter [${newSiteid}] to any existing record.`, '404')
         router.push('/')
       }
+      metaState.loading = false
     })
   } else {
     resetSite()
@@ -86,9 +86,13 @@ function subscribeToSite (newSiteid:string|null):void {
   }
 }
 
-export function useSite () {
-  // Route changed, subscribe to the siteid in the route, if any
+let _init = false
+
+function init () {
+  if (_init) return
   subscribeToSite(router.currentRoute.params.siteid)
+
+  // Route changed, subscribe to the siteid in the route, if any
   router.afterEach(route => {
     let siteid:string|null = null
     if (route.params.siteid) {
@@ -96,8 +100,15 @@ export function useSite () {
     }
     subscribeToSite(siteid)
   })
-  const site = computed(() => siteState)
-  const loading = computed(() => metaState.loading)
-  const meta = computed(() => metaState)
+
+  _init = true
+}
+
+const site = computed(() => siteState)
+const loading = computed(() => metaState.loading)
+const meta = computed(() => metaState)
+
+export function useSite () {
+  init()
   return { loading, meta, site }
 }

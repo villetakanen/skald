@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App renders correctly 1`] = `
+<v-container-stub
+  tag="div"
+>
+  <!---->
+   
+  <v-row-stub
+    tag="div"
+  >
+    <v-col-stub
+      tag="div"
+    >
+      <tabtitle-stub
+        sub=""
+        sublink="/v/"
+        topic=""
+      />
+    </v-col-stub>
+  </v-row-stub>
+   
+  <v-row-stub
+    tag="div"
+  >
+    <v-col-stub
+      tag="div"
+    >
+      <v-card-stub
+        loaderheight="4"
+        tag="div"
+      >
+        <v-card-text-stub>
+          <div
+            class="index"
+          >
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+            <!---->
+          </div>
+        </v-card-text-stub>
+      </v-card-stub>
+    </v-col-stub>
+  </v-row-stub>
+</v-container-stub>
+`;
