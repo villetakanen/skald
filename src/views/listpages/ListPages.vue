@@ -69,12 +69,10 @@ export default defineComponent({
     onMounted(() => { subscribe(props.siteid) })
     onUnmounted(() => { unsubscribe() })
     watch(site, (newSite) => {
-      console.log(newSite)
       subscribe(newSite.siteid)
     })
 
     function subscribe (siteid:string):void {
-      console.log('opening up', siteid)
       if (!siteid) return
       unsubscribe()
       pageList.value.length = 0
