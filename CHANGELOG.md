@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com/vitku/skald/compare/v2.4.2...v2.5.0) (2020-09-09)
+
+
+### Features
+
+* page listing with component api ([d0f212a](https://github.com/vitku/skald/commit/d0f212a1d04e6b92e268c0063d77c90ae6a59c0a))
+
 ### [2.4.2](https://github.com/vitku/skald/compare/v2.4.1...v2.4.2) (2020-09-07)
 
 ### [2.4.1](https://github.com/vitku/skald/compare/v2.4.0...v2.4.1) (2020-09-07)
