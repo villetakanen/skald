@@ -107,7 +107,6 @@ export default defineComponent({
     const dial = ref(false)
     const content = computed(() => {
       if (!page) return ''
-      if (page.value.htmlContentDraft) return page.value.htmlContentDraft
       else if (page.value.htmlContent) return page.value.htmlContent
       const skaldmd = new Skaldmd(site.value.siteid)
       return skaldmd.toHtml(page.value.content)
