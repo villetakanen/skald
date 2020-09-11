@@ -1,103 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="/Users/vtak/dev/skald/src/components/app/TabTitle.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="7"/>
+  <file path="/Users/vtak/dev/skald/src/components/playerlist/PlayerList.spec.ts">
+    <testCase name="Mounted App Renders with usePlayers init for &quot;mekanismi&quot;" duration="103"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/components/createpageaction/CreatePageAction.spec.ts">
-    <testCase name="CreatePageAction renders correctly" duration="87"/>
+  <file path="/Users/vtak/dev/skald/src/views/gm/PlayerList.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="29"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/addplayeraction/AddPlayerAction.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="605"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/pagelog/PagelogList.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="504"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/lib/usePlayers/index.spec.ts">
+    <testCase name="usePlayers unit tests inits without calling firebase" duration="36"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/lib/usePagelog/index.spec.ts">
+    <testCase name="usePagelog integration tests reads a pagelog" duration="73"/>
+    <testCase name="usePagelog integration tests upserts a pagelog entry" duration="2"/>
+    <testCase name="usePagelog integration tests does not upser a pagelog entry, if missing page id and action id" duration="1"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/pagelog/PagelogCard.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="45"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/components/app/AppStateSnack.spec.ts">
     <testCase name="Mounted App renders correctly" duration="7"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/views/gm/PlayerList.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="93"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/pagelog/PagelogCard.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="57"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/lib/usePagelog/index.spec.ts">
-    <testCase name="usePagelog integration tests reads a pagelog" duration="10"/>
-    <testCase name="usePagelog integration tests upserts a pagelog entry" duration="3"/>
-    <testCase name="usePagelog integration tests does not upser a pagelog entry, if missing page id and action id" duration="0"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/lib/usePlayers/index.spec.ts">
-    <testCase name="usePlayers unit tests inits without calling firebase" duration="19"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/addplayeraction/AddPlayerAction.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="397"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/pagelog/PagelogList.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="355"/>
-  </file>
   <file path="/Users/vtak/dev/skald/src/views/listpages/ListPages.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="337"/>
+    <testCase name="Mounted App renders correctly" duration="348"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/components/themed/Themed.spec.ts">
-    <testCase name="Mounted App is a Vue instance" duration="9"/>
-    <testCase name="Mounted App renders correctly" duration="6"/>
+  <file path="/Users/vtak/dev/skald/src/components/createpageaction/CreatePageAction.spec.ts">
+    <testCase name="CreatePageAction renders correctly" duration="66"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/views/ckeditor/CKEditor.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="132"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/page/WikiContent.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="8"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/site/SideBar.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="25"/>
+  <file path="/Users/vtak/dev/skald/src/components/navigationdrawer/NavigationDrawer.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="3"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/lib/skaldmd/index.test.ts">
-    <testCase name="render wikitext renders empty file, as empty" duration="1"/>
+    <testCase name="render wikitext renders empty file, as empty" duration="4"/>
     <testCase name="render wikitext renders sinle line as a paragraph" duration="2"/>
     <testCase name="render wikitext renders a paragraph with br" duration="0"/>
     <testCase name="render wikitext renders two paragraphs" duration="0"/>
     <testCase name="render wikitext renders a h3" duration="1"/>
     <testCase name="render wikitext renders a h2 and a paragraph" duration="0"/>
-    <testCase name="render wikitext renders a p, h1 and a paragraph" duration="1"/>
-    <testCase name="render wikitext renders a p, and a two by two array" duration="0"/>
-    <testCase name="render wikitext renders a [wiki:page] link to skald/page, when there is no wiki set" duration="15"/>
+    <testCase name="render wikitext renders a p, h1 and a paragraph" duration="0"/>
+    <testCase name="render wikitext renders a p, and a two by two array" duration="1"/>
+    <testCase name="render wikitext renders a [wiki:page] link to skald/page, when there is no wiki set" duration="0"/>
     <testCase name="render wikitext renders a [wiki:4.0 review] link to skald/4-0-review, when there is no wiki set" duration="1"/>
     <testCase name="render wikitext renders a [wiki:kääpiö] link to skald/kääpiö, when there is no wiki set" duration="0"/>
-    <testCase name="render wikitext renders a [wiki:test/page] link to test/page" duration="1"/>
+    <testCase name="render wikitext renders a [wiki:test/page] link to test/page" duration="0"/>
     <testCase name="render wikitext renders a [wiki:test/page Named] link to test/page-named with text Named" duration="0"/>
     <testCase name="render wikitext renders a [url:http://mekanismi.web.app] link to http://mekanismi.web.app" duration="0"/>
-    <testCase name="render wikitext renders a [url:http://mekanismi.web.app|link] link to http://mekanismi.web.app" duration="2"/>
+    <testCase name="render wikitext renders a [url:http://mekanismi.web.app|link] link to http://mekanismi.web.app" duration="0"/>
     <testCase name="render wikitext renders a *[url:http://mekanismi.web.app|link]* link to *http://mekanismi.web.app*" duration="0"/>
     <testCase name="render wikitext renders a _[url:http://mekanismi.web.app|link]_ link to _http://mekanismi.web.app_" duration="1"/>
     <testCase name="render wikitext renders a HR" duration="0"/>
-    <testCase name="render wikitext renders a li" duration="1"/>
+    <testCase name="render wikitext renders a li" duration="0"/>
     <testCase name="render wikitext renders a nested li with 2 levels" duration="1"/>
     <testCase name="render wikitext renders a nested li" duration="0"/>
-    <testCase name="render wikitext renders a legend box" duration="1"/>
+    <testCase name="render wikitext renders a legend box" duration="0"/>
     <testCase name="render wikitext renders a code block" duration="0"/>
-    <testCase name="render wikitext renders italics" duration="0"/>
-    <testCase name="render wikitext renders italics with &quot; and , " duration="1"/>
-    <testCase name="render wikitext hides comments" duration="0"/>
-    <testCase name="render wikitext hides restricted" duration="1"/>
-    <testCase name="render wikitext shows restricted, when user has tags" duration="1"/>
+    <testCase name="render wikitext renders italics" duration="1"/>
+    <testCase name="render wikitext renders italics with &quot; and , " duration="0"/>
+    <testCase name="render wikitext hides comments" duration="1"/>
+    <testCase name="render wikitext hides restricted" duration="0"/>
+    <testCase name="render wikitext shows restricted, when user has tags" duration="64"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/components/navigationdrawer/NavigationDrawer.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="2"/>
-  </file>
-  <file path="/Users/vtak/dev/skald/src/components/character/Character.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="80"/>
+  <file path="/Users/vtak/dev/skald/src/components/site/SideBar.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="63"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/views/viewpage/ViewPage.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="88"/>
+    <testCase name="Mounted App renders correctly" duration="119"/>
   </file>
-  <file path="/Users/vtak/dev/skald/src/components/app/OnScrollFab.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="2"/>
+  <file path="/Users/vtak/dev/skald/src/components/character/Character.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="6"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/views/ViewCharacter/ViewCharacter.spec.ts">
-    <testCase name="Mounted App renders correctly" duration="8"/>
+    <testCase name="Mounted App renders correctly" duration="6"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/themed/Themed.spec.ts">
+    <testCase name="Mounted App is a Vue instance" duration="2"/>
+    <testCase name="Mounted App renders correctly" duration="4"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/views/ckeditor/CKEditor.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="60"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/page/WikiContent.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="6"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/app/OnScrollFab.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="1"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/components/pagelog/PagelogItem.spec.ts">
     <testCase name="Mounted App renders correctly" duration="6"/>
   </file>
   <file path="/Users/vtak/dev/skald/src/lib/skaldmd/hideContent.test.ts">
-    <testCase name="hideContents returns empty file, as empty" duration="1"/>
+    <testCase name="hideContents returns empty file, as empty" duration="0"/>
     <testCase name="hideContents returns a file with no comments, as is" duration="1"/>
     <testCase name="hideContents returns a file with a comment, without the comment" duration="0"/>
     <testCase name="hideContents hides a block of text, if that text starts with // restricted" duration="0"/>
     <testCase name="hideContents hides a block of text, if that text starts with // restricted, and ends with // end restricted" duration="0"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/components/app/TabTitle.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="2"/>
+  </file>
+  <file path="/Users/vtak/dev/skald/src/views/playerlist/PlayerList.spec.ts">
+    <testCase name="Mounted App renders correctly" duration="6"/>
   </file>
 </testExecutions>

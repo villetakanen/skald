@@ -113,7 +113,7 @@ export default new Router({
       name: 'gmplayers',
       // lazy-loaded when the route is visited.
       props: true,
-      component: () => import(/* webpackChunkName: "site" */ './views/gm/PlayerList.vue')
+      component: () => import(/* webpackChunkName: "site" */ './views/playerlist/PlayerList.vue')
     }
   ]
 })
