@@ -35,6 +35,9 @@ function subscribePlayers (siteid:string):void {
           nick: change.doc.data().nick,
           tags: change.doc.data().tags
         })
+      } else if (change.type === 'removed') {
+        const clearedList: Player[] = players.value.list.filter((item) => { return item.uid !== change.doc.id })
+        players.value.list = clearedList
       }
     })
     meta.value.loading = false
