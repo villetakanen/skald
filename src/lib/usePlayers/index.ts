@@ -2,11 +2,13 @@ import { useSite } from '../useSite'
 import { ref } from '@vue/composition-api'
 import firebase, { FirebaseError } from 'firebase/app'
 import 'firebase/firestore'
-interface Player {
-  nickName: string
+
+export interface Player {
+  nick: string
   uid: string
   tags?: string[]
 }
+
 const playerListStruct:Player[] = []
 const players = ref({ list: playerListStruct })
 const meta = ref({
@@ -30,7 +32,7 @@ function subscribePlayers (siteid:string):void {
       if (change.type === 'added') {
         players.value.list.push({
           uid: change.doc.id,
-          nickName: change.doc.data().nickName,
+          nick: change.doc.data().nick,
           tags: change.doc.data().tags
         })
       }
