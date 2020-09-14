@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Mounted App Renders with usePlayers init for "mekanismi" 1`] = `
+<v-dialog-stub
+  closedelay="0"
+  contentclass=""
+  maxwidth="none"
+  opendelay="0"
+  origin="center center"
+  retainfocus="true"
+  transition="dialog-transition"
+  width="500"
+>
+   
+  <v-card-stub
+    loaderheight="4"
+    tag="div"
+  >
+    <v-card-title-stub>
+      
+    </v-card-title-stub>
+     
+    <v-card-text-stub>
+      
+    </v-card-text-stub>
+     
+    <v-card-actions-stub>
+      
+    </v-card-actions-stub>
+  </v-card-stub>
+</v-dialog-stub>
+`;

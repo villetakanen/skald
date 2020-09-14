@@ -44,8 +44,20 @@ function subscribePlayers (siteid:string):void {
   })
 }
 
+/**
+ * Get a Player Entity for the Site
+ *
+ * @param uid the UID of Player of the active site
+ */
+function getPlayer (uid:string):Player|null {
+  players.value.list.forEach((p:Player) => {
+    if (p.uid === uid) return p
+  })
+  return null
+}
+
 export function usePlayers () {
   const { site } = useSite()
   subscribePlayers(site.value.siteid)
-  return { players }
+  return { players, getPlayer }
 }

@@ -18,6 +18,14 @@ exports[`Mounted App renders correctly 1`] = `
         <v-card-text-stub>
           <playerlist-stub />
         </v-card-text-stub>
+         
+        <v-card-actions-stub>
+          <v-spacer-stub />
+           
+          <addplayeraction-stub
+            siteid=""
+          />
+        </v-card-actions-stub>
       </v-card-stub>
     </v-col-stub>
   </v-row-stub>

@@ -5,13 +5,9 @@
       :loading="players.loading"
       :headers="headers">
       <template v-slot:item.actions="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        mdi-pencil
-      </v-icon>
+      <PlayerTagsDialog
+        :siteid="site.siteid"
+        :uid="item.uid"/>
       <v-icon
         small
         @click="removePlayer(item)"
@@ -31,9 +27,14 @@ import VueCompositionApi, { defineComponent } from '@vue/composition-api'
 import { usePlayers, Player } from '@/lib/usePlayers'
 import { useSite } from '@/lib/useSite'
 import { useAppState } from '@/lib/useAppState'
+import PlayerTagsDialog from './PlayerTagsDialog.vue'
+
 Vue.use(VueCompositionApi)
 
 export default defineComponent({
+  components: {
+    PlayerTagsDialog
+  },
   setup (props) {
     const { players } = usePlayers()
     const { site } = useSite()
@@ -50,7 +51,7 @@ export default defineComponent({
         raiseError(error as FirebaseError)
       })
     }
-    return { players, headers, removePlayer }
+    return { players, headers, removePlayer, site }
   }
 })
 </script>
