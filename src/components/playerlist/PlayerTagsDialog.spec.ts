@@ -8,7 +8,8 @@ describe('Mounted App', () => {
         $t: () => {}
       },
       propsData: {
-        siteid: 'skald'
+        siteid: 'skald',
+        uid: ''
       }
     })
     expect(wrapper.element).toMatchSnapshot()

@@ -17,15 +17,23 @@ exports[`Mounted App Renders with usePlayers init for "mekanismi" 1`] = `
     tag="div"
   >
     <v-card-title-stub>
-      
+      <!---->
     </v-card-title-stub>
      
-    <v-card-text-stub>
-      
-    </v-card-text-stub>
+    <!---->
      
     <v-card-actions-stub>
-      
+      <v-spacer-stub />
+       
+      <v-btn-stub
+        activeclass=""
+        color="primary"
+        tag="button"
+        text="true"
+        type="button"
+      >
+        
+      </v-btn-stub>
     </v-card-actions-stub>
   </v-card-stub>
 </v-dialog-stub>
