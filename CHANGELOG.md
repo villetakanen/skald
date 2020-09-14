@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.6.0](https://github.com/vitku/skald/compare/v2.5.0...v2.6.0) (2020-09-14)
+
+
+### Features
+
+* playerlist vol 2 ([e1cc6f0](https://github.com/vitku/skald/commit/e1cc6f0d765a27b4e4e041120d8714602b1cc21f))
+* playertags editable in new tooling ([ec35bc4](https://github.com/vitku/skald/commit/ec35bc4096e4c753032e9fa55918e72825328172))
+
+
+### Bug Fixes
+
+* do not show draft as the page ([2890268](https://github.com/vitku/skald/commit/289026817e5ca17be0f226b06a9e90a0e67c181b))
+
 ## [2.5.0](https://github.com/vitku/skald/compare/v2.4.2...v2.5.0) (2020-09-09)
 
 
