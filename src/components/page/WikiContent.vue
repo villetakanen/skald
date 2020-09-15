@@ -11,6 +11,8 @@ import ViewAttachment from '@/components/page/ViewAttachment.vue'
 import ViewUpload from '@/components/page/ViewUpload.vue'
 import { useSite } from '@/lib/useSite'
 import { skaldURI } from '@/plugins/skaldfire'
+import { useProfile } from '@/lib/useProfile'
+import { usePlayers, Player } from '@/lib/usePlayers'
 
 Vue.component('ViewAttachment', ViewAttachment)
 Vue.component('ViewUpload', ViewUpload)
@@ -74,11 +76,39 @@ export default defineComponent({
       return line
     }
 
+    function withIntel (content:string):string {
+      const { activeProfile, isOwner } = useProfile()
+      if (isOwner(site.value.siteid)) return content
+
+      const { getPlayer } = usePlayers()
+      const tags:string[] = []
+      let player:Player|null = null
+      if (activeProfile.value) {
+        player = getPlayer(activeProfile.value.uid)
+        if (player && player.tags) player.tags.forEach(tag => tags.push(tag))
+      }
+      // \[intel:(.+?]*)]((.|\R)+?(?=\[\/intel\]))\[\/intel\]
+      const re = new RegExp('\\[intel:(.+?)\\]((.|\\n)+?(?=\\[\\/intel\\]))\\[\\/intel\\]', 'gmu')
+      const line = content.replace(re, (match, p1, p2, offset, string):string => {
+        const intelTags = (p1 as string).split(',').map(string => string.trim().toLowerCase())
+        if (player) {
+          let hasTag = ''
+          intelTags.forEach(tag => {
+            if (player && player.tags?.map(string => string.trim().toLowerCase()).includes(tag)) hasTag = tag
+          })
+          if (hasTag) return '<p>Intel: <span class="intel">' + hasTag + '</span></p>' + p2 + '<p>//intel</p>'
+        }
+        return ''
+      })
+      return line
+    }
+
     const rendedContent = computed(() => {
       let r = props.html
       r = attachLinks(r, site.value.siteid)
       r = fileLinks(r, site.value.siteid)
       r = rendWikiLinks(r)
+      r = withIntel(r)
       return {
         template: '<div>' + r + '</div>'
       }
@@ -87,3 +117,17 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.intel {
+  border-radius: 4px;
+  background-color: rgba(219, 26, 155, 0.5);
+  padding: 3px;
+  margin: 2px;
+  margin-right: 8px;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 12px;
+  font-weight: bold;
+}
+</style>

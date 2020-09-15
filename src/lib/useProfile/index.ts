@@ -36,7 +36,8 @@ function resetState () {
   }
 }
 
-function isOwner (siteid:string):Boolean {
+function isOwner (siteid:string|undefined):Boolean {
+  if (!siteid) return false
   if (!profileRef.value.owns) return false
   return profileRef.value.owns.includes(siteid)
 }
